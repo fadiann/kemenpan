@@ -1,0 +1,177 @@
+<script type="text/javascript" src="Public/js/jquery-ui-1.10.1.custom.min.js"></script>
+<link rel="stylesheet" href="Public/css/jquery.ui.datepicker.css">
+<section id="main" class="column">
+		<?
+		include 'risk_view_parrent.php';
+		?>
+	<article class="module width_3_quarter">
+		<form method="post" name="f" action="#" class="form-horizontal">
+		<?
+		switch ($_action) {
+			case "getadd" :
+				?>
+		<table border='1' class="table_risk" cellspacing='0' cellpadding="0">
+				<tr align="center">
+					<th width="2%" rowspan="2">No</th>
+					<th width="55%" colspan="5">Risiko Residu</th>
+					<th width="10%" rowspan="2">Pilihan<br>Penanganan<br>Risiko
+					</th>
+					<th width="33%" colspan="3">Penanganan Risiko</th>
+				</tr>
+				<tr align="center">
+					<th width="25">Kategori Risiko</th>
+					<th>No Risiko</th>
+					<th width="40">Nama Risiko</th>
+					<th>Selera Risiko</th>
+					<th>Nilai<br>Risiko<br>Residu
+					</th>
+					<th>Rencana<br>Aksi
+					</th>
+					<th>Batas<br> Waktu
+					</th>
+					<th>Penanggung<br>Jawab
+					</th>
+				</tr>
+			<?php
+				$i = 0;
+				$no = 0;
+				$rs_kategori = $params->risk_kategori_data_viewlist ();
+				while ( $arr_kategori = $rs_kategori->FetchRow () ) {
+					$x = 0;
+					$rs_iden = $risks->list_identifikasi ( $arr_kategori ['risk_kategori_id'], $ses_penetapan_id );
+					$countKat = $rs_iden->RecordCount ();
+					while ( $arr_iden = $rs_iden->FetchRow () ) {
+						$x ++;
+						$no ++;
+						?>
+				<tr>
+					<?php
+						if ($x == 1) {
+							$i ++;
+							?>
+					<td rowspan=<?=$countKat?>><?=$i?></td>
+					<td rowspan=<?=$countKat?>><?=$arr_iden['risk_kategori'];?></td>
+					<?php
+						}
+						?>
+					<td><?=$arr_iden['identifikasi_no_risiko'];?></td>
+					<td><?=$arr_iden['identifikasi_nama_risiko'];?></td>
+					<td><?=$arr_iden['identifikasi_selera'];?></td>
+					<td><?=$arr_iden['evaluasi_risiko_residu'];?></td>
+					<td align="center">
+					<?
+						$rs_td = $params->risk_penanganan_data_viewlist ();
+						$arr_td = $rs_td->GetArray ();
+						echo $Helper->buildCombo_risk ( "pil_penanganan_" . $no, $arr_td, 0, 1, $arr_iden ['penanganan_risiko_id'], "font-size:8pt", false, true, false, "penanganan_risk" );
+						?>
+					</td>
+					<td align="center">
+						<textarea class="cmb_risk_<?=$no?>" id="penanganan_<?=$no?>" name="penanganan_<?=$no?>" rows="1" cols="20" style="width: 175px; height: 2em; font-size: 8pt;"><?=$arr_iden['penanganan_plan']?></textarea>
+					</td>
+					<td align="center"><input type="text" class="cmb_risk" name="date_<?=$no?>" id="date_<?=$no?>" value="<?=$Helper->dateIndo($arr_iden['penanganan_date'])?>"></td>
+					<td align="center">
+						<?=$Helper->dbCombo("pic_".$no, "auditee_pic", "pic_id", "pic_name", "and pic_del_st = 1 and pic_auditee_id = '".$arr_iden['penetapan_auditee_id']."'", $arr_iden['penanganan_pic_id'], "cmb_risk", 1)?>
+					</td>
+				</tr>
+			<?php
+					}
+				}
+				?>
+		</table>
+		<?
+				break;
+		}
+		?>
+			<fieldset>
+				<center>
+					<input type="button" class="blue_btn" value="Kembali"
+						onclick="location='<?=$def_page_request?>'"> &nbsp;&nbsp;&nbsp; <input
+						type="submit" class="blue_btn" value="Simpan">
+				</center>
+				<input type="hidden" name="data_action" id="data_action"
+					value="<?=$_nextaction?>">
+			</fieldset>
+		</form>
+	</article>
+</section>
+<?php
+$no = 0;
+$rs_kategori = $params->risk_kategori_data_viewlist ();
+while ( $arr_kategori = $rs_kategori->FetchRow () ) {
+	$x = 0;
+	$rs_iden = $risks->list_identifikasi ( $arr_kategori ['risk_kategori_id'], $ses_penetapan_id );
+	while ( $arr_iden = $rs_iden->FetchRow () ) {
+		$no ++;
+		?>
+<script>
+			$("#date_<?=$no?>").datepicker({
+				dateFormat: 'dd-mm-yy',
+				 nextText: "",
+				 prevText: "",
+				 changeYear: true,
+				 changeMonth: true,
+				 minDate: 0
+			}); 
+			
+			$('textarea.cmb_risk_<?=$no?>').focus(function () {
+			   checkContentSize("penanganan_<?=$no?>");
+			});
+			$('textarea.cmb_risk_<?=$no?>').focusout(function(){
+			    $(this).animate({ height: "2em" }, 500); 
+			});
+			$('textarea.cmb_risk_<?=$no?>').keypress(function (e) {
+			  if (e.which == 13) {
+			     checkContentSize("penanganan_<?=$no?>");
+			  }
+			});
+		</script>
+<?php
+	}
+}
+?>
+<script>
+function has_scrollbar(elem_id){ 
+    elem = document.getElementById(elem_id); 
+    if (elem.clientHeight < elem.scrollHeight){
+        alert("The element #" + elem_id + " has a vertical scrollbar!"); 
+    }else{
+        alert("The element #" + elem_id + " doesn't have a vertical");
+    } ;
+}
+
+function checkContentSize(elem_id){
+ 	elem = document.getElementById(elem_id); 
+    console.log(elem.clientHeight);
+    if (elem.clientHeight < elem.scrollHeight){
+        $( "#" + elem_id + "" ).animate({ height: elem.scrollHeight + 5}, 500); 
+    }
+}
+$(function() {
+	$(".penanganan_risk").on("change", function() {
+		var penanganan = $(this).val(),
+			action = $(this).parent().next().find("textarea");
+			date_tenggak = $(this).parent().next().next().find("input[type='text']");
+			pic = $(this).parent().next().next().next().find("select");
+
+			$.ajax({
+				url: 'RiskManagement/ajax.php?data_action=cek_penanganan',
+				type: 'POST',
+				dataType: 'text',
+				data: {id_penanganan: penanganan},
+				success: function(data) {
+					if(data==1){
+						action.attr("disabled", false).val();
+						date_tenggak.attr("disabled", false).val();
+						pic.attr("disabled", false).val();
+					}else if(data==0){
+						action.attr("disabled", true).val("");
+						date_tenggak.attr("disabled", true).val("");
+						pic.attr("disabled", true).val("");
+					}	
+				}
+			});
+			
+			
+	});
+});
+</script>

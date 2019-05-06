@@ -1,0 +1,7 @@
+39a46557b6f0b7aed481919e3cc88f6ea1ebd11c	2019-01-22 03:27:35	139.194.28.36	User Login	Sukses
+39a46557b6f0b7aed481919e3cc88f6ea1ebd11c	2019-01-22 03:36:32	139.194.28.36	Menambah Plan ID 666f5e407ebbbc561d4ad0992242737b0e271fbb	Sukses
+39a46557b6f0b7aed481919e3cc88f6ea1ebd11c	2019-01-22 03:36:32	139.194.28.36	Menambah Plan ID 666f5e407ebbbc561d4ad0992242737b0e271fbb	Sukses
+39a46557b6f0b7aed481919e3cc88f6ea1ebd11c	Menambah Plan ID 666f5e407ebbbc561d4ad0992242737b0e271fbb	insert into audit_plan
+				(audit_plan_id, audit_plan_code, audit_plan_tipe_id, audit_plan_tahun, audit_plan_start_date, audit_plan_end_date, audit_plan_hari, audit_plan_kegiatan, audit_plan_periode, audit_plan_biaya, audit_plan_sub_tipe)
+				values
+				('666f5e407ebbbc561d4ad0992242737b0e271fbb', '2020_277489', '0525307297f9bed8984a8054918087dcf03c4bcf', '2020', '1548374400', '1548892800', '7', 'Audit Kinerja', 'Januari Termin Pertama', '5000000', '') ErrorMsg : Data too long for column  (single quote) log_activity_ip (single quote)  at row 1

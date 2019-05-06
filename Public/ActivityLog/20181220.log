@@ -1,0 +1,20 @@
+3c7d52115accc93808ea7c0de0efe86d3e445d84	2018-12-20 02:39:54	112.215.238.96	User Login	Sukses
+3c7d52115accc93808ea7c0de0efe86d3e445d84	2018-12-20 07:59:47	125.160.112.157	User Login	Sukses
+3c7d52115accc93808ea7c0de0efe86d3e445d84	2018-12-20 08:32:33	125.160.112.157	User Login	Sukses
+3c7d52115accc93808ea7c0de0efe86d3e445d84	2018-12-20 08:37:52	125.160.112.157	Menambah Tindak Lanjut dengan ID 6ab0cef5aba349022a847ed8e6eaefac32fe4360	Sukses
+3c7d52115accc93808ea7c0de0efe86d3e445d84	2018-12-20 08:37:52	125.160.112.157	Menambah Tindak Lanjut dengan ID 6ab0cef5aba349022a847ed8e6eaefac32fe4360	Sukses
+3c7d52115accc93808ea7c0de0efe86d3e445d84	Menambah Tindak Lanjut dengan ID 6ab0cef5aba349022a847ed8e6eaefac32fe4360	insert into tindaklanjut_internal 
+                (tl_id, tl_rek_id, tl_desc, tl_date, tl_attachment) 
+                values 
+                ('c560ecd65ad84356c234ccbf17c26036235b9bee', 'abf133fef4f71b8b5dce25ffaebd3dce0bdd6c1c', '<p>tindak lanjut</p>', '1545264000', '') ErrorMsg : Data too long for column  (single quote) log_activity_ip (single quote)  at row 13c7d52115accc93808ea7c0de0efe86d3e445d84	2018-12-20 08:38:32	125.160.112.157	Menambah Tindak Lanjut dengan ID e7abe7f04579e8cc72faff3a4e060cad56fa1940	Sukses
+3c7d52115accc93808ea7c0de0efe86d3e445d84	2018-12-20 08:38:32	125.160.112.157	Menambah Tindak Lanjut dengan ID e7abe7f04579e8cc72faff3a4e060cad56fa1940	Sukses
+3c7d52115accc93808ea7c0de0efe86d3e445d84	Menambah Tindak Lanjut dengan ID e7abe7f04579e8cc72faff3a4e060cad56fa1940	insert into tindaklanjut_internal 
+                (tl_id, tl_rek_id, tl_desc, tl_date, tl_attachment) 
+                values 
+                ('4f810f80dfa21c379b283e01428a67da6267df48', 'abf133fef4f71b8b5dce25ffaebd3dce0bdd6c1c', '<p>tes</p>', '1545264000', '') ErrorMsg : Data too long for column  (single quote) log_activity_ip (single quote)  at row 13c7d52115accc93808ea7c0de0efe86d3e445d84	2018-12-20 08:49:15	125.160.114.64	User Login	Sukses
+3c7d52115accc93808ea7c0de0efe86d3e445d84	2018-12-20 09:23:53	125.160.114.64	User Logout	Sukses
+3c7d52115accc93808ea7c0de0efe86d3e445d84	2018-12-20 09:23:53	125.160.112.157	User Login	Sukses
+3c7d52115accc93808ea7c0de0efe86d3e445d84	2018-12-20 09:42:32	125.160.112.157	User Logout	Sukses
+3c7d52115accc93808ea7c0de0efe86d3e445d84	2018-12-20 09:54:03	125.160.114.64	User Login	Sukses
+3c7d52115accc93808ea7c0de0efe86d3e445d84	2018-12-20 10:51:59	125.160.112.157	User Login	Sukses
+3c7d52115accc93808ea7c0de0efe86d3e445d84	2018-12-20 11:30:37	125.160.115.171	User Login	Sukses
