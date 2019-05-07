@@ -42,7 +42,7 @@ $offset = ($noPage - 1) * $num_row;
 
 $def_page_request = $paging_request . "&page=$noPage";
 
-$grid = "grid.php";
+$grid = "App/Templates/Grids/grid.php";
 $gridHeader = array ("Propinsi", "SBU", "Kode SBU", "Gol", "Jumlah");
 $gridDetail = array ("propinsi_name", "sbu_name", "sbu_kode", "sbu_rinci_gol", "sbu_rinci_amount");
 $gridWidth = array ("20", "20", "20", "8", "15");

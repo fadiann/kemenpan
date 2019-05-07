@@ -1,8 +1,8 @@
 <?php
 $PATH_ROOT = "D:/wamp64/www/menpan/";
-$INCLUDE_DIR = $PATH_ROOT . "_includes/";
+$INCLUDE_DIR = $PATH_ROOT . "App/Libraries/";
 
-include $INCLUDE_DIR . "lib_adodb/adodb.inc.php";
+include $INCLUDE_DIR . "Adodb/adodb.inc.php";
 class Databases {
 	var $dbhost = 'localhost';
 	var $dbuser = 'root';
@@ -98,7 +98,7 @@ class Databases {
 		return $a;
 	}
 	function path_log() {
-		return $this->basepath . "ActivityLog/";
+		return $this->basepath . "Public/ActivityLog/";
 	}
 }
 ?>

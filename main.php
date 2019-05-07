@@ -1,3 +1,16 @@
+<?php
+if(isset($_REQUEST['action'])){
+	if($_REQUEST['action'] == 'logout'){
+		session_start ();
+		$position = 1;
+		include_once "App/Classes/Login.php";
+		$logins = new Login ();
+		$logins->log_out ( $_SESSION ['ses_userId'] );
+		session_destroy ();
+		header("location: index.php");
+	}
+}
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
 	<head>
@@ -56,7 +69,7 @@
 			<div id="jam"></div>
 			</h2>
 			<div class="btn_view_site">
-				<a class="logout_user" href="#" title="Logout" onClick="logout()"><b>Logout</b></a>
+				<a class="logout_user" href="?action=logout" title="Logout"><b>Logout</b></a>
 			</div>
 			</hgroup>
 		</header>
@@ -408,11 +421,12 @@
 		?>
 		<footer>
 			<div id="clear"></div>
-			<div style="background-color: #324aff; height: 38px; border-top: 2px solid black">
+			<div style="background-color: #324aff; height: 40px; border-top: 2px solid black; padding-bottom: 5px;">
 				<center>
 				<!-- <p> -->
 					<br>
-					<strong>Copyright &copy; Bangga Solution - </strong><strong style="color: #ffffff;">PT Tri Nindya Utama</strong><br>
+					<strong>Copyright &copy; Kementerian Pendayagunaan Aparatur Negara dan Reformasi Birokrasi <?=date('Y')?>
+					<br>
 				<!-- </p> -->
 				</center>
 			</div>

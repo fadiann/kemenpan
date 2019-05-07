@@ -42,7 +42,7 @@ $offset = ($noPage - 1) * $num_row;
 
 $def_page_request = $paging_request . "&page=$noPage";
 
-$grid = "grid.php";
+$grid = "App/Templates/Grids/grid.php";
 $gridHeader = array ("Jabatan");
 $gridDetail = array ("1");
 $gridWidth = array ("80");

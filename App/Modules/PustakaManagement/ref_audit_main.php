@@ -42,7 +42,7 @@ $offset = ($noPage - 1) * $num_row;
 
 $def_page_request = $paging_request . "&page=$noPage";
 
-$grid = "grid.php";
+$grid = "App/Templates/Grids/grid.php";
 $gridHeader = array ("Referensi", "Keterangan", "Kategori", "Lampiran", "Link");
 $gridDetail = array ("1", "2", "3", "4", "5");
 $gridWidth = array ("15", "25", "10", "10", "20");

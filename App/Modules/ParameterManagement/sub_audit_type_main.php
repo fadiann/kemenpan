@@ -42,7 +42,7 @@ $offset = ($noPage - 1) * $num_row;
 
 $def_page_request = $paging_request . "&page=$noPage";
 
-$grid = "grid.php";
+$grid = "App/Templates/Grids/grid.php";
 $gridHeader = array ("Tipe Audit", "Nama Sub Tipe", "Keterangan");
 $gridDetail = array ("audit_type_name", "sub_audit_type_name", "sub_audit_type_desc");
 $gridWidth = array ("25", "25", "35");
