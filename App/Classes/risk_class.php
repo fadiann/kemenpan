@@ -246,18 +246,20 @@ class risk {
 	function list_identifikasi($id_kategori, $id_Penetapan, $monitoring="") {
 		$condition = "";
 		if($monitoring!="") $condition = " and risk_penanganan_status = '1' ";
-		$sql = "SELECT identifikasi_id, risk_kategori, identifikasi_no_risiko, identifikasi_nama_risiko, identifikasi_penyebab, identifikasi_selera, 
+		$sql = "SELECT risk_identifikasi.identifikasi_id, risk_kategori, identifikasi_no_risiko, identifikasi_nama_risiko, identifikasi_penyebab, identifikasi_selera, 
 				analisa_bobot_kat_risk, analisa_ri, analisa_bobot_risk, analisa_kemungkinan, analisa_kemungkinan_name, analisa_dampak, analisa_dampak_name, analisa_nilai_ri,
 				evaluasi_risiko_residu, evaluasi_komponen, evaluasi_efektifitas, evaluasi_risiko_residu, evaluasi_efektifitas_name, evaluasi_risiko_residu_name,
 				penanganan_risiko_id, penanganan_plan, penanganan_date, penanganan_pic_id, risk_penanganan_jenis, pic_name,
 				penetapan_auditee_id,
-				monitoring_action, monitoring_date, monitoring_plan_action, monitoring_tenggat_waktu
+				monitoring_action, monitoring_date, monitoring_plan_action, monitoring_tenggat_waktu, sasaran_organisasi, indikator_kinerja
 				FROM risk_identifikasi
 				LEFT JOIN risk_penetapan on identifikasi_penetapan_id = penetapan_id
 				LEFT JOIN par_risk_kategori on identifikasi_kategori_id = risk_kategori_id
 				LEFT JOIN par_risk_penanganan on penanganan_risiko_id = risk_penanganan_id
 				LEFT JOIN auditee_pic on penanganan_pic_id = pic_id
+				LEFT JOIN risk_identifikasi_detail ON risk_identifikasi.identifikasi_id = risk_identifikasi_detail.identifikasi_id 
 				WHERE identifikasi_penetapan_id = '" . $id_Penetapan . "' and identifikasi_kategori_id = '" . $id_kategori . "' ".$condition."  order by risk_kategori, identifikasi_selera";
+				//echo $sql;
 		$data = $this->db->_dbquery ( $sql );
 		return $data;
 	}

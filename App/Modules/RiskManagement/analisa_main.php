@@ -1,18 +1,17 @@
-<?
+<?php
 include_once "App/Classes/risk_class.php";
 include_once "App/Classes/param_class.php";
 
-$risks = new risk ( $ses_userId );
+$risks  = new risk ( $ses_userId );
 $params = new param ( $ses_userId );
 
 @$_action = $Helper->replacetext ( $_REQUEST ["data_action"] );
 
 $ses_penetapan_id = $_SESSION ['ses_penetapan_id'];
-
-$paging_request = "main.php?method=risk_penetapantujuan";
+$paging_request   = "main.php?method=risk_penetapantujuan";
 $acc_page_request = "analisa_acc.php";
 
-$num_row = 10;
+$num_row   = 10;
 @$str_page = $Helper->replacetext ( $_GET ['page'] );
 if (isset ( $str_page )) {
 	if (is_numeric ( $str_page ) && $str_page != 0) {
@@ -57,7 +56,6 @@ switch ($_action) {
 				$risks->update_analisa ( $arr_iden ['identifikasi_id'], $tk, $td, $ri, $get_nama_tk, $get_nama_td, $get_nama_ri ['ri_name'], $bobot_ri, $nilai_ri, $bobot_kat_ri );
 			}
 		}
-		
 		$nilai_profil = 0;
 		$rs_iden_kat = $risks->list_identifikasi_by_kat ( $ses_penetapan_id );
 		while ( $arr_iden_kat = $rs_iden_kat->FetchRow () ) {
@@ -68,14 +66,10 @@ switch ($_action) {
 			$nilai_bobot = round ( $sum_nilai_ri * $bobot_kat_ri / 100, 2 );
 			$nilai_profil = $nilai_bobot + $nilai_profil;
 		}
-		
-		$risks->update_profil ( $ses_penetapan_id, $nilai_profil );
-		
-		$Helper->js_alert_act ( 3 );
-		?>
-<script>window.open('<?=$def_page_request?>', '_self');</script>
-<?
-		$page_request = "blank.php";
+	$risks->update_profil ( $ses_penetapan_id, $nilai_profil );
+	$Helper->js_alert_act ( 3 );
+	echo "<script>window.open('".$def_page_request."', '_self');</script>";
+	$page_request = "blank.php";
 		break;
 }
 include_once $page_request;

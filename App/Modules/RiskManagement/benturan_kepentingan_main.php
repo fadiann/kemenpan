@@ -24,7 +24,7 @@ if (@$method != @$val_method) {
 }
 
 $ses_penetapan_id  = $_SESSION['ses_penetapan_id'];
-$paging_request    = "main.php?method=risk_identifikasi";
+$paging_request    = "main.php?method=benturan_kepentingan";
 $acc_page_request  = "identifikasi_acc.php";
 $list_page_request = "risk_view.php";
 $rs_penetapan      = $risks->penetapan_data_viewlist($ses_penetapan_id);
@@ -54,9 +54,9 @@ $gridWidth  = array("10", "25", "15", "20", "10");
 $key_by    = array("Nomor Risiko", "Kejadian Risiko", "Kategori Risiko", "Penyebab Risiko", "Dampak Risiko");
 $key_field = array("identifikasi_no_risiko", "identifikasi_nama_risiko", "risk_kategori", "identifikasi_penyebab", "identifikasi_selera");
 
-$widthAksi  = "15";
-$iconEdit   = "1";
-$iconDel    = "1";
+$widthAksi = "15";
+$iconEdit = "1";
+$iconDel = "1";
 $iconDetail = "0";
 // === end grid ===//
 
@@ -64,14 +64,14 @@ switch ($_action) {
 	case "getadd":
 		$_nextaction  = "postadd";
 		$page_request = $acc_page_request;
-		$page_title   = "Tambah Identifikasi";
+		$page_title   = "Tambah Benturan Kepentingan";
 		break;
 	case "getedit":
 		$_nextaction  = "postedit";
 		$page_request = $acc_page_request;
 		$fdata_id     = $Helper->replacetext($_REQUEST["data_id"]);
 		$rs           = $risks->identifikasi_data_viewlist($fdata_id);
-		$page_title   = "Ubah Identifikasi";
+		$page_title   = "Ubah Benturan Kepentingan";
 		break;
 	case "postadd":
 		$id					= $Helper->unixid();
@@ -138,9 +138,8 @@ switch ($_action) {
 	default:
 		$recordcount = $risks->identifikasi_count($ses_penetapan_id, $key_search, $val_search, $key_field);
 		$rs = $risks->identifikasi_view_grid($ses_penetapan_id, $key_search, $val_search, $key_field, $offset, $num_row);
-		$page_title = "Daftar Identifikasi Risiko";
+		$page_title = "Benturan Kepentingan";
 		$page_request = $list_page_request;
 	break;
 }
 include_once $page_request;
-?>
