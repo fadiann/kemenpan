@@ -11,7 +11,7 @@ html, body {
 	font-family: "Helvetica Neue", Helvetica, Arial, Verdana, sans-serif;
 	background: #ffffff;
 	font-size: 11px;
-	overflow: hidden;
+	overflow: initial;
 }
 
 .clear {
@@ -393,12 +393,12 @@ aside#sidebar {
 section#main {
 	width: 81%;
     min-height: 70%;
-   	max-height: 78%;
+   	/* max-height: 78%; */
 	/* background: url(../images/sidebar_shadow.png) repeat-y left top; */
 	float: left;
 	margin-top: 0px;
     padding: 0px 0px 10px 0px;
-    overflow-y: auto;
+    overflow-y: hidden;
 }
 
 #main h3 {

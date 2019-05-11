@@ -1,0 +1,39 @@
+9b44ac8966798da6f357fc1689342e187013cd51	2019-05-11 13:28:30	::1	User Login	Sukses
+9b44ac8966798da6f357fc1689342e187013cd51	2019-05-11 20:28:44	::1	Menambah Penetapan Risiko asda	Sukses
+9b44ac8966798da6f357fc1689342e187013cd51	2019-05-11 20:28:44	::1	Menambah Penetapan Risiko asda	Sukses
+9b44ac8966798da6f357fc1689342e187013cd51	Menambah Penetapan Risiko asda	insert into risk_penetapan (penetapan_id, penetapan_auditee_id, penetapan_tahun, penetapan_nama, penetapan_tujuan) 
+				values 
+				('4b243724880e8fc5cfa36030bf74689f04f97189','9ab2d5426492ad03b3796bd1e9222eadc66fc1f2','2019','asda','asdas') ErrorMsg : 9b44ac8966798da6f357fc1689342e187013cd51	2019-05-11 13:31:06	::1	User Login	Sukses
+9b44ac8966798da6f357fc1689342e187013cd51	2019-05-11 13:33:06	::1	User Logout	Sukses
+fe262a407870ffc998f263a7e9cfedbd0369eba0	2019-05-11 13:35:17	::1	User Login	Sukses
+fe262a407870ffc998f263a7e9cfedbd0369eba0	2019-05-11 20:37:31	::1	Menambah Penetapan Risiko sdfssf	Sukses
+fe262a407870ffc998f263a7e9cfedbd0369eba0	2019-05-11 21:44:07	::1	Menambah Identifikasi Risiko id 83678a4604281cf3141785fa6f1f29f9946c571a	Sukses
+fe262a407870ffc998f263a7e9cfedbd0369eba0	2019-05-11 21:44:26	::1	Menambah Identifikasi Risiko id f088721900cfecd1a781d864728cd89359dafed3	Sukses
+fe262a407870ffc998f263a7e9cfedbd0369eba0	2019-05-11 21:45:15	::1	Menambah Identifikasi Risiko id b240a71c81fb944f29d1ea8bb61ff75a29ef0c29	Sukses
+fe262a407870ffc998f263a7e9cfedbd0369eba0	2019-05-11 21:45:44	::1	Menambah Identifikasi Risiko id 13857c0573529b0377a38ab23c5315a390d90918	Sukses
+fe262a407870ffc998f263a7e9cfedbd0369eba0	2019-05-11 21:46:38	::1	Menambah Identifikasi Risiko id 3f6d7642f08dd5dffc76526b80ed4f8ceb4ad787	Sukses
+fe262a407870ffc998f263a7e9cfedbd0369eba0	2019-05-11 21:48:55	::1	Menambah Identifikasi Risiko id 0830aee5c678ae6dc510e8441e559aa2eb192515	Sukses
+fe262a407870ffc998f263a7e9cfedbd0369eba0	2019-05-11 21:54:02	::1	Menambah Identifikasi Risiko id c32683f044248567aa24582877ac15932f5e7e0f	Sukses
+fe262a407870ffc998f263a7e9cfedbd0369eba0	2019-05-11 21:54:11	::1	Menghapus Identifikasi Risiko ID 3f6d7642f08dd5dffc76526b80ed4f8ceb4ad787	Sukses
+fe262a407870ffc998f263a7e9cfedbd0369eba0	2019-05-11 21:54:18	::1	Menghapus Identifikasi Risiko ID 83678a4604281cf3141785fa6f1f29f9946c571a	Sukses
+fe262a407870ffc998f263a7e9cfedbd0369eba0	2019-05-11 21:54:23	::1	Menghapus Identifikasi Risiko ID f088721900cfecd1a781d864728cd89359dafed3	Sukses
+fe262a407870ffc998f263a7e9cfedbd0369eba0	2019-05-11 21:54:33	::1	Menghapus Identifikasi Risiko ID c32683f044248567aa24582877ac15932f5e7e0f	Sukses
+fe262a407870ffc998f263a7e9cfedbd0369eba0	2019-05-11 21:54:39	::1	Menghapus Identifikasi Risiko ID 13857c0573529b0377a38ab23c5315a390d90918	Sukses
+fe262a407870ffc998f263a7e9cfedbd0369eba0	2019-05-11 21:54:45	::1	Menghapus Identifikasi Risiko ID 0830aee5c678ae6dc510e8441e559aa2eb192515	Sukses
+fe262a407870ffc998f263a7e9cfedbd0369eba0	2019-05-11 21:57:11	::1	Menambah Identifikasi Risiko id 9f5d712ac10d6dad83030a224f4ed58f542db056	Sukses
+fe262a407870ffc998f263a7e9cfedbd0369eba0	2019-05-11 15:02:33	::1	User Logout	Sukses
+fe262a407870ffc998f263a7e9cfedbd0369eba0	2019-05-11 15:02:48	::1	User Login	Sukses
+fe262a407870ffc998f263a7e9cfedbd0369eba0	2019-05-11 22:04:39	::1	Menambah Identifikasi Risiko id e159ccb342ff0ea634d18b2fca27e332410ebb80	Sukses
+fe262a407870ffc998f263a7e9cfedbd0369eba0	2019-05-11 22:33:38	::1	Mengubah Identifikasi Risiko ID 	Sukses
+fe262a407870ffc998f263a7e9cfedbd0369eba0	2019-05-11 22:34:18	::1	Mengubah Identifikasi Risiko ID 	Sukses
+fe262a407870ffc998f263a7e9cfedbd0369eba0	2019-05-11 22:36:09	::1	Mengubah Identifikasi Risiko ID 23bf46eb7446f20afd0efa50be33f8ee826bc761	Sukses
+fe262a407870ffc998f263a7e9cfedbd0369eba0	2019-05-11 22:36:33	::1	Mengubah Identifikasi Risiko ID b240a71c81fb944f29d1ea8bb61ff75a29ef0c29	Sukses
+fe262a407870ffc998f263a7e9cfedbd0369eba0	2019-05-11 22:37:19	::1	Mengubah Identifikasi Risiko ID 23bf46eb7446f20afd0efa50be33f8ee826bc761	Sukses
+fe262a407870ffc998f263a7e9cfedbd0369eba0	2019-05-11 22:38:10	::1	Mengubah Identifikasi Risiko ID 23bf46eb7446f20afd0efa50be33f8ee826bc761	Sukses
+fe262a407870ffc998f263a7e9cfedbd0369eba0	2019-05-11 22:39:14	::1	Mengubah Identifikasi Risiko ID 23bf46eb7446f20afd0efa50be33f8ee826bc761	Sukses
+fe262a407870ffc998f263a7e9cfedbd0369eba0	2019-05-11 22:39:24	::1	Mengubah Identifikasi Risiko ID 23bf46eb7446f20afd0efa50be33f8ee826bc761	Sukses
+fe262a407870ffc998f263a7e9cfedbd0369eba0	2019-05-11 22:39:42	::1	Menghapus Identifikasi Risiko ID 23bf46eb7446f20afd0efa50be33f8ee826bc761	Sukses
+fe262a407870ffc998f263a7e9cfedbd0369eba0	2019-05-11 22:39:48	::1	Menghapus Identifikasi Risiko ID b240a71c81fb944f29d1ea8bb61ff75a29ef0c29	Sukses
+fe262a407870ffc998f263a7e9cfedbd0369eba0	2019-05-11 22:40:05	::1	Mengubah Identifikasi Risiko ID 9f5d712ac10d6dad83030a224f4ed58f542db056	Sukses
+fe262a407870ffc998f263a7e9cfedbd0369eba0	2019-05-11 22:40:18	::1	Mengubah Identifikasi Risiko ID 9f5d712ac10d6dad83030a224f4ed58f542db056	Sukses
+fe262a407870ffc998f263a7e9cfedbd0369eba0	2019-05-11 22:42:23	::1	Menambah Identifikasi Risiko id 3907d031f77f13fb6588d764163aeb0ab5945ce0	Sukses

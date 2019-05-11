@@ -978,6 +978,19 @@ class Helper
     function urlImage($path) {
         return $this->db->weburl . $path;
     }
-}
+    
+    function filter($data) {
+        $filter = stripslashes(strip_tags(htmlspecialchars($data, ENT_QUOTES)));
+        return $filter;
+    }
 
+    public function postData($name) {
+        $data   = $this->filter($_POST[$name]);
+        return $data;
+    }	
+    function unixid(){
+		$a = sha1(microtime());
+		return $a;
+	}
+}
 ?>

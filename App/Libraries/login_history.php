@@ -1,7 +1,7 @@
 <?php
 @session_start();
 ini_set('date.timezone', 'Asia/Jakarta');
-error_reporting (0);
+error_reporting (E_ALL);
 if (@$position == 1) {
 	include_once "App/Classes/Login.php";
 	include_once "App/Libraries/Helper.php";

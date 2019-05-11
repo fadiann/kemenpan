@@ -16,6 +16,7 @@ if(isset($_REQUEST['action'])){
 	<head>
 		<title>e-MAS | Elektronik Manajemen Audit Sistem</title>
 		<link rel="stylesheet" href="Public/css/layout.css" type="text/css" media="screen" />
+    	<link rel="stylesheet" href="Public/css/loader.css">	
 		<link rel="shortcut icon" href="Public/images/favicon.ico" type="image/x-icon">
 		<!--[if lt IE 9]>
 			<link rel="stylesheet" href="Public/css/ie.css" type="text/css" media="screen" />
@@ -25,6 +26,7 @@ if(isset($_REQUEST['action'])){
 		<script src="Public/js/actions.js" type="text/javascript"></script>
 		<script src="Public/js/hideshow.js" type="text/javascript"></script>
 		<script src="Public/js/jqClock.min.js" type="text/javascript"></script>
+		<script src="Public/js/pace.min.js"></script>
 		<?php
 		$position = 1;
 		include_once ("App/Libraries/login_history.php");
@@ -58,8 +60,15 @@ if(isset($_REQUEST['action'])){
 		$("div#jamcal").clock({"calendar":"true","langSet":"id"});
 		});
 		</script>
+		<script>
+			Pace.on("done", function(){
+				$(".preloader").fadeOut(200);
+			});
+		</script>
+		
 	</head>
 	<body onload="sh('notif', '<?=$jml_notif?>')">
+    	<div class="preloader"></div>
 		<header id="header">
 			<hgroup>
 			<h1 class="site_title">
@@ -421,7 +430,7 @@ if(isset($_REQUEST['action'])){
 		?>
 		<footer>
 			<div id="clear"></div>
-			<div style="background-color: #324aff; height: 40px; border-top: 2px solid black; padding-bottom: 5px;">
+			<div style="background-color: #324aff; height: 30px; border-top: 2px solid black; padding-bottom: 5px;">
 				<center>
 				<!-- <p> -->
 					<br>

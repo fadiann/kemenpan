@@ -1,0 +1,63 @@
+[07-May-2019 03:08:48 UTC] PHP Warning:  include(App/Libraries/Adodb/adodb.inc.php): failed to open stream: No such file or directory in /home/u6559439/public_html/e-mas/App/Config/Databases.php on line 5
+[07-May-2019 03:08:48 UTC] PHP Warning:  include(): Failed opening 'App/Libraries/Adodb/adodb.inc.php' for inclusion (include_path='.:/opt/alt/php71/usr/share/pear') in /home/u6559439/public_html/e-mas/App/Config/Databases.php on line 5
+[07-May-2019 03:08:48 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function ADONewConnection() in /home/u6559439/public_html/e-mas/App/Config/Databases.php:29
+Stack trace:
+#0 /home/u6559439/public_html/e-mas/App/Config/Databases.php(23): Databases->_dbconn()
+#1 /home/u6559439/public_html/e-mas/App/Classes/Login.php(10): Databases->__construct()
+#2 /home/u6559439/public_html/e-mas/App/Config/Logout.php(4): Login->__construct()
+#3 {main}
+  thrown in /home/u6559439/public_html/e-mas/App/Config/Databases.php on line 29
+[07-May-2019 03:08:49 UTC] PHP Warning:  include(App/Libraries/Adodb/adodb.inc.php): failed to open stream: No such file or directory in /home/u6559439/public_html/e-mas/App/Config/Databases.php on line 5
+[07-May-2019 03:08:49 UTC] PHP Warning:  include(): Failed opening 'App/Libraries/Adodb/adodb.inc.php' for inclusion (include_path='.:/opt/alt/php71/usr/share/pear') in /home/u6559439/public_html/e-mas/App/Config/Databases.php on line 5
+[07-May-2019 03:08:49 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function ADONewConnection() in /home/u6559439/public_html/e-mas/App/Config/Databases.php:29
+Stack trace:
+#0 /home/u6559439/public_html/e-mas/App/Config/Databases.php(23): Databases->_dbconn()
+#1 /home/u6559439/public_html/e-mas/App/Classes/Login.php(10): Databases->__construct()
+#2 /home/u6559439/public_html/e-mas/App/Config/Logout.php(4): Login->__construct()
+#3 {main}
+  thrown in /home/u6559439/public_html/e-mas/App/Config/Databases.php on line 29
+[07-May-2019 03:09:24 UTC] PHP Warning:  include(App/Libraries/Adodb/adodb.inc.php): failed to open stream: No such file or directory in /home/u6559439/public_html/e-mas/App/Config/Databases.php on line 5
+[07-May-2019 03:09:24 UTC] PHP Warning:  include(): Failed opening 'App/Libraries/Adodb/adodb.inc.php' for inclusion (include_path='.:/opt/alt/php71/usr/share/pear') in /home/u6559439/public_html/e-mas/App/Config/Databases.php on line 5
+[07-May-2019 03:09:24 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function ADONewConnection() in /home/u6559439/public_html/e-mas/App/Config/Databases.php:29
+Stack trace:
+#0 /home/u6559439/public_html/e-mas/App/Config/Databases.php(23): Databases->_dbconn()
+#1 /home/u6559439/public_html/e-mas/App/Classes/Login.php(10): Databases->__construct()
+#2 /home/u6559439/public_html/e-mas/App/Config/Logout.php(4): Login->__construct()
+#3 {main}
+  thrown in /home/u6559439/public_html/e-mas/App/Config/Databases.php on line 29
+[07-May-2019 03:09:29 UTC] PHP Warning:  include(App/Libraries/Adodb/adodb.inc.php): failed to open stream: No such file or directory in /home/u6559439/public_html/e-mas/App/Config/Databases.php on line 5
+[07-May-2019 03:09:29 UTC] PHP Warning:  include(): Failed opening 'App/Libraries/Adodb/adodb.inc.php' for inclusion (include_path='.:/opt/alt/php71/usr/share/pear') in /home/u6559439/public_html/e-mas/App/Config/Databases.php on line 5
+[07-May-2019 03:09:29 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function ADONewConnection() in /home/u6559439/public_html/e-mas/App/Config/Databases.php:29
+Stack trace:
+#0 /home/u6559439/public_html/e-mas/App/Config/Databases.php(23): Databases->_dbconn()
+#1 /home/u6559439/public_html/e-mas/App/Classes/Login.php(10): Databases->__construct()
+#2 /home/u6559439/public_html/e-mas/App/Config/Logout.php(4): Login->__construct()
+#3 {main}
+  thrown in /home/u6559439/public_html/e-mas/App/Config/Databases.php on line 29
+[07-May-2019 03:09:36 UTC] PHP Warning:  include(App/Libraries/Adodb/adodb.inc.php): failed to open stream: No such file or directory in /home/u6559439/public_html/e-mas/App/Config/Databases.php on line 5
+[07-May-2019 03:09:36 UTC] PHP Warning:  include(): Failed opening 'App/Libraries/Adodb/adodb.inc.php' for inclusion (include_path='.:/opt/alt/php71/usr/share/pear') in /home/u6559439/public_html/e-mas/App/Config/Databases.php on line 5
+[07-May-2019 03:09:36 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function ADONewConnection() in /home/u6559439/public_html/e-mas/App/Config/Databases.php:29
+Stack trace:
+#0 /home/u6559439/public_html/e-mas/App/Config/Databases.php(23): Databases->_dbconn()
+#1 /home/u6559439/public_html/e-mas/App/Classes/Login.php(10): Databases->__construct()
+#2 /home/u6559439/public_html/e-mas/App/Config/Logout.php(4): Login->__construct()
+#3 {main}
+  thrown in /home/u6559439/public_html/e-mas/App/Config/Databases.php on line 29
+[07-May-2019 03:20:34 UTC] PHP Warning:  include(App/Libraries/Adodb/adodb.inc.php): failed to open stream: No such file or directory in /home/u6559439/public_html/e-mas/App/Config/Databases.php on line 5
+[07-May-2019 03:20:34 UTC] PHP Warning:  include(): Failed opening 'App/Libraries/Adodb/adodb.inc.php' for inclusion (include_path='.:/opt/alt/php71/usr/share/pear') in /home/u6559439/public_html/e-mas/App/Config/Databases.php on line 5
+[07-May-2019 03:20:34 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function ADONewConnection() in /home/u6559439/public_html/e-mas/App/Config/Databases.php:29
+Stack trace:
+#0 /home/u6559439/public_html/e-mas/App/Config/Databases.php(23): Databases->_dbconn()
+#1 /home/u6559439/public_html/e-mas/App/Classes/Login.php(10): Databases->__construct()
+#2 /home/u6559439/public_html/e-mas/App/Config/Logout.php(4): Login->__construct()
+#3 {main}
+  thrown in /home/u6559439/public_html/e-mas/App/Config/Databases.php on line 29
+[07-May-2019 03:36:23 UTC] PHP Warning:  include(App/Libraries/Adodb/adodb.inc.php): failed to open stream: No such file or directory in /home/u6559439/public_html/e-mas/App/Config/Databases.php on line 5
+[07-May-2019 03:36:23 UTC] PHP Warning:  include(): Failed opening 'App/Libraries/Adodb/adodb.inc.php' for inclusion (include_path='.:/opt/alt/php71/usr/share/pear') in /home/u6559439/public_html/e-mas/App/Config/Databases.php on line 5
+[07-May-2019 03:36:23 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function ADONewConnection() in /home/u6559439/public_html/e-mas/App/Config/Databases.php:29
+Stack trace:
+#0 /home/u6559439/public_html/e-mas/App/Config/Databases.php(23): Databases->_dbconn()
+#1 /home/u6559439/public_html/e-mas/App/Classes/Login.php(10): Databases->__construct()
+#2 /home/u6559439/public_html/e-mas/App/Config/Logout.php(4): Login->__construct()
+#3 {main}
+  thrown in /home/u6559439/public_html/e-mas/App/Config/Databases.php on line 29
