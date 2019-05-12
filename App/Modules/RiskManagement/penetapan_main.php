@@ -48,14 +48,18 @@ $offset = ($noPage - 1) * $num_row;
 $def_page_request = $paging_request . "&page=$noPage";
 
 $grid = "App/Templates/Grids/grid_risiko.php";
-$gridHeader = array ("Satuan Kerja", "Tahun", "Identifikasi", "Analisis", "Evaluasi", "Penanganan");
-$gridDetail = array ("auditee_name", "penetapan_tahun", "penetapan_id", "penetapan_profil_risk", "penetapan_profil_risk_residu", "penetapan_id");
+// $gridHeader = array ("Satuan Kerja", "Tahun", "Identifikasi", "Analisis", "Evaluasi", "Penanganan");
+// $gridDetail = array ("auditee_name", "penetapan_tahun", "penetapan_id", "penetapan_profil_risk", "penetapan_profil_risk_residu", "penetapan_id");
+// $gridWidth = array ("30", "8", "9", "9", "9", "10");
+
+$gridHeader = array ("Satuan Kerja", "Tahun", "Identifikasi", "Analisis", "Keputusan Penanganan");
+$gridDetail = array ("auditee_name", "penetapan_tahun", "penetapan_id", "penetapan_profil_risk", "penetapan_id");
 $gridWidth = array ("30", "8", "9", "9", "9", "10");
 
-$key_by = array ("Satuan Kerja", "Tahun", "Analisis", "Evaluasi");
-$key_field = array ("auditee_name", "penetapan_tahun", "penetapan_profil_risk", "penetapan_profil_risk_residu");
+$key_by = array ("Satuan Kerja", "Tahun", "Analisis");
+$key_field = array ("auditee_name", "penetapan_tahun", "penetapan_profil_risk");
 
-$widthAksi = "15";
+$widthAksi = "10";
 $iconDetail = "1";
 // === end grid ===//
 

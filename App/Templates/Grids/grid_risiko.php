@@ -74,7 +74,7 @@
 					?>
 		</td> 
 	<?
-				} elseif ($gridHeader [$j] == "Penanganan") {
+				} elseif ($gridHeader [$j] == "Keputusan Penanganan") {
 					?>
 		<td align="center">
 			<?
