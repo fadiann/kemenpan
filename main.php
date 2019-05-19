@@ -18,7 +18,7 @@ if (isset($_REQUEST['action'])) {
 	<title>e-MAS | Elektronik Manajemen Audit Sistem</title>
 	<link rel="stylesheet" href="Public/css/layout.css" type="text/css" media="screen" />
 	<link rel="stylesheet" href="Public/css/loader.css">
-	<link rel="shortcut icon" href="Public/images/favicon.ico" type="image/x-icon">
+	<link rel="shortcut icon" href="Public/images/emas-logo.png" type="image/x-icon">
 	<!--[if lt IE 9]>
 			<link rel="stylesheet" href="Public/css/ie.css" type="text/css" media="screen" />
 		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>

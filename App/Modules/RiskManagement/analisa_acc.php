@@ -25,12 +25,13 @@
 						<th>Level Kemungkinan</th>
 						<th>Level Dampak</th>
 						<th>Besaran Risiko</th>
+						<th>Level Risiko</th>
 						<!-- <th>Bobot<br>Risiko<br>(%)
-						</th>
-						<th>Nilai<br>Risiko<br>Inheren
-						</th>
-						<th>Bobot<br>Kategori<br>Risiko<br>(%)
-						</th> -->
+																</th>
+																<th>Nilai<br>Risiko<br>Inheren
+																</th>
+																<th>Bobot<br>Kategori<br>Risiko<br>(%)
+																</th> -->
 					</tr>
 					<?php
 					$i   = 0;
@@ -58,7 +59,8 @@
 							?>
 								<td><?= $arr_iden['sasaran_organisasi']; ?></td>
 								<td><?= $arr_iden['indikator_kinerja']; ?></td>
-								<? /*<td><?= $arr_iden['identifikasi_no_risiko']; ?></td> */ ?>
+								<? /*<td><?= $arr_iden['identifikasi_no_risiko']; ?>
+					</td> */ ?>
 								<td><?= $arr_iden['identifikasi_nama_risiko']; ?></td>
 								<td><?= $arr_iden['identifikasi_penyebab']; ?></td>
 								<td><?= $arr_iden['identifikasi_selera']; ?></td>
@@ -77,6 +79,26 @@
 									?>
 								</td>
 								<td align="center"><label class="ri"><?= $arr_iden['analisa_ri'] ?></label></td>
+								<td align="center">
+									<label class="levelrisk">
+										<?php
+										$risk_level = $arr_iden['analisa_ri'];
+										if ($risk_level == '' || $risk_level == 0) {
+											echo "Belum Terhitung";
+										} elseif ($risk_level > 0 && $risk_level <= 5) {
+											echo "Sangat Rendah";
+										} elseif ($risk_level >= 6 && $risk_level <= 10) {
+											echo "Rendah";
+										} elseif ($risk_level >= 11 && $risk_level <= 15) {
+											echo "Sedang";
+										} elseif ($risk_level >= 16 && $risk_level <= 20) {
+											echo "Tinggi";
+										} elseif ($risk_level >= 21 && $risk_level <= 25) {
+											echo "Sangat Tinggi";
+										}
+										?>
+									</label>
+								</td>
 								<? /*
 					<td align="center"><input type="text" name="bobot_risiko_<?=$no?>"
 					id="bobot_risiko" size="2" class="cmb_risk bobot_ri_<?=$kat?>"

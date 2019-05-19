@@ -140,51 +140,114 @@ class risk {
 		return $data;
 	}
 	// end penetapan tujuan
-	
+
 	// identifikasi
-	function identifikasi_count($penetapan_id, $key_search, $val_search, $all_field) {
+	function identifikasi_count($penetapan_id, $key_search, $val_search, $all_field)
+	{
 		$condition = "";
-		if($val_search!=""){
-			if($key_search!="") $condition = " and ".$key_search." like '%".$val_search."%' ";
+		if ($val_search != "") {
+			if ($key_search != "") $condition = " and " . $key_search . " like '%" . $val_search . "%' ";
 			else {
-				for($i=0;$i<count($all_field);$i++){
+				for ($i = 0; $i < count($all_field); $i++) {
 					$or = " or ";
-					if($i==0) $or = "";
-					$condition .= $or.$all_field[$i]." like '%".$val_search."%' ";
+					if ($i == 0) $or = "";
+					$condition .= $or . $all_field[$i] . " like '%" . $val_search . "%' ";
 				}
-				$condition = " and (".$condition.")";
+				$condition = " and (" . $condition . ")";
 			}
 		}
 		$sql = "SELECT count(*) FROM risk_identifikasi
 				LEFT JOIN risk_penetapan on identifikasi_penetapan_id = penetapan_id
 				LEFT JOIN par_risk_kategori on identifikasi_kategori_id = risk_kategori_id
-				WHERE identifikasi_penetapan_id = '" . $penetapan_id . "' ".$condition;
-		$data = $this->db->_dbquery ( $sql );
-		$arr = $data->FetchRow ();
-		return $arr [0];
+				WHERE identifikasi_penetapan_id = '" . $penetapan_id . "' " . $condition;
+		$data = $this->db->_dbquery($sql);
+		$arr = $data->FetchRow();
+		return $arr[0];
 	}
-	function identifikasi_view_grid($penetapan_id, $key_search, $val_search, $all_field, $offset, $num_row) {
+	function identifikasi_view_grid($penetapan_id, $key_search, $val_search, $all_field, $offset, $num_row)
+	{
 		$condition = "";
-		if($val_search!=""){
-			if($key_search!="") $condition = " and ".$key_search." like '%".$val_search."%' ";
+		if ($val_search != "") {
+			if ($key_search != "") $condition = " and " . $key_search . " like '%" . $val_search . "%' ";
 			else {
-				for($i=0;$i<count($all_field);$i++){
+				for ($i = 0; $i < count($all_field); $i++) {
 					$or = " or ";
-					if($i==0) $or = "";
-					$condition .= $or.$all_field[$i]." like '%".$val_search."%' ";
+					if ($i == 0) $or = "";
+					$condition .= $or . $all_field[$i] . " like '%" . $val_search . "%' ";
 				}
-				$condition = " and (".$condition.")";
+				$condition = " and (" . $condition . ")";
 			}
 		}
 		$sql = "SELECT identifikasi_id, identifikasi_no_risiko, identifikasi_nama_risiko, risk_kategori, identifikasi_penyebab, identifikasi_selera, penetapan_status
 				FROM risk_identifikasi
 				LEFT JOIN risk_penetapan on identifikasi_penetapan_id = penetapan_id
 				LEFT JOIN par_risk_kategori on identifikasi_kategori_id = risk_kategori_id
-				WHERE identifikasi_penetapan_id = '" . $penetapan_id . "' ".$condition."
+				WHERE identifikasi_penetapan_id = '" . $penetapan_id . "' " . $condition . "
 				LIMIT $offset, $num_row";
-		$data = $this->db->_dbquery ( $sql );
+		$data = $this->db->_dbquery($sql);
 		return $data;
 	}
+
+	//benturan kepentingan	
+	function benturan_kepentingan_count($key_search, $val_search, $all_field)
+	{
+		$condition = "";
+		if ($val_search != "") {
+			if ($key_search != "") $condition = " and " . $key_search . " like '%" . $val_search . "%' ";
+			else {
+				for ($i = 0; $i < count($all_field); $i++) {
+					$or = " or ";
+					if ($i == 0) $or = "";
+					$condition .= $or . $all_field[$i] . " like '%" . $val_search . "%' ";
+				}
+				$condition = " and (" . $condition . ")";
+			}
+		}
+		$sql = "SELECT count(*) FROM benturan_kepentingan
+				WHERE 1=1 " . $condition;
+		$data = $this->db->_dbquery($sql);
+		$arr = $data->FetchRow();
+		return $arr[0];
+	}
+	function benturan_kepentingan_view_grid($key_search, $val_search, $all_field, $offset, $num_row)
+	{
+		$condition = "";
+		if ($val_search != "") {
+			if ($key_search != "") $condition = " and " . $key_search . " like '%" . $val_search . "%' ";
+			else {
+				for ($i = 0; $i < count($all_field); $i++) {
+					$or = " or ";
+					if ($i == 0) $or = "";
+					$condition .= $or . $all_field[$i] . " like '%" . $val_search . "%' ";
+				}
+				$condition = " and (" . $condition . ")";
+			}
+		}
+		$sql = "SELECT * FROM benturan_kepentingan
+				WHERE 1=1  ". $condition . "
+				LIMIT $offset, $num_row";
+		$data = $this->db->_dbquery($sql);
+		return $data;
+	}
+	function benturan_kepentingan_viewById($id)
+	{
+		$sql = "SELECT * FROM benturan_kepentingan WHERE benturan_kepentingan_id = '".$id."'";
+		$data = $this->db->_dbquery($sql);
+		return $data;
+	}
+	function benturan_kepentingan_add($data)
+	{
+		$sql = "INSERT INTO benturan_kepentingan VALUES (?, ?, ?, ?, ?)";
+		$this->db->bind($sql, $data);
+	}
+	function benturan_kepentingan_edit($data)
+	{
+		$sql = "UPDATE benturan_kepentingan SET uraian = ?, pelaku = ?, rencana_aksi = ?, tahun = ? WHERE benturan_kepentingan_id = ?";
+		$this->db->bind($sql, $data);
+	}
+
+	//end benturan kepentingan
+
 	function identifikasi_data_viewlist($id) {
 		$sql = "SELECT risk_identifikasi.identifikasi_id, identifikasi_no_risiko, 
 				identifikasi_nama_risiko, identifikasi_kategori_id, identifikasi_penyebab, identifikasi_selera, monitoring_action, monitoring_date, monitoring_plan_action, monitoring_tenggat_waktu, sasaran_organisasi, indikator_kinerja

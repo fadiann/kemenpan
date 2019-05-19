@@ -23,12 +23,9 @@ if (@$method != @$val_method) {
 	$val_method = "";
 }
 
-$ses_penetapan_id  = $_SESSION['ses_penetapan_id'];
 $paging_request    = "main.php?method=benturan_kepentingan";
-$acc_page_request  = "identifikasi_acc.php";
-$list_page_request = "risk_view.php";
-$rs_penetapan      = $risks->penetapan_data_viewlist($ses_penetapan_id);
-$arr_penetapan     = $rs_penetapan->FetchRow();
+$acc_page_request  = "benturan_kepentingan_acc.php";
+$list_page_request = "benturan_kepentingan_view.php";
 
 // ==== buat grid ===//
 $num_row = 10;
@@ -46,17 +43,17 @@ $offset = ($noPage - 1) * $num_row;
 
 $def_page_request = $paging_request . "&page=$noPage";
 
-$grid       = "App/Templates/Grids/grid_risiko.php";
-$gridHeader = array("Nomor Risiko", "Kejadian Risiko", "Kategori Risiko", "Penyebab Risiko", "Dampak Risiko");
-$gridDetail = array("identifikasi_no_risiko", "identifikasi_nama_risiko", "risk_kategori", "identifikasi_penyebab", "identifikasi_selera");
-$gridWidth  = array("10", "25", "15", "20", "10");
+$grid       = "App/Templates/Grids/grid_benturan_kepentingan.php";
+$gridHeader = array("Tahun", "Uraian", "Pelaku Yang Terkait", "Rencana Aksi");
+$gridDetail = array("tahun", "uraian", "pelaku", "rencana_aksi");
+$gridWidth  = array("5", "25", "15", "20");
 
-$key_by    = array("Nomor Risiko", "Kejadian Risiko", "Kategori Risiko", "Penyebab Risiko", "Dampak Risiko");
-$key_field = array("identifikasi_no_risiko", "identifikasi_nama_risiko", "risk_kategori", "identifikasi_penyebab", "identifikasi_selera");
+$key_by    = array("Tahun", "Uraian", "Pelaku Yang Terkait", "Rencana Aksi");
+$key_field = array("tahun", "uraian", "pelaku", "rencana_aksi");
 
-$widthAksi = "15";
-$iconEdit = "1";
-$iconDel = "1";
+$widthAksi  = "10";
+$iconEdit   = "1";
+$iconDel    = "1";
 $iconDetail = "0";
 // === end grid ===//
 
@@ -70,75 +67,53 @@ switch ($_action) {
 		$_nextaction  = "postedit";
 		$page_request = $acc_page_request;
 		$fdata_id     = $Helper->replacetext($_REQUEST["data_id"]);
-		$rs           = $risks->identifikasi_data_viewlist($fdata_id);
+		$row          = $risks->benturan_kepentingan_viewById($fdata_id)->FetchRow();
 		$page_title   = "Ubah Benturan Kepentingan";
 		break;
 	case "postadd":
-		$id					= $Helper->unixid();
-		$fnama              = $Helper->replacetext($_POST["nama"]);
-		$fkategori          = $Helper->replacetext($_POST["kategori"]);
-		$fpenyebab          = $Helper->replacetext($_POST["penyebab"]);
-		$fdampak            = $Helper->replacetext($_POST["dampak"]);
-		$rs_get_penetapan   = $risks->penetapan_data_viewlist($ses_penetapan_id);
-		$arr_get_penetapan  = $rs_get_penetapan->FetchRow();
-		$count_identifikasi = trim($risks->get_count_identifikasi($ses_penetapan_id));
-		$loopUntil          = 3 - strlen($count_identifikasi);
-		$no_identifikasi    = str_repeat('0', $loopUntil) . $count_identifikasi;
-		$nomor_risiko       = $arr_get_penetapan['auditee_kode'] . $no_identifikasi;
-
-		$data_detail = [
+		$id			  = $Helper->unixid();
+		$data = [
 			$id,
-			$Helper->postData('sasaran'),
-			$Helper->postData('indikator')
+			$Helper->postData('uraian'),
+			$Helper->postData('pelaku'),
+			$Helper->postData('rencana'),
+			$Helper->postData('tahun'),
 		];
-
-		if ($fnama != "" && $fkategori != "" && $fpenyebab != "" && $fdampak != "") {
-			$risks->identifikasi_add( $id, $ses_penetapan_id, $nomor_risiko, $fnama, $fkategori, $fpenyebab, $fdampak);
-			$risks->identifikasi_detail_add($data_detail);
-			$risks->reset_data_risk($ses_penetapan_id);
-			$Helper->js_alert_act(3);
-		} else {
-			$Helper->js_alert_act(5);
-		}
+		// var_dump($_POST);
+		// die();
+		$risks->benturan_kepentingan_add($data);
+		$Helper->js_alert_act(3);
 		echo "<script>window.open('" . $def_page_request . "', '_self');</script>";
 		$page_request = "blank.php";
 		break;
 	case "postedit":
-		$fdata_id  = $Helper->replacetext($_POST["data_id"]);
-		$fnama     = $Helper->replacetext($_POST["nama"]);
-		$fkategori = $Helper->replacetext($_POST["kategori"]);
-		$fpenyebab = $Helper->replacetext($_POST["penyebab"]);
-		$fdampak   = $Helper->replacetext($_POST["dampak"]);
-		$data_detail = [
-			$Helper->postData('sasaran'),
-			$Helper->postData('indikator'),
-			$fdata_id
+		$id  = $Helper->replacetext($_POST["data_id"]);
+		$data = [
+			$Helper->postData('uraian'),
+			$Helper->postData('pelaku'),
+			$Helper->postData('rencana'),
+			$Helper->postData('tahun'),
+			$id
 		];
-		if ($fnama != "" && $fkategori != "" && $fpenyebab != "" && $fdampak != "") {
-			$risks->identifikasi_edit($fdata_id, $fnama, $fkategori, $fpenyebab, $fdampak);
-			$risks->identifikasi_detail_edit($data_detail);
-			$risks->reset_data_risk($ses_penetapan_id);
-			$Helper->js_alert_act(1);
-		} else {
-			$Helper->js_alert_act(5);
-		}
+		$risks->benturan_kepentingan_edit($data);
+		$Helper->js_alert_act(1);
 		echo "<script>window.open('" . $def_page_request . "', '_self');</script>";
 		$page_request = "blank.php";
 		break;
 	case "getdelete":
 		$fdata_id = $Helper->replacetext($_REQUEST["data_id"]);
-		$risks->identifikasi_delete($fdata_id);
-		$risks->identifikasi_detail_delete($fdata_id);
-		$risks->reset_data_risk($ses_penetapan_id);
+		// var_dump($_REQUEST);
+		// die();
+		$Helper->deleteData('benturan_kepentingan', 'benturan_kepentingan_id', $fdata_id);
 		$Helper->js_alert_act(2);
 		echo "<script>window.open('" . $def_page_request . "', '_self');</script>";
 		$page_request = "blank.php";
 	break;
 
 	default:
-		$recordcount = $risks->identifikasi_count($ses_penetapan_id, $key_search, $val_search, $key_field);
-		$rs = $risks->identifikasi_view_grid($ses_penetapan_id, $key_search, $val_search, $key_field, $offset, $num_row);
-		$page_title = "Benturan Kepentingan";
+		$recordcount  = $risks->benturan_kepentingan_count($key_search, $val_search, $key_field);
+		$rs           = $risks-> benturan_kepentingan_view_grid($key_search, $val_search, $key_field, $offset, $num_row);
+		$page_title   = "Benturan Kepentingan";
 		$page_request = $list_page_request;
 	break;
 }

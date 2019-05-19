@@ -7,7 +7,7 @@ if (@$position == 1) {
 class userm {
 	var $_db;
 	var $userId;
-	function userm($userId = "") {
+	function __construct($userId = "") {
 		$this->_db = new Databases();
 		$this->userId = $userId;
 	}

@@ -10,27 +10,23 @@
 		switch ($_action) {
 			case "getadd" :
 				?>
-		<table border='1' class="table_risk" cellspacing='0' cellpadding="0">
+		<table border='1' class="table_risk form-control" cellspacing='0' cellpadding="0">
 				<tr align="center">
 					<th width="2%" rowspan="2">No</th>
-					<th width="55%" colspan="5">Risiko Residu</th>
+					<th width="40%" colspan="5">Risiko Residu</th>
 					<th width="10%" rowspan="2">Pilihan<br>Penanganan<br>Risiko
 					</th>
-					<th width="33%" colspan="3">Penanganan Risiko</th>
+					<th width="48%" colspan="3">Penanganan Risiko</th>
 				</tr>
 				<tr align="center">
 					<th width="25">Kategori Risiko</th>
 					<th>No Risiko</th>
 					<th width="40">Nama Risiko</th>
 					<th>Selera Risiko</th>
-					<th>Nilai<br>Risiko<br>Residu
-					</th>
-					<th>Rencana<br>Aksi
-					</th>
-					<th>Batas<br> Waktu
-					</th>
-					<th>Penanggung<br>Jawab
-					</th>
+					<th>Nilai<br>Risiko<br>Residu</th>
+					<th width="15%">Mitigasi</th>
+					<th width="10%">Batas Waktu</th>
+					<th width="10%">Penanggung Jawab</th>
 				</tr>
 			<?php
 				$i = 0;
@@ -62,15 +58,16 @@
 					<?
 						$rs_td = $params->risk_penanganan_data_viewlist ();
 						$arr_td = $rs_td->GetArray ();
-						echo $Helper->buildCombo_risk ( "pil_penanganan_" . $no, $arr_td, 0, 1, $arr_iden ['penanganan_risiko_id'], "font-size:8pt", false, true, false, "penanganan_risk" );
+						echo $Helper->buildCombo_risk ( "pil_penanganan_" . $no, $arr_td, 0, 1, $arr_iden ['penanganan_risiko_id'], "", false, true, false, "penanganan_risk" );
 						?>
 					</td>
 					<td align="center">
-						<textarea class="cmb_risk_<?=$no?>" id="penanganan_<?=$no?>" name="penanganan_<?=$no?>" rows="1" cols="20" style="width: 175px; height: 2em; font-size: 8pt;"><?=$arr_iden['penanganan_plan']?></textarea>
+						<textarea name="penanganan_<?=$no?>" rows="3" class="span9"><?=$arr_iden['penanganan_plan']?></textarea>
 					</td>
-					<td align="center"><input type="text" class="cmb_risk" name="date_<?=$no?>" id="date_<?=$no?>" value="<?=$Helper->dateIndo($arr_iden['penanganan_date'])?>"></td>
+					<td align="center"><input type="text" class="span9" name="date_<?=$no?>" id="date_<?=$no?>" value="<?=$Helper->dateIndo($arr_iden['penanganan_date'])?>"></td>
 					<td align="center">
-						<?=$Helper->dbCombo("pic_".$no, "auditee_pic", "pic_id", "pic_name", "and pic_del_st = 1 and pic_auditee_id = '".$arr_iden['penetapan_auditee_id']."'", $arr_iden['penanganan_pic_id'], "cmb_risk", 1)?>
+						<?//=$Helper->dbCombo("pic_".$no, "auditee_pic", "pic_id", "pic_name", "and pic_del_st = 1 and pic_auditee_id = '".$arr_iden['penetapan_auditee_id']."'", $arr_iden['penanganan_pic_id'], "cmb_risk", 1)?>
+						<input type="text" name="<?="pic_".$no?>" class="span9">
 					</td>
 				</tr>
 			<?php

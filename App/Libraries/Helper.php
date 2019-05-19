@@ -180,6 +180,31 @@ class Helper
         $cb = "<select name=\"" . $name . "\">" . "<option value=\"0\" " . $selNo . " style=\"color:#FF0000\">No</option>" . "<option value=\"1\" " . $selYes . ">Yes</option>" . "</select>";
         return $cb;
     }
+    function tahunCombo($name, $id, $value = '')
+    {
+        $tahun = date('Y');
+        if($value == ''){
+            $cb    = "<select name=\"" . $name . "\" id='".$id."'>";
+            $cb   .= "<option value=''>--Tahun--</option>";
+            for ($x = 2010; $x <= $tahun + 1; $x++) {
+                $cb .= "<option value='" . $x . "'>" . $x . "</option>";
+            }
+            $cb .= "</select>";
+        }else{
+            $cb    = "<select name=\"" . $name . "\" id='".$id."'>";
+            $cb   .= "<option value=''>--Tahun--</option>";
+            for ($x = 2010; $x <= $tahun + 1; $x++) {
+                if($x == $value){
+                    $selected = 'selected';
+                }else{
+                    $selected = '';
+                }
+                $cb .= "<option value='" . $x . "'".$selected.">" . $x . "</option>";
+            }
+            $cb .= "</select>";
+        }
+        return $cb;
+    }
 
     function dbCombo($nama, $table, $id, $show, $where, $def, $other, $lit = false, $orderby = "", $parrent = false, $all = false)
     {
@@ -219,7 +244,7 @@ class Helper
         return $html;
     }
 
-    function buildCombo($objname, $data, $col_id, $col_show, $selected_id = "", $action_onchange = "", $style = "", $use_none = false, $use_head = false, $use_all = false, $other = "")    
+    function buildCombo($objname, $data, $col_id, $col_show, $selected_id = "", $action_onchange = "", $style = "", $use_none = false, $use_head = false, $use_all = false, $other = "")
     {
         $combo = "";
         $combo .= "<select name=\"$objname\" id=\"$objname\" style=\"$style\" class=\"" . $other . "\" onchange = \"return " . $action_onchange . "\">\n";
@@ -337,7 +362,6 @@ class Helper
             $xxx = date("Y-m-d", strtotime($tgl));
             return $xxx;
         }
-
     }
 
     function dateIndo($tgl)
@@ -366,7 +390,6 @@ class Helper
             $xxx = date("d-m-Y", strtotime($tgl));
             return $xxx;
         }
-
     }
 
     function combo_hari_indo($hari, $name)
@@ -578,10 +601,7 @@ class Helper
         } else if ($act_type == 12) {
             $str_alert = "Database Berhasil Direstore, Silahkan Logout dan Login Kembali";
         }
-
-        ?>
-        <script>alert('<?=$str_alert?>');</script>
-        <?
+        echo "<script> alert('".$str_alert."');</script>";
     }
 
     function replacetext($text, $money = false)
@@ -684,7 +704,6 @@ class Helper
             if (file_exists($x)) {
                 unlink($x);
             }
-
         }
 
         $uploadfile = $_UPLOAD_DIR . basename($_FILES[$nama_file]['name']);
@@ -703,7 +722,6 @@ class Helper
             if (file_exists($x)) {
                 unlink($x);
             }
-
         }
     }
 
@@ -855,7 +873,6 @@ class Helper
         $arr = $data->FetchRow();
 
         return $arr[0];
-
     }
 
     function name($sesUserId)
@@ -866,7 +883,6 @@ class Helper
         $arr = $data->FetchRow();
 
         return $arr[0];
-
     }
 
     function combo_tahapan($name, $selected)
@@ -874,7 +890,7 @@ class Helper
         $select_pendahuluan = "";
         $select_rinci = "";
         $select_pelaksanaan = "";
-        
+
         if ($selected == "PKA Pendahuluan") {
             $select_pendahuluan = "selected";
         }
@@ -882,7 +898,7 @@ class Helper
         if ($selected == "PKA Pelaksanaan") {
             $select_pelaksanaan = "selected";
         }
-        
+
         if ($selected == "PKA Rinci") {
             $select_rinci = "selected";
         }
@@ -924,25 +940,25 @@ class Helper
                     $angka -= 900;
                 } else {
                     $hsl .= "D";
-                    $angka-=500;
+                    $angka -= 500;
                 }
             }
         }
-        while ($angka>=100) {
-            if ($angka>=400) {
+        while ($angka >= 100) {
+            if ($angka >= 400) {
                 $hsl .= "CD";
                 $angka -= 400;
             } else {
                 $angka -= 100;
             }
         }
-        if ($angka>=50) {
-            if ($angka>=90) {
+        if ($angka >= 50) {
+            if ($angka >= 90) {
                 $hsl .= "XC";
                 $angka -= 90;
             } else {
                 $hsl .= "L";
-                $angka-=50;
+                $angka -= 50;
             }
         }
         while ($angka >= 10) {
@@ -957,7 +973,7 @@ class Helper
         if ($angka >= 5) {
             if ($angka == 9) {
                 $hsl .= "IX";
-                $angka-=9;
+                $angka -= 9;
             } else {
                 $hsl .= "V";
                 $angka -= 5;
@@ -975,22 +991,31 @@ class Helper
         return ($hsl);
     }
 
-    function urlImage($path) {
+    function urlImage($path)
+    {
         return $this->db->weburl . $path;
     }
-    
-    function filter($data) {
+
+    function filter($data)
+    {
         $filter = stripslashes(strip_tags(htmlspecialchars($data, ENT_QUOTES)));
         return $filter;
     }
 
-    public function postData($name) {
+    public function postData($name)
+    {
         $data   = $this->filter($_POST[$name]);
         return $data;
-    }	
-    function unixid(){
-		$a = sha1(microtime());
-		return $a;
-	}
+    }
+    function unixid()
+    {
+        $a = sha1(microtime());
+        return $a;
+    }
+
+    public function deleteData($table, $key, $id) {
+        $sql = "DELETE FROM ".$table." WHERE ".$key."='".$id."'";
+        $this->db->_dbquery($sql);
+    }
 }
 ?>

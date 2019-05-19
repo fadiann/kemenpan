@@ -261,7 +261,7 @@ switch ($_action) {
 	}
 			?>
 		</center>
-				<input type="hidden" name="status_resiko" value="<?=$fstatus_risiko?>">	
+				<input type="hidden" name="status_resiko" value="<?=@$fstatus_risiko?>">	
 				<input type="hidden" name="penetapan_id" id="penetapan_id" value="<?=$ses_penetapan_id?>">
 				<input type="hidden" name="status_risk" id="status_risk" value="">
 				<input type="hidden" name="data_action" id="data_action" value="<?=$_nextaction?>">
