@@ -1,4 +1,4 @@
-<?
+<?php
 include_once "App/Classes/risk_class.php";
 include_once "App/Classes/param_class.php";
 include_once "App/Classes/auditee_class.php";
@@ -91,7 +91,7 @@ switch ($_action) {
 	case "getadd" :
 		$_nextaction = "postadd";
 		$page_request = $acc_page_request;
-		$page_title = "Tambah Penetapan Tujuan";
+		$page_title = "Tambah Periode Manajemen Risiko";
 		break;
 	case "getedit" :
 		$_nextaction = "postedit";
@@ -109,8 +109,8 @@ switch ($_action) {
 	case "postadd" :
 		$fsatker = $Helper->replacetext ( $_POST ["satker"] );
 		$ftahun = $Helper->replacetext ( $_POST ["tahun"] );
-		$fnama = $Helper->replacetext ( $_POST ["nama"] );
-		$ftujuan = $Helper->replacetext ( $_POST ["tujuan"] );
+		$fnama = $Helper->replacetext ('NULL');
+		$ftujuan = $Helper->replacetext ('NULL');
 		if ($fsatker != "" && $ftahun != "" && $fnama != "" && $ftujuan != "") {
 			$cek_satker = $risks->cek_satker_tahun($fsatker, $ftahun);
 			if($cek_satker==0){
@@ -131,8 +131,8 @@ switch ($_action) {
 		$fdata_id = $Helper->replacetext ( $_POST ["data_id"] );
 		$fsatker = $Helper->replacetext ( $_POST ["satker"] );
 		$ftahun = $Helper->replacetext ( $_POST ["tahun"] );
-		$fnama = $Helper->replacetext ( $_POST ["nama"] );
-		$ftujuan = $Helper->replacetext ( $_POST ["tujuan"] );
+		$fnama = $Helper->replacetext ('NULL');
+		$ftujuan = $Helper->replacetext ('NULL');
 		if ($fsatker != "" && $ftahun != "" && $fnama != "" && $ftujuan != "") {
 			$cek_satker = $risks->cek_satker_tahun($fsatker, $ftahun, $fdata_id);
 			if($cek_satker==0){

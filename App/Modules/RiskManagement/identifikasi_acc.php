@@ -15,7 +15,7 @@
 					<label class="span2">Sasaran Organisasi</label> <input type="text" class="span4" name="sasaran" id="sasaran"> <span class="mandatory">*</span>
 				</fieldset>
 				<fieldset class="hr">
-					<label class="span2">Indikator Kerja</label> <input type="text" class="span4" name="indikator" id="indikator"> <span class="mandatory">*</span>
+					<label class="span2">Indikator Kinerja</label> <input type="text" class="span4" name="indikator" id="indikator"> <span class="mandatory">*</span>
 				</fieldset>
 				<!-- FIELD BARU -->
 				<fieldset class="hr">
@@ -31,7 +31,19 @@
 				</fieldset>
 				<fieldset class="hr">
 					<label class="span2">Dampak Risiko</label>
-					<textarea cols="10" rows="5" class="span4" name="dampak" id="dampak"></textarea><span class="mandatory">*</span>
+					<!-- <textarea cols="10" rows="5" class="span4" name="dampak" id="dampak"></textarea><span class="mandatory">*</span> -->
+					<select name="dampak" id="dampak" class="span3">
+						<option value="">---Pilih Salah Satu---</option>
+						<option value="Beban Keuangan Negara (Fraud)">Beban Keuangan Negara (Fraud)</option>
+						<option value="Beban Keuangan Negara (Non Fraud)">Beban Keuangan Negara (Non Fraud)</option>
+						<option value="Penurunan Reputasi">Penurunan Reputasi</option>
+						<option value="Sanksi Pidana">Sanksi Pidana</option>
+						<option value="Sanksi perdata">Sanksi perdata</option>
+						<option value="Sanksi administratif">Sanksi administratif</option>
+						<option value="Kecelakaan Kerja">Kecelakaan Kerja</option>
+						<option value="Gangguan terhadap layanan organisasi">Gangguan terhadap layanan organisasi</option>
+						<option value="Penurunan Kinerja">Penurunan Kinerja</option>
+					</select>
 				</fieldset>
 				<? /*
 			<fieldset class="hr">
@@ -54,7 +66,7 @@
 					<label class="span2">Sasaran Organisasi</label> <input type="text" class="span4" name="sasaran" id="sasaran" value="<?php echo $arr['sasaran_organisasi'] ?>"> <span class="mandatory">*</span>
 				</fieldset>
 				<fieldset class="hr">
-					<label class="span2">Indikator Kerja</label> <input type="text" class="span4" name="indikator" id="indikator" value="<?php echo $arr['indikator_kinerja'] ?>"> <span class="mandatory">*</span>
+					<label class="span2">Indikator Kinerja</label> <input type="text" class="span4" name="indikator" id="indikator" value="<?php echo $arr['indikator_kinerja'] ?>"> <span class="mandatory">*</span>
 				</fieldset>
 				<!-- FIELD BARU -->
 
@@ -78,14 +90,61 @@
 
 				<fieldset class="hr">
 					<label class="span2">Penyebab Risiko</label>
-					<textarea cols="10" rows="5" class="span4" name="penyebab" id="penyebab"><?= $arr['identifikasi_nama_risiko'] ?></textarea>
+					<textarea cols="10" rows="5" class="span4" name="penyebab" id="penyebab"><?= $arr['identifikasi_penyebab'] ?></textarea>
 					<span class="mandatory">*</span>
 				</fieldset>
+
+				<fieldset class="hr">
+					<label class="span2">Dampak Risiko</label>
+					<!-- <textarea cols="10" rows="5" class="span4" name="dampak" id="dampak"></textarea><span class="mandatory">*</span> -->
+					<select name="dampak" id="dampak" class="span3">
+						<option value="">---Pilih Salah Satu---</option>
+						<option value="Beban Keuangan Negara (Fraud)" 
+						<?php if ($arr['identifikasi_selera'] == 'Beban Keuangan Negara (Fraud)') { echo 'selected'; } ?>>
+						Beban Keuangan Negara (Fraud)
+						</option>
+						<option value="Beban Keuangan Negara (Non Fraud)" 
+						<?php if ($arr['identifikasi_selera'] == 'Beban Keuangan Negara (Non Fraud)') { echo 'selected'; } ?>>
+						Beban Keuangan Negara (Non Fraud)
+						</option>
+						<option value="Penurunan Reputasi" 
+						<?php if ($arr['identifikasi_selera'] == 'Penurunan Reputasi') { echo 'selected'; } ?>>
+						Penurunan Reputasi
+						</option>
+						<option value="Sanksi Pidana" 
+						<?php if ($arr['identifikasi_selera'] == 'Sanksi Pidana') { echo 'selected'; } ?>>
+						Sanksi Pidana
+						</option>
+						<option value="Sanksi perdata" 
+						<?php if ($arr['identifikasi_selera'] == 'Sanksi perdata') { echo 'selected'; } ?>>
+						Sanksi perdata
+						</option>
+						<option value="Sanksi administratif" 
+						<?php if ($arr['identifikasi_selera'] == 'Sanksi administratif') { echo 'selected'; } ?>>
+						Sanksi administratif
+						</option>
+						<option value="Kecelakaan Kerja" 
+						<?php if ($arr['identifikasi_selera'] == 'Kecelakaan Kerja') { echo 'selected'; } ?>>
+						Kecelakaan Kerja
+						</option>
+						<option value="Gangguan terhadap layanan organisasi" 
+						<?php if ($arr['identifikasi_selera'] == 'Gangguan terhadap layanan organisasi') { echo 'selected'; } ?>>
+						Gangguan terhadap layanan organisasi
+						</option>
+						<option value="Penurunan Kinerja" 
+						<?php if ($arr['identifikasi_selera'] == 'Penurunan Kinerja') { echo 'selected'; } ?>>
+						Penurunan Kinerja
+						</option>
+					</select>
+					<?//=$arr['identifikasi_selera']?>
+				</fieldset>
+				<? /*
 				<fieldset class="hr">
 					<label class="span2">Dampak Risiko</label>
 					<textarea cols="10" rows="5" class="span4" name="dampak" id="dampak"><?= $arr['identifikasi_nama_risiko'] ?></textarea>
 					<span class="mandatory">*</span>
 				</fieldset>
+				*/ ?>
 				<input type="hidden" name="data_id" value="<?= $arr['identifikasi_id'] ?>">
 				<?
 				break;

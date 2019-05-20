@@ -2,7 +2,7 @@
 $PATH_ROOT = "D:/wamp64/www/kemenpan/";
 $INCLUDE_DIR = $PATH_ROOT . "App/Classes/";
 
-include $PATH_ROOT . "App/Libraries/Adodb/adodb.inc.php";
+include $PATH_ROOT . "App/Libraries/Adodb5/adodb.inc.php";
 class Databases
 {
 	var $dbhost = 'hekya.id';

@@ -33,14 +33,14 @@
 				?>
 				</select><span class="mandatory">*</span>
 			</fieldset>
-			<fieldset class="hr">
+			<!-- <fieldset class="hr">
 				<label class="span2">Nama Kegiatan</label> <input type="text"
 					class="span4" name="nama" id="nama"> <span class="mandatory">*</span>
 			</fieldset>
 			<fieldset class="hr">
 				<label class="span2">Tujuan Kegiatan</label> <input type="text"
 					class="span7" name="tujuan" id="tujuan"> <span class="mandatory">*</span>
-			</fieldset>
+			</fieldset> -->
 		<?
 				break;
 			case "getedit" :
@@ -70,16 +70,16 @@
 				?>
 				</select><span class="mandatory">*</span>
 			</fieldset>
-			<fieldset class="hr">
+			<!-- <fieldset class="hr">
 				<label class="span2">Nama Kegiatan</label> <input type="text"
 					class="span4" name="nama" id="nama"
-					value="<?=$arr['penetapan_nama']?>"> <span class="mandatory">*</span>
+					value="<?//=$arr['penetapan_nama']?>"> <span class="mandatory">*</span>
 			</fieldset>
 			<fieldset class="hr">
 				<label class="span2">Tujuan Kegiatan</label> <input type="text"
 					class="span7" name="tujuan" id="tujuan"
-					value="<?=$arr['penetapan_tujuan']?>"> <span class="mandatory">*</span>
-			</fieldset>
+					value="<?//=$arr['penetapan_tujuan']?>"> <span class="mandatory">*</span>
+			</fieldset> -->
 			<input type="hidden" name="data_id" value="<?=$arr['penetapan_id']?>">	
 		<?
 				break;
@@ -102,15 +102,15 @@ $(function() {
 	$("#validation-form").validate({
 		rules: {
 			satker: "required",
-			tahun: "required",
-			nama: "required",
-			tujuan: "required"
+			tahun: "required"
+			// nama: "required",
+			// tujuan: "required"
 		},
 		messages: {
 			satker: "Pilih Satuan Kerja",
-			tahun: "Pilih Tahun",
-			nama: "Masukan Nama",
-			tujuan: "Masukan Tujuan"
+			tahun: "Pilih Tahun"
+			// nama: "Masukan Nama",
+			// tujuan: "Masukan Tujuan"
 		},		
 		submitHandler: function(form) {
 			form.submit();
