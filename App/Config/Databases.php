@@ -5,19 +5,29 @@ $INCLUDE_DIR = $PATH_ROOT . "App/Classes/";
 include $PATH_ROOT . "App/Libraries/Adodb5/adodb.inc.php";
 class Databases
 {
-	var $dbhost = 'hekya.id';
-	var $dbuser = 'u6559439_fadian';
-	var $dbpassword = 'fadian123';
-	var $dbname = 'u6559439_kemenpan';
+	var $dbhost = 'localhost';
+	var $dbuser = 'root';
+	var $dbpassword = 'password';
+	var $dbname = 'kemenpan';
 	var $dbdriver = 'mysqli';
 	var $debug = false;
 	var $db;
 	var $basepath = "D:/wamp64/www/kemenpan/";
 	var $baseurl = "http://localhost/kemenpan/";
 
+	// var $dbhost = 'hekya.id';
+	// var $dbuser = 'u6559439_fadian';
+	// var $dbpassword = 'fadian123';
+	// var $dbname = 'u6559439_kemenpan';
+	// var $dbdriver = 'mysqli';
+	// var $debug = false;
+	// var $db;
+	// var $basepath = "D:/wamp64/www/kemenpan/";
+	// var $baseurl = "http://localhost/kemenpan/";
+
 	//auth api
-	var $user_api = 'simontila_server';
-	var $pass_api = '3d0bd3a36b5972bc7a90ff63d51a39526f5c8658';
+	// var $user_api = 'simontila_server';
+	// var $pass_api = '3d0bd3a36b5972bc7a90ff63d51a39526f5c8658';
 
 	function __construct(){
 		$this->db = $this->_dbconn();

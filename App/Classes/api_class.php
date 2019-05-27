@@ -8,7 +8,7 @@ class rest_api{
 	var $_db;	
 	var $userId;
 	
-	function rest_api($userId = "") {
+	function __construct($userId = "") {
 		$this->_db = new Databases();
 		$this->userId = $userId;
 	}

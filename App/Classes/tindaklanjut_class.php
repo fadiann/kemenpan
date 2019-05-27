@@ -8,7 +8,7 @@ class tindaklanjut
 {
     public $_db;
     public $userId;
-    public function tindaklanjut($userId = "")
+    public function __construct($userId = "")
     {
         $this->_db = new Databases();
         $this->userId = $userId;

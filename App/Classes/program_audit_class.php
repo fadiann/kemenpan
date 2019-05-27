@@ -7,7 +7,7 @@ if (@$position == 1) {
 class programaudit {
 	var $_db;
 	var $userId;
-	function programaudit($userId = "") {
+	function __construct($userId = "") {
 		$this->_db = new Databases();
 		$this->userId = $userId;
 	}

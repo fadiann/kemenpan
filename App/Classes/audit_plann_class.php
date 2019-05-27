@@ -7,7 +7,7 @@ if (@$position == 1) {
 class planning {
 	var $_db;
 	var $userId;
-	function planning($userId = "") {
+	function __construct($userId = "") {
 		$this->_db = new Databases();
 		$this->userId = $userId;
 	}

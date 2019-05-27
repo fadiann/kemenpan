@@ -16,8 +16,8 @@ $rs_auditee = $assigns->assign_auditee_viewlist ( $arr['assign_id'], $auditee_id
 			<tr>
 				<td colspan="8">
 					<center>
-						<img src="Public/images/logo.png"/><br>
-						PT. Tri Nindya Utama
+						<img src="Public/images/logo.png" width="48"/><br>
+						Kementerian Pendayagunaan Aparatur Negara dan Reformasi Birokrasi Republik Indonesia
 					</center><br>
 				</td>
 			</tr>

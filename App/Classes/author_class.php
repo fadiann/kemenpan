@@ -11,7 +11,7 @@ class Author extends db
 	private $db;
 	private $userId;
 
-	public function author($userId = "")
+	public function __construct($userId = "")
 	{
 		$this->db = new db;
 		$this->userId = $userId;

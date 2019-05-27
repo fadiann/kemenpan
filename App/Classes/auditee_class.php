@@ -99,6 +99,7 @@ class auditee {
 		$sql = "update auditee set auditee_del_st = '0' where auditee_id = '".$id."' ";
 		$aksinyo = "Menghapus Auditee ID ".$id;
 		$this->_db->_dbexecquery ( $sql, $this->userId, $aksinyo );
+		//echo $sql;
 	}
 	function auditee_update_del_to_add($id, $kode, $name, $parrent_id, $inspektorat_id, $propinsi_id, $kabupaten_id, $alamat, $telp, $fax, $ext, $email) {
 		$sql = "update auditee set auditee_kode = '".$kode."', auditee_name = '".$name."', auditee_parrent_id = '".$parrent_id."', auditee_inspektorat_id = '".$inspektorat_id."', auditee_propinsi_id = '".$propinsi_id."', auditee_kabupaten_id = '".$kabupaten_id."', auditee_alamat = '".$alamat."', auditee_telp = '".$telp."', auditee_fax = '".$fax."', auditee_ext = '".$ext."', auditee_email = '".$email."', auditee_del_st = '1' where auditee_id = '".$id."' ";

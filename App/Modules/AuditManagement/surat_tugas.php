@@ -8,17 +8,17 @@ $arr = $rs->FetchRow();
 	</header>
 		<table align="center" width="100%">
 			<tr>
-				<td rowspan="2" width="10px"><img src="Public/images/logo.png" width="50px"></td>
+				<td rowspan="2" width="10px"><img src="Public/images/logo.png" width="48"></td>
 				<td align="center">
 					<strong>
-						<font size="5">PT. Tri Nindya Utama</font><br>
+						<font size="5">Kementerian Pendayagunaan Aparatur Negara dan Reformasi Birokrasi Republik Indonesia</font><br>
 					</strong>
 				</td>
 			</tr>
 			<tr>
 				<td align="center">
-					Jl. H. Sa'aba Raya Kav 1-2, Meruya Selatan, Kembangan Jakarta Barat 11650<br>
-					Telp : (021) 5842138
+					Jl. Jend. Sudirman Kav. 69 Jakarta Selatan - 12190 Indonesia<br>
+					Telp. (+6221) 7398381 - 89
 				</td>
 			</tr>
 			<tr>

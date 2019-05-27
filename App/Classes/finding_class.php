@@ -7,7 +7,7 @@ if (@$position == 1) {
 class finding {
 	var $_db;
 	var $userId;
-	function finding($userId = "") {
+	function __construct($userId = "") {
 		$this->_db = new Databases();
 		$this->userId = $userId;
 	}

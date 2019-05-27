@@ -7,7 +7,7 @@ if (@$position == 1) {
 class kertas_kerja {
 	var $_db;
 	var $userId;
-	function kertas_kerja($userId = "") {
+	function __construct($userId = "") {
 		$this->_db = new Databases();
 		$this->userId = $userId;
 	}

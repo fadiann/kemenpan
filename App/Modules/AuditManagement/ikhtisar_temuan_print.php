@@ -42,8 +42,8 @@ body{
 			<tr>
 				<td colspan="3">
 					<center>
-						<img src="Public/images/logo.png" width="48" height="48" style="width:48pt;height:48pt;" /><br>
-						PT. Tri Nindya Utama
+						<img src="Public/images/logo.png" width="48"/><br>
+						Kementerian Pendayagunaan Aparatur Negara dan Reformasi Birokrasi Republik Indonesia
 					</center><br>
 				</td>
 			</tr>

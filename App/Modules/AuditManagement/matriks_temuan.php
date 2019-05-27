@@ -10,7 +10,7 @@ $rekomendasis = new rekomendasi ( $ses_userId );
 <article class="module width_3_quarter">
 	<table border='1' class="table_risk" cellspacing='0' cellpadding="0">
 		<tr>
-			<td style="border-right:0"><img src="Public/images/logo.png" width="30" height="30" /></td>
+			<td style="border-right:0"><img src="Public/images/logo.png" width="30"/></td>
 			<td style="border-left:0" colspan="5" align="center" valign="middle">MATRIKS  TEMUAN  HASIL  AUDIT</td>
 		</tr>
 		<tr>

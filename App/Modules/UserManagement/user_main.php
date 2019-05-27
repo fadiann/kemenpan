@@ -153,9 +153,7 @@ switch ($_action) {
 		break;
 	case "getdelete" :
 		$fuser_id = $Helper->replacetext ( $_REQUEST ["data_id"] );
-		$userms->_db->conn->BeginTrans ();
 		$userms->users_delete ( $fuser_id );
-		$userms->_db->conn->CommitTrans ();
 		$Helper->js_alert_act ( 2 );
 		?>
 <script>window.open('<?=$def_page_request?>', '_self');</script>
@@ -164,9 +162,7 @@ switch ($_action) {
 		break;
 	case "getKill" :
 		$fuser_id = $Helper->replacetext ( $_REQUEST ["data_id"] );
-		$userms->_db->conn->BeginTrans ();
 		$userms->users_kill ( $fuser_id );
-		$userms->_db->conn->CommitTrans ();
 		$Helper->js_alert_act ( 2 );
 		?>
 <script>window.open('<?=$def_page_request?>', '_self');</script>

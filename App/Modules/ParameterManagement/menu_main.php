@@ -4,7 +4,7 @@ include_once "App/Classes/param_class.php";
 $params = new param ( $ses_userId );
 
 @$_action = $Helper->replacetext ( $_REQUEST ["data_action"] );
-$parrent = $Helper->replacetext ( $_REQUEST ["parrent"] );
+@$parrent = $Helper->replacetext ( $_REQUEST ["parrent"] );
 
 if(isset($_POST["val_search"])){
 	@session_start();
@@ -16,7 +16,7 @@ $key_search = @$_SESSION['key_search'];
 $val_search = @$_SESSION['val_search'];
 $val_method = @$_SESSION['val_method'];
 
-if(@$method!=@$val_method){
+if(@$method != @$val_method){
 	unset($_SESSION['key_search']);
 	unset($_SESSION['val_search']);
 	unset($_SESSION['val_method']);

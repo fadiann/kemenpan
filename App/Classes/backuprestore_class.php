@@ -8,7 +8,7 @@ class backuprestore {
 	var $_db;
 	var $userId;
 
-	function backuprestore($userId = "") {
+	function __construct($userId = "") {
 		$this->_db = new Databases();
 		$this->userId = $userId;
 	}
@@ -71,9 +71,9 @@ class backuprestore {
 	}
 	
 	function write_to_file($whatToWrite, $nama_file){
-		$full_path = $this->_db->basepath."backup_db/".$nama_file.".sql";
-		$f_open = fopen($full_path, "w");
-		$f_write = fwrite($f_open, $whatToWrite, strlen($whatToWrite));
+		$full_path 	= $this->_db->basepath."Public/backup_db/".$nama_file.".sql";
+		$f_open 	= fopen($full_path, "w");
+		$f_write 	= fwrite($f_open, $whatToWrite, strlen($whatToWrite));
 		fclose($f_open);
 	}
 	
@@ -163,5 +163,11 @@ class backuprestore {
 				$this->_db->_dbquery($sql);
 			}
 		}			
+	}
+
+	function deletebackup($id) {
+		$sql 		= "DELETE FROM backup_restore WHERE backup_restore_id = '".$id."'";
+		$aksinyo 	= "Menghapus Backup Database dengan ID ".$id;
+		$this->_db->_dbexecquery($sql, $this->userId, $aksinyo);
 	}
 }

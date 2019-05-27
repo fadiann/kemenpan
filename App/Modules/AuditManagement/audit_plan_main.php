@@ -139,34 +139,34 @@ switch ($_action) {
 		$page_title = "Rincian Perencanaan Audit";
 		break;
 	case "postadd" :
-		$ftipe_audit = $Helper->replacetext ( $_POST ["tipe_audit"] );
-		$fsub_type = $Helper->replacetext ( $_POST ["sub_type"] );
-		$fauditee = $_POST ["auditee_id"];
-		$ftahun = $Helper->replacetext ( $_POST ["tahun"] );
-		$auto_num = mt_rand(100000, 999999);
-		$kode_plan = $ftahun."_".$auto_num;
-		$ftujuan = $Helper->replacetext ( $_POST ["tujuan"] );
-		$fperiode = $Helper->replacetext ( $_POST ["periode"] );
-		$fbiaya_audit = $Helper->replacetext ( $_POST ["biaya_audit"], true );
-		$ftanggal_awal = $Helper->date_db_ori ( $Helper->replacetext ( $_POST ["tanggal_awal"] ) );
-		$ftanggal_akhir = $Helper->date_db_ori ( $Helper->replacetext ( $_POST ["tanggal_akhir"] ) );
-		$convert_tgl_awal = $Helper->date_db ($ftanggal_awal);
-		$convert_tgl_akhir = $Helper->date_db ($ftanggal_akhir);
-		$ftanggal_awal1 = $Helper->date_db ($Helper->replacetext ( $_POST ["tanggal_awal"] ));
-		$ftanggal_akhir1 = $Helper->date_db ($Helper->replacetext ( $_POST ["tanggal_akhir"] ));
-		$count_plan_date = (($convert_tgl_akhir - $convert_tgl_awal) / 86400) + 1;
-		$count_weekend = $Helper->cek_holiday ( $convert_tgl_awal, $convert_tgl_akhir );
-		$hari_kerja = $count_plan_date - $count_weekend;
+		$ftipe_audit 		= $Helper->replacetext ( $_POST ["tipe_audit"] );
+		$fsub_type 			= $Helper->replacetext ( $_POST ["sub_type"] );
+		$fauditee 			= $_POST ["auditee_id"];
+		$ftahun 			= $Helper->replacetext ( $_POST ["tahun"] );
+		$auto_num 			= mt_rand(100000, 999999);
+		$kode_plan 			= $ftahun."_".$auto_num;
+		$ftujuan 			= $Helper->replacetext ( $_POST ["tujuan"] );
+		$fperiode 			= $Helper->replacetext ( $_POST ["periode"] );
+		$fbiaya_audit 		= $Helper->replacetext ( $_POST ["biaya_audit"], true );
+		$ftanggal_awal 		= $Helper->datedb_ori ( $Helper->replacetext ( $_POST ["tanggal_awal"] ) );
+		$ftanggal_akhir 	= $Helper->datedb_ori ( $Helper->replacetext ( $_POST ["tanggal_akhir"] ) );
+		$convert_tgl_awal 	= $Helper->date_db ($ftanggal_awal);
+		$convert_tgl_akhir 	= $Helper->date_db ($ftanggal_akhir);
+		$ftanggal_awal1 	= $Helper->date_db ($Helper->replacetext ( $_POST ["tanggal_awal"] ));
+		$ftanggal_akhir1 	= $Helper->date_db ($Helper->replacetext ( $_POST ["tanggal_akhir"] ));
+		$count_plan_date 	= (($convert_tgl_akhir - $convert_tgl_awal) / 86400) + 1;
+		$count_weekend 		= $Helper->cek_holiday ( $convert_tgl_awal, $convert_tgl_akhir );
+		$hari_kerja 		= $count_plan_date - $count_weekend;
 		
-		if ($ftipe_audit != "" && $ftahun != "" && $ftanggal_akhir != "" && $cek_auditee != "0") {
+		if ($ftipe_audit != "" && $ftahun != "" && $ftanggal_akhir != "") {
 			$id_plann = $plannings->uniq_id ();
 			$plannings->planning_add ( $id_plann, $kode_plan, $ftipe_audit, $ftahun, $ftanggal_awal1, $ftanggal_akhir1, $hari_kerja, $ftujuan, $fperiode, $fbiaya_audit, $fsub_type );
 			//auditee
 			$count_auditee = 0;
 			$count_auditee = count($fauditee);
-			for($i=0;$i<=$count_auditee;$i++){
-				$fauditee_id = $Helper->replacetext ( $_POST ["auditee_id"][$i] );
-				$fjml_hari = $Helper->replacetext ( $_POST ["jml_hari"][$i] );
+			for($i=0; $i<=$count_auditee ;$i++){
+				$fauditee_id 	= $Helper->replacetext ( $_POST ["auditee_id"][$i] );
+				$fjml_hari 		= $Helper->replacetext ( $_POST ["jml_hari"][$i] );
 				if($fauditee_id!=""){
 					$plannings->planning_add_auditee ( $id_plann, $fauditee_id, $fjml_hari );
 				}
@@ -200,7 +200,7 @@ switch ($_action) {
 		$count_weekend = $Helper->cek_holiday ( $convert_tgl_awal, $convert_tgl_akhir );
 		$hari_kerja = $count_plan_date - $count_weekend;
 
-		if ($ftipe_audit != "" && $ftahun != "" && $ftanggal_akhir != "" && $cek_auditee != "0") {
+		if ($ftipe_audit != "" && $ftahun != "" && $ftanggal_akhir != "") {
 			$plannings->planning_edit ( $fdata_id, $ftipe_audit, $ftahun, $ftanggal_awal1, $ftanggal_akhir1, $hari_kerja, $ftujuan, $fperiode, $fbiaya_audit, $fsub_type );
 			//auditee
 			$count_auditee = 0;

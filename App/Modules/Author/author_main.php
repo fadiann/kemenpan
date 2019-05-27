@@ -119,9 +119,7 @@ switch ($_action) {
         break;
     case "getdelete":
         $fdata_id = $Helper->replacetext($_REQUEST["data_id"]);
-        // $authors->_db->conn->BeginTrans();
         $authors->author_delete($fdata_id);
-        // $authors->_db->conn->CommitTrans();
         $Helper->js_alert_act(2);
                 // echo "del";
         ?>
