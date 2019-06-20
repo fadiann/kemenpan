@@ -60,7 +60,9 @@ $gridWidth = array ("15", "20", "10", "10", "10", "10", "10");
 $key_by = array ("Nama Kegiatan");
 $key_field = array ("assign_kegiatan");
 
-$widthAksi = "15";
+$widthAksi  = "10";
+$iconEdit   = "1";
+$iconDel    = "1";
 $iconDetail = "1";
 // === end grid ===//
 switch ($_action) {
@@ -145,7 +147,8 @@ switch ($_action) {
 		$rs = $assigns->assign_viewlist ( $fdata_id );
 		$page_title = "Ubah Pelaksanaan Audit";
 		break;
-	case "getdetail" :
+	case "getdetail" :	
+		$_nextaction = "";
 		$page_request = $acc_page_request;
 		$fdata_id = $Helper->replacetext ( $_REQUEST ["data_id"] );
 		$rs = $assigns->assign_viewlist ( $fdata_id );

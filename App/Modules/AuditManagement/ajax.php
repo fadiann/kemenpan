@@ -1,13 +1,14 @@
 <?
-include_once "../App/Classes/report_class.php";
-include_once "../App/Classes/param_class.php";
-include_once "../App/Classes/auditor_class.php";
-include_once "../App/Classes/program_audit_class.php";
-include_once "../App/Libraries/Helper.php";
-include_once "../App/Classes/finding_class.php";
-include_once "../App/Classes/dashboard_class.php";
-include_once "../App/Classes/assignment_class.php";
-include_once "../App/Classes/rekomendasi_class.php";
+$position = 2;
+include_once "../../Classes/report_class.php";
+include_once "../../Classes/param_class.php";
+include_once "../../Classes/auditor_class.php";
+include_once "../../Classes/program_audit_class.php";
+include_once "../../Libraries/Helper.php";
+include_once "../../Classes/finding_class.php";
+include_once "../../Classes/dashboard_class.php";
+include_once "../../Classes/assignment_class.php";
+include_once "../../Classes/rekomendasi_class.php";
 
 session_start();
 session_regenerate_id();
@@ -24,7 +25,7 @@ $dashboards    = new dashboard($ses_UserId);
 $assigns       = new assign($ses_UserId);
 $rekomendasis  = new rekomendasi($ses_UserId); 
 
-$_action = $Helper->replacetext ( $_REQUEST ["data_action"] );
+@$_action = $Helper->replacetext ( $_REQUEST ["data_action"] );
 switch ($_action) {
 	case "getsbu_rinci" :
 		$idsatker = $Helper->replacetext ( $_POST ["idsatker"] );

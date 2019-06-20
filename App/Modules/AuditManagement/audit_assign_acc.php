@@ -1,11 +1,8 @@
-<script type="text/javascript" src="Public/js/jquery.validate.min.js"></script>
-<script type="text/javascript" src="Public/js/jquery-ui-1.10.1.custom.min.js"></script>
-<link rel="stylesheet" href="Public/css/jquery.ui.datepicker.css">
-<link rel="stylesheet" href="Public/js/select2/select2.css" type="text/css" />
-<script type="text/javascript" src="Public/js/select2/select2.min.js"></script>
-<script type="text/javascript" src="Public/ckeditor/ckeditor.js"></script>
+
 <link href="Public/css/responsive-tabs.css" rel="stylesheet" type="text/css" />
-<script src="Public/js/responsive-tabs.js" type="text/javascript"></script>
+<link href="Public/css/jquery-ui.css" rel="stylesheet" type="text/css" >
+<!-- <link rel="stylesheet" href="Public/css/jquery.ui.datepicker.css"> -->
+<link href="Public/js/select2/select2.css" rel="stylesheet" type="text/css" />
 
 <section id="main" class="column">
 	<article class="module width_3_quarter">
@@ -51,34 +48,34 @@
 			<div id="periodes">
 				<fieldset class="hr">
 					<label class="span2">Tanggal Kegiatan</label> 
-					<input type="text" class="span1" name="tanggal_awal" id="tanggal_awal"> 
+					<input type="text" class="span1" name="tanggal_awal" id="tanggal_awal" autocomplete="off">
 					<label class="span0">s/d</label> 
-					<input type="text" class="span1" name="tanggal_akhir" id="tanggal_akhir">
+					<input type="text" class="span1" name="tanggal_akhir" id="tanggal_akhir" autocomplete="off">
 					<span class="mandatory">*</span>
 				</fieldset>
 				<fieldset class="hr">
 					<label class="span2">Jumlah Hari Persiapan</label>
 					<input type="text" class="span1" name="hari_persiapan" id="hari_persiapan">
 					<label class="span2">Tanggal Persiapan</label> 
-					<input type="text" class="span1" name="tanggal_persiapan_awal" id="tanggal_persiapan_awal"> 
+					<input type="text" class="span1" name="tanggal_persiapan_awal" id="tanggal_persiapan_awal" autocomplete="off"> 
 					<label class="span0">s/d</label> 
-					<input type="text" class="span1" name="tanggal_persiapan_akhir" id="tanggal_persiapan_akhir">
+					<input type="text" class="span1" name="tanggal_persiapan_akhir" id="tanggal_persiapan_akhir" autocomplete="off">
 				</fieldset>
 				<fieldset class="hr">
 					<label class="span2">Jumlah Hari Pelaksanaan</label>
 					<input type="text" class="span1" name="hari_pelaksanaan" id="hari_pelaksanaan">
 					<label class="span2">Tanggal Pelaksanaan</label> 
-					<input type="text" class="span1" name="tanggal_pelaksanaan_awal" id="tanggal_pelaksanaan_awal"> 
+					<input type="text" class="span1" name="tanggal_pelaksanaan_awal" id="tanggal_pelaksanaan_awal" autocomplete="off"> 
 					<label class="span0">s/d</label> 
-					<input type="text" class="span1" name="tanggal_pelaksanaan_akhir" id="tanggal_pelaksanaan_akhir">
+					<input type="text" class="span1" name="tanggal_pelaksanaan_akhir" id="tanggal_pelaksanaan_akhir" autocomplete="off">
 				</fieldset>
 				<fieldset class="hr">
 					<label class="span2">Jumlah Hari Pelaporan</label>
 					<input type="text" class="span1" name="hari_pelaporan" id="hari_pelaporan">
 					<label class="span2">Tanggal Pelaporan</label> 
-					<input type="text" class="span1" name="tanggal_pelaporan_awal" id="tanggal_pelaporan_awal"> 
+					<input type="text" class="span1" name="tanggal_pelaporan_awal" id="tanggal_pelaporan_awal" autocomplete="off"> 
 					<label class="span0">s/d</label> 
-					<input type="text" class="span1" name="tanggal_pelaporan_akhir" id="tanggal_pelaporan_akhir">
+					<input type="text" class="span1" name="tanggal_pelaporan_akhir" id="tanggal_pelaporan_akhir" autocomplete="off">
 				</fieldset>
 			</div>
 			<fieldset class="hr">
@@ -194,74 +191,7 @@
 			</fieldset>
 			</div>
 			<div id="dates">
-				<script type="text/javascript">
-				$("#tanggal_awal").datepicker({
-					dateFormat: 'dd-mm-yy',
-					nextText: "",
-					prevText: "",
-					changeYear: true,
-					changeMonth: true
-					});
-					$("#tanggal_akhir").datepicker({
-					dateFormat: 'dd-mm-yy',
-					nextText: "",
-					prevText: "",
-					changeYear: true,
-					changeMonth: true
-					});
-					$("#tanggal_surat").datepicker({
-					dateFormat: 'dd-mm-yy',
-					nextText: "",
-					prevText: "",
-					changeYear: true,
-					changeMonth: true
-					});
-					
-					$("#tanggal_persiapan_awal").datepicker({
-					dateFormat: 'dd-mm-yy',
-					nextText: "",
-					prevText: "",
-					changeYear: true,
-					changeMonth: true
-					});
-					$("#tanggal_persiapan_akhir").datepicker({
-					dateFormat: 'dd-mm-yy',
-					nextText: "",
-					prevText: "",
-					changeYear: true,
-					changeMonth: true
-					});
-					
-					$("#tanggal_pelaksanaan_awal").datepicker({
-					dateFormat: 'dd-mm-yy',
-					nextText: "",
-					prevText: "",
-					changeYear: true,
-					changeMonth: true
-					});
-					$("#tanggal_pelaksanaan_akhir").datepicker({
-					dateFormat: 'dd-mm-yy',
-					nextText: "",
-					prevText: "",
-					changeYear: true,
-					changeMonth: true
-					});
-					
-					$("#tanggal_pelaporan_awal").datepicker({
-					dateFormat: 'dd-mm-yy',
-					nextText: "",
-					prevText: "",
-					changeYear: true,
-					changeMonth: true
-					});
-					$("#tanggal_pelaporan_akhir").datepicker({
-					dateFormat: 'dd-mm-yy',
-					nextText: "",
-					prevText: "",
-					changeYear: true,
-					changeMonth: true
-					});
-			</script>
+				
 			</div>
 			<fieldset class="hr">
 				<ul class="rtabs">
@@ -295,11 +225,15 @@
 					<textarea class="ckeditor" cols="10" rows="40" name="instruksi" id="instruksi"><?=$arr['assign_instruksi'];?></textarea>
 				</div>
 			</fieldset>
-			<fieldset class="hr">
+			<fieldset class="hr" style="height: 40px !important">
 				<label class="span2">Lampiran</label>
 				<input type="hidden" class="span4" name="assign_attach_old" value="<?=$arr['assign_file']?>"> 
 				<input type="file" class="span4" name="assign_attach" id="assign_attach">
-				<label class="span2"><a href="#" Onclick="window.open('<?=$Helper->baseurl("Upload_Audit").$arr['assign_file']?>','_blank')"><?=$arr['assign_file']?></a></label>
+				<label class="span2">
+					<span class="lampiran">
+					<a href="#" title="Lihat File" class="link_open" Onclick="window.open('<?=$Helper->baseurl("Upload_Audit").$arr['assign_file']?>','_blank')"><?=$arr['assign_file']?> </a> <a href="#" title="Hapus File" class="btn_del" Onclick="">x</a>
+					</span>
+				</span>
 			</fieldset>
 			<input type="hidden" name="data_id" id="data_id" value="<?=$arr['assign_id']?>">	
 		<?
@@ -619,11 +553,11 @@
 		?>
 			<fieldset>
 				<center>
-				<input type="button" class="blue_btn" value="Kembali" onclick="location='<?=$def_page_request?>'"> &nbsp;&nbsp;&nbsp;
+				<input type="button" class="btn-info" value="Kembali" onclick="location='<?=$def_page_request?>'"> &nbsp;&nbsp;&nbsp;
 				<?
 				if($_action != "getdetail"){
 				?>
-					<input type="submit" class="blue_btn" value="Simpan">
+					<input type="submit" class="btn-success" value="Simpan">
 				<?
 				}
 				// if($_action != "getdetail"){
@@ -679,13 +613,79 @@ $(document).ready(function() {
 	endforeach
 	;
 	?>
-  $("#auditee").select2({
-    placeholder:"Ketikkan kode atau nama Obyek Audit",
-    tokenSeparators: [",", " "],
-    multiple: true,
-    width:'317px',
-    data: data
-  });
+	$("#auditee").select2({
+		placeholder:"Ketikkan kode atau nama Obyek Audit",
+		tokenSeparators: [",", " "],
+		multiple: true,
+		width:'317px',
+		data: data
+	});
+  	$("#tanggal_awal").datepicker({
+		dateFormat: 'dd-mm-yy',
+		nextText: "",
+		prevText: "",
+		changeYear: true,
+		changeMonth: true
+	});
+	$("#tanggal_akhir").datepicker({
+		dateFormat: 'dd-mm-yy',
+		nextText: "",
+		prevText: "",
+		changeYear: true,
+		changeMonth: true
+	});
+	$("#tanggal_surat").datepicker({
+		dateFormat: 'dd-mm-yy',
+		nextText: "",
+		prevText: "",
+		changeYear: true,
+		changeMonth: true
+	});
+
+	$("#tanggal_persiapan_awal").datepicker({
+		dateFormat: 'dd-mm-yy',
+		nextText: "",
+		prevText: "",
+		changeYear: true,
+		changeMonth: true
+	});
+	$("#tanggal_persiapan_akhir").datepicker({
+		dateFormat: 'dd-mm-yy',
+		nextText: "",
+		prevText: "",
+		changeYear: true,
+		changeMonth: true
+	});
+
+	$("#tanggal_pelaksanaan_awal").datepicker({
+		dateFormat: 'dd-mm-yy',
+		nextText: "",
+		prevText: "",
+		changeYear: true,
+		changeMonth: true
+	});
+	$("#tanggal_pelaksanaan_akhir").datepicker({
+		dateFormat: 'dd-mm-yy',
+		nextText: "",
+		prevText: "",
+		changeYear: true,
+		changeMonth: true
+	});
+
+	$("#tanggal_pelaporan_awal").datepicker({
+		dateFormat: 'dd-mm-yy',
+		nextText: "",
+		prevText: "",
+		changeYear: true,
+		changeMonth: true
+	});
+	$("#tanggal_pelaporan_akhir").datepicker({
+		dateFormat: 'dd-mm-yy',
+		nextText: "",
+		prevText: "",
+		changeYear: true,
+		changeMonth: true
+	});
 
 });
   
@@ -707,3 +707,9 @@ $(function() {
 	});
 });
 </script>
+
+<script type="text/javascript" src="Public/js/jquery-ui.js"></script>
+<script type="text/javascript" src="Public/js/jquery.validate.min.js"></script>
+<script type="text/javascript" src="Public/js/select2/select2.min.js"></script>
+<script type="text/javascript" src="Public/ckeditor/ckeditor.js"></script>
+<script type="text/javascript" src="Public/js/responsive-tabs.js"></script>

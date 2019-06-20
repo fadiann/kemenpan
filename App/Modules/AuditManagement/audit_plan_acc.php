@@ -1,10 +1,7 @@
-<script type="text/javascript" src="Public/js/jquery.validate.min.js"></script>
-<script type="text/javascript" src="Public/js/jquery-ui-1.10.1.custom.min.js"></script>
-<script type="text/javascript" src="Public/js/jquery.maskMoney.js"></script>
-<link rel="stylesheet" href="Public/css/jquery.ui.datepicker.css">
+<link href="Public/css/responsive-tabs.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<!-- <link rel="stylesheet" href="Public/css/jquery.ui.datepicker.css"> -->
 <link rel="stylesheet" href="Public/js/select2/select2.css" type="text/css" />
-<script type="text/javascript" src="Public/js/select2/select2.min.js"></script>
-<script type="text/javascript" src="Public/ckeditor/ckeditor.js"></script>
 
 <section id="main" class="column">
 	<article class="module width_3_quarter">
@@ -78,9 +75,9 @@
 			</fieldset>
 			<fieldset class="hr">
 				<label class="span2">Rencana Kegiatan</label> 
-				<input type="text" class="span1" name="tanggal_awal" id="tanggal_awal"> 
+				<input type="text" class="span1" name="tanggal_awal" id="tanggal_awal" autocomplete="off"> 
 				<label class="span0">s/d</label> 
-				<input type="text" class="span1" name="tanggal_akhir" id="tanggal_akhir">
+				<input type="text" class="span1" name="tanggal_akhir" id="tanggal_akhir" autocomplete="off">
 				<span class="mandatory">*</span>
 			</fieldset>
 			<fieldset class="hr">
@@ -202,9 +199,9 @@
 			</fieldset>
 			<fieldset class="hr">
 				<label class="span2">Rencana Kegiatan</label> 
-				<input type="text" class="span1" name="tanggal_awal" id="tanggal_awal" value="<?=$Helper->dateIndo($arr['audit_plan_start_date'])?>"> 
+				<input type="text" class="span1" name="tanggal_awal" id="tanggal_awal" value="<?=$Helper->dateIndo($arr['audit_plan_start_date'])?>" autocomplete="off"> 
 				<label class="span0">s/d</label> 
-				<input type="text" class="span1" name="tanggal_akhir" id="tanggal_akhir" value="<?=$Helper->dateIndo($arr['audit_plan_end_date'])?>">
+				<input type="text" class="span1" name="tanggal_akhir" id="tanggal_akhir" value="<?=$Helper->dateIndo($arr['audit_plan_end_date'])?>" autocomplete="off">
 				<span class="mandatory">*</span>
 			</fieldset>
 			<fieldset class="hr">
@@ -478,3 +475,9 @@ function propinsiOnChange(objValue, cmbNext){
 	}
 }
 </script>
+
+<script src="Public/js/jquery-ui.js"></script>
+<script type="text/javascript" src="Public/js/jquery.validate.min.js"></script>
+<script type="text/javascript" src="Public/js/select2/select2.min.js"></script>
+<script type="text/javascript" src="Public/ckeditor/ckeditor.js"></script>
+<script type="text/javascript" src="Public/js/responsive-tabs.js"></script>

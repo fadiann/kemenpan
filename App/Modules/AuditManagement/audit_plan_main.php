@@ -58,7 +58,9 @@ $gridWidth = array ("15", "20", "10", "15", "5", "10");
 $key_by = array ("Nama Kegiatan");
 $key_field = array ("audit_plan_kegiatan");
 
-$widthAksi = "15";
+$widthAksi  = "10";
+$iconEdit   = "1";
+$iconDel    = "1";
 $iconDetail = "1";
 // === end grid ===//
 
@@ -148,8 +150,8 @@ switch ($_action) {
 		$ftujuan 			= $Helper->replacetext ( $_POST ["tujuan"] );
 		$fperiode 			= $Helper->replacetext ( $_POST ["periode"] );
 		$fbiaya_audit 		= $Helper->replacetext ( $_POST ["biaya_audit"], true );
-		$ftanggal_awal 		= $Helper->datedb_ori ( $Helper->replacetext ( $_POST ["tanggal_awal"] ) );
-		$ftanggal_akhir 	= $Helper->datedb_ori ( $Helper->replacetext ( $_POST ["tanggal_akhir"] ) );
+		$ftanggal_awal 		= $Helper->date_db ( $Helper->replacetext ( $_POST ["tanggal_awal"] ) );
+		$ftanggal_akhir 	= $Helper->date_db ( $Helper->replacetext ( $_POST ["tanggal_akhir"] ) );
 		$convert_tgl_awal 	= $Helper->date_db ($ftanggal_awal);
 		$convert_tgl_akhir 	= $Helper->date_db ($ftanggal_akhir);
 		$ftanggal_awal1 	= $Helper->date_db ($Helper->replacetext ( $_POST ["tanggal_awal"] ));
@@ -160,13 +162,13 @@ switch ($_action) {
 		
 		if ($ftipe_audit != "" && $ftahun != "" && $ftanggal_akhir != "") {
 			$id_plann = $plannings->uniq_id ();
-			$plannings->planning_add ( $id_plann, $kode_plan, $ftipe_audit, $ftahun, $ftanggal_awal1, $ftanggal_akhir1, $hari_kerja, $ftujuan, $fperiode, $fbiaya_audit, $fsub_type );
+			$plannings->planning_add ( $id_plann, $kode_plan, $ftipe_audit, $ftahun, $ftanggal_awal, $ftanggal_akhir, $hari_kerja, $ftujuan, $fperiode, $fbiaya_audit, $fsub_type );
 			//auditee
 			$count_auditee = 0;
-			$count_auditee = count($fauditee);
+			$count_auditee = count($_POST ["auditee_id"]);
 			for($i=0; $i<=$count_auditee ;$i++){
-				$fauditee_id 	= $Helper->replacetext ( $_POST ["auditee_id"][$i] );
-				$fjml_hari 		= $Helper->replacetext ( $_POST ["jml_hari"][$i] );
+				@$fauditee_id 	= $Helper->replacetext ( $_POST ["auditee_id"][$i] );
+				@$fjml_hari 		= $Helper->replacetext ( $_POST ["jml_hari"][$i] );
 				if($fauditee_id!=""){
 					$plannings->planning_add_auditee ( $id_plann, $fauditee_id, $fjml_hari );
 				}

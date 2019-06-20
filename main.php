@@ -23,11 +23,12 @@ if (isset($_REQUEST['action'])) {
 			<link rel="stylesheet" href="Public/css/ie.css" type="text/css" media="screen" />
 		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
-	<script src="Public/js/jquery-1.9.1.min.js" type="text/javascript"></script>
+
+	<script src="Public/js/jquery-3.4.1.js" type="text/javascript"></script>
 	<script src="Public/js/actions.js" type="text/javascript"></script>
 	<script src="Public/js/hideshow.js" type="text/javascript"></script>
 	<script src="Public/js/jqClock.min.js" type="text/javascript"></script>
-	<script src="Public/js/pace.min.js"></script>
+	<script src="Public/js/pace.min.js" type="text/javascript"></script>
 	<?php
 	$position = 1;
 	include_once("App/Libraries/login_history.php");
@@ -49,13 +50,13 @@ if (isset($_REQUEST['action'])) {
 			}
 		}
 
-		function sh(id, jml) {
-			if (jml == '0') {
-				document.getElementById(id).style.display = 'none';
-			} else {
-				document.getElementById(id).style.display = 'block';
-			}
-		}
+		// function sh(id, jml) {
+		// 	if (jml == '0') {
+		// 		document.getElementById(id).style.display = 'none';
+		// 	} else {
+		// 		document.getElementById(id).style.display = 'block';
+		// 	}
+		// }
 		$(document).ready(function() {
 			$("#jam").clock({
 				"format": "24",
@@ -75,7 +76,8 @@ if (isset($_REQUEST['action'])) {
 
 </head>
 
-<body onload="sh('notif', '<?= $jml_notif ?>')">
+<!-- <body onload="sh('notif', '<?//= $jml_notif ?>')"> -->
+<body>
 	<div class="preloader"></div>
 	<header id="header">
 		<hgroup>

@@ -39,8 +39,8 @@
 		<?
 		} else if ($gridHeader [$j] == "Rencana Kegiatan" || $gridHeader [$j] == "Tanggal Audit") {
 		?>
-		<td>
-			<?=$arr['audit_plan_start_date'] . " s.d " . $arr['audit_plan_end_date'];
+		<td align="center">
+			<?=$Helper->dateIndo($arr['audit_plan_start_date']) . " s.d " . $Helper->dateIndo($arr['audit_plan_end_date']);
 			?>
 		</td>
 		<?
@@ -86,8 +86,14 @@
 		<td>
 			<?php
 				if ($arr ['audit_plan_status'] == 2) {
-					$iconEdit = 0;
-					$iconDel = 0;
+					$cekAction = $Helper->cekAction($ses_group_id);
+					if($cekAction == 1){
+						$iconDel 	= 1;
+						$iconEdit	= 1;
+					}else{
+						$iconDel 	= 0;
+						$iconEdit	= 0;
+					}
 				} else {
 					$iconEdit = $Helper->cek_akses ( $ses_group_id, $method, 'getedit' );
 					$iconDel = $Helper->cek_akses ( $ses_group_id, $method, 'getdelete' );

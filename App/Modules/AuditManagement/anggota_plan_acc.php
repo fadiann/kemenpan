@@ -9,40 +9,77 @@
 		<header>
 			<h3 class="tabs_involved"><?=$page_title?></h3>
 		</header>
-		<form method="post" name="f" action="#" class="form-horizontal"
+		<form method="post" name="f" action="#" class="form-horizontal validation-form"
 			id="validation-form">
 		<?
 		switch ($_action) {
 			case "getadd" :
-				?>
-			<fieldset class="hr">
-				<label class="span2">Auditee</label>
-				<?php
-				$rs_auditee = $plannings->planning_auditee_viewlist ( $ses_plan_id );
-				$arr_auditee = $rs_auditee->GetArray ();
-				echo $Helper->buildCombo_risk ( "auditee_id", $arr_auditee, 1, 2, "", "", false, true, false );
-				?><span class="mandatory">*</span>
-			</fieldset>
-			<fieldset class="hr">
-				<label class="span2">Auditor</label>
-				<?=$Helper->dbCombo("anggota_id", "auditor", "auditor_id", "auditor_name", "and auditor_del_st = 1 ", "", "", 1, "order by auditor_name")?>
-				<label class="span1">Golongan : </label> 
-				<label class="span0" id="gol"></label> <span class="mandatory">*</span>
-			</fieldset>
-			<fieldset class="hr">
-				<label class="span2">Posisi</label>
-				<?=$Helper->dbCombo("posisi_id", "par_posisi_penugasan", "posisi_id", "posisi_name", "and posisi_del_st = 1 ", "", "", 1, "order by posisi_sort")?><span
-					class="mandatory">*</span>
-			</fieldset>
-			<fieldset class="hr">
-				<label class="span2">Tanggal</label>
-				<input type="text" class="span1" name="tanggal_awal" id="tanggal_awal" value="<?=$Helper->dateIndo($arr_plan['audit_plan_start_date'])?>"> 
-				<input type="hidden" class="span1" name="tanggal_awal_ori" id="tanggal_awal_ori" value="<?=$Helper->date_db($arr_plan['audit_plan_start_date'])?>"> 
-				<label class="span0">s/d</label> 
-				<input type="text" class="span1" name="tanggal_akhir" id="tanggal_akhir" value="<?=$Helper->dateIndo($arr_plan['audit_plan_end_date'])?>">
-				<input type="hidden" class="span1" name="tanggal_akhir_ori" id="tanggal_akhir_ori" value="<?=$Helper->date_db($arr_plan['audit_plan_end_date'])?>"> 
-			</fieldset>
-			<fieldset>
+		?>
+			<a href="#" class="link_btn" id="tambah" style="float:right; margin: 0px 20px 0px 0px; padding-bottom: -5px !important">Tambah</a>
+			<div style="clear:both;"></div>
+			<div id="clone">
+			<h3 align="center" style="margin: 20px 0px 0px 0px; padding: 0px;">------ AUDITOR ------</h3>
+				<fieldset class="hr">
+					<label class="span2">Auditee</label>
+					<?php
+					$rs_auditee = $plannings->planning_auditee_viewlist ( $ses_plan_id );
+					$arr_auditee = $rs_auditee->GetArray ();
+					echo $Helper->buildCombo_risk ( "auditee_id[]", $arr_auditee, 1, 2, "", "", false, true, false );
+					?><span class="mandatory">*</span>
+				</fieldset>
+				<fieldset class="hr">
+					<label class="span2">Auditor</label>
+					<?=$Helper->dbCombo("anggota_id[]", "auditor", "auditor_id", "auditor_name", "and auditor_del_st = 1 ", "", "", 1, "order by auditor_name")?>
+					<label class="span1">Golongan : </label> 
+					<label class="span0" id="gol"></label> <span class="mandatory">*</span>
+				</fieldset>
+				<fieldset class="hr">
+					<label class="span2">Posisi</label>
+					<?=$Helper->dbCombo("posisi_id[]", "par_posisi_penugasan", "posisi_id", "posisi_name", "and posisi_del_st = 1 ", "", "", 1, "order by posisi_sort")?><span
+						class="mandatory">*</span>
+				</fieldset>
+				<fieldset class="hr">
+					<label class="span2">Tanggal</label>
+					<input type="text" class="span1 tanggal_awal" name="tanggal_awal[]" id="tanggal_awal" value="<?=$Helper->dateIndo($arr_plan['audit_plan_start_date'])?>" autocomplete="off"> 
+					<input type="hidden" class="span1" name="tanggal_awal_ori" id="tanggal_awal_ori" value="<?=$Helper->date_db($arr_plan['audit_plan_start_date'])?>" autocomplete="off"> 
+					<label class="span0">s/d</label> 
+					<input type="text" class="span1 tanggal_akhir" name="tanggal_akhir[]" id="tanggal_akhir" value="<?=$Helper->dateIndo($arr_plan['audit_plan_end_date'])?>" autocomplete="off">
+					<input type="hidden" class="span1" name="tanggal_akhir_ori" id="tanggal_akhir_ori" value="<?=$Helper->date_db($arr_plan['audit_plan_end_date'])?>" autocomplete="off"> 
+				</fieldset>
+			</div>
+			<div class="copy">
+			</div>
+			<script> 
+				$(document).ready(function() { 
+					var count = 0;
+					$("#tambah").click(function() { 
+						$('.tanggal_awal').datepicker('destroy');
+						$('.tanggal_akhir').datepicker('destroy');
+						$("#clone").clone().appendTo(".copy"); 
+						count += 1;
+						$('.tanggal_awal').attr("id",'tanggal_awal' + count).datepicker({
+							dateFormat: 'dd-mm-yy',
+							nextText: "",
+							prevText: "",
+							changeYear: true,
+							changeMonth: true,
+							minDate: '<?=$Helper->dateIndo($arr_plan['audit_plan_start_date'])?>',
+							maxDate: '<?=$Helper->dateIndo($arr_plan['audit_plan_end_date'])?>'
+						}); 
+						$('.tanggal_akhir').attr("id",'tanggal_akhir' + count).datepicker({
+							dateFormat: 'dd-mm-yy',
+							nextText: "",
+							prevText: "",
+							changeYear: true,
+							changeMonth: true,
+							minDate: '<?=$Helper->dateIndo($arr_plan['audit_plan_start_date'])?>',
+							maxDate: '<?=$Helper->dateIndo($arr_plan['audit_plan_end_date'])?>'
+						});  
+						//console.log(count);
+					}); 
+				}); 
+			</script> 
+			<!-- <fieldset>
 				<label class="span2">Rincian Biaya</label>
 				<table border="1" cellpadding="0" cellspacing="0" class="table_risk">
 					<thead>
@@ -57,7 +94,7 @@
 
 					</tbody>
 				</table>
-			</fieldset>
+			</fieldset> -->
 		<?
 				break;
 			case "getedit" :
@@ -85,12 +122,13 @@
 			</fieldset>
 			<fieldset class="hr">
 				<label class="span2">Tanggal</label>
-				<input type="text" class="span1" name="tanggal_awal" id="tanggal_awal" value="<?=$Helper->dateIndo($arr['plan_auditor_start_date'])?>"> 
+				<input type="text" class="span1" name="tanggal_awal" id="tanggal_awal" value="<?=$Helper->dateIndo($arr['plan_auditor_start_date'])?>" autocomplete="off"> 
 				<input type="hidden" class="span1" name="tanggal_awal_ori" id="tanggal_awal_ori" value="<?=$arr['plan_auditor_start_date']?>"> 
 				<label class="span0">s/d</label> 
-				<input type="text" class="span1" name="tanggal_akhir" id="tanggal_akhir" value="<?=$Helper->dateIndo($arr['plan_auditor_end_date'])?>">
+				<input type="text" class="span1" name="tanggal_akhir" id="tanggal_akhir" value="<?=$Helper->dateIndo($arr['plan_auditor_end_date'])?>" autocomplete="off">
 				<input type="hidden" class="span1" name="tanggal_akhir_ori" id="tanggal_akhir_ori" value="<?=$arr['plan_auditor_end_date']?>"> 
 			</fieldset>
+			<? /*
 			<fieldset>
 				<label class="span2">Rincian Biaya</label>
 				<table border="1" cellpadding="0" cellspacing="0" class="table_risk">
@@ -119,6 +157,7 @@
 					</tbody>
 				</table>
 			</fieldset>
+			*/ ?>
 			<input type="hidden" name="data_id"
 				value="<?=$arr['plan_auditor_id']?>">	
 		<?
@@ -127,9 +166,8 @@
 		?>
 			<fieldset>
 				<center>
-					<input type="button" class="blue_btn" value="Kembali"
-						onclick="location='<?=$def_page_request?>'"> &nbsp;&nbsp;&nbsp; <input
-						type="submit" class="blue_btn" value="Simpan">
+					<input type="button" class="blue_btn" value="Kembali" onclick="location='<?=$def_page_request?>'"> 
+					<input type="submit" class="blue_btn" value="Simpan">
 				</center>
 				<input type="hidden" name="data_action" id="data_action"
 					value="<?=$_nextaction?>">
@@ -138,7 +176,7 @@
 	</article>
 </section>
 <script>
-$("#tanggal_awal").datepicker({
+$(".tanggal_awal").datepicker({
 	dateFormat: 'dd-mm-yy',
 	nextText: "",
 	prevText: "",
@@ -147,7 +185,7 @@ $("#tanggal_awal").datepicker({
 	minDate: '<?=$Helper->dateIndo($arr_plan['audit_plan_start_date'])?>',
 	maxDate: '<?=$Helper->dateIndo($arr_plan['audit_plan_end_date'])?>'
 });  
-$("#tanggal_akhir").datepicker({
+$(".tanggal_akhir").datepicker({
 	dateFormat: 'dd-mm-yy',
 	nextText: "",
 	prevText: "",
@@ -156,7 +194,7 @@ $("#tanggal_akhir").datepicker({
 	minDate: '<?=$Helper->dateIndo($arr_plan['audit_plan_start_date'])?>',
 	maxDate: '<?=$Helper->dateIndo($arr_plan['audit_plan_end_date'])?>'
 });  
-	
+
 $("#biaya_audit").maskMoney({precision: 0});
 
 $("#auditee_id").on('change', function(){
@@ -168,7 +206,7 @@ $("#anggota_id").on('change', function(){
 	$("#table_sbu").empty();
 	var id_auditor = $(this).val();
 	$.ajax({
-		url: 'AuditManagement/ajax.php?data_action=getgol_auditor',
+		url: 'App/Modules/AuditManagement/ajax.php?data_action=getgol_auditor',
 		type: 'POST',
 		dataType: 'text',
 		data: {id_auditor: id_auditor},
@@ -180,7 +218,7 @@ $("#anggota_id").on('change', function(){
 });
 
 $(function() {
-	$("#validation-form").validate({
+	$(".validation-form").validate({
 		rules: {
 			auditee_id: "required",
 			anggota_id: "required",
@@ -207,7 +245,7 @@ function getSbu(){
 		
 	console.log('get prov : '+idsatker+", golongan : "+golongan);
 	$.ajax({
-		url: 'AuditManagement/ajax.php?data_action=getsbu_rinci',
+		url: 'App/Modules/AuditManagement/ajax.php?data_action=getsbu_rinci',
 		type: 'POST',
 		dataType: 'json',
 		data: {idsatker: idsatker, golongan:golongan},

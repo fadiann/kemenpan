@@ -82,37 +82,42 @@ switch ($_action) {
 		echo "<script>window.open('" . $acc_page_request_detil . "&auditor=" . $fdata_id . "', '_self');</script>";
 		break;
 	case "postadd" :
-		$fauditee_id = $Helper->replacetext ( $_POST ["auditee_id"] );
-		$fanggota_id = $Helper->replacetext ( $_POST ["anggota_id"] );
-		$fposisi_id = $Helper->replacetext ( $_POST ["posisi_id"] );
-		$ftanggal_awal = $Helper->date_db_ori ( $Helper->replacetext ( $_POST ["tanggal_awal"] ) );
-		$ftanggal_akhir = $Helper->date_db_ori ( $Helper->replacetext ( $_POST ["tanggal_akhir"] ) );
-		$convert_tgl_awal = $Helper->date_db ($ftanggal_awal);
-		$convert_tgl_akhir = $Helper->date_db ($ftanggal_akhir);
-		$count_plan_date = (($convert_tgl_akhir - $convert_tgl_awal) / 86400) + 1;
-		$count_weekend = $Helper->cek_holiday ( $convert_tgl_awal, $convert_tgl_akhir );
-		$hari_kerja = $count_plan_date - $count_weekend;
-		$fidsbu = $_POST ["idsbu"];
-		$fjml_hari = $_POST ["jml_hari"];
-		$fnilai = $_POST ["nilai"];
-		$ftotal_biaya = $_POST ["total_biaya"];
-		$sum_biaya = 0;
-		if ($fauditee_id != "" && $fanggota_id != "" && $fposisi_id != "") {
-			$id_plan_anggota = $plannings->uniq_id ();
-			$plannings->plan_auditor_add ( $id_plan_anggota, $fauditee_id, $fanggota_id, $fposisi_id, $convert_tgl_awal, $convert_tgl_akhir, $count_plan_date, $ses_plan_id, $hari_kerja );
-			
-			for($i = 0; $i < count ( $fidsbu ); $i ++) {
-				$plannings->plan_auditor_detil_add ( $id_plan_anggota, $fidsbu [$i], $fjml_hari [$i], $fnilai [$i], $ftotal_biaya [$i] );
-				$sum_biaya = $sum_biaya+$ftotal_biaya [$i];
-			}
-			$plannings->plan_auditor_update_sum_biaya( $id_plan_anggota,$sum_biaya);
-			$Helper->js_alert_act ( 3 );
-		} else {
-			$Helper->js_alert_act ( 5 );
+		$count	= count($_POST['auditee_id']);
+		for($x = 0; $x < $count; $x++){
+			$fauditee_id 		= $Helper->replacetext ( $_POST ["auditee_id"][$x] );
+			$fanggota_id 		= $Helper->replacetext ( $_POST ["anggota_id"][$x] );
+			$fposisi_id 		= $Helper->replacetext ( $_POST ["posisi_id"][$x] );
+			$ftanggal_awal 		= $Helper->date_db ( $Helper->replacetext ( $_POST ["tanggal_awal"][$x] ) );
+			$ftanggal_akhir 	= $Helper->date_db ( $Helper->replacetext ( $_POST ["tanggal_akhir"][$x] ) );
+			$convert_tgl_awal	= $Helper->date_db ($ftanggal_awal);
+			$convert_tgl_akhir 	= $Helper->date_db ($ftanggal_akhir);
+			$count_plan_date 	= (($convert_tgl_akhir - $convert_tgl_awal) / 86400) + 1;
+			$count_weekend 		= $Helper->cek_holiday ( $convert_tgl_awal, $convert_tgl_akhir );
+			$hari_kerja 		= $count_plan_date - $count_weekend;		
+			if ($fauditee_id != "" && $fanggota_id != "" && $fposisi_id != "") {
+				$id_plan_anggota = $plannings->uniq_id ();
+				$plannings->plan_auditor_add ( $id_plan_anggota, $fauditee_id, $fanggota_id, $fposisi_id, $convert_tgl_awal, $convert_tgl_akhir, $count_plan_date, $ses_plan_id, $hari_kerja );
+				
+				/*DETAIL AUDITOR*/
+				// $fidsbu 			= $_POST ["idsbu"];
+				// $fjml_hari 			= $_POST ["jml_hari"];
+				// $fnilai 			= $_POST ["nilai"];
+				// $ftotal_biaya 		= $_POST ["total_biaya"];
+				// $sum_biaya 			= 0;
+				// for($i = 0; $i < count ( $fidsbu ); $i ++) {
+				// 	$plannings->plan_auditor_detil_add ( $id_plan_anggota, $fidsbu [$i], $fjml_hari [$i], $fnilai [$i], $ftotal_biaya [$i] );
+				// 	$sum_biaya = $sum_biaya+$ftotal_biaya [$i];
+				// }
+				// $plannings->plan_auditor_update_sum_biaya( $id_plan_anggota,$sum_biaya);
+				/*END DETAIL AUDITOR*/
+				}
 		}
-		?>
-<script>window.open('<?=$def_page_request?>', '_self');</script>
-<?
+		if(in_array('', $_POST['auditee_id']) || in_array('', $_POST['anggota_id']) || in_array('', $_POST['posisi_id'])){
+			$Helper->js_alert_act ( 5 );
+		} else {
+			$Helper->js_alert_act ( 3 );
+		}
+		echo "<script>window.open('".$def_page_request."', '_self');</script>";
 		$page_request = "blank.php";
 		break;
 	case "postedit" :
@@ -125,37 +130,33 @@ switch ($_action) {
 		$count_plan_date = (($ftanggal_akhir - $ftanggal_awal) / 86400) + 1;
 		$count_weekend = $Helper->cek_holiday ( $ftanggal_awal, $ftanggal_akhir );
 		$hari_kerja = $count_plan_date - $count_weekend;
-		$fidsbu = $_POST ["idsbu"];
-		$fjml_hari = $_POST ["jml_hari"];
-		$fnilai = $_POST ["nilai"];
-		$ftotal_biaya = $_POST ["total_biaya"];
-		$sum_biaya = 0;
+		// $fidsbu = $_POST ["idsbu"];
+		// $fjml_hari = $_POST ["jml_hari"];
+		// $fnilai = $_POST ["nilai"];
+		// $ftotal_biaya = $_POST ["total_biaya"];
+		// $sum_biaya = 0;
 		if ($fauditee_id != "" && $fanggota_id != "" && $fposisi_id != "") {
 			$plannings->plan_auditor_edit ( $fdata_id, $fauditee_id, $fanggota_id, $fposisi_id, $ftanggal_awal, $ftanggal_akhir, $count_plan_date, $hari_kerja);
 
-			$plannings->plan_auditor_detil_clean ( $fdata_id );
-			for($i = 0; $i < count ( $fidsbu ); $i ++) {
-				$plannings->plan_auditor_detil_add ( $fdata_id, $fidsbu [$i], $fjml_hari [$i], $fnilai [$i], $ftotal_biaya [$i] );
-				$sum_biaya = $sum_biaya+$ftotal_biaya [$i];
-			}
-			$plannings->plan_auditor_update_sum_biaya( $fdata_id, $sum_biaya);
+			// $plannings->plan_auditor_detil_clean ( $fdata_id );
+			// for($i = 0; $i < count ( $fidsbu ); $i ++) {
+			// 	$plannings->plan_auditor_detil_add ( $fdata_id, $fidsbu [$i], $fjml_hari [$i], $fnilai [$i], $ftotal_biaya [$i] );
+			// 	$sum_biaya = $sum_biaya+$ftotal_biaya [$i];
+			// }
+			// $plannings->plan_auditor_update_sum_biaya( $fdata_id, $sum_biaya);
 			
 			$Helper->js_alert_act ( 1 );
 		} else {
 			$Helper->js_alert_act ( 5 );
 		}
-		?>
-<script>window.open('<?=$def_page_request?>', '_self');</script>
-<?
+		echo "<script>window.open('".$def_page_request."', '_self');</script>";
 		$page_request = "blank.php";
 		break;
 	case "getdelete" :
 		$fdata_id = $Helper->replacetext ( $_REQUEST ["data_id"] );
 		$plannings->auditor_plan_delete ( $fdata_id );
 		$Helper->js_alert_act ( 2 );
-		?>
-<script>window.open('<?=$def_page_request?>', '_self');</script>
-<?
+		echo "<script>window.open('".$def_page_request."', '_self');</script>";
 		$page_request = "blank.php";
 		break;
 	default :

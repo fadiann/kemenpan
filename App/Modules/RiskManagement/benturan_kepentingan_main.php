@@ -78,6 +78,7 @@ switch ($_action) {
 			$Helper->postData('pelaku'),
 			$Helper->postData('rencana'),
 			$Helper->postData('tahun'),
+			$ses_id_int
 		];
 		// var_dump($_POST);
 		// die();
@@ -111,10 +112,12 @@ switch ($_action) {
 	break;
 
 	default:
-		$recordcount  = $risks->benturan_kepentingan_count($key_search, $val_search, $key_field);
-		$rs           = $risks-> benturan_kepentingan_view_grid($key_search, $val_search, $key_field, $offset, $num_row);
-		$page_title   = "Benturan Kepentingan";
-		$page_request = $list_page_request;
+		//$cekGroup		= $Helper->cekGroup($_SESSION ['ses_userId'], $_SESSION['ses_groupId']);
+		$recordcount  	= $risks->benturan_kepentingan_count($key_search, $val_search, $key_field, $ses_id_int);
+		$rs           	= $risks-> benturan_kepentingan_view_grid($key_search, $val_search, $key_field, $offset, $num_row, $ses_id_int);
+		$page_title   	= "Benturan Kepentingan";
+		$page_request 	= $list_page_request;
+		//var_dump($_SESSION);
 	break;
 }
 include_once $page_request;

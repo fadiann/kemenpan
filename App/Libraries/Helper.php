@@ -1,5 +1,11 @@
 <?php
-include_once "App/Config/Databases.php";
+if (@$position == 1) {
+	include_once "App/Config/Databases.php";
+} elseif (@$position == 2) {
+	include_once "../../Config/Databases.php";
+} else {
+	include_once "App/Config/Databases.php";
+}
 
 class Helper
 {
@@ -18,12 +24,12 @@ class Helper
 
     function basepath($folder_modul)
     {
-        return $this->db->basepath . "Upload/" . $folder_modul . "/";
+        return $this->db->basepath . "Public/Upload/" . $folder_modul . "/";
     }
 
     function baseurl($folder_modul)
     {
-        return $this->db->baseurl . "Upload/" . $folder_modul . "/";
+        return $this->db->baseurl . "Public/Upload/" . $folder_modul . "/";
     }
 
     function baseurl_apps($folder_modul)
@@ -1016,6 +1022,17 @@ class Helper
     public function deleteData($table, $key, $id) {
         $sql = "DELETE FROM ".$table." WHERE ".$key."='".$id."'";
         $this->db->_dbquery($sql);
+    }
+
+    /*FUNGSI USER*/
+    public function cekAction($group_id)
+    {
+        if($group_id == 'a38c99db8e8777d33b3b358d59a47ae1a0c69d66' || $group_id == '4d6cb5538c7cfbd6b1ccbd881e0e97e69183b4a0' || $group_id == '46e8d25b481a17e5fe2ac046b4c734fd27d3491b'){ //jika grup nya vendor, admin, atau inspektur bisa Mengedit Dan Menghapus
+            $action = 1;
+        }else{ //selain itu Tidak bisa Mengedit Dan Menghapus
+            $action = 0;
+        }
+        return $action;
     }
 }
 ?>

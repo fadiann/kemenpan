@@ -80,8 +80,14 @@
 						$iconDel = $Helper->cek_akses ( $ses_group_id, $method, 'getdelete' );
 						echo "Sedang Menunggu Persetujuan";
 					} else if ($arr[$gridDetail[$j]]==2 || $arr[$gridDetail[$j]]==3) {
-						$iconEdit = 0;
-						$iconDel = 0;
+						$cekAction = $Helper->cekAction($ses_group_id);
+						if($cekAction == 1){
+							$iconDel 	= 1;
+							$iconEdit	= 1;
+						}else{
+							$iconDel 	= 0;
+							$iconEdit	= 0;
+						}
 						if ($surat_tugas_akses) {
 						echo $arr['assign_surat_no'];
 						?>

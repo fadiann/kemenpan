@@ -189,9 +189,12 @@ class risk {
 	}
 
 	//benturan kepentingan	
-	function benturan_kepentingan_count($key_search, $val_search, $all_field)
+	function benturan_kepentingan_count($key_search, $val_search, $all_field, $base_on_id_eks="")
 	{
 		$condition = "";
+		if ($base_on_id_eks == '0') $base_on_id_eks = "";
+		if ($base_on_id_eks != '') $condition .= " and user_id = '".$base_on_id_eks."' ";
+
 		if ($val_search != "") {
 			if ($key_search != "") $condition = " and " . $key_search . " like '%" . $val_search . "%' ";
 			else {
@@ -209,9 +212,12 @@ class risk {
 		$arr = $data->FetchRow();
 		return $arr[0];
 	}
-	function benturan_kepentingan_view_grid($key_search, $val_search, $all_field, $offset, $num_row)
+	function benturan_kepentingan_view_grid($key_search, $val_search, $all_field, $offset, $num_row, $base_on_id_eks="")
 	{
 		$condition = "";
+		if ($base_on_id_eks == '0') $base_on_id_eks = "";
+		if ($base_on_id_eks != '') $condition .= " and user_id = '".$base_on_id_eks."' ";
+
 		if ($val_search != "") {
 			if ($key_search != "") $condition = " and " . $key_search . " like '%" . $val_search . "%' ";
 			else {
@@ -224,9 +230,10 @@ class risk {
 			}
 		}
 		$sql = "SELECT * FROM benturan_kepentingan
-				WHERE 1=1  ". $condition . "
+				WHERE 1=1 ". $condition . "
 				LIMIT $offset, $num_row";
 		$data = $this->db->_dbquery($sql);
+		//echo $sql;
 		return $data;
 	}
 	function benturan_kepentingan_viewById($id)
@@ -237,7 +244,7 @@ class risk {
 	}
 	function benturan_kepentingan_add($data)
 	{
-		$sql = "INSERT INTO benturan_kepentingan VALUES (?, ?, ?, ?, ?)";
+		$sql = "INSERT INTO benturan_kepentingan VALUES (?, ?, ?, ?, ?, ?)";
 		$this->db->bind($sql, $data);
 	}
 	function benturan_kepentingan_edit($data)

@@ -1,6 +1,8 @@
 <?php
 if (@$position == 1) {
 	include_once "App/Config/Databases.php";
+} elseif (@$position == 2) {
+	include_once "../../Config/Databases.php";
 } else {
 	include_once "../App/Config/Databases.php";
 }

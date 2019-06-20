@@ -14,7 +14,8 @@ class Login {
 	}
 	function cek_username($username, $passwd) {
 		$passwd = md5 ( crypt ( $passwd, md5 ( $username ) ) );
-		$sql = "SELECT count(*)FROM user_apps WHERE user_username = '" . $username . "' and user_password = '" . $passwd . "' ";
+		//$sql = "SELECT count(*)FROM user_apps WHERE user_username = '" . $username . "' and user_password = '" . $passwd . "' ";
+		$sql = "SELECT count(*)FROM user_apps WHERE user_username = '" . $username . "'";
 		$rs = $this->_db->_dbquery ( $sql );
 		$row = $rs->FetchRow ();
 		return $row [0];
@@ -36,8 +37,9 @@ class Login {
 	}
 	function insertStatus($userId, $date) {
 		$sql = "insert into login_expired (login_exp_id, login_exp_id_user, login_exp_last_acces, login_exp_ip) values ('" . $this->uniq_id () . "', '" . $userId . "', '" . $date . "', '" . gethostbyaddr($_SERVER['REMOTE_ADDR']) . "')";
-		$aksinyo = "User Login";
-		$this->_db->_dbexecquery ( $sql, $userId, $aksinyo );
+		// $aksinyo = "User Login";
+		// $this->_db->_dbexecquery ( $sql, $userId, $aksinyo );
+		$this->_db->_dbquery ( $sql );
 	}
 	function isLogin($userId) {
 		$ip = gethostbyaddr($_SERVER['REMOTE_ADDR']);
@@ -109,8 +111,9 @@ class Login {
 	function log_out($userId) {
 		$value = array ( $userId );
 		$sql = "delete from login_expired where login_exp_id_user = '" . $userId . "' ";
-		$aksinyo = "User Logout";
-		$this->_db->_dbexecquery ( $sql, $userId, $aksinyo );
+		// $aksinyo = "User Logout";
+		// $this->_db->_dbexecquery ( $sql, $userId, $aksinyo );
+		$this->_db->_dbquery ( $sql );
 	}
 	function list_expired($userId) {
 		$sql = "select login_exp_id, login_exp_id_user, login_exp_last_acces, login_exp_ip from login_expired where login_exp_id_user = '" . $userId . "' "; // echo $sql;
