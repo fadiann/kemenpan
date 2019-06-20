@@ -16,7 +16,12 @@ $logins->deleteLoginsytem();
 <link rel="stylesheet" href="Public/css/login.css">
 <title>e-MAS Login | Elektronik Manajemen Audit Sistem</title>
 </head>
-<?
+<?php
+if(isset($_GET['user'])){
+	$get_user = $Helper->replacetext($_GET['user']);
+}else{
+	$get_user = '';
+}
 $index = "index.php";
 if (@$_POST ['submit'] == "Login") {
 
@@ -53,10 +58,10 @@ if (@$_POST ['submit'] == "Login") {
 			}
 		} else {
 			$alert = "Verifikasi Username dan Password dengan benar dan coba kembali !!!";
-			echo "<script>alert('$alert'); location.href='" . $index . "';</script>";
+			echo "<script>alert('$alert'); location.href='" . $index . "?user=".$username."';</script>";
 		}
 	} else {
-		echo "<script>alert('Username / Password tidak boleh kosong !!!'); location.href='" . $index . "';</script>";
+		echo "<script>alert('Username / Password tidak boleh kosong !!!'); location.href='" . $index . "?user=".$username."';</script>";
 	}
 }
 ?>
@@ -71,7 +76,7 @@ if (@$_POST ['submit'] == "Login") {
 					<label for="email">Kode Pengguna</label>
 				</p>
 				<p align="center">
-					<input type="text" name="username" style="text-align: center">
+					<input type="text" name="username" style="text-align: center" value="<?=$get_user?>">
 				</p>
 
 				<p align="center">

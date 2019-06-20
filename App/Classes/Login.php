@@ -14,7 +14,7 @@ class Login {
 	}
 	function cek_username($username, $passwd) {
 		$passwd = md5 ( crypt ( $passwd, md5 ( $username ) ) );
-		//$sql = "SELECT count(*)FROM user_apps WHERE user_username = '" . $username . "' and user_password = '" . $passwd . "' ";
+		// $sql = "SELECT count(*)FROM user_apps WHERE user_username = '" . $username . "' and user_password = '" . $passwd . "' ";
 		$sql = "SELECT count(*)FROM user_apps WHERE user_username = '" . $username . "'";
 		$rs = $this->_db->_dbquery ( $sql );
 		$row = $rs->FetchRow ();
