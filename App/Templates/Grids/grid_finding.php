@@ -1,13 +1,14 @@
-<table class="table_grid" cellspacing="0" cellpadding="0">
+<div class="table-responsive mt-md">
+	<table class="table table-bordered table-striped table-condensed mb-none">
 	<tr>
 		<?
 		$jmlHeader = count ( $gridHeader );
-		echo ("<th width='5%'>No</th>");
+		echo ("<th width='5%' class='text-center'>No</th>");
 		for($j = 0; $j < $jmlHeader; $j ++) {
-			echo ("<th width='" . $gridWidth [$j] . "%'>" . $gridHeader [$j] . "</th>");
+			echo ("<th class='text-center' width='" . $gridWidth [$j] . "%'>" . $gridHeader [$j] . "</th>");
 		}
 		if ($widthAksi != "0") {
-			echo ("<th width='" . $widthAksi . "%'>Aksi</th>");
+			echo ("<th class='text-center' width='" . $widthAksi . "%'>Aksi</th>");
 		}
 		?>
 	</tr>
@@ -50,9 +51,9 @@
 					if ($arr ['finding_status'] == 1) {
 						echo "Sedang direviu Katim";
 					} elseif ($arr ['finding_status'] == 2) {
-						echo "Telah Direviu Katim <br>Sedang Menunggu Reviu Pengendali Teknis";
+						echo "Di Setujui Pengendali Teknis <br>Sedang Menunggu Reviu Inspektur";
 					} elseif ($arr ['finding_status'] == 3) {
-						echo "Telah Direviu Pengendali Teknis <br>Sedang Menunggu Reviu Pengendali Mutu";
+						echo "Telah Direviu Pengendali Teknis <br>Sedang Menunggu Reviu Inspektur";
 					} elseif ($arr ['finding_status'] == 4) {
 						echo "Telah Disetujui";
 					} elseif ($arr ['finding_status'] == 5) {
@@ -60,7 +61,7 @@
 					} elseif ($arr ['finding_status'] == 6) {
 						echo "Ditolak Pengendali Teknis <br>Sedang Menunggu Pebaikan Katim";
 					} elseif ($arr ['finding_status'] == 7) {
-						echo "Ditolak Pengendali Mutu <br>Sedang Menunggu Pebaikan Pengendali Teknis";
+						echo "Ditolak Inspektur <br>Sedang Menunggu Pebaikan Pengendali Teknis";
 					} elseif ($arr ['finding_status'] == 8) {
 						echo "Selesai";
 					} else {
@@ -82,8 +83,8 @@
 			if ($arr ['finding_status'] == 0 || $arr ['finding_status'] == 5) { 
 				if($status_owner){// owner
 		?>
-			<fieldset>
-				<select name="status"
+			<fieldset class="form-group">
+				<select name="status" class="form-control"
 					onchange="return set_action('getajukan_temuan', '<?=$arr[0]?>', this.value)">
 					<option value="">Pilih Status</option>
 					<option value="1">Ajukan ke Katim</option>
@@ -94,34 +95,37 @@
 			} elseif ($arr ['finding_status'] == 1 || $arr ['finding_status'] == 6) { 
 				if($cek_posisi=='8918ca5378a1475cd0fa5491b8dcf3d70c0caba7'){// katim
 					?>
-			<fieldset>
-				<select name="status"
+			<fieldset class="form-group">
+				<select name="status" class="form-control"
 					onchange="return set_action('getapprove_temuan', '<?=$arr[0]?>', this.value)">
 					<option value="">Pilih Status</option>
 					<option value="5">Tolak Temuan</option>
-					<option value="2">Ajukan ke Dalnis</option>
+					<option value="2">Ajukan ke Dalnis</option> //langsung ke inspektur
 				</select>
 			</fieldset>
 			<?php
 				}
-			} elseif ($arr ['finding_status'] == 2 || $arr ['finding_status'] == 7) {
-				if($cek_posisi=='8918ca5378a1475cd0fa5491b8dcf3d70c0caba7'){ // dalnis
+			} elseif ($arr ['finding_status'] == 10 || $arr ['finding_status'] == 7) {
+				//if($cek_posisi=='8918ca5378a1475cd0fa5491b8dcf3d70c0caba7'){ // dalnis
+				if($cek_posisi=='9e8e412b0bc5071b5d47e30e0507fe206bdf8dbd'){ // dalnis
 					?>
-			<fieldset>
-				<select name="status"
+			<fieldset class="form-group">
+				<select name="status" class="form-control"
 					onchange="return set_action('getapprove_temuan', '<?=$arr[0]?>', this.value)">
 					<option value="">Pilih Status</option>
 					<option value="6">Tolak Temuan</option>
-					<option value="3">Ajukan ke Daltu</option>
+					<!-- <option value="3">Ajukan ke Daltu</option> -->
+					<option value="3">Ajukan ke Inspektur</option>
 				</select>
 			</fieldset>
 			<?php
 				}
-			} elseif ($arr ['finding_status'] == 3) {
-				if($cek_posisi=='8918ca5378a1475cd0fa5491b8dcf3d70c0caba7'){ // daltu
+			} elseif ($arr ['finding_status'] == 2) {
+				//if($cek_posisi=='8918ca5378a1475cd0fa5491b8dcf3d70c0caba7'){ // daltu
+				if($_SESSION ['ses_groupId']=='4d6cb5538c7cfbd6b1ccbd881e0e97e69183b4a0'){ // Inspektur
 					?>
-			<fieldset>
-				<select name="status"
+			<fieldset class="form-group">
+				<select name="status" class="form-control"
 					onchange="return set_action('getapprove_temuan', '<?=$arr[0]?>', this.value)">
 					<option value="">Pilih Status</option>
 					<option value="7">Tolak Temuan</option>
@@ -134,24 +138,22 @@
 				
 			if ($iconDetail) {
 				?>
-			<input type="image" src="Public/images/icn_alert_info.png"
-			title="Rincian Data"
-			Onclick="return set_action('getdetail', '<?=$arr[0]?>')">
-			&nbsp;&nbsp;
+			<button class="btn btn-info btn-circle btn-sm" title="Rincian Data" Onclick="return set_action('getdetail', '<?=$arr[0]?>')"><i class="fa fa-info-circle"></i></button>
+			
 	<?
 			}
 			if ($iconEdit) {
 				?>
 			<input type="image" src="Public/images/icn_edit.png" title="Ubah Data"
 			Onclick="return set_action('getedit', '<?=$arr[0]?>')">
-			&nbsp;&nbsp;
+			
 	<?
 			}
 			if ($iconDel) {
 				?>
 			<input type="image" src="Public/images/icn_trash.png" title="Hapus Data"
 			Onclick="return set_action('getdelete', '<?=$arr[0]?>', '<?=$arr[1]?>')">
-			&nbsp;&nbsp;
+			
 	<?
 			}
 			?>	

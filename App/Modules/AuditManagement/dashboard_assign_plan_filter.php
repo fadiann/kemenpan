@@ -10,18 +10,18 @@ $assigns = new assign ( $ses_userId );
 			<h3 class="tabs_involved">Filter Dashboard Audit</h3>
 		</header>
 		<form method="post" name="f" action="main.php?method=dashboardassignplanaudit" class="form-horizontal" id="validation-form">
-			<fieldset class="hr">
-				<label class="span2">Tahun</label>
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Tahun</label>
 				<?php
 				$rs_tahun = $assigns->assign_tahun_viewlist();
 				$arr_tahun = $rs_tahun->GetArray ();
 				echo $Helper->buildCombo ( "fil_tahun_id", $arr_tahun, 0, 0, "", "", "", false, true, false );
 				?>
-				<span class="mandatory">*</span>
+				<span class="required">*</span>
 			</fieldset>
-			<fieldset>
+			<fieldset class="form-group">
 				<center>
-					<input type="submit" class="blue_btn" value="Lihat">
+					<input type="submit" class="btn btn-success" value="Lihat">
 				</center>
 			</fieldset>
 		</form>

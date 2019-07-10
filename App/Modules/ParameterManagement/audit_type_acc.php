@@ -10,16 +10,16 @@
 		switch ($_action) {
 			case "getadd" :
 				?>
-			<fieldset class="hr">
+			<fieldset class="form-group">
 				<label class="span1">Tipe Pengawasan</label> 
 				<input type="text" class="span3" name="name" id="name">
-				<span class="mandatory">*</span>
+				<span class="required">*</span>
 			</fieldset>
-			<fieldset class="hr">
+			<fieldset class="form-group">
 				<label class="span1">Keterangan</label> 
 				<input type="text" class="span7" name="desc" id="desc">
 			</fieldset>
-			<fieldset class="hr">
+			<fieldset class="form-group">
 				<label class="span1">Opsi</label> 
 				<select name="opsi" id="opsi">
 					<option value="">=== Pilih Satu</option>
@@ -27,22 +27,22 @@
 					<option value="2">Pengawasan Non Pemeriksaan</option>
 					<option value="3">Lain lain</option>
 				</select>
-				<span class="mandatory">*</span>
+				<span class="required">*</span>
 			</fieldset>
 		<?
 				break;
 			case "getedit" :
 				$arr = $rs->FetchRow ();
 				?>
-			<fieldset class="hr">
+			<fieldset class="form-group">
 				<label class="span1">Tipe Pengawasan</label> 
 				<input type="text" class="span3" name="name" id="name" value="<?=$arr['audit_type_name']?>">
 			</fieldset>
-			<fieldset class="hr">
+			<fieldset class="form-group">
 				<label class="span1">Keterangan</label> 
 				<input type="text" class="span7" name="desc" id="desc" value="<?=$arr['audit_type_desc']?>">
 			</fieldset>
-			<fieldset class="hr">
+			<fieldset class="form-group">
 				<label class="span1">Opsi</label> 
 				<select name="opsi" id="opsi">
 					<option value="">=== Pilih Satu</option>
@@ -50,7 +50,7 @@
 					<option value="2" <? if($arr['audit_type_opsi']==2) echo "selected";?>>Pengawasan Non Pemeriksaan</option>
 					<option value="3" <? if($arr['audit_type_opsi']==3) echo "selected";?>>Lain lain</option>
 				</select>
-				<span class="mandatory">*</span>
+				<span class="required">*</span>
 			</fieldset>
 			<input type="hidden" name="data_id"
 				value="<?=$arr['audit_type_id']?>">	
@@ -58,11 +58,11 @@
 				break;
 		}
 		?>
-			<fieldset>
+			<fieldset class="form-group">
 				<center>
-					<input type="button" class="blue_btn" value="Kembali"
+					<input type="button" class="btn btn-primary" value="Kembali"
 						onclick="location='<?=$def_page_request?>'"> &nbsp;&nbsp;&nbsp; <input
-						type="submit" class="blue_btn" value="Simpan">
+						type="submit" class="btn btn-success" value="Simpan">
 				</center>
 				<input type="hidden" name="data_action" id="data_action"
 					value="<?=$_nextaction?>">

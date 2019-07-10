@@ -71,21 +71,21 @@ class programaudit {
 		$data = $this->_db->_dbquery ( $sql );
 		return $data;
 	}
-	function program_audit_add($assign_id, $id_auditee, $id_ref, $id_auditor, $program_jam, $lampiran, $date) {
-		$id = $this->uniq_id ();
-		$sql = "insert into program_audit 
-				(program_id, program_id_assign, program_id_auditee, program_id_ref, program_id_auditor, program_jam, program_lampiran, program_create_by, program_create_date) 
-				values 
-				('".$id."', '".$assign_id."', '".$id_auditee."', '".$id_ref."', '".$id_auditor."', '".$program_jam."', '".$lampiran."', '".$this->userId."', '".$date."')";
-		$aksinyo = "Menambah Program Audit ID ".$id;
-		$this->_db->_dbexecquery ( $sql, $this->userId, $aksinyo );
-	}
-	function program_audit_edit($id, $id_auditee, $id_ref, $id_auditor, $program_jam, $lampiran) {
-		$sql = "update program_audit set program_id_auditee = '".$id_auditee."',program_id_ref = '".$id_ref."', program_id_auditor = '".$id_auditor."', program_jam = '".$program_jam."', program_lampiran = '".$lampiran."'
-				where program_id = '".$id."' ";
-		$aksinyo = "Mengubah Program Audit dengan ID ".$id;
-		$this->_db->_dbexecquery ( $sql, $this->userId, $aksinyo );
-	}
+	// function program_audit_add($assign_id, $id_auditee, $id_ref, $id_auditor, $program_jam, $lampiran, $date) {
+	// 	$id = $this->uniq_id ();
+	// 	$sql = "insert into program_audit 
+	// 			(program_id, program_id_assign, program_id_auditee, program_id_ref, program_id_auditor, program_jam, program_lampiran, program_create_by, program_create_date) 
+	// 			values 
+	// 			('".$id."', '".$assign_id."', '".$id_auditee."', '".$id_ref."', '".$id_auditor."', '".$program_jam."', '".$lampiran."', '".$this->userId."', '".$date."')";
+	// 	$aksinyo = "Menambah Program Audit ID ".$id;
+	// 	$this->_db->_dbexecquery ( $sql, $this->userId, $aksinyo );
+	// }
+	// function program_audit_edit($id, $id_auditee, $id_ref, $id_auditor, $program_jam, $lampiran) {
+	// 	$sql = "update program_audit set program_id_auditee = '".$id_auditee."',program_id_ref = '".$id_ref."', program_id_auditor = '".$id_auditor."', program_jam = '".$program_jam."', program_lampiran = '".$lampiran."'
+	// 			where program_id = '".$id."' ";
+	// 	$aksinyo = "Mengubah Program Audit dengan ID ".$id;
+	// 	$this->_db->_dbexecquery ( $sql, $this->userId, $aksinyo );
+	// }
 	function program_audit_update_status($id, $status, $date) {
 		$sql = "update program_audit set program_status = '".$status."', program_approve_by = '".$this->userId."', program_approve_date = '".$date."'
 				where program_id = '".$id."' ";
@@ -154,6 +154,25 @@ class programaudit {
 				('".$program_id."', '".$assign_id."', '".$id_auditee."', '".$id_ref."', '".$id_auditor."', '".$program_jam."', '".$lampiran."', '".$program_create_by."', '".$date."')
 				ON DUPLICATE KEY UPDATE program_id = '".$program_id."', program_id_assign = '".$assign_id."', program_id_auditee = '".$id_auditee."', program_id_ref = '".$id_ref."', program_id_auditor = '".$id_auditor."', program_jam = '".$program_jam."', program_lampiran = '".$lampiran."', program_create_by = '".$program_create_by."', program_create_date = '".$date."' ";
 		$this->_db->_dbquery ($sql);
+	}
+	function program_audit_add($assign_id, $id_auditee, $id_ref, $id_auditor, $program_jam, $lampiran, $date) {
+		$id 	= $this->uniq_id();
+		$sql 	= "insert into program_audit
+				(program_id, program_id_assign, program_id_auditee, program_id_ref, program_id_auditor, program_jam, program_lampiran, program_create_by, program_create_date) 
+				values 
+				('".$id."', '".$assign_id."', '".$id_auditee."', '".$id_ref."', '".$id_auditor."', '".$program_jam."', '".$lampiran."', '".$this->userId."', '".$date."')";
+		//$aksinyo = "Menambah Program Audit ID ".$id;
+		//$this->_db->_dbexecquery ( $sql, $this->userId, $aksinyo );
+		//echo $sql."<br>";
+		echo $sql;
+		$data = $this->_db->_dbquery ( $sql );
+		
+	}
+	function program_audit_edit($id, $id_auditee, $id_ref, $id_auditor, $program_jam, $lampiran) {
+		$sql = "update program_audit set program_id_auditee = '".$id_auditee."',program_id_ref = '".$id_ref."', program_id_auditor = '".$id_auditor."', program_jam = '".$program_jam."', program_lampiran = '".$lampiran."'
+				where program_id = '".$id."' ";
+		$aksinyo = "Mengubah Program Audit dengan ID ".$id;
+		$this->_db->_dbexecquery ( $sql, $this->userId, $aksinyo );
 	}
 }
 ?>

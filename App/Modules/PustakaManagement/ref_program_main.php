@@ -22,8 +22,8 @@ if(@$method!=@$val_method){
 	$val_method = "";
 }
 
-$paging_request = "main.php?method=ref_program";
-$acc_page_request = "ref_program_acc.php";
+$paging_request    = "main.php?method=ref_program";
+$acc_page_request  = "ref_program_acc.php";
 $list_page_request = "pustaka_view.php";
 
 // ==== buat grid ===//
@@ -42,11 +42,11 @@ $offset = ($noPage - 1) * $num_row;
 
 $def_page_request = $paging_request . "&page=$noPage";
 
-$grid = "App/Templates/Grids/grid.php";
+$grid       = "App/Templates/Grids/grid.php";
 $gridHeader = array ("Kode", "Aspek", "Sub Aspek");
 $gridDetail = array ( "1", "2" , "3");
-$gridWidth = array ( "25", "30", "30");
-$widthAksi = "15";
+$gridWidth  = array ( "20", "25", "30");
+$widthAksi  = "20";
 $iconDetail = "1";
 
 $key_by = array ("Kode", "Aspek", "Sub Aspek");

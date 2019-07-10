@@ -9,9 +9,11 @@ if ($method == 'kertas_kerja') {
 $rs_program = $programaudits->program_audit_viewlist ( $ses_program_id );
 $arr_program = $rs_program->FetchRow ();
 ?>
-<article class="module width_3_quarter">
-	<fieldset>
-		<table class="view_parrent">
+<div class="row">
+	<div class="col-md-12">
+		<section class="panel">
+		<div class="panel-body">
+		<table class="table table-borderless table-condensed table-hover">
 			<tr>
 				<td width="150px">Obyek Audit</td>
 				<td>:</td>
@@ -33,5 +35,7 @@ $arr_program = $rs_program->FetchRow ();
 				<td><?=$Helper->text_show($arr_program['ref_program_procedure'])?></td>
 			</tr>
 		</table>
-	</fieldset>
-</article>
+		</div>
+		</section>
+	</div>
+</div>

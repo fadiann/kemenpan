@@ -28,7 +28,7 @@ echo $tahun;
 	}
 	</style>
 	<body>
-		<table border='1' class="table_risk" width="5%" cellspacing='0' cellpadding="0">
+		<table border='1' class="table table-bordered table-striped table-condensed mb-none" width="5%" cellspacing='0' cellpadding="0">
         <tr><th width="3%" align="center" class="text-center">No</th><th align="center" colspan="5" class="text-center">Obyek Audit</th></tr>
         <?php $rs_auditees2 = $dashboards->auditee_list($tahun, $tipe_audit, $status) ?>
         <?php if ($rs_auditees2->RecordCount() > 0): ?>

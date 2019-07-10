@@ -5,8 +5,13 @@ $reports = new report ( $ses_userId );
 
 $rs_auditee = $assigns->assign_auditee_viewlist ( $arr['assign_id'], $auditee_id );
 ?>
-<section id="main" class="column">	
-	<article class="module width_3_quarter">
+<div class="row">
+	<div class="col-md-12">
+		<section class="panel">
+			<header class="panel-heading">
+				<h2 class="panel-title"><?=$page_title?></h2>
+			</header>
+			<div class="panel-body">
 		<?
 		while($arr_auditee = $rs_auditee->FetchRow()){
 			$katim = $reports->get_anggota($arr['assign_id'], $arr_auditee['assign_auditee_id_auditee'], 'KT');
@@ -61,7 +66,7 @@ $rs_auditee = $assigns->assign_auditee_viewlist ( $arr['assign_id'], $auditee_id
 			<tr>
 				<td colspan="2">Periode Audit</td>
 				<td align="center">:</td>
-				<td><?=$fil_tahun_id?></td>
+				<td><?=@$fil_tahun_id?></td>
 				<td>Direviu Oleh</td>
 				<td align="center">:</td>
 				<td><?=$dalnis ?></td>
@@ -108,7 +113,7 @@ $rs_auditee = $assigns->assign_auditee_viewlist ( $arr['assign_id'], $auditee_id
 				<td colspan="7"><strong>Langkah Kerja:</strong></td>
 			</tr>
 		</table>
-		<table border='1' class="table_risk" cellspacing='0' cellpadding="0">
+		<table border='1' class="table table-bordered table-striped table-condensed mb-none" cellspacing='0' cellpadding="0">
 			<tr align="center">
 				<th width="2%" rowspan="2">No.</th>
 				<th width="50%" rowspan="2" colspan="2">Langkah Kerja Audit</th>
@@ -182,10 +187,12 @@ $rs_auditee = $assigns->assign_auditee_viewlist ( $arr['assign_id'], $auditee_id
 		<?
 		}
 		?>
-		<fieldset>
+		<fieldset class="form-group">
 			<center>
-				<input type="button" class="blue_btn" value="Kembali" onclick="location='<?=$def_page_request?>'">
+				<input type="button" class="btn btn-primary" value="Kembali" onclick="location='<?=$def_page_request?>'">
 			</center>
 		</fieldset>
-	</article>
-</section>
+			</div>
+		</section>
+	</div>
+</div>

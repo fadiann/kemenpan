@@ -9,21 +9,21 @@ $assigns = new assign ( $ses_userId );
 			<h3 class="tabs_involved">Filter Dashboard Pengawasan</h3>
 		</header>
 		<form method="post" name="f" action="main.php?method=dashboard_audit" class="form-horizontal" id="validation-form">
-			<fieldset class="hr">
-				<label class="span2">Tipe Pengawasan</label>
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Tipe Pengawasan</label>
 				<?=$Helper->dbCombo("tipe_audit", "par_audit_type", "audit_type_id", "audit_type_name", "and audit_type_del_st = 1 ", "", "","","","", 1)?>
 			</fieldset>
-			<fieldset class="hr">
-				<label class="span2">Tahun</label>
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Tahun</label>
 				<?php
 				$rs_tahun = $assigns->assign_tahun_viewlist();
 				$arr_tahun = $rs_tahun->GetArray ();
 				echo $Helper->buildCombo ( "fil_tahun_id", $arr_tahun, 0, 0, "", "", "", false, false, true );
 				?>
 			</fieldset>
-			<fieldset>
+			<fieldset class="form-group">
 				<center>
-					<input type="submit" class="blue_btn" value="Lihat">
+					<input type="submit" class="btn btn-success" value="Lihat">
 				</center>
 			</fieldset>
 		</form>

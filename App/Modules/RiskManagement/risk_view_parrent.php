@@ -2,12 +2,14 @@
 $rs_penetapan = $risks->penetapan_data_viewlist ( $ses_penetapan_id );
 $arr_penetapan = $rs_penetapan->FetchRow ();
 ?>
-<article class="module width_3_quarter">
-	<fieldset>
-		<table class="view_parrent">
+<div class="row">
+	<div class="col-md-12">
+		<section class="panel">
+		<div class="panel-body">
+		<table class="table table-borderless table-condensed table-hover">
 			<tr>
 				<td width="150">Satuan Kerja</td>
-				<td>:</td>
+				<td width="5">:</td>
 				<td><?=$arr_penetapan['auditee_name']?></td>
 			</tr>
 			<tr>
@@ -15,6 +17,7 @@ $arr_penetapan = $rs_penetapan->FetchRow ();
 				<td>:</td>
 				<td><?=$arr_penetapan['penetapan_tahun']?></td>
 			</tr>
+			<? /*
 			<tr>
 				<td>Nama Kegiatan</td>
 				<td>:</td>
@@ -25,6 +28,7 @@ $arr_penetapan = $rs_penetapan->FetchRow ();
 				<td>:</td>
 				<td><?=$arr_penetapan['penetapan_tujuan']?></td>
 			</tr>
+			*/ ?>
 			<tr>
 				<td>Profil Risiko Inheren</td>
 				<td>:</td>
@@ -41,5 +45,7 @@ $arr_penetapan = $rs_penetapan->FetchRow ();
 				<td><?=$arr_penetapan['penetapan_status_name']?></td>
 			</tr>
 		</table>
-	</fieldset>
-</article>
+		</div>
+		</section>
+	</div>
+</div>

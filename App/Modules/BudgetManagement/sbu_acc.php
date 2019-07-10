@@ -10,24 +10,24 @@
 		switch ($_action) {
 			case "getadd" :
 				?>
-			<fieldset class="hr">
+			<fieldset class="form-group">
 				<label class="span1">Kode SBU</label> 
-				<input type="text" class="span1" name="kode" id="kode"><span class="mandatory">*</span>
+				<input type="text" class="form-control" name="kode" id="kode"><span class="required">*</span>
 			</fieldset>
-			<fieldset class="hr">
+			<fieldset class="form-group">
 				<label class="span1">Nama SBU</label> 
-				<input type="text" class="span3" name="name" id="name"><span class="mandatory">*</span>
+				<input type="text" class="span3" name="name" id="name"><span class="required">*</span>
 			</fieldset>
-			<fieldset class="hr">
+			<fieldset class="form-group">
 				<label class="span1">Jumlah Hari</label>
-				<select name="status">
+				<select name="status" class="form-control">
 					<option value="">Kosong</option>
 					<option value="1">Sesuai Tanggal</option>
 					<option value="2">Sesuai Tanggal - 1</option>
 					<option value="3">1</option>
 				</select>
 			</fieldset>
-			<fieldset class="hr">
+			<fieldset class="form-group">
 				<label class="span1">No Urut</label> 
 				<input type="text" class="span0" name="sort" id="sort">
 			</fieldset>
@@ -36,23 +36,23 @@
 			case "getedit" :
 				$arr = $rs->FetchRow ();
 				?>
-			<fieldset class="hr">
+			<fieldset class="form-group">
 				<label class="span1">Kode SBU</label> 
-				<input type="text" class="span1" name="kode" id="kode" value="<?=$arr['sbu_kode']?>">
-				<span class="mandatory">*</span>
+				<input type="text" class="form-control" name="kode" id="kode" value="<?=$arr['sbu_kode']?>">
+				<span class="required">*</span>
 			</fieldset>
-			<fieldset class="hr">
+			<fieldset class="form-group">
 				<label class="span1">Nama SBU</label>
 				<input type="text" class="span3" name="name" id="name" value="<?=$arr['sbu_name']?>">
-				<span class="mandatory">*</span>
+				<span class="required">*</span>
 			</fieldset>
-			<fieldset class="hr">
+			<fieldset class="form-group">
 				<label class="span1">No Urut</label> 
 				<input type="text" class="span0" name="sort" id="sort" value="<?=$arr['sbu_sort']?>">
 			</fieldset>
-			<fieldset class="hr">
+			<fieldset class="form-group">
 				<label class="span1">Jumlah Hari</label>
-				<select name="status">
+				<select name="status" class="form-control">
 					<option value="0">Kosong</option>
 					<option value="1" <? if($arr['sbu_status']=='1') echo "selected";?>>Sesuai Tanggal</option>
 					<option value="2" <? if($arr['sbu_status']=='2') echo "selected";?>>Sesuai Tanggal - 1</option>
@@ -64,10 +64,10 @@
 				break;
 		}
 		?>
-			<fieldset>
+			<fieldset class="form-group">
 				<center>
-					<input type="button" class="blue_btn" value="Kembali" onclick="location='<?=$def_page_request?>'"> &nbsp;&nbsp;&nbsp; 
-					<input type="submit" class="blue_btn" value="Simpan">
+					<input type="button" class="btn btn-primary" value="Kembali" onclick="location='<?=$def_page_request?>'"> &nbsp;&nbsp;&nbsp; 
+					<input type="submit" class="btn btn-success" value="Simpan">
 				</center>
 				<input type="hidden" name="data_action" id="data_action" value="<?=$_nextaction?>">
 			</fieldset>

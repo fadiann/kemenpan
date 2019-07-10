@@ -22,7 +22,7 @@ header("Expires: 0");
 header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
 header("Cache-Control: private",false);
 ?>
-<table border='1' class="table_risk" cellspacing='0' cellpadding="0">
+<table border='1' class="table table-bordered table-striped table-condensed mb-none" cellspacing='0' cellpadding="0">
 	<tr>
 		<th width="2%">No</th>
 		<th width="18%">No & Tanggal SPT</th>

@@ -17,6 +17,21 @@ class param {
 		return $this->_db->uniqid ();
 	}
 	
+    function ref_program_viewlist_byAspek($id = "") {
+        $condition = "";
+        if ($id != "") $condition = "and ref_program_aspek_id = '" . $id . "' ";
+        $sql       = "select ref_program_id, ref_program_id_type, ref_program_code, ref_program_aspek_id, ref_program_title, ref_program_procedure, aspek_name, concat(ref_program_code, ' - ' ,ref_program_title) as kode_judul, audit_type_name
+				FROM ref_program_audit
+				left join par_audit_type on ref_program_id_type = audit_type_id
+				left join par_aspek on ref_program_aspek_id = aspek_id
+				where ref_program_del_st = 1 " . $condition; //echo $sql;
+        $data      = $this
+            ->_db
+            ->_dbquery($sql);
+        //echo $sql;
+        return $data;
+    }
+
 	// propinsi
 	function propinsi_count($key_search, $val_search, $all_field) {
 		$condition = "";

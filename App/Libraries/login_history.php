@@ -1,5 +1,5 @@
 <?php
-@session_start();
+session_start();
 ini_set('date.timezone', 'Asia/Jakarta');
 error_reporting (E_ALL);
 if (@$position == 1) {
@@ -58,7 +58,7 @@ if ($ses_userId) {
 			break;
 	}
 } else {
-	echo "<script>alert('Anda Harus Login Terlebih Dahulu'); parent.location.href='" . $index . "';</script>";
+	header("location: index.php");
 }
 
 $getajukan_tl  = $Helper->cek_akses ( $ses_group_id, $method, 'getajukan_tl' );

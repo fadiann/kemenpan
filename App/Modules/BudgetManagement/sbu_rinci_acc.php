@@ -12,46 +12,46 @@
 		switch ($_action) {
 			case "getadd" :
 				?>
-			<fieldset class="hr">
+			<fieldset class="form-group">
 				<label class="span1">Propinsi</label>
 				<?=$Helper->dbCombo("propinsi", "par_propinsi", "propinsi_id", "propinsi_name", " and propinsi_del_st = '1' ", "", "", true)?><span
 					class="mandatory">*</span>
 			</fieldset>
-			<fieldset class="hr">
+			<fieldset class="form-group">
 				<label class="span1">Kode SBU</label>
 				<?=$Helper->dbCombo("sbu", "par_sbu", "sbu_id", "concat(sbu_kode, ' - ',sbu_name) as lengkap", " and sbu_del_st = '1' ", "", "", true)?><span
 					class="mandatory">*</span>
 			</fieldset>
-			<fieldset class="hr">
+			<fieldset class="form-group">
 				<label class="span1">Golongan</label>
 				<?=$Helper->dbCombo("golongan", "auditor", "auditor_golongan", "auditor_golongan", " group by auditor_golongan ", "", "", true, "order by auditor_golongan")?>
 			</fieldset>
-			<fieldset class="hr">
-				<label class="span1">Jumlah</label> <input type="text" class="span1"
-					name="amount" id="amount"><span class="mandatory">*</span>
+			<fieldset class="form-group">
+				<label class="span1">Jumlah</label> <input type="text" class="form-control"
+					name="amount" id="amount"><span class="required">*</span>
 			</fieldset>
 		<?
 				break;
 			case "getedit" :
 				$arr = $rs->FetchRow ();
 				?>
-			<fieldset class="hr">
+			<fieldset class="form-group">
 				<label class="span1">Propinsi</label>
 				<?=$Helper->dbCombo("propinsi", "par_propinsi", "propinsi_id", "propinsi_name", " and propinsi_del_st = '1' ", $arr['sbu_rinci_prov_id'], "", true)?><span
 					class="mandatory">*</span>
 			</fieldset>
-			<fieldset class="hr">
+			<fieldset class="form-group">
 				<label class="span1">Kode SBU</label>
 				<?=$Helper->dbCombo("sbu", "par_sbu", "sbu_id", "sbu_name", " and sbu_del_st = '1' ", $arr['sbu_rinci_sbu_id'], "", true)?><span
 					class="mandatory">*</span>
 			</fieldset>
-			<fieldset class="hr">
+			<fieldset class="form-group">
 				<label class="span1">Golongan</label>
 				<?=$Helper->dbCombo("golongan", "auditor", "auditor_golongan", "auditor_golongan", " group by auditor_golongan ", $arr['sbu_rinci_gol'], "", true, "order by auditor_golongan")?><span
 					class="mandatory">*</span>
 			</fieldset>
-			<fieldset class="hr">
-				<label class="span1">Jumlah</label> <input type="text" class="span1"
+			<fieldset class="form-group">
+				<label class="span1">Jumlah</label> <input type="text" class="form-control"
 					name="amount" id="amount" value="<?=$arr['sbu_rinci_amount']?>"><span
 					class="mandatory">*</span>
 			</fieldset>
@@ -60,11 +60,11 @@
 				break;
 		}
 		?>
-			<fieldset>
+			<fieldset class="form-group">
 				<center>
-					<input type="button" class="blue_btn" value="Kembali"
+					<input type="button" class="btn btn-primary" value="Kembali"
 						onclick="location='<?=$def_page_request?>'"> &nbsp;&nbsp;&nbsp; <input
-						type="submit" class="blue_btn" value="Simpan">
+						type="submit" class="btn btn-success" value="Simpan">
 				</center>
 				<input type="hidden" name="data_action" id="data_action"
 					value="<?=$_nextaction?>">

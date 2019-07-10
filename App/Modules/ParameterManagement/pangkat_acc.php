@@ -10,33 +10,33 @@
 		switch ($_action) {
 			case "getadd" :
 				?>
-			<fieldset class="hr">
-				<label class="span2">Nama Golongan</label> <input type="text" class="span3" name="name" id="name"><span class="mandatory">*</span>
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Nama Golongan</label> <input type="text" class="span3" name="name" id="name"><span class="required">*</span>
 			</fieldset>
-			<fieldset class="hr">
-				<label class="span2">Nama Pangkat</label> <input type="text" class="span3" name="desc" id="desc">
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Nama Pangkat</label> <input type="text" class="span3" name="desc" id="desc">
 			</fieldset>
 		<?
 				break;
 			case "getedit" :
 				$arr = $rs->FetchRow ();
 				?>
-			<fieldset class="hr">
-				<label class="span2">Nama Golongan</label> <input type="text" class="span3" name="name" id="name" value="<?=$arr['pangkat_name']?>"><span class="mandatory">*</span>
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Nama Golongan</label> <input type="text" class="span3" name="name" id="name" value="<?=$arr['pangkat_name']?>"><span class="required">*</span>
 			</fieldset>
-			<fieldset class="hr">
-				<label class="span2">Nama Pangkat</label> <input type="text" class="span3" name="desc" id="desc" value="<?=$arr['pangkat_desc']?>">
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Nama Pangkat</label> <input type="text" class="span3" name="desc" id="desc" value="<?=$arr['pangkat_desc']?>">
 			</fieldset>
 			<input type="hidden" name="data_id" value="<?=$arr['pangkat_id']?>">	
 		<?
 				break;
 		}
 		?>
-			<fieldset>
+			<fieldset class="form-group">
 				<center>
-					<input type="button" class="blue_btn" value="Kembali"
+					<input type="button" class="btn btn-primary" value="Kembali"
 						onclick="location='<?=$def_page_request?>'"> &nbsp;&nbsp;&nbsp; <input
-						type="submit" class="blue_btn" value="Simpan">
+						type="submit" class="btn btn-success" value="Simpan">
 				</center>
 				<input type="hidden" name="data_action" id="data_action"
 					value="<?=$_nextaction?>">

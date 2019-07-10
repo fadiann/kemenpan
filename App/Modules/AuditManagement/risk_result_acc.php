@@ -15,18 +15,18 @@
 			case "getplan" :
 				$arr = $rs->FetchRow ();
 				?>
-			<fieldset class="hr">
-				<label class="span2">Satuan Kerja</label> 
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Satuan Kerja</label> 
 				<?=$arr['auditee_name'];?>
 				<input type="hidden" name="auditee_id" id="auditee_id" value="<?=$arr['penetapan_auditee_id'];?>" />
 			</fieldset>
-			<fieldset class="hr">
-				<label class="span2">Tipe Audit</label>
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Tipe Audit</label>
 				<?=$Helper->dbCombo("tipe_audit", "par_audit_type", "audit_type_id", "audit_type_name", "and audit_type_del_st = 1 ", "", "", 1)?><span
 					class="mandatory">*</span>
 			</fieldset>
-			<fieldset class="hr">
-				<label class="span2">Tahun Audit</label> <select class="span1"
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Tahun Audit</label> <select class="form-control"
 					name="tahun" id="tahun">
 					<option value="">Pilih Satu</option>
 					<?
@@ -38,32 +38,32 @@
 					$thn ++;
 				}
 				?>
-				</select><span class="mandatory">*</span>
+				</select><span class="required">*</span>
 			</fieldset>
-			<fieldset>
-				<label class="span2">Tujuan Audit</label>
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Tujuan Audit</label>
 			</fieldset>
-			<fieldset class="hr">
+			<fieldset class="form-group">
 				<textarea class="ckeditor" cols="10" rows="40" name="tujuan" id="tujuan"></textarea>
 			</fieldset>
-			<fieldset class="hr">
-				<label class="span2">Periode Yang Diaudit</label>
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Periode Yang Diaudit</label>
 				<input type="text" class="span5" name="periode" id="periode">
 			</fieldset>
-			<fieldset class="hr">
-				<label class="span2">Rencana Audit</label> <input type="text"
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Rencana Audit</label> <input type="text"
 					class="span1" name="tanggal_awal" id="tanggal_awal"> <label
-					class="span0">s/d</label> <input type="text" class="span1"
-					name="tanggal_akhir" id="tanggal_akhir"><span class="mandatory">*</span>
+					class="span0">s/d</label> <input type="text" class="form-control"
+					name="tanggal_akhir" id="tanggal_akhir"><span class="required">*</span>
 			</fieldset>
 		<?
 		}
 		?>
-			<fieldset>
+			<fieldset class="form-group">
 				<center>
-					<input type="button" class="blue_btn" value="Kembali"
+					<input type="button" class="btn btn-primary" value="Kembali"
 						onclick="location='<?=$def_page_request?>'"> &nbsp;&nbsp;&nbsp; <input
-						type="submit" class="blue_btn" value="Simpan">
+						type="submit" class="btn btn-success" value="Simpan">
 				</center>
 				<input type="hidden" name="data_action" id="data_action" value="<?=$_nextaction?>">
 				<input type="hidden" name="data_id" id="data_id" value="<?=$arr['penetapan_id'];?>">

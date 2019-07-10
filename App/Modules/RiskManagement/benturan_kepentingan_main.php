@@ -80,8 +80,8 @@ switch ($_action) {
 			$Helper->postData('tahun'),
 			$ses_id_int
 		];
-		// var_dump($_POST);
-		// die();
+		var_dump($_POST);
+		die();
 		$risks->benturan_kepentingan_add($data);
 		$Helper->js_alert_act(3);
 		echo "<script>window.open('" . $def_page_request . "', '_self');</script>";
@@ -113,8 +113,9 @@ switch ($_action) {
 
 	default:
 		//$cekGroup		= $Helper->cekGroup($_SESSION ['ses_userId'], $_SESSION['ses_groupId']);
-		$recordcount  	= $risks->benturan_kepentingan_count($key_search, $val_search, $key_field, $ses_id_int);
-		$rs           	= $risks-> benturan_kepentingan_view_grid($key_search, $val_search, $key_field, $offset, $num_row, $ses_id_int);
+		//echo "session: ".$ses_id_int."<br>";
+		$recordcount  	= $risks->benturan_kepentingan_count($key_search, $val_search, $key_field, $ses_id_eks);
+		$rs           	= $risks-> benturan_kepentingan_view_grid($key_search, $val_search, $key_field, $offset, $num_row, $ses_id_eks);
 		$page_title   	= "Benturan Kepentingan";
 		$page_request 	= $list_page_request;
 		//var_dump($_SESSION);

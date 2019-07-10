@@ -33,7 +33,7 @@ header("Cache-Control: private",false);
 	}
 	</style>
 	<body>
-		<table border='1' class="table_risk" cellspacing='0' cellpadding="0">
+		<table border='1' class="table table-bordered table-striped table-condensed mb-none" cellspacing='0' cellpadding="0">
 			<tr>
 				<td colspan="10" align="center">MATRIKS TEMUAN</td>
 			</tr>

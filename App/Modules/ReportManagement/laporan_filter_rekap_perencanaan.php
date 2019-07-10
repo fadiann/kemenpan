@@ -4,35 +4,43 @@ include_once "App/Classes/audit_plann_class.php";
 
 $plannings = new planning ( $ses_userId );
 ?>
-<section id="main" class="column">
-	<article class="module width_3_quarter">
-		<header>
-			<h3 class="tabs_involved">Filter Rekap Perencanaan</h3>
-		</header>
-		<form method="post" name="f" action="main.php?method=laporan_rekap_perencanaan" class="form-horizontal" id="validation-form">
-			<fieldset class="hr">
-				<label class="span2">Tahun</label>
-				<?php
-				$rs_tahun = $plannings->plan_tahun_viewlist();
-				$arr_tahun = $rs_tahun->GetArray ();
-				echo $Helper->buildCombo ( "fil_tahun_id", $arr_tahun, 0, 0, "", "propinsiOnChange(this.value, 'fil_tipe_id')", "", false, true, false );
-				?>
-				<span class="mandatory">*</span>
-			</fieldset>
-			<fieldset class="hr">
-				<label class="span2">Tipe Pengawasan</label>
-				<select name="fil_tipe_id" id="fil_tipe_id">
-					<option value="">==== Pilih Tahun</option>
-				</select>
-			</fieldset>
-			<fieldset>
-				<center>
-					<input type="submit" class="blue_btn" value="Lihat">
-				</center>
-			</fieldset>
-		</form>
-	</article>
-</section>
+<div class="row">
+	<div class="col-md-12">
+		<section class="panel">
+			<header class="panel-heading">
+				<h2 class="panel-title">Filter Rekap Perencanaan</h2>
+			</header>
+			<div class="panel-body">
+				<form method="post" name="f" action="main.php?method=laporan_rekap_perencanaan" class="form-horizontal" id="validation-form">
+					<fieldset class="form-group">
+						<label class="col-sm-3 control-label">Tahun <span class="required">*</span></label>
+						<div class="col-sm-5">
+						<?php
+						$rs_tahun = $plannings->plan_tahun_viewlist();
+						$arr_tahun = $rs_tahun->GetArray ();
+						echo $Helper->buildCombo ( "fil_tahun_id", $arr_tahun, 0, 0, "", "propinsiOnChange(this.value, 'fil_tipe_id')", "", false, true, false );
+						?>
+						</div>
+						
+					</fieldset>
+					<fieldset class="form-group">
+						<label class="col-sm-3 control-label">Tipe Pengawasan</label>
+						<div class="col-sm-5">
+							<select name="fil_tipe_id" id="fil_tipe_id" class="form-control">
+								<option value="">==== Pilih Tahun</option>
+							</select>
+						</div>
+					</fieldset>
+					<fieldset class="form-group">
+						<center>
+							<input type="submit" class="btn btn-success" value="Lihat">
+						</center>
+					</fieldset>
+				</form>
+			</div>
+		</section>
+	</div>
+</div>
 <script>
 $(function() {
 	$("#validation-form").validate({

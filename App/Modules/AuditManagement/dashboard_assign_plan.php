@@ -23,7 +23,7 @@ foreach ($rs_auditees->GetArray() as $auditee) {
       <h3 class="tabs_involved">Dashboard Audit Tahun <?=$tahun ?></h3>
     </header>
     <br>
-    <fieldset>
+    <fieldset class="form-group">
         <ul class="rtabs">
       <li><a href="#view1">Audit</a></li>
       <li><a href="#view2">Temuan & Rekomendasi</a></li>

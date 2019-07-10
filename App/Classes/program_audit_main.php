@@ -227,6 +227,7 @@ switch ($_action) {
 		$page_request = "blank.php";
 		break;
 	default :
+		$back			= "window.open('main.php?method=auditassign', '_self');";
 		$recordcount = $programaudits->program_audit_count ( $ses_assign_id, $key_search, $val_search, $key_field );
 		$rs = $programaudits->program_audit_view_grid ( $ses_assign_id, $key_search, $val_search, $key_field, $offset, $num_row );
 		$page_title = "Daftar Program Audit";

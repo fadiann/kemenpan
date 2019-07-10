@@ -15,46 +15,46 @@
 			case "getedit" :
 				$arr = $rs->FetchRow ();
 				?>
-			<fieldset class="hr">
+			<fieldset class="form-group">
 				<label class="span3">Kategori Risiko</label>
 				<?php echo $arr['risk_kategori']?>
 			</fieldset>
-			<fieldset class="hr">
+			<fieldset class="form-group">
 				<label class="span3">Nomor Risiko</label>
 				<?php echo $arr['identifikasi_no_risiko']?>
 			</fieldset>
-			<fieldset class="hr">
+			<fieldset class="form-group">
 				<label class="span3">Nama Risiko</label>
 				<?php echo $arr['identifikasi_nama_risiko']?>
 			</fieldset>
-			<fieldset class="hr">
+			<fieldset class="form-group">
 				<label class="span3">Nilai Risiko Residu</label>
 				<?php echo $arr['evaluasi_risiko_residu']?>
 			</fieldset>
-			<fieldset class="hr">
+			<fieldset class="form-group">
 				<label class="span3">Rencana Aksi</label>
 				<?php echo $arr['penanganan_plan']?>
 			</fieldset>
-			<fieldset class="hr">
+			<fieldset class="form-group">
 				<label class="span3">Rencana Waktu</label>
 				<?php echo $Helper->dateIndo($arr['penanganan_date'])?>
 			</fieldset>
-			<fieldset class="hr">
+			<fieldset class="form-group">
 				<label class="span3">PIC</label>
 				<?php echo $arr['pic_name']?>
 			</fieldset>
-			<fieldset class="hr">
+			<fieldset class="form-group">
 				<label class="span3">Penanganan Risiko Yang telah di lakukan</label>
 				<textarea class="cmb_risk_1 span6" id="penanganan_risiko_yg_telah_dilakukan" name="penanganan_risiko_yg_telah_dilakukan" style="height: 3em; font-size: 8pt;"><?=$arr['monitoring_action']?></textarea>
 			</fieldset>
-			<fieldset class="hr">
+			<fieldset class="form-group">
 				<label class="span3">Lampiran</label> <input type="file" class="span4" name="attach[]" id="attach" multiple="" onChange="makeFileList();"> 
 				<label class="fileList_label"></label>
 				<ul id="fileList">
 					<li>No Files Selected</li>
 				</ul>
 			</fieldset>
-			<fieldset class="hr">
+			<fieldset class="form-group">
 				<label class="span3">List Lampiran</label> 
 					<?php 
 					$rs_file = $risks->list_risk_attach($arr['identifikasi_id']);
@@ -65,16 +65,16 @@
 					}
 					?>
 			</fieldset>
-			<fieldset class="hr">
+			<fieldset class="form-group">
 				<label class="span3">Waktu Pelaksanaan</label> <input type="text"
 					class="span1" name="pelaksanaan_date" id="pelaksanaan_date"
 					value="<?=$Helper->dateIndo($arr['monitoring_date'])?>">
 			</fieldset>
-			<fieldset class="hr">
+			<fieldset class="form-group">
 				<label class="span3">Penanganan Risiko Yang Akan Dilaksanakan</label>
 				<textarea class="cmb_risk_2 span6" id="penanganan_risiko_yg_akan_dilakukan" name="penanganan_risiko_yg_akan_dilakukan" style="height: 3em; font-size: 8pt;"><?=$arr['monitoring_plan_action']?></textarea>
 			</fieldset>
-			<fieldset class="hr">
+			<fieldset class="form-group">
 				<label class="span3">Tenggat Waktu</label> <input type="text"
 					class="span1" name="tenggat_date" id="tenggat_date"
 					value="<?=$Helper->dateIndo($arr['monitoring_tenggat_waktu'])?>">
@@ -85,39 +85,39 @@
 			case "getdetail" :
 				$arr = $rs->FetchRow ();
 				?>
-			<fieldset class="hr">
+			<fieldset class="form-group">
 				<label class="span3">Kategori Risiko</label>
 				<?php echo $arr['risk_kategori']?>
 			</fieldset>
-			<fieldset class="hr">
+			<fieldset class="form-group">
 				<label class="span3">Nomor Risiko</label>
 				<?php echo $arr['identifikasi_no_risiko']?>
 			</fieldset>
-			<fieldset class="hr">
+			<fieldset class="form-group">
 				<label class="span3">Nama Risiko</label>
 				<?php echo $arr['identifikasi_nama_risiko']?>
 			</fieldset>
-			<fieldset class="hr">
+			<fieldset class="form-group">
 				<label class="span3">Nilai Risiko Risidu</label>
 				<?php echo $arr['evaluasi_risiko_residu']?>
 			</fieldset>
-			<fieldset class="hr">
+			<fieldset class="form-group">
 				<label class="span3">Rencana Aksi</label>
 				<?php echo $arr['penanganan_plan']?>
 			</fieldset>
-			<fieldset class="hr">
+			<fieldset class="form-group">
 				<label class="span3">Rencana Waktu</label>
 				<?php echo $Helper->dateIndo($arr['penanganan_date'])?>
 			</fieldset>
-			<fieldset class="hr">
+			<fieldset class="form-group">
 				<label class="span3">PIC</label>
 				<?php echo $arr['pic_name']?>
 			</fieldset>
-			<fieldset class="hr">
+			<fieldset class="form-group">
 				<label class="span3">Penanganan Risiko Yang telah di lakukan</label>
 				<?php echo $arr['monitoring_action']?>
 			</fieldset>
-			<fieldset class="hr">
+			<fieldset class="form-group">
 				<label class="span3">Lampiran</label> 
 					<?php 
 					$rs_file = $risks->list_risk_attach($arr['identifikasi_id']);
@@ -128,15 +128,15 @@
 					}
 					?>
 			</fieldset>
-			<fieldset class="hr">
+			<fieldset class="form-group">
 				<label class="span3">Waktu Pelaksanaan</label>
 				<?=$Helper->dateIndo($arr['monitoring_date'])?>
 			</fieldset>
-			<fieldset class="hr">
+			<fieldset class="form-group">
 				<label class="span3">Penanganan Risiko Yang Akan Dilaksanakan</label>
 				<?php echo $arr['monitoring_plan_action']?>
 			</fieldset>
-			<fieldset class="hr">
+			<fieldset class="form-group">
 				<label class="span3">Tenggat Waktu</label>
 				<?=$Helper->dateIndo($arr['monitoring_tenggat_waktu'])?>
 			</fieldset>
@@ -144,15 +144,15 @@
 				break;
 		}
 		?>
-			<fieldset>
+			<fieldset class="form-group">
 				<center>
-					<input type="button" class="blue_btn" value="Kembali"
+					<input type="button" class="btn btn-primary" value="Kembali"
 						onclick="location='<?=$def_page_request?>'">
 					<?
 					if ($_action != 'getdetail') {
 						?>
 					&nbsp;&nbsp;&nbsp;
-					<input type="submit" class="blue_btn" value="Simpan">
+					<input type="submit" class="btn btn-success" value="Simpan">
 				</center>
 				<input type="hidden" name="data_action" id="data_action"
 					value="<?=$_nextaction?>">	

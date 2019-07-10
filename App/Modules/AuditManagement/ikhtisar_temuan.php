@@ -5,8 +5,13 @@ $reports = new report ( $ses_userId );
 
 $rs_auditee = $assigns->assign_auditee_viewlist ( $arr['assign_id'], $auditee_id );
 ?>
-<section id="main" class="column">
-	<article class="module width_3_quarter">
+<div class="row">
+	<div class="col-md-12">
+		<section class="panel">
+			<header class="panel-heading">
+				<h2 class="panel-title"><?=$page_title?></h2>
+			</header>
+			<div class="panel-body">
 		<?
 		while($arr_auditee = $rs_auditee->FetchRow()){
 			$katim = $reports->get_anggota($arr['assign_id'], $arr_auditee['assign_auditee_id_auditee'], 'KT');
@@ -40,7 +45,7 @@ $rs_auditee = $assigns->assign_auditee_viewlist ( $arr['assign_id'], $auditee_id
 				<td colspan="3" align="center"><br>IKHTISAR TEMUAN HASIL AUDIT</td>
 			</tr>
 		</table>
-		<table border='1' class="table_risk" cellspacing='0' cellpadding="0">
+		<table border='1' class="table table-bordered table-striped table-condensed mb-none" cellspacing='0' cellpadding="0">
 			<tr align="center">
 				<th width="2%">No.</th>
 				<th width="65%">URAIAN TEMUAN HASIL AUDIT</th>
@@ -99,11 +104,13 @@ $rs_auditee = $assigns->assign_auditee_viewlist ( $arr['assign_id'], $auditee_id
 				<td><?=$katim?></td>
 			</tr>
 		</table>
-		<fieldset>
+		<fieldset class="form-group">
 			<center>
-				<input type="button" class="blue_btn" value="Kembali" onclick="location='<?=$def_page_request?>'">
-				<input type="button" class="blue_btn" value="ms-word" onClick="window.open('AuditManagement/ikhtisar_temuan_print.php?id_assign=<?=$arr['assign_id']?>&id_auditee=<?=$arr_auditee['assign_auditee_id_auditee']?>', '_blank','toolbar=no,location=no,status=no,menubar=yes,scrollbars=yes,resizable=yes');">
+				<input type="button" class="btn btn-primary" value="Kembali" onclick="location='<?=$def_page_request?>'">
+				<input type="button" class="btn btn-primary" value="ms-word" onClick="window.open('App/Modules/AuditManagement/ikhtisar_temuan_print.php?id_assign=<?=$arr['assign_id']?>&id_auditee=<?=$arr_auditee['assign_auditee_id_auditee']?>', '_blank','toolbar=no,location=no,status=no,menubar=yes,scrollbars=yes,resizable=yes');">
 			</center>
 		</fieldset>
-	</article>
-</section>
+			</div>
+		</section>
+	</div>
+</div>

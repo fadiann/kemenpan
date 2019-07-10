@@ -2,13 +2,19 @@
 	<?
 	include 'risk_view_parrent.php';
 	?>
-	<article class="module width_3_quarter">
+<div class="row">
+	<div class="col-md-12">
+		<section class="panel">
+			<header class="panel-heading">
+				<h2 class="panel-title"><?=$page_title?></h2>
+			</header>
+			<div class="panel-body wrap">
 		<form method="post" name="f" action="#" class="form-horizontal" id="validation-form">
 			<?
 			switch ($_action) {
 				case "getadd":
 					?>
-				<table border='1' class="table_risk" cellspacing='0' cellpadding="0">
+				<table border='1' class="table table-bordered table-striped table-condensed mb-none" cellspacing='0' cellpadding="0">
 					<tr align="center">
 						<th width="2%" rowspan="2">No</th>
 						<th width="47%" colspan="6">Identifikasi Risiko</th>
@@ -34,14 +40,14 @@
 																</th> -->
 					</tr>
 					<?php
-					$i   = 0;
-					$no  = 0;
-					$kat = 'A';
+					$i           = 0;
+					$no          = 0;
+					$kat         = 'A';
 					$rs_kategori = $params->risk_kategori_data_viewlist();
 					while ($arr_kategori = $rs_kategori->FetchRow()) {
 						$x = 0;
-						$rs_iden = $risks->list_identifikasi($arr_kategori['risk_kategori_id'], $ses_penetapan_id);
-						$countKat = $rs_iden->RecordCount();
+						$rs_iden 	= $risks->list_identifikasi($arr_kategori['risk_kategori_id'], $ses_penetapan_id);
+						$countKat 	= $rs_iden->RecordCount();
 						while ($arr_iden = $rs_iden->FetchRow()) {
 							$x++;
 							$no++;
@@ -129,15 +135,18 @@
 				break;
 		}
 		?>
-			<fieldset>
+			<fieldset class="form-group mt-md">
 				<center>
-					<input type="button" class="blue_btn" value="Kembali" onclick="location='<?= $def_page_request ?>'"> &nbsp;&nbsp;&nbsp; <input type="submit" class="blue_btn" value="Simpan">
+					<input type="button" class="btn btn-primary" value="Kembali" onclick="location='<?= $def_page_request ?>'">
+					<input type="submit" class="btn btn-success" value="Simpan">
 				</center>
 				<input type="hidden" name="data_action" id="data_action" value="<?= $_nextaction ?>">
 			</fieldset>
 		</form>
-	</article>
-</section>
+			</div>
+		</section>
+	</div>
+</div>
 <script>
 	$(function() {
 		$(".tingkat_kemungkinan").on("change", function() {

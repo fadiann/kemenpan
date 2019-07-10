@@ -15,10 +15,10 @@ $arr_risk = $rs_penentapan->FetchRow();
 ?>
 <section id="main" class="column">	
 	<article class="module width_3_quarter">
-		<fieldset>
+		<fieldset class="form-group">
 			<label>LAPORAN RISIKO</label>
 		</fieldset>
-		<table border='0' class="table_risk" cellspacing='0' cellpadding="0">
+		<table border='0' class="table table-bordered table-striped table-condensed mb-none" cellspacing='0' cellpadding="0">
 			<tr>
 				<td colspan="3" style="border:0" width="10%">Tahun</td>
 				<td colspan="3" style="border:0">: <?=$fil_tahun?></td>
@@ -33,10 +33,10 @@ $arr_risk = $rs_penentapan->FetchRow();
 			</tr>
 		</table>
 		<br><br>
-		<fieldset>
+		<fieldset class="form-group">
 			<label>ANALISIS RISIKO</label>
 		</fieldset>
-		<table border='1' class="table_risk" cellspacing='0' cellpadding="0">
+		<table border='1' class="table table-bordered table-striped table-condensed mb-none" cellspacing='0' cellpadding="0">
 			<tr align="center">
 				<th width="2%" rowspan="2">No</th>
 				<th width="47%" colspan="5">Identifikasi Risiko</th>
@@ -107,10 +107,10 @@ $arr_risk = $rs_penentapan->FetchRow();
 		?>
 		</table>
 		<br>
-		<fieldset>
+		<fieldset class="form-group">
 			<label>EVALUASI RISIKO</label>
 		</fieldset>
-		<table border='1' class="table_risk" cellspacing='0' cellpadding="0">
+		<table border='1' class="table table-bordered table-striped table-condensed mb-none" cellspacing='0' cellpadding="0">
 			<tr align="center">
 				<th width="2%" rowspan="2">No</th>
 				<th width="58%" colspan="7">Risiko Inhern</th>
@@ -172,10 +172,10 @@ $arr_risk = $rs_penentapan->FetchRow();
 		?>
 		</table>
 		<br>
-		<fieldset>
+		<fieldset class="form-group">
 			<label>PENANGANAN RISIKO</label>
 		</fieldset>
-		<table border='1' class="table_risk" cellspacing='0' cellpadding="0">
+		<table border='1' class="table table-bordered table-striped table-condensed mb-none" cellspacing='0' cellpadding="0">
 				<tr align="center">
 					<th width="2%" rowspan="2">No</th>
 					<th width="55%" colspan="5">Risiko Residu</th>
@@ -237,7 +237,7 @@ $arr_risk = $rs_penentapan->FetchRow();
 		?>
 		</table>
 		<br><br>
-		<table border='0' width="80%" class="table_risk" cellspacing='0' cellpadding="0">
+		<table border='0' width="80%" class="table table-bordered table-striped table-condensed mb-none" cellspacing='0' cellpadding="0">
 			<tr>
 				<td style="border:0" width="70%">&nbsp;</td>
 				<td style="border:0" width="30%">Pemilik Risiko <br>Kepala Satker</td>

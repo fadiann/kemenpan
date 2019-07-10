@@ -221,6 +221,7 @@ switch ($_action) {
 		$page_request = "blank.php";
 		break;
 	default :
+		$back			= "window.open('main.php?method=kertas_kerja', '_self');";
 		$recordcount = $findings->finding_count ( $ses_assign_id, $ses_kka_id, $key_search, $val_search, $key_field );
 		$rs = $findings->finding_view_grid ( $ses_assign_id, $ses_kka_id, $key_search, $val_search, $key_field, $offset, $num_row );
 		$page_title = "Daftar Temuan Audit";

@@ -10,23 +10,23 @@
 		switch ($_action) {
 			case "getadd" :
 				?>
-			<fieldset class="hr">
-				<label class="span2">Kode Kelompok Temuan</label> <input type="text" class="span2" name="code" id="code">
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Kode Kelompok Temuan</label> <input type="text" class="span2" name="code" id="code">
 			</fieldset>
-			<fieldset class="hr">
-				<label class="span2">Kelompok Temuan</label> <input type="text" class="span4" name="name" id="name">
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Kelompok Temuan</label> <input type="text" class="form-control" name="name" id="name">
 			</fieldset>
 		<?
 				break;
 			case "getedit" :
 				$arr = $rs->FetchRow ();
 				?>
-			<fieldset class="hr">
-				<label class="span2">Kode Kelompok Temuan</label> <input type="text"
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Kode Kelompok Temuan</label> <input type="text"
 					class="span2" name="code" id="" code"" value="<?=$arr['finding_type_code']?>">
 			</fieldset>
-			<fieldset class="hr">
-				<label class="span2">Kelompok Temuan</label> <input type="text"
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Kelompok Temuan</label> <input type="text"
 					class="span4" name="name" id="name" value="<?=$arr['finding_type_name']?>">
 			</fieldset>
 			<input type="hidden" name="data_id" value="<?=$arr['finding_type_id']?>">	
@@ -34,11 +34,11 @@
 				break;
 		}
 		?>
-			<fieldset>
+			<fieldset class="form-group">
 				<center>
-					<input type="button" class="blue_btn" value="Kembali"
+					<input type="button" class="btn btn-primary" value="Kembali"
 						onclick="location='<?=$def_page_request?>'"> &nbsp;&nbsp;&nbsp; <input
-						type="submit" class="blue_btn" value="Simpan">
+						type="submit" class="btn btn-success" value="Simpan">
 				</center>
 				<input type="hidden" name="data_action" id="data_action"
 					value="<?=$_nextaction?>">

@@ -10,16 +10,16 @@
 		switch ($_action) {
 			case "getadd" :
 				?>
-			<fieldset class="hr">
-				<label class="span2">Satuan Kerja</label>
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Satuan Kerja</label>
 				<?php
 				$rs_auditee = $auditees->auditee_data_viewlist ();
 				$arr_auditee = $rs_auditee->GetArray ();
 				echo $Helper->buildCombo_risk ( "satker", $arr_auditee, 0, 2, "", "", false, true, false );
-				?><span class="mandatory">*</span>
+				?><span class="required">*</span>
 			</fieldset>
-			<fieldset class="hr">
-				<label class="span2">Tahun</label> <select class="span1"
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Tahun</label> <select class="form-control"
 					name="tahun" id="tahun">
 					<option value="">Pilih Satu</option>
 					<?
@@ -31,31 +31,31 @@
 					$thn ++;
 				}
 				?>
-				</select><span class="mandatory">*</span>
+				</select><span class="required">*</span>
 			</fieldset>
-			<fieldset class="hr">
-				<label class="span2">Nama Kegiatan</label> <input type="text"
-					class="span4" name="nama" id="nama"> <span class="mandatory">*</span>
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Nama Kegiatan</label> <input type="text"
+					class="span4" name="nama" id="nama"> <span class="required">*</span>
 			</fieldset>
-			<fieldset class="hr">
-				<label class="span2">Tujuan Kegiatan</label> <input type="text"
-					class="span7" name="tujuan" id="tujuan"> <span class="mandatory">*</span>
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Tujuan Kegiatan</label> <input type="text"
+					class="span7" name="tujuan" id="tujuan"> <span class="required">*</span>
 			</fieldset>
 		<?
 				break;
 			case "getedit" :
 				$arr = $rs->FetchRow ();
 				?>
-			<fieldset class="hr">
-				<label class="span2">Satuan Kerja</label>
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Satuan Kerja</label>
 				<?php
 				$rs_auditee = $auditees->auditee_data_viewlist ();
 				$arr_auditee = $rs_auditee->GetArray ();
 				echo $Helper->buildCombo_risk ( "satker", $arr_auditee, 0, 2, $arr ['penetapan_auditee_id'], "", false, true, false );
-				?><span class="mandatory">*</span>
+				?><span class="required">*</span>
 			</fieldset>
-			<fieldset class="hr">
-				<label class="span2">Tahun</label> <select class="span1"
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Tahun</label> <select class="form-control"
 					name="tahun" id="tahun">
 					<option value="">Pilih Satu</option>
 					<?
@@ -68,28 +68,28 @@
 					$thn ++;
 				}
 				?>
-				</select><span class="mandatory">*</span>
+				</select><span class="required">*</span>
 			</fieldset>
-			<fieldset class="hr">
-				<label class="span2">Nama Kegiatan</label> <input type="text"
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Nama Kegiatan</label> <input type="text"
 					class="span4" name="nama" id="nama"
-					value="<?=$arr['penetapan_nama']?>"> <span class="mandatory">*</span>
+					value="<?=$arr['penetapan_nama']?>"> <span class="required">*</span>
 			</fieldset>
-			<fieldset class="hr">
-				<label class="span2">Tujuan Kegiatan</label> <input type="text"
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Tujuan Kegiatan</label> <input type="text"
 					class="span7" name="tujuan" id="tujuan"
-					value="<?=$arr['penetapan_tujuan']?>"> <span class="mandatory">*</span>
+					value="<?=$arr['penetapan_tujuan']?>"> <span class="required">*</span>
 			</fieldset>
 			<input type="hidden" name="data_id" value="<?=$arr['penetapan_id']?>">	
 		<?
 				break;
 		}
 		?>
-			<fieldset>
+			<fieldset class="form-group">
 				<center>
-					<input type="button" class="blue_btn" value="Kembali"
+					<input type="button" class="btn btn-primary" value="Kembali"
 						onclick="location='<?=$def_page_request?>'"> &nbsp;&nbsp;&nbsp; <input
-						type="submit" class="blue_btn" value="Simpan">
+						type="submit" class="btn btn-success" value="Simpan">
 				</center>
 				<input type="hidden" name="data_action" id="data_action"
 					value="<?=$_nextaction?>">

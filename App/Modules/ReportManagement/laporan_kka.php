@@ -24,7 +24,7 @@ if($fil_tahun_id!="" && $fil_auditee_id!=""){
 ?>
 <section id="main" class="column">	
 	<article class="module width_3_quarter">
-		<table border='1' class="table_risk" cellspacing='0' cellpadding="0">
+		<table border='1' class="table table-bordered table-striped table-condensed mb-none" cellspacing='0' cellpadding="0">
 			<tr>
 				<td colspan="6" align="center">KERTAS KERJA AUDIT</td>
 			</tr>

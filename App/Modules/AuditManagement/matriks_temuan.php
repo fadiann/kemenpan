@@ -7,18 +7,20 @@ $findings = new finding ( $ses_userId );
 $rekomendasis = new rekomendasi ( $ses_userId );
 
 ?>
-<article class="module width_3_quarter">
-	<table border='1' class="table_risk" cellspacing='0' cellpadding="0">
+<div class="col-md-12 mt-md">
+	<div class="col-md-2">
+		<img src="Public/images/logo.png" width="70"/>
+	</div>
+	<div class="col-md-6 text-center">
+		<h3>MATRIKS  TEMUAN  HASIL  AUDIT</h3>
+	</div>
+	<table class="table table-borderless mt-md">
 		<tr>
-			<td style="border-right:0"><img src="Public/images/logo.png" width="30"/></td>
-			<td style="border-left:0" colspan="5" align="center" valign="middle">MATRIKS  TEMUAN  HASIL  AUDIT</td>
-		</tr>
-		<tr>
-			<td>NAMA AUDITAN</td>
-			<td>:</td>
+			<td width="15%">NAMA AUDITAN</td>
+			<td width="2%">:</td>
 			<td><?=$assign_nama_auditee?></td>
-			<td>Lampiran</td>
-			<td>:</td>
+			<td width="15%">Lampiran</td>
+			<td width="2%">:</td>
 			<td>LHA - <?=$arr_lha['audit_type_name']?></td>
 		</tr>
 		<tr>
@@ -39,7 +41,7 @@ $rekomendasis = new rekomendasi ( $ses_userId );
 		</tr>
 	</table>
 	<br>
-	<table border='1' class="table_risk" cellspacing='0' cellpadding="0">
+	<table border='1' class="table table-bordered table-striped table-condensed mb-none" cellspacing='0' cellpadding="0">
 		<tr>
 			<th width="5%">No</th>
 			<th width="40%">Uraian Temuan</th>
@@ -85,4 +87,4 @@ $rekomendasis = new rekomendasi ( $ses_userId );
 			}
 			?>
 	</table>
-</article>
+</div>

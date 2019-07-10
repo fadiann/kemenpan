@@ -4,13 +4,19 @@
 		<?
 		include 'risk_view_parrent.php';
 		?>
-	<article class="module width_3_quarter">
+<div class="row">
+	<div class="col-md-12">
+		<section class="panel">
+			<header class="panel-heading">
+				<h2 class="panel-title"><?=$page_title?></h2>
+			</header>
+			<div class="panel-body wrap">
 		<form method="post" name="f" action="#" class="form-horizontal">
 		<?
 		switch ($_action) {
 			case "getadd" :
 				?>
-		<table border='1' class="table_risk form-control" cellspacing='0' cellpadding="0">
+		<table border='1' class="table table-bordered table-striped table-condensed mb-none" cellspacing='0' cellpadding="0">
 				<tr align="center">
 					<th width="2%" rowspan="2">No</th>
 					<th width="40%" colspan="5">Risiko Residu</th>
@@ -79,18 +85,19 @@
 				break;
 		}
 		?>
-			<fieldset>
+			<fieldset class="form-group mt-md">
 				<center>
-					<input type="button" class="blue_btn" value="Kembali"
-						onclick="location='<?=$def_page_request?>'"> &nbsp;&nbsp;&nbsp; <input
-						type="submit" class="blue_btn" value="Simpan">
+					<input type="button" class="btn btn-primary" value="Kembali" onclick="location='<?=$def_page_request?>'"> 
+					<input type="submit" class="btn btn-success" value="Simpan">
 				</center>
 				<input type="hidden" name="data_action" id="data_action"
 					value="<?=$_nextaction?>">
 			</fieldset>
 		</form>
-	</article>
-</section>
+			</div>
+		</section>
+	</div>
+</div>
 <?php
 $no = 0;
 $rs_kategori = $params->risk_kategori_data_viewlist ();

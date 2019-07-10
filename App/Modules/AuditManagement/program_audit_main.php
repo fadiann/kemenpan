@@ -36,11 +36,11 @@ if(@$method!=@$val_method){
 	$val_method = "";
 }
 
-$paging_request = "main.php?method=programaudit";
-$acc_page_request = "program_audit_acc.php";
-$cetak_page_request = "program_audit_print.php";
+$paging_request        = "main.php?method=programaudit";
+$acc_page_request      = "program_audit_acc.php";
+$cetak_page_request    = "program_audit_print.php";
 $ikhtisar_page_request = "ikhtisar_temuan.php";
-$list_page_request = "audit_view.php";
+$list_page_request     = "audit_view.php";
 
 // ==== buat grid ===//
 $num_row = 10;
@@ -141,16 +141,12 @@ switch ($_action) {
         } else {
             $Helper->js_alert_act(10);
         }
-		?>
-<script>window.open('<?=$def_page_request?>', '_self');</script>
-<?
+		echo "<script>window.open('".$def_page_request."', '_self');</script>";
 		$page_request = "blank.php";
 		break;
 	case "kertas_kerja" :
 		$_SESSION ['ses_program_id'] = $Helper->replacetext ( $_REQUEST ["data_id"] );
-		?>
-<script>window.open('main.php?method=kertas_kerja', '_self');</script>
-<?
+		echo "<script>window.open('main.php?method=kertas_kerja', '_self');</script>";
 		break;
 	case "getadd" :
 		$_nextaction = "postadd";
@@ -170,60 +166,108 @@ switch ($_action) {
 		$rs = $programaudits->program_audit_viewlist ( $fdata_id );
 		$page_title = "Detail Program Audit";
 		break;
-	case "postadd" :
-		$fauditee = $Helper->replacetext ( $_POST ["auditee"] );
-		$fauditor = $Helper->replacetext ( $_POST ["auditor"] );
-		$program_jam = $Helper->replacetext ( $_POST ["jamm"] );
-		$ftanggal = $Helper->date_db ( date ( "d-m-Y H:i:s" ) );
-		$fref_program = $Helper->replacetext ( $_POST ["ref_program"] );
-		$flampiran = $Helper->replacetext ( $_FILES ["attach"] ["name"]);
-		$ex_ref_program = explode ( ",", $fref_program );
-		$cek_ref_program = count ( $ex_ref_program );
-		if ($fauditee != "" && $fauditor != "" && $program_jam != "" && $cek_ref_program != "0") {
-			$Helper->UploadFile ( "Upload_ProgramAudit", "attach", "");
-			for($i = 0; $i < $cek_ref_program; $i ++) {
-				$programaudits->program_audit_add ( $ses_assign_id, $fauditee, $ex_ref_program [$i], $fauditor, $program_jam, $flampiran, $ftanggal );
+
+	// case "postadd" :
+	// 	$fauditee = $Helper->replacetext ( $_POST ["auditee"] );
+	// 	$fauditor = $Helper->replacetext ( $_POST ["auditor"] );
+	// 	$program_jam = $Helper->replacetext ( $_POST ["jamm"] );
+	// 	$ftanggal = $Helper->date_db ( date ( "d-m-Y H:i:s" ) );
+	// 	$fref_program = $Helper->replacetext ( $_POST ["ref_program"] );
+	// 	$flampiran = $Helper->replacetext ( $_FILES ["attach"] ["name"]);
+	// 	$ex_ref_program = explode ( ",", $fref_program );
+	// 	$cek_ref_program = count ( $ex_ref_program );
+	// 	if ($fauditee != "" && $fauditor != "" && $program_jam != "" && $cek_ref_program != "0") {
+	// 		$Helper->UploadFile ( "Upload_ProgramAudit", "attach", "");
+	// 		for($i = 0; $i < $cek_ref_program; $i ++) {
+	// 			$programaudits->program_audit_add ( $ses_assign_id, $fauditee, $ex_ref_program [$i], $fauditor, $program_jam, $flampiran, $ftanggal );
+	// 		}
+	// 		$Helper->js_alert_act ( 3 );
+	// 	} else {
+	// 		$Helper->js_alert_act ( 5 );
+	// 	}
+	// 	echo "<script>window.open('".$def_page_request."', '_self');</script>";
+	// 	$page_request = "blank.php";
+	// 	break;
+	// case "postedit" :
+	// 	$fdata_id = $Helper->replacetext ( $_POST ["data_id"] );
+	// 	$fauditee = $Helper->replacetext ( $_POST ["auditee_id"] );
+	// 	$fauditor = $Helper->replacetext ( $_POST ["auditor"] );
+	// 	$program_jam = $Helper->replacetext ( $_POST ["jamm"] );
+	// 	$fref_program = $Helper->replacetext ( $_POST ["ref_program"] );
+	// 	$flampiran = $Helper->replacetext ( $_FILES ["attach"] ["name"] );
+	// 	$flampiran_old = $Helper->replacetext ( $_POST ["attach_old"] );
+	// 	if ($fauditee != "" && $fauditor != "" && $program_jam != "" && $fref_program != "") {
+	// 		if (! empty ( $flampiran )) {
+	// 			$Helper->UploadFile ( "Upload_ProgramAudit", "attach", $flampiran_old );
+	// 		} else {
+	// 			$flampiran = $flampiran_old;
+	// 		}
+	// 		$programaudits->program_audit_edit ( $fdata_id, $fauditee, $fref_program, $fauditor, $program_jam, $flampiran );
+	// 		$Helper->js_alert_act ( 1 );
+	// 	} else {
+	// 		$Helper->js_alert_act ( 5 );
+	// 	}
+	// 	echo "<script>window.open('".$def_page_request."', '_self');</script>";
+	// 	$page_request = "blank.php";
+	// 	break;
+
+	case "postadd":
+		$fauditee        = $Helper->replacetext($_POST["auditee"]);
+		$fauditor        = $Helper->replacetext($_POST["auditor"]);
+		$program_jam     = 0;
+		$ftanggal        = $Helper->date_db(date("d-m-Y H:i:s"));
+		//$fref_program    = $Helper->replacetext($_POST["ref_program"]);
+		$flampiran       = $Helper->replacetext($_FILES["attach"]["name"]);
+		$ex_ref_program  = $_POST['ref_program'];
+		$cek_ref_program = count($_POST["ref_program"]);
+		//echo $cek_ref_program;
+		//var_dump($_POST);
+		//die();
+		if ($fauditee != "" && $fauditor != "" && $cek_ref_program != "0") {
+			$Helper->UploadFile("Upload_ProgramAudit", "attach", "");
+			for ($i = 0; $i < $cek_ref_program; $i++) {
+				$programaudits->program_audit_add($ses_assign_id, $fauditee, $ex_ref_program[$i], $fauditor, $program_jam, $flampiran, $ftanggal);
 			}
-			$Helper->js_alert_act ( 3 );
-		} else {
-			$Helper->js_alert_act ( 5 );
+			$Helper->js_alert_act(3);
 		}
-		?>
-<script>window.open('<?=$def_page_request?>', '_self');</script>
-<?
-		$page_request = "blank.php";
-		break;
-	case "postedit" :
-		$fdata_id = $Helper->replacetext ( $_POST ["data_id"] );
-		$fauditee = $Helper->replacetext ( $_POST ["auditee_id"] );
-		$fauditor = $Helper->replacetext ( $_POST ["auditor"] );
-		$program_jam = $Helper->replacetext ( $_POST ["jamm"] );
-		$fref_program = $Helper->replacetext ( $_POST ["ref_program"] );
-		$flampiran = $Helper->replacetext ( $_FILES ["attach"] ["name"] );
-		$flampiran_old = $Helper->replacetext ( $_POST ["attach_old"] );
-		if ($fauditee != "" && $fauditor != "" && $program_jam != "" && $fref_program != "") {
-			if (! empty ( $flampiran )) {
-				$Helper->UploadFile ( "Upload_ProgramAudit", "attach", $flampiran_old );
-			} else {
+		else {
+			$Helper->js_alert_act(5);
+		}
+		echo "HALLO";
+        echo "<script>window.open('$def_page_request', '_self');</script>";
+		$page_request = "_includes/pages/template/blank.php";
+	break;
+	case "postedit":
+		$fdata_id      = $Helper->replacetext($_POST["data_id"]);
+		$fauditee      = $Helper->replacetext($_POST["auditee_id"]);
+		$fauditor      = $Helper->replacetext($_POST["auditor"]);
+		$program_jam   = 0;
+		$fref_program  = $Helper->replacetext($_POST["ref_program"]);
+		$flampiran     = $Helper->replacetext($_FILES["attach"]["name"]);
+		$flampiran_old = $Helper->replacetext($_POST["attach_old"]);
+		if ($fauditee != "" && $fauditor != "" && $fref_program != "") {
+			if (!empty($flampiran)) {
+				$Helper->UploadFile("Upload_ProgramAudit", "attach", $flampiran_old);
+			}
+			else {
 				$flampiran = $flampiran_old;
 			}
-			$programaudits->program_audit_edit ( $fdata_id, $fauditee, $fref_program, $fauditor, $program_jam, $flampiran );
-			$Helper->js_alert_act ( 1 );
-		} else {
-			$Helper->js_alert_act ( 5 );
+			$programaudits->program_audit_edit($fdata_id, $fauditee, $fref_program, $fauditor, $program_jam, $flampiran);
+			$Helper->js_alert_act(1);
 		}
-		?>
-<script>window.open('<?=$def_page_request?>', '_self');</script>
-<?
-		$page_request = "blank.php";
-		break;
+		else {
+			$Helper->js_alert_act(5);
+		}
+		echo "<script>window.open('".$def_page_request."', '_self');</script>";
+		$page_request = "_includes/pages/template/blank.php";
+	break;
+
+
 	case "getdelete" :
 		$fdata_id = $Helper->replacetext ( $_REQUEST ["data_id"] );
 		$programaudits->program_audit_delete ( $fdata_id );
 		$Helper->js_alert_act ( 2 );
-		?>
-<script>window.open('<?=$def_page_request?>', '_self');</script>
-<?
+	echo "<script>window.open('".$def_page_request."', '_self');</script>";
 		$page_request = "blank.php";
 		break;
 	default :

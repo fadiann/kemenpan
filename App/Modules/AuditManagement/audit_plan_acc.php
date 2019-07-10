@@ -3,86 +3,102 @@
 <!-- <link rel="stylesheet" href="Public/css/jquery.ui.datepicker.css"> -->
 <link rel="stylesheet" href="Public/js/select2/select2.css" type="text/css" />
 
-<section id="main" class="column">
-	<article class="module width_3_quarter">
-		<header>
-			<h3 class="tabs_involved"><?=$page_title?></h3>
-		</header>
-		<form method="post" name="f" action="#" class="form-horizontal"
-			id="validation-form">
+
+<div class="row">
+	<div class="col-md-12">
+		<section class="panel">
+			<header class="panel-heading">
+				<h2 class="panel-title"><?=$page_title?></h2>
+			</header>
+			<div class="panel-body wrap">
+		<form method="post" name="f" action="#" class="form-horizontal" id="validation-form">
 		<?
 		switch ($_action) {
 			case "getadd" :
 				?>
-			<fieldset class="hr">
-				<label class="span2">Nama Kegiatan</label>
-				<input type="text" class="span7" name="tujuan" id="tujuan">
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Nama Kegiatan</label>
+					<div class="col-sm-5">
+						<textarea class="form-control" name="tujuan" id="tujuan" row='3'></textarea>
+					</div>
 			</fieldset>
-			<fieldset class="hr">
-				<input type="button" id="tambah_auditee" class="btn" value="Tambah Obyek Audit">
-				<table id="tabel_auditee" width="100%">
-					<thead>
-						<tr>
-							<th align="left" width="3%">No.</th>
-							<th align="left" width="40%">Obyek Audit</th>
-							<th align="left" width="50%">Jumlah Hari</th>
-							<th width="5%">&nbsp;</th>
-						</tr>
-					</thead>
+			<fieldset class="form-group">
+				
+				<label class="col-sm-3 control-label">Objek Audit</label>
+				<div class="col-md-6">
+				<table id="tabel_auditee" class="table table-borderless" width="100%">
 					<tbody>
 						<tr id="1">
 							<td align="center">1.</td>
 							<td><?=$Helper->dbCombo("auditee_id[]", "auditee", "auditee_id", "auditee_name", "and auditee_del_st = 1 ", "", "", 1)?></td>
-							<td><input class="span9" type="text" name="jml_hari[]"></td>
-							<td>&nbsp;</td>
+							<input class="form-control" type="hidden" name="jml_hari[]" value="0">
+							<td>
+							<button id="tambah_auditee" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Tambah</button>
+						</td>
 						</tr>
 					</tbody>
 				</table>
+				</div>
 			</fieldset>
-			<fieldset class="hr">
-				<label class="span2">Tipe Audit</label>
-				<?
-				$rs_type = $params->audit_type_data_viewlist ();
-				$arr_type = $rs_type->GetArray ();
-				echo $Helper->buildCombo ("tipe_audit", $arr_type, 0, 1, "", "propinsiOnChange(this.value, 'sub_type')", "", false, true, false );
-				?>
-				<span class="mandatory">*</span>
-			</fieldset>
-			<fieldset>
-				<label class="span2">Sub Tipe Audit</label>
-				<select name="sub_type" id="sub_type">
-					<option value="">Pilih Kelompok Temuan</option>
-				</select>
-			</fieldset>
-			<fieldset class="hr">
-				<label class="span2">Tahun</label> <select class="span1"
-					name="tahun" id="tahun">
-					<option value="">Pilih Satu</option>
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Tipe Audit <span class="required">*</span></label>
+					<div class="col-sm-5">
 					<?
-				$thn = date ( "Y" ) - 1;
-				for($i = 1; $i <= 3; $i ++) {
+					$rs_type = $params->audit_type_data_viewlist ();
+					$arr_type = $rs_type->GetArray ();
+					echo $Helper->buildCombo ("tipe_audit", $arr_type, 0, 1, "", "propinsiOnChange(this.value, 'sub_type')", "", false, true, false );
+				?>
+					</div>
+				
+			</fieldset>
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Sub Tipe Audit</label>
+					<div class="col-sm-5">
+					<select name="sub_type" id="sub_type" class="form-control">
+						<option value="">Pilih Kelompok Temuan</option>
+					</select>
+					</div>
+			</fieldset>
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Tahun <span class="required">*</span></label> 
+					<div class="col-sm-5">
+					<select class="form-control" name="tahun" id="tahun">
+						<option value="">Pilih Satu</option>
+						<?
+					$thn = date ( "Y" ) - 1;
+					for($i = 1; $i <= 3; $i ++) {
+						?>
+						<option value="<?=$thn?>" <? if($thn==date("Y")) echo "selected";?>><?=$thn?></option>
+						<?
+						$thn ++;
+					}
 					?>
-					<option value="<?=$thn?>" <? if($thn==date("Y")) echo "selected";?>><?=$thn?></option>
-					<?
-					$thn ++;
-				}
-				?>
-				</select><span class="mandatory">*</span>
+					</select>
+					</div>
 			</fieldset>
-			<fieldset class="hr">
-				<label class="span2">Periode</label>
-				<input type="text" class="span5" name="periode" id="periode">
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Periode</label>
+					<div class="col-sm-5">
+				<input type="text" class="form-control" name="periode" id="periode">
+					</div>
 			</fieldset>
-			<fieldset class="hr">
-				<label class="span2">Rencana Kegiatan</label> 
-				<input type="text" class="span1" name="tanggal_awal" id="tanggal_awal" autocomplete="off"> 
-				<label class="span0">s/d</label> 
-				<input type="text" class="span1" name="tanggal_akhir" id="tanggal_akhir" autocomplete="off">
-				<span class="mandatory">*</span>
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Rencana Kegiatan <span class="required">*</span></label> 
+					<div class="col-sm-2">
+				<input type="text" class="form-control" name="tanggal_awal" id="tanggal_awal" autocomplete="off">
+					</div>
+					<div class="col-sm-1 text-center"> 
+				s/d
+					</div>
+					<div class="col-sm-2">
+				<input type="text" class="form-control" name="tanggal_akhir" id="tanggal_akhir" autocomplete="off">
+					</div>
 			</fieldset>
-			<fieldset class="hr">
-				<label class="span2">Total Biaya</label>
-				<input type="text" class="span1" name="biaya_audit" id="biaya_audit">
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Total Biaya</label>
+					<div class="col-sm-5">
+				<input type="text" class="form-control" name="biaya_audit" id="biaya_audit" autocomplete="off">
+					</div>
 			</fieldset>
 		<?
 				break;
@@ -90,26 +106,23 @@
 				$arr = $rs->FetchRow ();
 				?>
 			
-			<fieldset class="hr">
-				<label class="span2">Kode Perencanaan</label>
-				<?=$arr['audit_plan_code']?>
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Kode Perencanaan</label>
+					<div class="col-sm-5">
+						<input type="text" class="form-control" value="<?=$arr['audit_plan_code']?>" readonly>
+					</div>
 			</fieldset>
-			<fieldset class="hr">
-				<label class="span2">Nama Kegiatan</label>
-				<input type="text" class="span7" name="tujuan" id="tujuan" value="<?=$arr['audit_plan_kegiatan']?>">
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Nama Kegiatan</label>
+					<div class="col-sm-5">
+						<textarea class="form-control" name="tujuan" id="tujuan" row='3'><?=$arr['audit_plan_kegiatan']?></textarea>
+					</div>
 			</fieldset>
-			<fieldset class="hr">
-			<fieldset class="hr">
-				<input type="button" id="tambah_auditee" class="btn" value="Tambah Obyek Audit">
-				<table id="tabel_auditee" width="100%">
-					<thead>
-						<tr>
-							<th align="left" width="3%">No.</th>
-							<th align="left" width="40%">Obyek Audit</th>
-							<th align="left" width="50%">Jumlah Hari</th>
-							<th width="5%">&nbsp;</th>
-						</tr>
-					</thead>
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Obyek Audit</label>
+				<div class="col-sm-5">
+				<button id="tambah_auditee" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Tambah</button>
+				<table id="tabel_auditee" width="100%" class="table table-borderless">
 					<tbody>
 						<?
 						$no_auditee = 0;
@@ -119,10 +132,10 @@
 						?>
 						<input type="hidden" name="plan_auditee_id[]" value="<?=$arr_auditee['audit_plan_auditee_id']?>">
 						<tr id="<?=$no_auditee?>">
-							<td align="center"><?=$no_auditee?>.</td>
+							<td align="center" width="10%"><?=$no_auditee?>.</td>
 							<td><?=$Helper->dbCombo("auditee_id[]", "auditee", "auditee_id", "auditee_name", "and auditee_del_st = 1 ", $arr_auditee['audit_plan_auditee_id_auditee'], "", 1)?></td>
-							<td><input class="span9" type="text" name="jml_hari[]" value="<?=$arr_auditee['audit_plan_auditee_hari']?>"></td>
-							<td>&nbsp;</td>
+							<input class="form-control" type="hidden" name="jml_hari[]" value="0">
+							<td>&nbsp</td>
 						</tr>
 						<?
 						}
@@ -130,25 +143,27 @@
 						<tr id="<?=$no_auditee+1?>">
 							<td align="center"><?=$no_auditee+1?>.</td>
 							<td><?=$Helper->dbCombo("auditee_id[]", "auditee", "auditee_id", "auditee_name", "and auditee_del_st = 1 ", "", "", 1)?></td>
-							<td><input class="span9" type="text" name="jml_hari[]"></td>
-							<td>&nbsp;</td>
+							<input class="form-control" type="hidden" value="0" name="jml_hari[]">
+							<td>&nbsp</td>
 						</tr>
 					</tbody>
 				</table>
+				</div>
 			</fieldset>
-			</fieldset>
-			<fieldset class="hr">
-				<label class="span2">Tipe Audit</label>
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Tipe Audit <span class="required">*</span></label>
+					<div class="col-sm-5">
 				<?
 				$rs_type = $params->audit_type_data_viewlist ();
 				$arr_type = $rs_type->GetArray ();
 				echo $Helper->buildCombo ("tipe_audit", $arr_type, 0, 1, $arr['audit_plan_tipe_id'], "propinsiOnChange(this.value, 'sub_type')", "", false, true, false );
 				?>
-				<span class="mandatory">*</span>
+					</div>
 			</fieldset>
-			<fieldset class="hr">
-				<label class="span2">Sub Tipe Audit</label>
-				<select name="sub_type" id="sub_type">
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Sub Tipe Audit</label>
+					<div class="col-sm-5">
+				<select name="sub_type" id="sub_type" class="form-control">
 					<option value="">Pilih Sub Tipe</option>
 					<?
 					if($arr['audit_type_opsi']==1){
@@ -176,10 +191,12 @@
 					}
 					?>
 				</select>
+					</div>
 			</fieldset>
-			<fieldset class="hr">
-				<label class="span2">Tahun</label> <select class="span1"
-					name="tahun" id="tahun">
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Tahun <span class="required">*</span></label> 
+					<div class="col-sm-5">
+				<select class="form-control" name="tahun" id="tahun">
 					<option value="">Pilih Satu</option>
 					<?
 				$thn = date ( "Y" ) - 1;
@@ -191,22 +208,30 @@
 					$thn ++;
 				}
 				?>
-				</select><span class="mandatory">*</span>
+				</select>
+					</div>
 			</fieldset>
-			<fieldset class="hr">
-				<label class="span2">Periode</label>
-				<input type="text" class="span5" name="periode" id="periode" value="<?=$arr['audit_plan_periode']?>">
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Periode</label>
+					<div class="col-sm-5">
+				<input type="text" class="form-control" name="periode" id="periode" value="<?=$arr['audit_plan_periode']?>">
+					</div>
 			</fieldset>
-			<fieldset class="hr">
-				<label class="span2">Rencana Kegiatan</label> 
-				<input type="text" class="span1" name="tanggal_awal" id="tanggal_awal" value="<?=$Helper->dateIndo($arr['audit_plan_start_date'])?>" autocomplete="off"> 
-				<label class="span0">s/d</label> 
-				<input type="text" class="span1" name="tanggal_akhir" id="tanggal_akhir" value="<?=$Helper->dateIndo($arr['audit_plan_end_date'])?>" autocomplete="off">
-				<span class="mandatory">*</span>
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Rencana Kegiatan <span class="required">*</span></label> 
+					<div class="col-sm-2">
+				<input type="text" class="form-control" name="tanggal_awal" id="tanggal_awal" value="<?=$Helper->dateIndo($arr['audit_plan_start_date'])?>" autocomplete="off"> 
+					</div>
+					<div class="col-sm-1 text-center"> s/d </div>
+					<div class="col-sm-2">
+				<input type="text" class="form-control" name="tanggal_akhir" id="tanggal_akhir" value="<?=$Helper->dateIndo($arr['audit_plan_end_date'])?>" autocomplete="off">
+					</div>
 			</fieldset>
-			<fieldset class="hr">
-				<label class="span2">Total Biaya</label>
-				<input type="text" class="span1" name="biaya_audit" id="biaya_audit" value="<?=$Helper->format_uang($arr['audit_plan_biaya'])?>">
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Total Biaya</label>
+					<div class="col-sm-5">
+				<input type="text" class="form-control" name="biaya_audit" id="biaya_audit" value="<?=$Helper->format_uang($arr['audit_plan_biaya'])?>">
+					</div>
 			</fieldset>
 			<input type="hidden" name="data_id" value="<?=$arr['audit_plan_id']?>">	
 		<?
@@ -214,7 +239,7 @@
 			case "getdetail" :
 				$arr = $rs->FetchRow ();
 				?>
-			<table class="table_detail">
+			<table class="table table-borderless">
 				<tr>
 					<td>Kode Perencanaan</td>
 					<td>:</td>
@@ -294,16 +319,21 @@
 				$rs_komentar = $plannings->planning_komentar_viewlist ( $arr ['audit_plan_id'] );
 				$plan_id_auditee = "";
 				?>
-			<fieldset class="hr">
-				<label class="span2">Nama Kegiatan</label>
+			<fieldset class="form-group">
+				<label class="col-sm-3 text-right">Nama Kegiatan :</label>
+					<div class="col-sm-5">
 					<?=$arr['audit_plan_kegiatan']?>
+					</div>
 				</fieldset>
-			<fieldset class="hr">
-				<label class="span2">Tipe Audit</label>
+			<fieldset class="form-group">
+				<label class="col-sm-3 text-right">Tipe Audit :</label>
+					<div class="col-sm-5">
 					<?=$arr['audit_type_name']?>
+					</div>
 				</fieldset>
-			<fieldset class="hr">
-				<label class="span2">Obyek Audit</label>
+			<fieldset class="form-group">
+				<label class="col-sm-3 text-right">Obyek Audit :</label>
+					<div class="col-sm-5">
 					<?
 				$z = 0;
 				while ( $arr_id_auditee = $rs_id_auditee->FetchRow () ) {
@@ -311,21 +341,29 @@
 					echo $z . ". " . $arr_id_auditee ['auditee_name'] . "<br>";
 				}
 				?>
+					</div>
 				</fieldset>
-			<fieldset class="hr">
-				<label class="span2">Tahun</label>
+			<fieldset class="form-group">
+				<label class="col-sm-3 text-right">Tahun :</label>
+					<div class="col-sm-5">
 					<?=$arr['audit_plan_tahun']?>
+					</div>
 				</fieldset>
-			<fieldset class="hr">
-				<label class="span2">Rencana Kegiatan</label>
+			<fieldset class="form-group">
+				<label class="col-sm-3 text-right">Rencana Kegiatan :</label>
+					<div class="col-sm-5">
 					<?=$Helper->dateIndo($arr['audit_plan_start_date'])?> s/d <?=$Helper->dateIndo($arr['audit_plan_end_date'])?>
+					</div>
 				</fieldset>
-			<fieldset class="hr">
-				<label class="span2">Total Biaya</label>
+			<fieldset class="form-group">
+				<label class="col-sm-3 text-right">Total Biaya :</label>
+					<div class="col-sm-5">
 					Rp. <?=number_format($arr['audit_plan_biaya'])?>
+					</div>
 			</fieldset>
-			<fieldset class="hr">
-				<label class="span2">detail komentar</label> 
+			<fieldset class="form-group">
+				<label class="col-sm-3 text-right">Detail komentar :</label> 
+					<div class="col-sm-5">
 				<table>
 					<tbody>
 						<?php
@@ -341,9 +379,13 @@
 				?>	
 					</tbody>
 				</table>
+					</div>
 			</fieldset>			
-			<fieldset class="hr">
-				<label class="span2">Isi Komentar</label><input type="text" class="span7" name="komentar">
+			<fieldset class="form-group">
+				<label class="col-sm-3 text-right">Isi Komentar :</label>
+					<div class="col-sm-6">
+						<textarea class="form-control" name="komentar" row="3" required></textarea>
+					</div>
 			</fieldset>
 			<input type="hidden" name="data_id" value="<?=$arr['audit_plan_id']?>">
 			<input type="hidden" name="status_plan" value="<?=$status?>">
@@ -352,24 +394,26 @@
 				break;
 		}
 		?>
-			<fieldset>
+			<fieldset class="form-group">
 				<center>
 				<?
 				if($_action != "getajukan" || $_action != "getapprove"){
 				?>
-					<input type="button" class="blue_btn" value="Kembali" onclick="location='<?=$def_page_request?>'"> &nbsp;&nbsp;&nbsp;
+					<input type="button" class="btn btn-primary" value="Kembali" onclick="location='<?=$def_page_request?>'"> &nbsp;&nbsp;&nbsp;
 				<?
 				}
 				?>
 				<?php if ($_action != "getdetail"): ?>
-					<input type="submit" class="blue_btn" value="Simpan">
+					<input type="submit" class="btn btn-success" value="Simpan">
 				<?php endif ?>
 				</center>
-				<input type="hidden" name="data_action" id="data_action" value="<?=$_nextaction?>">
+				<input type="hidden" name="data_action" id="data_action" value="<?=@$_nextaction?>">
 			</fieldset>
 		</form>
-	</article>
-</section>
+			</div>
+		</section>
+	</div>
+</div>
 <script>
 $(document).ready(function() {
 	$('#tambah_auditee').on('click', function(e){
@@ -380,8 +424,8 @@ $(document).ready(function() {
 		var new_row = '<tr id="'+no+'">'
 			+ '<td align="center">'+no+'.</td>'
 			+ '<td>'+select_auditee+'</td>'
-			+ '<td><input class="span9" type="text" name="jml_hari[]"></td>'
-			+ '<td><button class="btn auditee_remove">-</button></td>'
+			+ '<input class="form-control" type="hidden" name="jml_hari[]" value="0"></<input>'
+			+ '<td><button class="btn btn-danger btn-circle auditee_remove"><i class="fa fa-times-circle"></i></button></td>'
 			+ '</tr>';
 		$('#tabel_auditee tbody').append(new_row);
 	});

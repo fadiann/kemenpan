@@ -61,16 +61,9 @@ body{
 				<td colspan="6">
 					<table border="1" cellpadding="0" cellspacing="0" width="100%">
 						<tr>
-							<th rowspan="2">No</th>
-							<th rowspan="2">Nama</th>
-							<th rowspan="2">Gol.</th>
-							<th rowspan="2">Peran</th>
-							<th colspan="3">Lama Tugas (Hari Kerja)</th>
-						</tr>
-						<tr>
-							<th>Persiapan</th>
-							<th>Pelaksanaan</th>
-							<th>Pelaporan</th>
+							<th>No</th>
+							<th>Nama</th>
+							<th>Peran</th>
 						</tr>
 			<?
 				$no=0;
@@ -81,11 +74,7 @@ body{
 						<tr>
 							<td align="center"><?=$no?></td>
 							<td><?=$arr_auditor ['auditor_name']?></td>
-							<td align="center"><?=$arr_auditor ['pangkat_name']?></td>
 							<td align="center"><?=$arr_auditor ['posisi_name']?></td>
-							<td align="center"><?=$arr ['assign_hari_persiapan']?></td>
-							<td align="center"><?=$arr ['assign_hari_pelaksanaan']?></td>
-							<td align="center"><?=$arr ['assign_hari_pelaporan']?></td>
 						</tr>
 			<?
 				}

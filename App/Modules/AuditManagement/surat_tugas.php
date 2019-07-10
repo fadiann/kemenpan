@@ -1,33 +1,65 @@
 <?php
 $arr = $rs->FetchRow();
 ?>
-<section id="main" class="column">
-<article class="module width_3_quarter">
-	<header>
-		<h3 class="tabs_involved"><?=$page_title?></h3>
-	</header>
-		<table align="center" width="100%">
+	<div class="row">
+		<div class="col-md-12">
+			<section class="panel">
+				<header class="panel-heading">
+					<h2 class="panel-title"><?=$page_title?></h2>
+				</header>
+				<div class="panel-body">
+		<table align="center" width="80%" class="table table-borderless">
+			<? /*
 			<tr>
-				<td rowspan="2" width="10px"><img src="Public/images/logo.png" width="48"></td>
+				<!-- <td rowspan="2" width="10px"><img src="Public/images/logo.png" width="48"></td> -->
 				<td align="center">
 					<strong>
-						<font size="5">Kementerian Pendayagunaan Aparatur Negara dan Reformasi Birokrasi Republik Indonesia</font><br>
+						<!-- <font size="5">Kementerian Pendayagunaan Aparatur Negara dan Reformasi Birokrasi Republik Indonesia</font><br> -->
 					</strong>
 				</td>
 			</tr>
+			*/ ?>
 			<tr>
 				<td align="center">
-					Jl. Jend. Sudirman Kav. 69 Jakarta Selatan - 12190 Indonesia<br>
-					Telp. (+6221) 7398381 - 89
+					<!-- Jl. Jend. Sudirman Kav. 69 Jakarta Selatan - 12190 Indonesia<br>
+					Telp. (+6221) 7398381 - 89 -->
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+				</td>
+			</tr>
+			<!-- <tr>
+				<td colspan="2"><hr></td>
+			</tr> -->
+		</table>
+		<table align="center" width="90%">
+			<tr>
+				<td valign="top" width="10%">Menimbang</td>
+				<td valign="top" width="1%">:</td>
+				<td valign="top"><ol>
+					<p align="justify">bahwa dalam rangka pelaksanaan Program Dukungan Manajemen dan Pelaksanaan Tugas Teknis Lainnya TA 2019, dipandang perlu menugaskan pegawai Kementerian PANRB, untuk melakukan Reviu Perjanjian Kinerja di Lingkungan Sekretariat Kementerian Tahun 2019.</p></ol></td>
+			</tr>
+			<tr>
+				<td valign="top">Dasar</td>
+				<td valign="top">:</td>
+				<td valign="top"><ol><p align="justify">
+					<li>Peraturan Pemerintah Nomor 60 Tahun 2008 tentang Sistem Pengendalian Internal Pemerintah;</li>
+					<li>Peraturan Presiden Nomor 29 Tahun 2014 tentang Sistem Akuntabilitas Kinerja Instansi Pemerintah;</li>
+					<li>Peraturan Menteri Pendayagunaan Aparatur Negara dan Reformasi Birokrasi Nomor 53 Tahun 2014 tentang Petunjuk Teknis Perjanjian Kinerja, Pelaporan Kinerja dan Tata Cara Reviu atas Laporan Kinerja Pemerintah;</li>
+					<li>Peraturan Menteri Pendayagunaan Aparatur Negara dan Reformasi Birokrasi Nomor 3 Tahun 2016 sebagai mana telah diubah dengan Peraturan Menteri Pendayagunaan Aparatur Negara dan Reformasi Birokrasi Nomor 12 Tahun 2017 tentang Perubahan Atas Peraturan Menteri Pendayagunaan Aparatur Negara Dan Reformasi Birokrasi Republik Indonesia Nomor 3 Tahun 2016 Tentang Organisasi Dan Tata Kerja Kementerian Pendayagunaan Aparatur Negara Dan Reformasi Birokrasi</li>
+					</p>
+					</ol>
 				</td>
 			</tr>
 			<tr>
-				<td colspan="2"><hr></td>
+				<td valign="top"><br></td>
 			</tr>
 		</table>
-		<table align="center" width="95%">
+		<table align="center" width="75%">
 			<tr>
-				<td colspan="7" align="center"><strong><u>SURAT PERINTAH TUGAS<u></strong></td>
+				<td colspan="7" align="center"><strong><u>SURAT PERINTAH TUGAS<u></u></td>
 			</tr>
 			<tr>
 				<td colspan="7" align="center">NOMOR : <?=$arr['assign_surat_no']?></td>
@@ -64,17 +96,17 @@ $arr = $rs->FetchRow();
 				<td colspan="6">
 					<table border="1" cellpadding="0" cellspacing="0" width="100%">
 						<tr>
-							<th rowspan="2">No</th>
-							<th rowspan="2">Nama</th>
-							<th rowspan="2">Gol.</th>
-							<th rowspan="2">Peran</th>
-							<th colspan="3">Lama Tugas (Hari Kerja)</th>
+							<th class="text-center">No</th>
+							<th class="text-center">Nama</th>
+							<!-- <th rowspan="2">Gol.</th> -->
+							<th class="text-center">Peran</th>
+							<!-- <th colspan="3">Lama Tugas (Hari Kerja)</th> -->
 						</tr>
-						<tr>
+						<!-- <tr>
 							<th>Persiapan</th>
 							<th>Pelaksanaan</th>
 							<th>Pelaporan</th>
-						</tr>
+						</tr> -->
 			<?
 				$no=0;
 				$rs_auditor = $assigns->view_auditor_assign ( $arr ['assign_surat_id_assign']);
@@ -84,11 +116,11 @@ $arr = $rs->FetchRow();
 						<tr>
 							<td align="center"><?=$no?></td>
 							<td><?=$arr_auditor ['auditor_name']?></td>
-							<td align="center"><?=$arr_auditor ['pangkat_name']?></td>
+							<!-- <td align="center"><?=$arr_auditor ['pangkat_name']?></td> -->
 							<td align="center"><?=$arr_auditor ['posisi_name']?></td>
-							<td align="center"><?=$arr_auditor['assign_auditor_prepday']?></td>
-							<td align="center"><?=$arr_auditor['assign_auditor_execday']?></td>
-							<td align="center"><?=$arr_auditor['assign_auditor_reportday']?></td>
+							<!-- <td align="center"><?//=$arr_auditor['assign_auditor_prepday']?></td>
+							<td align="center"><?//=$arr_auditor['assign_auditor_execday']?></td>
+							<td align="center"><?//=$arr_auditor['assign_auditor_reportday']?></td> -->
 						</tr>
 			<?php
 				}
@@ -143,7 +175,7 @@ $arr = $rs->FetchRow();
 				<td colspan="6">
 					<table border="1" cellpadding="0" cellspacing="0" width="100%">
 						<tr>
-							<th>No</th>
+							<th class="text-center">No.</th>
 							<th>Nama</th>
 							<th>Gol.</th>
 							<th>Jabatan</th>
@@ -203,7 +235,7 @@ $arr = $rs->FetchRow();
 			<tr>
 				<td width="60%">&nbsp;</td>
 				<td>
-					Ditempatkan di Jakarta<br>
+					Ditetapkan di Jakarta<br>
 					Pada Tanggal <?=$Helper->dateIndoLengkap($arr['assign_surat_tgl'])?><br><br>
 					<?=$arr['assign_surat_jabatanTTD']?>,<br><br><br><br><br>
 					<u><?=$arr['auditor_name']?></u><br>
@@ -233,8 +265,8 @@ $arr = $rs->FetchRow();
 		</table>
 		<br><br><br><br>
 		<form method="post" name="f" action="#" class="form-horizontal" onsubmit="return cek_data()">
-		<fieldset class="hr">
-			<table class="view_parrent">
+		<fieldset class="form-group">
+			<table class="table table-borderless">
 				<tr>
 					<td>Detail komentar</td>
 					<td>:</td>
@@ -254,16 +286,16 @@ $arr = $rs->FetchRow();
 		<?
 		if ($arr ['assign_surat_status'] != 2) {
 		?>
-		<fieldset class="hr">
-			<label class="span2">Isi Komentar</label>
+		<fieldset class="form-group">
+			<label class="col-sm-3 control-label">Isi Komentar</label>
 			<textarea id="komentar" name="komentar" rows="1" cols="20" style="width: 475px; height: 3em; font-size: 11px;"></textarea>
 		</fieldset>
 		<?
 		}
 		?>
-		<fieldset>
+		<fieldset class="form-group">
 			<center>
-				<input type="button" class="blue_btn" value="Kembali" onclick="location='<?=$def_page_request?>'">
+				<input type="button" class="btn btn-primary" value="Kembali" onclick="location='<?=$def_page_request?>'">
 				<?
 				if ($arr ['assign_surat_status'] == 0 || $arr ['assign_surat_status'] == 3) {
 					if($getajukan){
@@ -276,7 +308,7 @@ $arr = $rs->FetchRow();
 					}
 				} else if($arr ['assign_surat_status'] == 2){
 				?>
-				<input type="button" class="blue_btn" value="ms-word" onclick="window.open('AuditManagement/surat_tugas_print.php?id_surat=<?=$arr['assign_surat_id']?>','toolbar=no, location=no, status=no, menubar=yes, scrollbars=yes, resizable=yes');">
+				<!-- <input type="button" class="blue_btn" value="ms-word" onclick="window.open('Api/surat_tugas_print.php?id_surat=<? //=$arr['assign_surat_id']?>','toolbar=no, location=no, status=no, menubar=yes, scrollbars=yes, resizable=yes');"> -->
 				<?
 				}
 				?>
@@ -285,8 +317,10 @@ $arr = $rs->FetchRow();
 				<input type="hidden" name="data_action" id="data_action" value="<?=$_nextaction?>">
 		</fieldset>
 	</form>
-</article>
-</section>
+				</div>
+			</section>
+		</div>
+	</div>
 <script>
 function cek_data(){
 	var data = document.getElementById('status').value;

@@ -28,10 +28,10 @@ if(@$method!=@$val_method){
 	$val_method = "";
 }
 
-$paging_request = "main.php?method=surattugas";
-$acc_page_request = "surat_tugas_acc.php";
+$paging_request 	= "main.php?method=surattugas";
+$acc_page_request 	= "surat_tugas_acc.php";
 $surat_page_request = "surat_tugas.php";
-$list_page_request = "audit_view.php";
+$list_page_request 	= "audit_view.php";
 
 // ==== buat grid ===//
 $num_row = 10;
@@ -70,7 +70,7 @@ switch ($_action) {
 		$page_request = $surat_page_request;
 		$fdata_id = $Helper->replacetext ( $_REQUEST ["data_id"] );
 		$rs = $assigns->surat_assign_viewlist ( $fdata_id );
-		$page_title = "Surat Tugas";
+		$page_title = "SURAT TUGAS";
 		break;
 	case "getadd" :
 		$_nextaction = "postadd";

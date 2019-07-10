@@ -14,11 +14,13 @@ $fil_tipe_id = $Helper->replacetext ( $_POST ["fil_tipe_id"] );
 
 if($fil_tahun_id!=""){
 ?>
-<section id="main" class="column">	
-	<article class="module width_3_quarter">
-		<table border='1' class="table_risk" cellspacing='0' cellpadding="0">
+<div class="row">
+	<div class="col-md-12">
+		<section class="panel">
+			<div class="panel-body">
+		<table border='1' class="table table-bordered table-striped table-condensed mb-none" cellspacing='0' cellpadding="0">
 			<tr>
-				<td colspan="20">PROGRAM KERJA PENGAWASAN TAHUNAN (PKPT)<br>PT. Tri Nindya Utama<br>Tahun : <?=$fil_tahun_id?></td>
+				<td colspan="20">PROGRAM KERJA PENGAWASAN TAHUNAN (PKPT)<br>Kementerian Pendayagunaan Aparatur Negara dan Reformasi Birokrasi <br>Tahun : <?=$fil_tahun_id?></td>
 			</tr>
 			<tr>
 				<td width="2%" rowspan="2">Tim</td>
@@ -28,7 +30,7 @@ if($fil_tahun_id!=""){
 				<td align="center" rowspan="2">&nbsp;</td>
 				<td align="center" rowspan="2">Nama</td>
 				<td align="center" rowspan="2" width="7%">Jumlah Anggaran (Rp)</td>
-				<td align="center" colspan="12">Pengawasan Oleh PT Tri Nindya Utama</td>
+				<td align="center" colspan="12">Rencana Waktu Pelaksanaan</td>
 				<td align="center" rowspan="2" width="7%">Ket</td>
 			</tr>
 			<tr>
@@ -84,7 +86,7 @@ if($fil_tahun_id!=""){
 			</tr>
 			<?
 						$no_perencanaan= 0;
-						$rs_report = $plannings->plan_report_viewlist($arr_tipe_audit['audit_type_id'], $arr_sub_tipe['sub_audit_type_name'], $in_tipe);
+						$rs_report = $plannings->plan_report_viewlist(@$arr_tipe_audit['audit_type_id'], $arr_sub_tipe['sub_audit_type_name'], $in_tipe);
 						while($arr_report = $rs_report->FetchRow()){
 							$no_perencanaan++;
 							$no_tim=0;
@@ -224,7 +226,10 @@ if($fil_tahun_id!=""){
 			}
 			?>
 		</table>
-</section>
+			</div>
+		</section>
+	</div>
+</div>
 <?
 }else{
 	$Helper->js_alert_act ( 5 );

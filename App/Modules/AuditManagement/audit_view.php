@@ -1,73 +1,82 @@
-<section id="main" class="column">
 <form method="post" name="f" action="#">
-<?
-if (! empty ( $view_parrent ))
-	include_once $view_parrent;
-?>
-	<article class="module width_3_quarter">
-		<header>
-			<h3 class="tabs_involved"><?=$page_title?></h3>
-		<?php
-		if($iconAdd){
-			if($method=='programaudit'){
-				if($status_katim){
-		?>
-		<ul class="tabs">
-			<li><a href="#" OnClick="return set_action('getadd');">Tambah</a></li>
-		</ul>
-		<?php
-				}
-			}elseif($method=='finding_kka' || $method=='kertas_kerja'){
-				if($status_owner){
-		?>
-		<ul class="tabs">
-			<li><a href="#" OnClick="return set_action('getadd');">Tambah</a></li>
-		</ul>
-		<?php
-				}
-			}else{
-		?>
-		<ul class="tabs">
-			<li><a href="#" onclick="return set_action('getadd');">Tambah</a></li>
-		</ul>
-		<?php
-			}
-		}
-		?>
-		</header>
-		<header>
-			<ul class="tabs">
-				<li>
-					<select name="key_search" class="select_search">
-						<?
-						if(count($key_by)!=1)
-						?>
-						<option value="">Semua Pilihan</option>
+	<?php
+	if (! empty ( $view_parrent ))
+		include_once $view_parrent;
+	?>
+	<div class="row">
+		<div class="col-md-12">
+			<section class="panel">
+				<header class="panel-heading">
+					<h2 class="panel-title"><?=$page_title?></h2>
+				</header>
+				<div class="panel-body">
+					<div class="form-inline text-right mt-sm">
+					<?php
+					if($iconAdd){
+						if($method=='programaudit'){
+							if($status_katim){
+					?>
+						<a class="btn btn-success" href="#" OnClick="return set_action('getadd');"><i class="fa fa-plus"> </i> Tambah</a>
+					<?php
+							}
+						}elseif($method=='finding_kka' || $method=='kertas_kerja'){
+							if($status_owner){
+					?>
+						<a class="btn btn-success" href="#" OnClick="return set_action('getadd');"><i class="fa fa-plus"> </i> Tambah</a>
+					<?php
+							}
+						}else{
+					?>
+						<a class="btn btn-success" href="#" OnClick="return set_action('getadd');"><i class="fa fa-plus"> </i> Tambah</a>
+					<?php
+						}
+					}
+					?>
+					<?php if($method == 'programaudit') : ?>
 						<?php
-						for($i=0;$i<count($key_by);$i++){
-						?>
-							<option value="<?=$key_field[$i]?>" <? if(@$key_search==$key_field[$i]) echo "selected";?>><?=$key_by[$i]?></option>
-						<?php
+						if(isset($back)){
+							$back = $back;
+						}else{
+							$back = "window.open('main.php?method=auditassign', '_self');";
 						}
 						?>
-					</select>
-				</li>
-				<li><input type="text" name="val_search" id="val_search" class="text_search" value=<?=@$val_search?>></li>
-				<li><a href="#" OnClick="return set_action('');">Cari</a></li>
-			</ul>
-		</header>
-		<input type="hidden" value="" name="data_action" id="data_action">
-		<input type="hidden" value="" name="status_plan" id="status_plan">
-		<input type="hidden" value="" name="status_pka" id="status_pka">
-		<input type="hidden" value="" name="status_kka" id="status_kka">
-		<input type="hidden" value="" name="status_tl" id="status_tl">
-		<input type="hidden" value="" name="status_penugasan" id="status_penugasan">
-		<input type="hidden" value="" name="status_temuan" id="status_temuan">
-		<input type="hidden" value="" name="status_surat_tugas" id="status_surat_tugas">
-		<input type="hidden" value="" name="data_id" id="data_id">
+							<a class="btn btn-info" href="#" onclick="<?=@$back?>">Kembali</a></li>
+					<?php endif; ?>
+					</div>
+
+						<div class="form-inline text-right mt-sm">
+						<select name="key_search" class="form-control">
+							<?php
+							if(count($key_by)!=1)
+							?>
+							<option value="">Semua Pilihan</option>
+							<?php
+							for($i=0;$i<count($key_by);$i++){
+							?>
+								<option value="<?=$key_field[$i]?>" <? if(@$key_search==$key_field[$i]) echo "selected";?>><?=$key_by[$i]?></option>
+							<?php
+							}
+							?>
+						</select>
+						<input type="text" name="val_search" id="val_search" class="form-control" value=<?=@$val_search?>>
+						<a href="#" OnClick="return set_action('');" class="btn btn-primary">Cari</a>
+						</div>
+
+
+					<input type="hidden" value="" name="data_action" id="data_action">
+					<input type="hidden" value="" name="status_plan" id="status_plan">
+					<input type="hidden" value="" name="status_pka" id="status_pka">
+					<input type="hidden" value="" name="status_kka" id="status_kka">
+					<input type="hidden" value="" name="status_tl" id="status_tl">
+					<input type="hidden" value="" name="status_penugasan" id="status_penugasan">
+					<input type="hidden" value="" name="status_temuan" id="status_temuan">
+					<input type="hidden" value="" name="status_surat_tugas" id="status_surat_tugas">
+					<input type="hidden" value="" name="data_id" id="data_id">
+					
+					<?php include_once $grid; ?>
+
+				</div>
+			</section>
+		</div>
+	</div>
 </form>
-<?
-include_once $grid;
-?>
-	</article>
-</section>

@@ -121,6 +121,7 @@ switch ($_action) {
 		$page_request = "blank.php";
 		break;
 	default :
+		$back			= "window.open('main.php?method=finding_kka', '_self');";
 		$recordcount = $rekomendasis->rekomendasi_count ( $ses_finding_id, "", $key_search, $val_search, $key_field );
 		$rs = $rekomendasis->rekomendasi_view_grid ( $ses_finding_id, $key_search, $val_search, $key_field, $offset, $num_row );
 		$page_title = "Daftar Rekomendasi";

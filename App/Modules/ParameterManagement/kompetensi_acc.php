@@ -10,12 +10,12 @@
 		switch ($_action) {
 			case "getadd" :
 				?>
-			<fieldset class="hr">
-				<label class="span2">Jenis Pelatihan</label> <input type="text"
-					class="span2" name="name" id="name"><span class="mandatory">*</span>
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Jenis Pelatihan</label> <input type="text"
+					class="span2" name="name" id="name"><span class="required">*</span>
 			</fieldset>
-			<fieldset class="hr">
-				<label class="span2">Keterangan</label> <input type="text"
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Keterangan</label> <input type="text"
 					class="span7" name="desc" id="desc">
 			</fieldset>
 		<?
@@ -23,13 +23,13 @@
 			case "getedit" :
 				$arr = $rs->FetchRow ();
 				?>
-			<fieldset class="hr">
-				<label class="span2">Jenis Pelatihan</label> <input type="text"
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Jenis Pelatihan</label> <input type="text"
 					class="span2" name="name" id="name"
-					value="<?=$arr['kompetensi_name']?>"><span class="mandatory">*</span>
+					value="<?=$arr['kompetensi_name']?>"><span class="required">*</span>
 			</fieldset>
-			<fieldset class="hr">
-				<label class="span2">Keterangan</label> <input type="text"
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Keterangan</label> <input type="text"
 					class="span7" name="desc" id="desc"
 					value="<?=$arr['kompetensi_desc']?>">
 			</fieldset>
@@ -39,11 +39,11 @@
 				break;
 		}
 		?>
-			<fieldset>
+			<fieldset class="form-group">
 				<center>
-					<input type="button" class="blue_btn" value="Kembali"
+					<input type="button" class="btn btn-primary" value="Kembali"
 						onclick="location='<?=$def_page_request?>'"> &nbsp;&nbsp;&nbsp; <input
-						type="submit" class="blue_btn" value="Simpan">
+						type="submit" class="btn btn-success" value="Simpan">
 				</center>
 				<input type="hidden" name="data_action" id="data_action"
 					value="<?=$_nextaction?>">

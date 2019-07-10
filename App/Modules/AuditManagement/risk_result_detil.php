@@ -3,10 +3,10 @@
 include "risk_result_view.php";
 ?>
 <article class="module width_3_quarter">
-		<fieldset>
+		<fieldset class="form-group">
 			<label>Analisa Risiko</label>
 		</fieldset>
-		<table border='1' class="table_risk" cellspacing='0' cellpadding="0">
+		<table border='1' class="table table-bordered table-striped table-condensed mb-none" cellspacing='0' cellpadding="0">
 			<tr align="center">
 				<th width="2%" rowspan="2">No</th>
 				<th width="47%" colspan="5">Identifikasi Risiko</th>
@@ -76,10 +76,10 @@ include "risk_result_view.php";
 	?>
 </table>
 		<br>
-		<fieldset>
+		<fieldset class="form-group">
 			<label>Evaluasi Risiko</label>
 		</fieldset>
-		<table border='1' class="table_risk" cellspacing='0' cellpadding="0">
+		<table border='1' class="table table-bordered table-striped table-condensed mb-none" cellspacing='0' cellpadding="0">
 			<tr align="center">
 				<th width="2%" rowspan="2">No</th>
 				<th width="58%" colspan="7">Risiko Inhern</th>
@@ -139,10 +139,10 @@ include "risk_result_view.php";
 	?>
 </table>
 		<br>
-		<fieldset>
+		<fieldset class="form-group">
 			<label>Penanganan Risiko</label>
 		</fieldset>
-		<table border='1' class="table_risk" cellspacing='0' cellpadding="0">
+		<table border='1' class="table table-bordered table-striped table-condensed mb-none" cellspacing='0' cellpadding="0">
 			<tr align="center">
 				<th width="2%" rowspan="2">No</th>
 				<th width="55%" colspan="5">Risiko Residu</th>
@@ -201,9 +201,9 @@ include "risk_result_view.php";
 	?>
 </table>
 		<form method="post" name="f" action="#" class="form-horizontal">
-			<fieldset>
+			<fieldset class="form-group">
 				<center>
-					<input type="button" class="blue_btn" value="Kembali" onclick="location='<?=$def_page_request?>'"> 
+					<input type="button" class="btn btn-primary" value="Kembali" onclick="location='<?=$def_page_request?>'"> 
 					<?php 
 					$cek_perencanaan = $plannings->cek_perencanaan($ses_penetapan_id);
 					if($cek_perencanaan==0){

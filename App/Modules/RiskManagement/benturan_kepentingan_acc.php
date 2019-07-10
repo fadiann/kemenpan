@@ -1,56 +1,72 @@
 <script src="Public/js/jquery.validate.min.js" type="text/javascript"></script>
-<section id="main" class="column">
-    <article class="module width_3_quarter">
-        <header>
-            <h3 class="tabs_involved"><?= $page_title ?></h3>
-        </header>
+<div class="row">
+	<div class="col-md-12">
+		<section class="panel">
+			<header class="panel-heading">
+				<h2 class="panel-title"><?=$page_title?></h2>
+			</header>
+			<div class="panel-body wrap">
         <form method="post" name="f" action="#" class="form-horizontal" id="validation-form">
             <?
             switch ($_action) {
                 case "getadd":
                     ?>
-                <fieldset class="hr">
-                    <label class="span2">Tahun</label> <?= $Helper->tahunCombo('tahun', 'tahun') ?>
+                <fieldset class="form-group">
+                    <label class="col-sm-3 control-label">Tahun</label> 
+					<div class="col-sm-5"><?= $Helper->tahunCombo('tahun', 'tahun') ?></div>
                 </fieldset>
-                <fieldset class="hr">
-                    <label class="span2">Uraian</label> <textarea name="uraian" id="uraian" class="span5" rows="10"></textarea>
+                <fieldset class="form-group">
+                    <label class="col-sm-3 control-label">Uraian</label> 
+                    <div class="col-sm-5"><textarea name="uraian" id="uraian" class="form-control" rows="10"></textarea>
+                    </div>
                 </fieldset>
-                <fieldset class="hr">
-                    <label class="span2">Pelaku Yang Terkait</label> <input type="text" class="span2" name="pelaku" id="pelaku">
+                <fieldset class="form-group">
+                    <label class="col-sm-3 control-label">Pelaku Yang Terkait</label> 
+                    <div class="col-sm-5"><input type="text" class="form-control" name="pelaku" id="pelaku">
+                    </div>
                 </fieldset>
-                <fieldset class="hr">
-                    <label class="span2">Rencana Aksi</label> <textarea name="rencana" id="rencana" class="span5" rows="10"></textarea>
+                <fieldset class="form-group">
+                    <label class="col-sm-3 control-label">Rencana Aksi</label> 
+                    <div class="col-sm-5"><textarea name="rencana" id="rencana" class="form-control" rows="10"></textarea>
+                    </div>
                 </fieldset>
                 <?
                 break;
             case "getedit":
                 ?>
-                <fieldset class="hr">
-                    <label class="span2">Tahun</label> <?= $Helper->tahunCombo('tahun', 'tahun', $row['tahun']) ?>
+                <fieldset class="form-group">
+                    <label class="col-sm-3 control-label">Tahun</label> 
+					<div class="col-sm-5"><?= $Helper->tahunCombo('tahun', 'tahun', $row['tahun']) ?></div>
                 </fieldset>
-                <fieldset class="hr">
-                    <label class="span2">Uraian</label> <textarea name="uraian" id="uraian" class="span5" rows="10"><?=$row['uraian']?></textarea>
+                <fieldset class="form-group">
+                    <label class="col-sm-3 control-label">Uraian</label> 
+					<div class="col-sm-5"><textarea name="uraian" id="uraian" class="form-control" rows="10"><?=$row['uraian']?></textarea></div>
                 </fieldset>
-                <fieldset class="hr">
-                    <label class="span2">Pelaku Yang Terkait</label> <input type="text" class="span2" name="pelaku" id="pelaku" value="<?=$row['pelaku']?>">
+                <fieldset class="form-group">
+                    <label class="col-sm-3 control-label">Pelaku Yang Terkait</label> 
+					<div class="col-sm-5"><input type="text" class="form-control" name="pelaku" id="pelaku" value="<?=$row['pelaku']?>"></div>
                 </fieldset>
-                <fieldset class="hr">
-                    <label class="span2">Rencana Aksi</label> <textarea name="rencana" id="rencana" class="span5" rows="10"><?=$row['rencana_aksi']?></textarea>
+                <fieldset class="form-group">
+                    <label class="col-sm-3 control-label">Rencana Aksi</label> 
+					<div class="col-sm-5"><textarea name="rencana" id="rencana" class="form-control" rows="10"><?=$row['rencana_aksi']?></textarea></div>
                 </fieldset>
                 <input type="hidden" value="<?=$row['benturan_kepentingan_id']?>" name="data_id">
                 <?
                 break;
         }
         ?>
-            <fieldset>
+            <fieldset class="form-group mt-md">
                 <center>
-                    <input type="button" class="blue_btn" value="Kembali" onclick="location='<?= $def_page_request ?>'"> &nbsp;&nbsp;&nbsp; <input type="submit" class="blue_btn" value="Simpan">
+                    <input type="button" class="btn btn-primary" value="Kembali" onclick="location='<?= $def_page_request ?>'">
+                    <input type="submit" class="btn btn-success" value="Simpan">
                 </center>
                 <input type="hidden" name="data_action" id="data_action" value="<?= $_nextaction ?>">
             </fieldset>
         </form>
-    </article>
-</section>
+            </div>
+        </section>
+    </div>
+</div>
 <script>
     $(function() {
         $("#validation-form").validate({

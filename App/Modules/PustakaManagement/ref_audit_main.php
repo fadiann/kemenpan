@@ -22,8 +22,8 @@ if(@$method!=@$val_method){
 	$val_method = "";
 }
 
-$paging_request = "main.php?method=ref_audit";
-$acc_page_request = "ref_audit_acc.php";
+$paging_request    = "main.php?method=ref_audit";
+$acc_page_request  = "ref_audit_acc.php";
 $list_page_request = "pustaka_view.php";
 
 // ==== buat grid ===//
@@ -43,14 +43,14 @@ $offset = ($noPage - 1) * $num_row;
 $def_page_request = $paging_request . "&page=$noPage";
 
 $grid = "App/Templates/Grids/grid.php";
-$gridHeader = array ("Referensi", "Keterangan", "Kategori", "Lampiran", "Link");
-$gridDetail = array ("1", "2", "3", "4", "5");
-$gridWidth = array ("15", "25", "10", "10", "20");
+$gridHeader = array ("Referensi", "Keterangan", "Kategori", "Lampiran");
+$gridDetail = array ("1", "2", "3", "4");
+$gridWidth = array ("15", "25", "10", "10");
 $widthAksi = "15";
 $iconDetail = "0";
 
-$key_by = array ("Referensi", "Keterangan", "Kategori", "Lampiran", "Link");
-$key_field = array ("ref_audit_nama", "ref_audit_desc", "kategori_ref_name", "ref_audit_attach");
+$key_by = array ("Referensi", "Keterangan", "Kategori", "Lampiran");
+$key_field = array ("ref_audit_nama", "ref_audit_desc", "kategori_ref_name");
 // === end grid ===//
 
 switch ($_action) {

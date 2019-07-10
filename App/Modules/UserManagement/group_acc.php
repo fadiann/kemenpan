@@ -6,25 +6,27 @@
 <link rel="stylesheet" type="text/css" href="Public/css/jquery-ui.css" />
 <link rel="stylesheet" type="text/css" href="Public/css/jquery.tree.css" />
 
-<section id="main" class="column">
-	<article class="module width_3_quarter">
-		<header>
-			<h3 class="tabs_involved"><?=$page_title?></h3>
-		</header>
+<div class="row">
+	<div class="col-md-12">
+		<section class="panel">
+			<header class="panel-heading">
+				<h2 class="panel-title"><?=$page_title?></h2>
+			</header>
+			<div class="panel-body wrap">
 		<form method="post" name="f" action="#" class="form-horizontal"
 			id="validation-form">
 		<?
 		switch ($_action) {
 			case "getadd" :
 				?>
-			<fieldset class="hr">
-				<label class="span1">Nama Group</label> <input type="text"
-					class="span6" name="name" id="name">
+			<fieldset class="form-group">
+			<label class="col-sm-3 control-label">Nama Group :</label> 
+			<input type="text" class="form-control" name="name" id="name">
 			</fieldset>
-			<fieldset>
-				<label class="span1">Hak Akses :</label>
+			<fieldset class="form-group">
+			<label class="col-sm-3 control-label">Hak Akses :</label>
 			</fieldset>
-			<fieldset>
+			<fieldset class="form-group">
 				<table>
 					<tr>
 	<?php
@@ -197,14 +199,16 @@
 			case "getedit" :
 				$arr = $rs->FetchRow ();
 				?>
-			<fieldset class="hr">
-				<label class="span1">Nama Group</label> <input type="text"
-					class="span6" name="name" id="name" value="<?=$arr['group_name']?>">
+			<fieldset class="form-group">
+				<label class="col-sm-2">Nama Group :</label> 
+				<div class="col-sm-5">
+				<input type="text" class="form-control" name="name" id="name" value="<?=$arr['group_name']?>">
+				</div>
 			</fieldset>
-			<fieldset>
-				<label class="span1">Nama Menu :</label>
+			<fieldset class="form-group">
+				<label class="col-sm-2">Nama Menu :</label>
 			</fieldset>
-			<fieldset>
+			<fieldset class="form-group">
 				<table class="table_role" width="100%">
 					<tr>
 	<?php
@@ -395,18 +399,18 @@
 				break;
 		}
 		?>
-			<fieldset>
+			<fieldset class="form-group mt-md">
 				<center>
-					<input type="button" class="blue_btn" value="Kembali"
-						onclick="location='<?=$def_page_request?>'"> &nbsp;&nbsp;&nbsp; <input
-						type="submit" class="blue_btn" value="Simpan">
+					<input type="button" class="btn btn-primary" value="Kembali" onclick="location='<?=$def_page_request?>'"> 
+					<input type="submit" class="btn btn-success" value="Simpan">
 				</center>
-				<input type="hidden" name="data_action" id="data_action"
-					value="<?=$_nextaction?>">
+				<input type="hidden" name="data_action" id="data_action" value="<?=@$_nextaction?>">
 			</fieldset>
 		</form>
-	</article>
-</section>
+			</div>
+		</section>
+	</div>
+</div>
 <script> 
 <?php
 $rs_cek_parrent = $Helper->menu_list_parrent ();

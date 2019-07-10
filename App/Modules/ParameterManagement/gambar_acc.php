@@ -20,7 +20,7 @@
 			switch ($_action) {
 			case "getadd":
 			?>
-			<fieldset class="hr">					
+			<fieldset class="form-group">					
 				<!-- <label>Lampiran</label> -->
 				<!-- <br><br><br> -->
 				<input type="button" id="tambah_auditee" class="blue_btn" value="Tambah Baris">
@@ -49,14 +49,14 @@
 			break;
 			}
 			?>
-			<fieldset>
+			<fieldset class="form-group">
 				<center>
 				<?php
 				// }
 				if($_action != "getedit" && $_action != "getdetail"){
 				?>
-				<input type="button" class="blue_btn" value="Kembali" onclick="location='<?=$def_page_request?>'">
-				<input type="submit" class="blue_btn" value="Simpan">
+				<input type="button" class="btn btn-primary" value="Kembali" onclick="location='<?=$def_page_request?>'">
+				<input type="submit" class="btn btn-success" value="Simpan">
 				&nbsp;&nbsp;&nbsp;
 				<?php } ?>
 				<input type="hidden" name="data_id" value="<?= $ses_kka_id ?>">

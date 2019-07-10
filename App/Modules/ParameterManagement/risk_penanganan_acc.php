@@ -10,16 +10,16 @@
 		switch ($_action) {
 			case "getadd" :
 				?>
-			<fieldset class="hr">
-				<label class="span2">Jenis Penanganan</label> <input type="text"
-					class="span3" name="jenis" id="jenis"><span class="mandatory">*</span>
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Jenis Penanganan</label> <input type="text"
+					class="span3" name="jenis" id="jenis"><span class="required">*</span>
 			</fieldset>
-			<fieldset class="hr">
-				<label class="span2">Keterangan</label> <input type="text"
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Keterangan</label> <input type="text"
 					class="span7" name="desc" id="desc">
 			</fieldset>
-			<fieldset class="hr">
-				<label class="span2">Penanganan</label> <select name="status">
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Penanganan</label> <select name="status" class="form-control">
 					<option value="0">Tidak</option>
 					<option value="1">Ya</option>
 				</select>
@@ -29,18 +29,18 @@
 			case "getedit" :
 				$arr = $rs->FetchRow ();
 				?>
-			<fieldset class="hr">
-				<label class="span2">Jenis Penanganan</label> <input type="text"
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Jenis Penanganan</label> <input type="text"
 					class="span3" name="jenis" id="jenis"
-					value="<?=$arr['risk_penanganan_jenis']?>"><span class="mandatory">*</span>
+					value="<?=$arr['risk_penanganan_jenis']?>"><span class="required">*</span>
 			</fieldset>
-			<fieldset class="hr">
-				<label class="span2">Keterangan</label> <input type="text"
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Keterangan</label> <input type="text"
 					class="span7" name="desc" id="desc"
 					value="<?=$arr['risk_penanganan_desc']?>">
 			</fieldset>
-			<fieldset class="hr">
-				<label class="span2">Penanganan</label> <select name="status">
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Penanganan</label> <select name="status" class="form-control">
 					<option value="0"
 						<?php if($arr['risk_penanganan_status']=="0") echo "selected"?>>Tidak</option>
 					<option value="1"
@@ -53,11 +53,11 @@
 				break;
 		}
 		?>
-			<fieldset>
+			<fieldset class="form-group">
 				<center>
-					<input type="button" class="blue_btn" value="Kembali"
+					<input type="button" class="btn btn-primary" value="Kembali"
 						onclick="location='<?=$def_page_request?>'"> &nbsp;&nbsp;&nbsp; <input
-						type="submit" class="blue_btn" value="Simpan">
+						type="submit" class="btn btn-success" value="Simpan">
 				</center>
 				<input type="hidden" name="data_action" id="data_action"
 					value="<?=$_nextaction?>">

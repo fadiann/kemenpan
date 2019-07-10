@@ -9,10 +9,13 @@ $arr = $rs->FetchRow ();
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="Public/css/responsive-tabs.css" rel="stylesheet" type="text/css" />
 <script src="Public/js/responsive-tabs.js" type="text/javascript"></script>
-<section id="main" class="column">
-	<article class="module width_3_quarter">
-		<div id="demopage">
-			<div class="container1">
+<div class="row">
+	<div class="col-md-12">
+		<section class="panel">
+			<header class="panel-heading">
+				<h2 class="panel-title">Detail Pegawai</h2>
+			</header>
+			<div class="panel-body wrap">
 				<ul class="rtabs">
 					<li><a href="#view1">Rincian Pegawai</a></li>
 					<li><a href="#view2">Riwayat Pelatihan</a></li>
@@ -21,48 +24,48 @@ $arr = $rs->FetchRow ();
 				</ul>
 				<div class="panel-container">
 					<div id="view1">
-						<fieldset class="hr">
-							<label class="span2">NIP</label> <label class="span2">: <?=$arr['auditor_nip']?></label>
+						<fieldset class="form-group">
+							<label class="col-sm-3 control-label">NIP</label> <label class="col-sm-3 control-label">: <?=$arr['auditor_nip']?></label>
 						</fieldset>
-						<fieldset class="hr">
-							<label class="span2">Nama</label> <label class="span5">: <?=$arr['auditor_name']?></label>
+						<fieldset class="form-group">
+							<label class="col-sm-3 control-label">Nama</label> <label class="col-sm-3 control-label">: <?=$arr['auditor_name']?></label>
 						</fieldset>
-						<fieldset class="hr">
-							<label class="span2">Tempat, Tgl Lahir</label> <label
-								class="span5">: <?=$arr['auditor_tempat_lahir']?>, <?=$arr['auditor_tgl_lahir']?></label>
+						<fieldset class="form-group">
+							<label class="col-sm-3 control-label">Tempat, Tgl Lahir</label> <label
+								class="col-sm-3 control-label">: <?=$arr['auditor_tempat_lahir']?>, <?=$arr['auditor_tgl_lahir']?></label>
 						</fieldset>
-						<fieldset class="hr">
-							<label class="span2">Alamat Rumah</label>  <label class="span5">: <?=$arr['auditor_alamat']?></label>
+						<fieldset class="form-group">
+							<label class="col-sm-3 control-label">Alamat Rumah</label>  <label class="col-sm-3 control-label">: <?=$arr['auditor_alamat']?></label>
 						</fieldset>
-						<fieldset class="hr">
-							<label class="span2">Jenis Kelamin</label>  <label class="span5">: <?=$arr['auditor_jenis_kelamin']?></label>
+						<fieldset class="form-group">
+							<label class="col-sm-3 control-label">Jenis Kelamin</label>  <label class="col-sm-3 control-label">: <?=$arr['auditor_jenis_kelamin']?></label>
 						</fieldset>
-						<fieldset class="hr">
-							<label class="span2">Agama</label>  <label class="span5">: <?=$arr['auditor_agama']?></label>
+						<fieldset class="form-group">
+							<label class="col-sm-3 control-label">Agama</label>  <label class="col-sm-3 control-label">: <?=$arr['auditor_agama']?></label>
 						</fieldset>
-						<fieldset class="hr">
-							<label class="span2">Golongan/Pangkat</label> <label class="span5">: <?=$arr['auditor_pangkat']?></label>
+						<fieldset class="form-group">
+							<label class="col-sm-3 control-label">Golongan/Pangkat</label> <label class="col-sm-3 control-label">: <?=$arr['auditor_pangkat']?></label>
 						</fieldset>
-						<fieldset class="hr">
-							<label class="span2">TMT</label> <label class="span5">: <?=$arr['auditor_tmt']?></label>
+						<fieldset class="form-group">
+							<label class="col-sm-3 control-label">TMT</label> <label class="col-sm-3 control-label">: <?=$arr['auditor_tmt']?></label>
 						</fieldset>
-						<fieldset class="hr">
-							<label class="span2">Jabatan</label> <label class="span5">: <?=$arr['jenis_jabatan_sub']?></label>
+						<fieldset class="form-group">
+							<label class="col-sm-3 control-label">Jabatan</label> <label class="col-sm-3 control-label">: <?=$arr['jenis_jabatan_sub']?></label>
 						</fieldset>
-						<fieldset class="hr">
-							<label class="span2">Golongan Biaya</label> <label class="span5">: <?=$arr['auditor_golongan']?></label>
+						<fieldset class="form-group">
+							<label class="col-sm-3 control-label">Golongan Biaya</label> <label class="col-sm-3 control-label">: <?=$arr['auditor_golongan']?></label>
 						</fieldset>
-						<fieldset class="hr">
-							<label class="span2">Mobile</label> <label class="span5">: <?=$arr['auditor_mobile']?></label>
+						<fieldset class="form-group">
+							<label class="col-sm-3 control-label">Mobile</label> <label class="col-sm-3 control-label">: <?=$arr['auditor_mobile']?></label>
 						</fieldset>
-						<fieldset class="hr">
-							<label class="span2">Telp</label> <label class="span6">: <?=$arr['auditor_telp']?></label>
+						<fieldset class="form-group">
+							<label class="col-sm-3 control-label">Telp</label> <label class="col-sm-3 control-label">: <?=$arr['auditor_telp']?></label>
 						</fieldset>
-						<fieldset class="hr">
-							<label class="span2">Email</label> <label class="span2">: <?=$arr['auditor_email']?></label>
+						<fieldset class="form-group">
+							<label class="col-sm-3 control-label">Email</label> <label class="col-sm-3 control-label">: <?=$arr['auditor_email']?></label>
 						</fieldset>
-						<fieldset class="hr">
-							<label class="span2">Foto</label> <label class="span2">: <a href="#" Onclick="window.open('<?=$Helper->baseurl("Upload_Foto").$arr['auditor_foto']?>','_blank')"><?=$arr['auditor_foto']?></a></label>
+						<fieldset class="form-group">
+							<label class="col-sm-3 control-label">Foto</label> <label class="col-sm-3 control-label">: <a href="#" Onclick="window.open('<?=$Helper->baseurl("Upload_Foto").$arr['auditor_foto']?>','_blank')"><?=$arr['auditor_foto']?></a></label>
 						</fieldset>
 					</div>
 					<div id="view2">
@@ -73,7 +76,7 @@ $arr = $rs->FetchRow ();
 						<header>
 							<h3 class="tabs_involved"><?=$page_title?></h3>
 						</header>
-						<table class="table_grid" cellspacing="0" cellpadding="0">
+						<table class="table table-bordered table-striped" cellspacing="0" cellpadding="0">
 						<tr>
 							<th width='10%'>No</th>
 							<th width='30%'>No Surat Tugas</th>
@@ -110,6 +113,6 @@ $arr = $rs->FetchRow ();
 					</div>
 				</div>
 			</div>
-		</div>
-	</article>
-</section>
+		</section>
+	</div>
+</div>

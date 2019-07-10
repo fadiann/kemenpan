@@ -45,48 +45,48 @@ $def_page_request = $paging_request . "&page=$noPage";
 $grid = "App/Templates/Grids/grid.php";
 $gridHeader = array ("ID Contoh", "Nama", "Golongan/Pangkat/Coba", "Jabatan");
 $gridDetail = array ("1", "2", "3", "4");
-$gridWidth = array ("15", "30", "20", "20");
+$gridWidth = array ("15", "30", "20", "17");
 
 $key_by = array ("ID", "Nama", "Golongan Biaya", "Jabatan");
 $key_field = array ("auditor_nip", "auditor_name", "auditor_golongan", "jenis_jabatan");
 
-$widthAksi = "15";
+$widthAksi = "18";
 $iconDetail = "1";
 // === end grid ===//
 
 switch ($_action) {
 	case "getadd" :
-		$_nextaction = "postadd";
+		$_nextaction  = "postadd";
 		$page_request = $acc_page_request;
-		$page_title = "Tambah Pegawai";
+		$page_title   = "Tambah Pegawai";
 		break;
 	case "getedit" :
-		$_nextaction = "postedit";
+		$_nextaction  = "postedit";
 		$page_request = $acc_page_request;
-		$fdata_id = $Helper->replacetext ( $_REQUEST ["data_id"] );
-		$rs = $auditors->auditor_data_viewlist ( $fdata_id );
-		$page_title = "Ubah Pegawai";
+		$fdata_id     = $Helper->replacetext ( $_REQUEST ["data_id"] );
+		$rs           = $auditors->auditor_data_viewlist ( $fdata_id );
+		$page_title   = "Ubah Pegawai";
 		break;
 	case "getdetail" :
 		$fdata_id = $Helper->replacetext ( $_REQUEST ["data_id"] );
 		echo "<script>window.open('" . $acc_page_request_detil . "&auditor=" . $fdata_id . "', '_self');</script>";
 		break;
 	case "postadd" :
-		$fnip = $Helper->replacetext ( $_POST ["nip"] );
-		$fname = $Helper->replacetext ( $_POST ["name"] );
-		$ftempat_lahir = $Helper->replacetext ( $_POST ["tempat_lahir"] );
+		$fnip           = $Helper->replacetext ( $_POST ["nip"] );
+		$fname          = $Helper->replacetext ( $_POST ["name"] );
+		$ftempat_lahir  = $Helper->replacetext ( $_POST ["tempat_lahir"] );
 		$ftanggal_lahir = $Helper->replacetext ( $_POST ["tanggal_lahir"] );
-		$falamat = $Helper->replacetext ( $_POST ["alamat"] );
+		$falamat        = $Helper->replacetext ( $_POST ["alamat"] );
 		$fjenis_kelamin = $Helper->replacetext ( $_POST ["jenis_kelamin"] );
-		$fagama = $Helper->replacetext ( $_POST ["agama"] );
-		$fpangkat_id = $Helper->replacetext ( $_POST ["pangkat_id"] );
-		$ftmt = $Helper->replacetext ( $_POST ["tmt"] );
-		$fjabatan = $Helper->replacetext ( $_POST ["jabatan"] );
-		$fgolongan = $Helper->replacetext ( $_POST ["golongan"] );
-		$fmobile = $Helper->replacetext ( $_POST ["mobile"] );
-		$ftelp = $Helper->replacetext ( $_POST ["telp"] );
-		$femail = $Helper->replacetext ( $_POST ["email_auditor"] );
-		$ffoto = $Helper->replacetext ( $_FILES ["foto"] ["name"] );
+		$fagama         = $Helper->replacetext ( $_POST ["agama"] );
+		$fpangkat_id    = $Helper->replacetext ( $_POST ["pangkat_id"] );
+		$ftmt           = $Helper->replacetext ( $_POST ["tmt"] );
+		$fjabatan       = $Helper->replacetext ( $_POST ["jabatan"] );
+		$fgolongan      = $Helper->replacetext ( $_POST ["golongan"] );
+		$fmobile        = $Helper->replacetext ( $_POST ["mobile"] );
+		$ftelp          = $Helper->replacetext ( $_POST ["telp"] );
+		$femail         = $Helper->replacetext ( $_POST ["email_auditor"] );
+		$ffoto          = $Helper->replacetext ( $_FILES ["foto"] ["name"] );
 		if ($fnip != "" && $fname != "" && $fgolongan != "" && $femail != "") {
 			$rs_nip = $auditors->cek_nip_auditor ( $fnip );
 			$arr_nip = $rs_nip->FetchRow ();
@@ -113,23 +113,23 @@ switch ($_action) {
 		$page_request = "blank.php";
 		break;
 	case "postedit" :
-		$fdata_id = $Helper->replacetext ( $_POST ["data_id"] );
-		$fnip = $Helper->replacetext ( $_POST ["nip"] );
-		$fname = $Helper->replacetext ( $_POST ["name"] );
-		$ftempat_lahir = $Helper->replacetext ( $_POST ["tempat_lahir"] );
+		$fdata_id       = $Helper->replacetext ( $_POST ["data_id"] );
+		$fnip           = $Helper->replacetext ( $_POST ["nip"] );
+		$fname          = $Helper->replacetext ( $_POST ["name"] );
+		$ftempat_lahir  = $Helper->replacetext ( $_POST ["tempat_lahir"] );
 		$ftanggal_lahir = $Helper->replacetext ( $_POST ["tanggal_lahir"] );
-		$falamat = $Helper->replacetext ( $_POST ["alamat"] );
+		$falamat        = $Helper->replacetext ( $_POST ["alamat"] );
 		$fjenis_kelamin = $Helper->replacetext ( $_POST ["jenis_kelamin"] );
-		$fagama = $Helper->replacetext ( $_POST ["agama"] );
-		$fpangkat_id = $Helper->replacetext ( $_POST ["pangkat_id"] );
-		$ftmt = $Helper->replacetext ( $_POST ["tmt"] );
-		$fjabatan = $Helper->replacetext ( $_POST ["jabatan"] );
-		$fgolongan = $Helper->replacetext ( $_POST ["golongan"] );
-		$fmobile = $Helper->replacetext ( $_POST ["mobile"] );
-		$ftelp = $Helper->replacetext ( $_POST ["telp"] );
-		$femail = $Helper->replacetext ( $_POST ["email_auditor"] );
-		$ffoto = $Helper->replacetext ( $_FILES ["foto"] ["name"] );
-		$ffoto_old = $Helper->replacetext ( $_POST ["foto_old"] );
+		$fagama         = $Helper->replacetext ( $_POST ["agama"] );
+		$fpangkat_id    = $Helper->replacetext ( $_POST ["pangkat_id"] );
+		$ftmt           = $Helper->replacetext ( $_POST ["tmt"] );
+		$fjabatan       = $Helper->replacetext ( $_POST ["jabatan"] );
+		$fgolongan      = $Helper->replacetext ( $_POST ["golongan"] );
+		$fmobile        = $Helper->replacetext ( $_POST ["mobile"] );
+		$ftelp          = $Helper->replacetext ( $_POST ["telp"] );
+		$femail         = $Helper->replacetext ( $_POST ["email_auditor"] );
+		$ffoto          = $Helper->replacetext ( $_FILES ["foto"] ["name"] );
+		$ffoto_old      = $Helper->replacetext ( $_POST ["foto_old"] );
 		if ($fnip != "" && $fname != "" && $fgolongan != "" && $femail != "") {
 			$rs_nip = $auditors->cek_nip_auditor ( $fnip, $fdata_id );
 			$arr_nip = $rs_nip->FetchRow ();
@@ -175,9 +175,9 @@ switch ($_action) {
 		$page_request = "blank.php";
 		break;
 	default :
-		$recordcount = $auditors->auditor_count ($base_on_id_int, $key_search, $val_search, $key_field);
-		$rs = $auditors->auditor_viewlist ( $base_on_id_int, $key_search, $val_search, $key_field, $offset, $num_row );
-		$page_title = "Daftar Pegawai PT. Tri Nindya Utama";
+		$recordcount  = $auditors->auditor_count ($base_on_id_int, $key_search, $val_search, $key_field);
+		$rs           = $auditors->auditor_viewlist ( $base_on_id_int, $key_search, $val_search, $key_field, $offset, $num_row );
+		$page_title   = "Daftar Pegawai Kemenpan RB";
 		$page_request = $list_page_request;
 		break;
 }

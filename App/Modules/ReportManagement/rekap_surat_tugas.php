@@ -13,7 +13,7 @@ $tipe_audit = $Helper->replacetext ( $_POST ["tipe_audit"] );
 ?>
 <section id="main" class="column">	
 	<article class="module width_3_quarter">
-		<table border='1' class="table_risk" cellspacing='0' cellpadding="0">
+		<table border='1' class="table table-bordered table-striped table-condensed mb-none" cellspacing='0' cellpadding="0">
 			<tr>
 				<th width="2%">No</th>
 				<th width="18%">No & Tanggal SPT</th>
@@ -48,7 +48,7 @@ $tipe_audit = $Helper->replacetext ( $_POST ["tipe_audit"] );
 		</table>
 		<br>
 		<br>
-		<fieldset>
+		<fieldset class="form-group">
 			<center>
 				<input type="button" class="blue_btn" value="ms-excel" onclick="window.open('ReportManagement/rekap_surat_tugas_print.php?tahun=<?= $fil_tahun_id ?>&fil_auditor_id=<?= $fil_auditor_id ?>&tipe_audit=<?= $tipe_audit ?>','toolbar=no,location=no,status=no,menubar=yes,scrollbars=yes,resizable=yes');">
 			</center>

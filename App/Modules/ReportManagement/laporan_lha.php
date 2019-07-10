@@ -38,7 +38,7 @@ if($fil_tahun_id!="" && $fil_auditee_id!=""){
 	<article class="module width_3_quarter">
 	<table align="center" width="100%">
 		<tr>
-			<td align="center"><br><br><br><strong>PT. Tri Nindya Utama</strong></td>
+			<td align="center"><br><br><br><strong>Kementerian Pendayagunaan Aparatur Negara dan Reformasi Birokrasi </strong></td>
 		</tr>
 		<tr>
 			<td colspan="2"><hr></td>
@@ -57,7 +57,7 @@ if($fil_tahun_id!="" && $fil_auditee_id!=""){
 		</tr>
 	</table>
 	<br>
-	<fieldset>
+	<fieldset class="form-group">
 	<table align="center" width="100%">
 		<tr>
 			<td align="center"><strong>BAGIAN PERTAMA</strong></td>
@@ -71,7 +71,7 @@ if($fil_tahun_id!="" && $fil_auditee_id!=""){
 	</table>
 	</fieldset>
 	<br>
-	<fieldset>
+	<fieldset class="form-group">
 	<table align="center" width="100%">
 		<tr>
 			<td align="center" colspan="4"><strong>BAGIAN KEDUA</strong></td>
@@ -206,7 +206,7 @@ if($fil_tahun_id!="" && $fil_auditee_id!=""){
 	</table>
 	</fieldset>
 	<br>
-	<fieldset>
+	<fieldset class="form-group">
 	<table align="center" width="100%">
 		<tr>
 			<td colspan="5" align="center"><strong>BAB II</strong></td>
@@ -294,7 +294,7 @@ if($fil_tahun_id!="" && $fil_auditee_id!=""){
 	</table>
 	</fieldset>	
 	<br>
-	<fieldset>
+	<fieldset class="form-group">
 	<table align="center" width="100%">
 		<tr>
 			<td colspan="3" align="center"><strong>BAB III</strong></td>

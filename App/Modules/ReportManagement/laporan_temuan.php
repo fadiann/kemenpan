@@ -26,7 +26,7 @@ if($fil_tahun_id!="" && $fil_auditee_id!=""){
 <section id="main" class="column">	
 	<article class="module width_3_quarter">
 		<div style="overflow-x: auto; width: 100%;">
-			<table border='1' class="table_risk" cellspacing='0' cellpadding="0">
+			<table border='1' class="table table-bordered table-striped table-condensed mb-none" cellspacing='0' cellpadding="0">
 			<tr>
 				<td colspan="10" align="center">MATRIKS TEMUAN</td>
 			</tr>
@@ -88,7 +88,7 @@ if($fil_tahun_id!="" && $fil_auditee_id!=""){
 		</table>
 		</div>
 		<br><br>
-		<fieldset>
+		<fieldset class="form-group">
 			<center>
 				<input type="button" class="blue_btn" value="ms-excel" onclick="window.open('ReportManagement/laporan_temuan_excel.php?fil_tahun_id=<?= $fil_tahun_id ?>&fil_auditee_id=<?= $fil_auditee_id ?>','toolbar=no, location=no, status=no, menubar=yes, scrollbars=yes, resizable=yes');">
 			</center>

@@ -58,7 +58,7 @@ $gridWidth = array ("15", "20", "10", "15", "5", "10");
 $key_by = array ("Nama Kegiatan");
 $key_field = array ("audit_plan_kegiatan");
 
-$widthAksi  = "10";
+$widthAksi  = "15";
 $iconEdit   = "1";
 $iconDel    = "1";
 $iconDetail = "1";
@@ -111,9 +111,7 @@ switch ($_action) {
 			$plannings->planning_add_komentar ( $id_plann, $fkomentar, $ftanggal );
 			$Helper->js_alert_act ( 3 );
 		}
-		?>
-<script>window.open('<?=$def_page_request?>', '_self');</script>
-<?
+		echo "<script>window.open('".$def_page_request."', '_self');</script>";
 		$page_request = "blank.php";
 		break;
 	case "anggota_plan" :
@@ -178,29 +176,27 @@ switch ($_action) {
 		} else {
 			$Helper->js_alert_act ( 5 );
 		}
-		?>
-<script>window.open('<?=$def_page_request?>', '_self');</script>
-<?
+		echo "<script>window.open('".$def_page_request."', '_self');</script>";
 		$page_request = "blank.php";
 		break;
 	case "postedit" :
-		$fdata_id = $Helper->replacetext ( $_POST ["data_id"] );
-		$ftipe_audit = $Helper->replacetext ( $_POST ["tipe_audit"] );
-		$fsub_type = $Helper->replacetext ( $_POST ["sub_type"] );
-		$fauditee = $_POST ["auditee_id"];
-		$ftahun = $Helper->replacetext ( $_POST ["tahun"] );
-		$ftujuan = $Helper->replacetext ( $_POST ["tujuan"] );
-		$fperiode = $Helper->replacetext ( $_POST ["periode"] );
-		$fbiaya_audit = $Helper->replacetext ( $_POST ["biaya_audit"], true );
-		$ftanggal_awal = $Helper->date_db_ori ( $Helper->replacetext ( $_POST ["tanggal_awal"] ) );
-		$ftanggal_akhir = $Helper->date_db_ori ( $Helper->replacetext ( $_POST ["tanggal_akhir"] ) );
-		$ftanggal_awal1 = $Helper->date_db ($Helper->replacetext ( $_POST ["tanggal_awal"] ));
-		$ftanggal_akhir1 = $Helper->date_db ($Helper->replacetext ( $_POST ["tanggal_akhir"] ));
-		$convert_tgl_awal = $Helper->date_db ($ftanggal_awal);
+		$fdata_id          = $Helper->replacetext ( $_POST ["data_id"] );
+		$ftipe_audit       = $Helper->replacetext ( $_POST ["tipe_audit"] );
+		$fsub_type         = $Helper->replacetext ( $_POST ["sub_type"] );
+		$fauditee          = $_POST ["auditee_id"];
+		$ftahun            = $Helper->replacetext ( $_POST ["tahun"] );
+		$ftujuan           = $Helper->replacetext ( $_POST ["tujuan"] );
+		$fperiode          = $Helper->replacetext ( $_POST ["periode"] );
+		$fbiaya_audit      = $Helper->replacetext ( $_POST ["biaya_audit"], true );
+		$ftanggal_awal     = $Helper->date_db ( $Helper->replacetext ( $_POST ["tanggal_awal"] ) );
+		$ftanggal_akhir    = $Helper->date_db ( $Helper->replacetext ( $_POST ["tanggal_akhir"] ) );
+		$ftanggal_awal1    = $Helper->date_db ($Helper->replacetext ( $_POST ["tanggal_awal"] ));
+		$ftanggal_akhir1   = $Helper->date_db ($Helper->replacetext ( $_POST ["tanggal_akhir"] ));
+		$convert_tgl_awal  = $Helper->date_db ($ftanggal_awal);
 		$convert_tgl_akhir = $Helper->date_db ($ftanggal_akhir);
-		$count_plan_date = (($convert_tgl_akhir - $convert_tgl_awal) / 86400) + 1;
-		$count_weekend = $Helper->cek_holiday ( $convert_tgl_awal, $convert_tgl_akhir );
-		$hari_kerja = $count_plan_date - $count_weekend;
+		$count_plan_date   = (($convert_tgl_akhir - $convert_tgl_awal) / 86400) + 1;
+		$count_weekend     = $Helper->cek_holiday ( $convert_tgl_awal, $convert_tgl_akhir );
+		$hari_kerja        = $count_plan_date - $count_weekend;
 
 		if ($ftipe_audit != "" && $ftahun != "" && $ftanggal_akhir != "") {
 			$plannings->planning_edit ( $fdata_id, $ftipe_audit, $ftahun, $ftanggal_awal1, $ftanggal_akhir1, $hari_kerja, $ftujuan, $fperiode, $fbiaya_audit, $fsub_type );
@@ -223,9 +219,8 @@ switch ($_action) {
 		} else {
 			$Helper->js_alert_act ( 5 );
 		}
-		?>
-<script>window.open('<?=$def_page_request?>', '_self');</script>
-<?
+		// die();
+		echo "<script>window.open('".$def_page_request."', '_self');</script>";
 		$page_request = "blank.php";
 		break;
 	case "getdelete" :
@@ -233,9 +228,7 @@ switch ($_action) {
 		$plannings->planning_delete ( $fdata_id );
 		$Helper->hapus_notif($fdata_id);
 		$Helper->js_alert_act ( 2 );
-		?>
-<script>window.open('<?=$def_page_request?>', '_self');</script>
-<?
+		echo "<script>window.open('".$def_page_request."', '_self');</script>";
 		$page_request = "blank.php";
 		break;
 	default :

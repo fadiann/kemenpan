@@ -1,13 +1,14 @@
-<table class="table_grid" cellspacing="0" cellpadding="0">
+<div class="table-responsive mt-md">
+	<table class="table table-bordered table-striped table-condensed table-hover mb-none">
 	<tr>
 		<?
 		$jmlHeader = count ( $gridHeader );
-		echo ("<th width='5%'>No</th>");
+		echo ("<th width='5%' class='text-center'>No</th>");
 		for($j = 0; $j < $jmlHeader; $j ++) {
-		echo ("<th width='" . $gridWidth [$j] . "%'>" . $gridHeader [$j] . "</th>");
+			echo ("<th class='text-center' width='" . $gridWidth [$j] . "%'>" . $gridHeader [$j] . "</th>");
 		}
 		if ($widthAksi != "0") {
-		echo ("<th width='" . $widthAksi . "%'>Aksi</th>");
+			echo ("<th class='text-center' width='" . $widthAksi . "%'>Aksi</th>");
 		}
 		?>
 	</tr>
@@ -18,7 +19,7 @@
 	$i ++;
 	?>
 	<tr>
-		<td><?=$i+$offset?></td>
+		<td class="text-center"><?=$i+$offset?>.</td>
 		<?
 		for($j = 0; $j < count ( $gridDetail ); $j ++) {
 		if ($gridHeader [$j] == "Obyek Audit") {
@@ -65,7 +66,7 @@
 		<td>
 			<?
 			if ($arr ['audit_plan_status'] == 1) {
-			echo "Diajukan Oleh " . ucfirst ( $arr ['user_propose'] ) . "<br>Sedang Menunggu Approval";
+			echo "Diajukan Oleh " . ucfirst ( $arr ['user_propose'] ) . "<br>Sedang Menunggu Approval Inspektur";
 			} elseif ($arr ['audit_plan_status'] == 2) {
 			echo "Telah Disetujui Oleh " . ucfirst ( $arr ['user_approve'] );
 			} elseif ($arr ['audit_plan_status'] == 3) {
@@ -83,7 +84,7 @@
 		}
 		}
 		?>
-		<td>
+		<td class="text-center">
 			<?php
 				if ($arr ['audit_plan_status'] == 2) {
 					$cekAction = $Helper->cekAction($ses_group_id);
@@ -102,8 +103,8 @@
 					if ($arr ['audit_plan_status'] == 0 || $arr ['audit_plan_status'] == 3) {
 						if ($getajukan) {
 			?>
-			<fieldset>
-				<select name="status"
+			<fieldset class="form-group">
+				<select name="status" class="form-control mb-sm"
 					onchange="return set_action('getajukan', '<?=$arr[0]?>', this.value)">
 					<option value="">Pilih Status</option>
 					<option value="1">Ajukan</option>
@@ -114,8 +115,8 @@
 				} elseif ($arr ['audit_plan_status'] == 1) {
 					if ($getapprove) {
 			?>
-			<fieldset>
-				<select name="status"
+			<fieldset class="form-group">
+				<select name="status" class="form-control mb-sm"
 					onchange="return set_action('getapprove', '<?=$arr[0]?>', this.value)">
 					<option value="">Pilih Status</option>
 					<option value="3">Tolak Pengajuan</option>
@@ -130,23 +131,19 @@
 			<?
 			if ($iconDetail) {
 			?>
-			<input type="image" src="Public/images/icn_alert_info.png"
-			title="Rincian Data"
-			Onclick="return set_action('getdetail', '<?=$arr[0]?>')">
-			&nbsp;&nbsp;
+			<button class="btn btn-info btn-circle btn-sm" title="Rincian Data" Onclick="return set_action('getdetail', '<?=$arr[0]?>')"><i class="fa fa-info-circle"></i></button>
+			
 			<?
 			}
 			if ($iconEdit) {
 			?>
-			<input type="image" src="Public/images/icn_edit.png" title="Ubah Data"
-			Onclick="return set_action('getedit', '<?=$arr[0]?>')">
-			&nbsp;&nbsp;
+			<button class="btn btn-warning btn-circle btn-sm" title="Ubah Data" Onclick="return set_action('getedit', '<?=$arr[0]?>')"><i class="fa fa-pencil"></i></button>
+			
 			<?
 			}
 			if ($iconDel) {
 			?>
-			<input type="image" src="Public/images/icn_trash.png" title="Hapus Data"
-			Onclick="return set_action('getdelete', '<?=$arr[0]?>', '<?=$arr[1]?>')">
+			<button class="btn btn-danger btn-circle btn-sm" title="Hapus Data" Onclick="return set_action('getdelete', '<?=$arr[0]?>', '<?=$arr[1]?>')"><i class="fa fa-trash-o"></i></button>
 			<?
 			}
 			?>
@@ -167,30 +164,31 @@
 	</tr>
 	<tr>
 		<td align="center" class="td_paging">
-			<?
-			$showPage = "";
-			$jumPage = ceil ( $recordcount / $num_row );
-			if ($noPage > 1)
-			echo "<a href='" . $paging_request . "&page=" . ($noPage - 1) . "'> <<d </a>";
-			for($page = 1; $page <= $jumPage; $page ++) {
-			if ((($page >= $noPage - 3) && ($page <= $noPage + 3)) || ($page == 1) || ($page == $jumPage)) {
+	<?
+	$showPage = "";
+	$jumPage = ceil ( $recordcount / $num_row );
+	if ($noPage > 1)
+		echo "<a href='" . $paging_request . "&page=" . ($noPage - 1) . "' class='btn btn-sm btn-circle btn-primary'> <<d </a>";
+	for($page = 1; $page <= $jumPage; $page ++) {
+		if ((($page >= $noPage - 3) && ($page <= $noPage + 3)) || ($page == 1) || ($page == $jumPage)) {
 			if (($showPage == 1) && ($page != 2))
-			echo "<span class='titik_titik'>...</span>";
+				echo "<span class='titik_titik'>...</span>";
 			if (($showPage != ($jumPage - 1)) && ($page == $jumPage))
-			echo "<span class='titik_titik'>...</span>";
+				echo "<span class='titik_titik'>...</span>";
 			if ($page == $noPage)
-			echo "<span class='paging_aktif'>" . $page . "</span> ";
+				echo "<span class='btn btn-sm btn-circle btn-default'>" . $page . "</span> ";
 			else
-			echo " <a href='" . $paging_request . "&page=" . $page . "'>" . $page . "</a> ";
+				echo " <a href='" . $paging_request . "&page=" . $page . "' class='btn btn-sm btn-circle btn-primary'>" . $page . "</a> ";
 			$showPage = $page;
-			}
-			}
-			if ($noPage < $jumPage)
-			echo "<a href='" . $paging_request . "&page=" . ($noPage + 1) . "'> > </a>";
-			?>
-		</td>
+		}
+	}
+	if ($noPage < $jumPage)
+		echo "<a href='" . $paging_request . "&page=" . ($noPage + 1) . "' class='btn btn-sm btn-circle btn-primary'> > </a>";
+	?>
+	</td>
 	</tr>
-</table>
+	</table>
+</div>
 <script>
 $(document).ready(function() {
 	$(".colorbox_status").colorbox({iframe:false, innerWidth:550, innerHeight:150});

@@ -1,40 +1,39 @@
-<section id="main" class="column">
-	<article class="module width_3_quarter">
-		<header>
-			<h3 class="tabs_involved"><?=$page_title?></h3>
+<div class="row">
+	<div class="col-md-12">
+		<section class="panel">
+			<header class="panel-heading">
+				<h2 class="panel-title"><?=$page_title?></h2>
+			</header>
 			<form method="post" name="f" action="#">
-			<?php if($iconAdd){?>
-				<ul class="tabs">
-					<li><a href="#" OnClick="return set_action('getadd');">Tambah</a></li>
-				</ul>
-			<?php }?>
-				<input type="hidden" value="" name="data_action" id="data_action">
-				<input type="hidden" value="" name="data_id" id="data_id">
-		</header>
-		<header>
-			<ul class="tabs">
-				<li>
-					<select name="key_search" class="select_search">
-						<?
-						if(count($key_by)!=1)
-						?>
-						<option value="">Semua Pilihan</option>
-						<?php 
-						for($i=0;$i<count($key_by);$i++){
-						?>
-							<option value="<?=$key_field[$i]?>" <? if(@$key_search==$key_field[$i]) echo "selected";?>><?=$key_by[$i]?></option>
-						<?php
-						}
-						?>
-					</select>
-				</li>
-				<li><input type="text" name="val_search" id="val_search" class="text_search" value=<?=@$val_search?>></li>
-				<li><a href="#" OnClick="return set_action('');">Cari</a></li>
-			</ul>
-		</header>
-			</form>
-<?
-include_once $grid;
-?>   
-	</article>
-</section>
+			<div class="panel-body">
+				<div class="form-inline text-right mt-sm">
+				<?php if($iconAdd){?>
+					<a class="btn btn-success" href="#" OnClick="return set_action('getadd');"><i class="fa fa-plus"> </i> Tambah</a>
+				<?php }?>
+					<input type="hidden" value="" name="data_action" id="data_action">
+					<input type="hidden" value="" name="data_id" id="data_id">
+				</div>
+					<div class="form-inline text-right mt-sm">
+						<select name="key_search" class="form-control">
+							<?php
+							if(count($key_by)!=1)
+							?>
+							<option value="">Semua Pilihan</option>
+							<?php
+							for($i=0;$i<count($key_by);$i++){
+							?>
+								<option value="<?=$key_field[$i]?>" <? if(@$key_search==$key_field[$i]) echo "selected";?>><?=$key_by[$i]?></option>
+							<?php
+							}
+							?>
+						</select>
+						<input type="text" name="val_search" id="val_search" class="form-control" value=<?=@$val_search?>>
+						<a href="#" OnClick="return set_action('');" class="btn btn-primary">Cari</a>
+					</div>
+				</form>
+				<?php include_once $grid; ?>   
+			</div>
+		</section>
+	</div>
+</div>
+

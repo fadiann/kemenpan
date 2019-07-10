@@ -10,28 +10,28 @@
 		switch ($_action) {
 			case "getadd" :
 				?>
-			<fieldset class="hr">
+			<fieldset class="form-group">
 				<label class="span1">Nama Menu</label> <input type="text"
 					class="span2" name="name" id="name">
 			</fieldset>
-			<fieldset class="hr">
+			<fieldset class="form-group">
 				<label class="span1">Link</label> <input type="text" class="span5"
 					name="link" id="link">
 			</fieldset>
-			<fieldset class="hr">
+			<fieldset class="form-group">
 				<label class="span1">Method</label> <input type="text" class="span2"
 					name="method" id="method">
 			</fieldset>
-			<fieldset class="hr">
+			<fieldset class="form-group">
 				<label class="span1">Nama File</label> <input type="text"
 					class="span3" name="file" id="file">
 			</fieldset>
-			<fieldset class="hr">
+			<fieldset class="form-group">
 				<label class="span1">Sort</label> <input type="text" class="span0"
 					name="sort" id="sort">
 			</fieldset>
-			<fieldset class="hr">
-				<label class="span1">Status</label> <select name="status">
+			<fieldset class="form-group">
+				<label class="span1">Status</label> <select name="status" class="form-control">
 					<option value="">Pilih Satu</option>
 					<option value="1">Show</option>
 					<option value="0">Hidden</option>
@@ -43,28 +43,28 @@
 			case "getedit" :
 				$arr = $rs->FetchRow ();
 				?>
-			<fieldset class="hr">
+			<fieldset class="form-group">
 				<label class="span1">Nama Menu</label> <input type="text"
 					class="span2" name="name" id="name" value="<?=$arr['menu_name']?>">
 			</fieldset>
-			<fieldset class="hr">
+			<fieldset class="form-group">
 				<label class="span1">Link</label> <input type="text" class="span5"
 					name="link" id="link" value="<?=$arr['menu_link']?>">
 			</fieldset>
-			<fieldset class="hr">
+			<fieldset class="form-group">
 				<label class="span1">Method</label> <input type="text" class="span2"
 					name="method" id="method" value="<?=$arr['menu_method']?>">
 			</fieldset>
-			<fieldset class="hr">
+			<fieldset class="form-group">
 				<label class="span1">Nama File</label> <input type="text"
 					class="span3" name="file" id="file" value="<?=$arr['menu_file']?>">
 			</fieldset>
-			<fieldset class="hr">
+			<fieldset class="form-group">
 				<label class="span1">Sort</label> <input type="text" class="span0"
 					name="sort" id="sort" value="<?=$arr['menu_sort']?>">
 			</fieldset>
-			<fieldset class="hr">
-				<label class="span1">Status</label> <select name="status">
+			<fieldset class="form-group">
+				<label class="span1">Status</label> <select name="status" class="form-control">
 					<option value="">Pilih Satu</option>
 					<option value="1" <?php if($arr['menu_show']==1) echo "selected";?>>Show</option>
 					<option value="0" <?php if($arr['menu_show']==0) echo "selected";?>>Hidden</option>
@@ -75,11 +75,11 @@
 				break;
 		}
 		?>
-			<fieldset>
+			<fieldset class="form-group">
 				<center>
-					<input type="button" class="blue_btn" value="Kembali"
+					<input type="button" class="btn btn-primary" value="Kembali"
 						onclick="location='<?=$def_page_request?>'"> &nbsp;&nbsp;&nbsp; <input
-						type="submit" class="blue_btn" value="Simpan">
+						type="submit" class="btn btn-success" value="Simpan">
 				</center>
 				<input type="hidden" name="data_action" id="data_action"
 					value="<?=$_nextaction?>">

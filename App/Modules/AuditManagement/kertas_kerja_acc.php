@@ -23,17 +23,17 @@ if (! empty ( $view_parrent ))
 		switch ($_action) {
 			case "getadd" :
 				?>
-			<fieldset class="hr">
-				<label class="span2">No Kertas Kerja Audit</label>
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">No Kertas Kerja Audit</label>
 				<input type="text" class="span2" name="no_kka" id="no_kka">
-				<span class="mandatory">*</span>
+				<span class="required">*</span>
 			</fieldset>
-			<fieldset class="hr">
-				<label class="span2">Tanggal Kertas Kerja Audit</label>
-				<input type="text" class="span1" name="kertas_kerja_date" id="kertas_kerja_date">
-				<span class="mandatory">*</span>
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Tanggal Kertas Kerja Audit</label>
+				<input type="text" class="form-control" name="kertas_kerja_date" id="kertas_kerja_date">
+				<span class="required">*</span>
 			</fieldset>
-			<fieldset class="hr">
+			<fieldset class="form-group">
 				<ul class="rtabs">
 					<li><a href="#view1">Uraian</a></li>
 					<li><a href="#view2">Kesimpulan</a></li>
@@ -72,18 +72,18 @@ if (! empty ( $view_parrent ))
 			case "getedit" :
 				$arr = $rs->FetchRow ();
 				?>
-			<fieldset class="hr">
-				<label class="span2">No Kertas Kerja Audit</label> <input type="text"
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">No Kertas Kerja Audit</label> <input type="text"
 					class="span2" name="no_kka" id="no_kka"
-					value="<?=$arr['kertas_kerja_no']?>"><span class="mandatory">*</span>
+					value="<?=$arr['kertas_kerja_no']?>"><span class="required">*</span>
 			</fieldset>
-			<fieldset class="hr">
-				<label class="span2">Tanggal Kertas Kerja Audit</label> <input type="text"
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Tanggal Kertas Kerja Audit</label> <input type="text"
 					class="span1" name="kertas_kerja_date" id="kertas_kerja_date"
 					value="<?=$Helper->dateIndo($arr['kertas_kerja_date'])?>"><span
 					class="mandatory">*</span>
 			</fieldset>
-			<fieldset>
+			<fieldset class="form-group">
 				<ul class="rtabs">
 					<li><a href="#view1">Uraian</a></li>
 					<li><a href="#view2">Kesimpulan</a></li>
@@ -136,8 +136,8 @@ if (! empty ( $view_parrent ))
 				$arr = $rs->FetchRow ();
 				$rs_komentar = $kertas_kerjas->kka_komentar_viewlist ( $arr ['kertas_kerja_id'] );
 				?>
-			<fieldset class="hr">
-				<table class="view_parrent">
+			<fieldset class="form-group">
+				<table class="table table-borderless">
 					<tr>
 						<td width="120px">No KKA</td>
 						<td>:</td>
@@ -206,8 +206,8 @@ if (! empty ( $view_parrent ))
 				$rs_komentar = $kertas_kerjas->kka_komentar_viewlist ( $arr ['kertas_kerja_id'] );
 				?>
 			
-			<fieldset class="hr">
-				<table class="view_parrent">
+			<fieldset class="form-group">
+				<table class="table table-borderless">
 					<tr>
 						<td width="120px">No KKA</td>
 						<td>:</td>
@@ -268,8 +268,8 @@ if (! empty ( $view_parrent ))
 					</tr>
 				</table>
 			</fieldset>
-			<fieldset class="hr">
-				<label class="span2">Isi Komentar</label>
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Isi Komentar</label>
 				<textarea id="komentar" name="komentar" rows="1" cols="20" style="width: 475px; height: 3em; font-size: 11px;"></textarea>
 			</fieldset>
 			<input type="hidden" name="data_id" value="<?=$arr['kertas_kerja_id']?>">	
@@ -278,17 +278,17 @@ if (! empty ( $view_parrent ))
 				break;
 		}
 		?>
-			<fieldset>
+			<fieldset class="form-group">
 				<center>
 				<?
 				if($_action != "getajukan_kka" && $_action != "getapprove_kka"){
 				?>
-					<input type="button" class="blue_btn" value="Kembali" onclick="location='<?=$def_page_request?>'"> &nbsp;&nbsp;&nbsp;
+					<input type="button" class="btn btn-primary" value="Kembali" onclick="location='<?=$def_page_request?>'"> &nbsp;&nbsp;&nbsp;
 				<?
 				}
 				if($_action != "getdetail"){
 				?>
-					<input type="submit" class="blue_btn" value="Simpan">
+					<input type="submit" class="btn btn-success" value="Simpan">
 				<?php 
 				}else{
 				?>	
@@ -310,7 +310,7 @@ $('#tambah_auditee').on('click', function(e){
 	var new_row = '<tr id="'+no+'">'
 			+ '<td align="center">'+no+'.</td>'
 			+ '<td><input type="file" class="span4" name="kka_attach[]"></td>'
-			+ '<td><button class="btn auditee_remove">-</button></td>'
+			+ '<td><button class="btn auditee_remove" style="color: #000 !important">X</button></td>'
 		+ '</tr>';
 	$('#tabel_auditee tbody').append(new_row);
 });

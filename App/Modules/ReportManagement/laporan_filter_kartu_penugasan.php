@@ -11,27 +11,27 @@ $assigns = new assign ( $ses_userId );
 		</header>
 		<form method="post" name="f" action="main.php?method=laporan_kartu_penugasan" class="form-horizontal" id="validation-form">
 			
-			<fieldset class="hr">
-				<label class="span2">Obyek Audit</label>
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Obyek Audit</label>
 				<?php
 				$rs_auditee = $assigns->assign_auditee_viewlist();
 				$arr_auditee = $rs_auditee->GetArray ();
 				echo $Helper->buildCombo ( "fil_auditee_id", $arr_auditee, 0, 1, "", "", "", false, true, false );
 				?>
-				<span class="mandatory">*</span>
+				<span class="required">*</span>
 			</fieldset>
-			<fieldset class="hr">
-				<label class="span2">Tahun</label>
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Tahun</label>
 				<?php
 				$rs_tahun = $assigns->assign_tahun_viewlist();
 				$arr_tahun = $rs_tahun->GetArray ();
 				echo $Helper->buildCombo ( "fil_tahun_id", $arr_tahun, 0, 0, "", "", "", false, true, false );
 				?>
-				<span class="mandatory">*</span>
+				<span class="required">*</span>
 			</fieldset>
-			<fieldset>
+			<fieldset class="form-group">
 				<center>
-					<input type="submit" class="blue_btn" value="Lihat">
+					<input type="submit" class="btn btn-success" value="Lihat">
 				</center>
 			</fieldset>
 		</form>

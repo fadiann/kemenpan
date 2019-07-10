@@ -10,16 +10,16 @@
 		switch ($_action) {
 			case "getadd" :
 				?>
-			<fieldset class="hr">
-				<label class="span2">Tingkat Kemungkinan</label> <input type="text"
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Tingkat Kemungkinan</label> <input type="text"
 					class="span5" name="name" id="name">
 			</fieldset>
-			<fieldset class="hr">
-				<label class="span2">Nilai</label> <input type="text" class="span3"
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Nilai</label> <input type="text" class="span3"
 					name="nilai" id="nilai">
 			</fieldset>
-			<fieldset class="hr">
-				<label class="span2">Keterangan</label> <input type="text"
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Keterangan</label> <input type="text"
 					class="span7" name="desc" id="desc">
 			</fieldset>
 		<?
@@ -27,16 +27,16 @@
 			case "getedit" :
 				$arr = $rs->FetchRow ();
 				?>
-			<fieldset class="hr">
-				<label class="span2">Tingkat Kemungkinan</label> <input type="text"
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Tingkat Kemungkinan</label> <input type="text"
 					class="span5" name="name" id="name" value="<?=$arr['tk_name']?>">
 			</fieldset>
-			<fieldset class="hr">
-				<label class="span2">Nilai</label> <input type="text" class="span3"
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Nilai</label> <input type="text" class="span3"
 					name="nilai" id="nilai" value="<?=$arr['tk_value']?>">
 			</fieldset>
-			<fieldset class="hr">
-				<label class="span2">Keterangan</label> <input type="text"
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Keterangan</label> <input type="text"
 					class="span7" name="desc" id="desc" value="<?=$arr['tk_desc']?>">
 			</fieldset>
 			<input type="hidden" name="data_id" value="<?=$arr['tk_id']?>">	
@@ -44,11 +44,11 @@
 				break;
 		}
 		?>
-			<fieldset>
+			<fieldset class="form-group">
 				<center>
-					<input type="button" class="blue_btn" value="Kembali"
+					<input type="button" class="btn btn-primary" value="Kembali"
 						onclick="location='<?=$def_page_request?>'"> &nbsp;&nbsp;&nbsp; <input
-						type="submit" class="blue_btn" value="Simpan">
+						type="submit" class="btn btn-success" value="Simpan">
 				</center>
 				<input type="hidden" name="data_action" id="data_action"
 					value="<?=$_nextaction?>">

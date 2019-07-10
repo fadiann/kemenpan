@@ -10,47 +10,47 @@
 		switch ($_action) {
 			case "getadd" :
 				?>
-			<fieldset class="hr">
-				<label class="span2">Sub Tipe Pengawasan</label> 
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Sub Tipe Pengawasan</label> 
 				<input type="text" class="span3" name="name" id="name">
-				<span class="mandatory">*</span>
+				<span class="required">*</span>
 			</fieldset>
-			<fieldset class="hr">
-				<label class="span2">Keterangan</label> 
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Keterangan</label> 
 				<input type="text" class="span7" name="desc" id="desc">
 			</fieldset>
-			<fieldset class="hr">
-				<label class="span2">Tipe Pengawasan</label> 
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Tipe Pengawasan</label> 
 				<?=$Helper->dbCombo("type_id", "par_audit_type", "audit_type_id", "audit_type_name", "and audit_type_del_st = 1 ", "", "", 1)?>
-				<span class="mandatory">*</span>
+				<span class="required">*</span>
 			</fieldset>
 		<?
 				break;
 			case "getedit" :
 				$arr = $rs->FetchRow ();
 				?>
-			<fieldset class="hr">
-				<label class="span2">Sub Tipe Pengawasan</label> 
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Sub Tipe Pengawasan</label> 
 				<input type="text" class="span3" name="name" id="name" value="<?=$arr['sub_audit_type_name']?>">
 			</fieldset>
-			<fieldset class="hr">
-				<label class="span2">Keterangan</label> 
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Keterangan</label> 
 				<input type="text" class="span7" name="desc" id="desc" value="<?=$arr['sub_audit_type_desc']?>">
 			</fieldset>
-			<fieldset class="hr">
-				<label class="span2">Tipe Pengawasan</label> 
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Tipe Pengawasan</label> 
 				<?=$Helper->dbCombo("type_id", "par_audit_type", "audit_type_id", "audit_type_name", "and audit_type_del_st = 1", $arr['sub_audit_type_id_type'], "", 1)?>
-				<span class="mandatory">*</span>
+				<span class="required">*</span>
 			</fieldset>
 			<input type="hidden" name="data_id" value="<?=$arr['sub_audit_type_id']?>">	
 		<?
 				break;
 		}
 		?>
-			<fieldset>
+			<fieldset class="form-group">
 				<center>
-					<input type="button" class="blue_btn" value="Kembali" onclick="location='<?=$def_page_request?>'"> &nbsp;&nbsp;&nbsp; 
-					<input type="submit" class="blue_btn" value="Simpan">
+					<input type="button" class="btn btn-primary" value="Kembali" onclick="location='<?=$def_page_request?>'"> &nbsp;&nbsp;&nbsp; 
+					<input type="submit" class="btn btn-success" value="Simpan">
 				</center>
 				<input type="hidden" name="data_action" id="data_action" value="<?=$_nextaction?>">
 			</fieldset>

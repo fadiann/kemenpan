@@ -1,13 +1,14 @@
-<table class="table_grid" cellspacing="0" cellpadding="0">
+<div class="table-responsive mt-md">
+	<table class="table table-bordered table-striped table-condensed mb-none">
 	<tr>
 		<?
 		$jmlHeader = count ( $gridHeader );
-		echo ("<th width='5%'>No</th>");
+		echo ("<th width='5%' class='text-center'>No</th>");
 		for($j = 0; $j < $jmlHeader; $j ++) {
-			echo ("<th width='" . $gridWidth [$j] . "%'>" . $gridHeader [$j] . "</th>");
+			echo ("<th class='text-center' width='" . $gridWidth [$j] . "%'>" . $gridHeader [$j] . "</th>");
 		}
 		if ($widthAksi != "0") {
-			echo ("<th width='" . $widthAksi . "%'>Aksi</th>");
+			echo ("<th class='text-center' width='" . $widthAksi . "%'>Aksi</th>");
 		}
 		?>
 	</tr>
@@ -18,7 +19,7 @@
 			$i ++;
 			?>
 	<tr>
-		<td><?=$i+$offset?></td>
+		<td class='text-center'><?=$i+$offset?>.</td>
 	<?
 			for($j = 0; $j < count ( $gridDetail ); $j ++) {
 				if ($gridHeader [$j] == "Tanggal" || $gridHeader [$j] == "Batas Waktu") {
@@ -47,9 +48,9 @@
 	<?
 				} else if ($gridHeader [$j] == "Tanggal Kegiatan") {
 					?>
-		<td>
+		<td class="text-center">
 	<?
-					echo $Helper->dateIndo ( $arr ['assign_start_date'] ) . " s.d " . $Helper->dateIndo ( $arr ['assign_end_date'] );
+					echo $Helper->dateIndo ( $arr ['assign_start_date'] ) . " <br>s.d<br> " . $Helper->dateIndo ( $arr ['assign_end_date'] );
 					?>
 		</td>
 	<?
@@ -60,8 +61,9 @@
 					echo $assigns->count_auditor_assign ( $arr [$gridDetail [$j]] );
 					if ($anggota_assign_akses) {
 						?>
-			<br> <input type="image" src="Public/images/icn_search.png" title="View Tim"
-			Onclick="return set_action('anggota_assign', '<?=$arr[$gridDetail[$j]]?>', '')">
+			<br>
+			<button class="btn btn-default btn-circle btn-sm"  title="View Tim"
+			Onclick="return set_action('anggota_assign', '<?=$arr[$gridDetail[$j]]?>', '')"><i class="fa fa-search"></i></button>
 	<?
 					}
 					?>
@@ -78,7 +80,7 @@
 					} else if ($arr[$gridDetail[$j]]==1) {
 						$iconEdit = $Helper->cek_akses ( $ses_group_id, $method, 'getedit' );
 						$iconDel = $Helper->cek_akses ( $ses_group_id, $method, 'getdelete' );
-						echo "Sedang Menunggu Persetujuan";
+						echo "Sedang Menunggu Persetujuan Dalnis";
 					} else if ($arr[$gridDetail[$j]]==2 || $arr[$gridDetail[$j]]==3) {
 						$cekAction = $Helper->cekAction($ses_group_id);
 						if($cekAction == 1){
@@ -92,13 +94,13 @@
 						echo $arr['assign_surat_no'];
 						?>
 						<br>
-						<input type="image" src="Public/images/icn_search.png" title="View Surat Tugas" Onclick="return set_action('getsurattugas', '<?=$arr['assign_id']?>', '')">
+						<button class="btn btn-default btn-circle btn-sm" title="View Surat Tugas" Onclick="return set_action('getsurattugas', '<?=$arr['assign_id']?>', '')"><i class="fa fa-search"></i></button>
 	<?
 						}
 					} else if ($arr[$gridDetail[$j]]==4) {
 						$iconEdit = $Helper->cek_akses ( $ses_group_id, $method, 'getedit' );
 						$iconDel = $Helper->cek_akses ( $ses_group_id, $method, 'getdelete' );
-						echo "Penugasan Ditolak";
+						echo "Penugasan Ditolak Dalnis";
 					}
 					?>
 		</td>
@@ -111,8 +113,8 @@
 					$status_owner =  $kertas_kerjas->cek_owner_program ( $arr [$gridDetail [$j]], $ses_userId);
 					if ($kertas_kerja && $status_owner) {
 						?>
-			<br> <input type="image" src="Public/images/icn_search.png" title="View KKA"
-			Onclick="return set_action('kertas_kerja', '<?=$arr[$gridDetail[$j]]?>', '')">
+			<br>
+			<button class="btn btn-default btn-circle btn-sm" title="View KKA" Onclick="return set_action('kertas_kerja', '<?=$arr[$gridDetail[$j]]?>', '')"><i class="fa fa-search"></i></button>
 	<?
 					}
 					?>
@@ -143,8 +145,8 @@
 
 					$rs_id_auditee_2 = $assigns->assign_auditee_viewlist ( $arr [$gridDetail [$j]] );
 					while ( $arr_id_auditee_2 = $rs_id_auditee_2->FetchRow () ) {
-					?>
-						<input type="image" src="Public/images/icn_search.png" title="View LHA <?=$arr_id_auditee_2['auditee_name']?>" onclick="return set_action('getlha', '<?=$arr['assign_id'].":".$arr_id_auditee_2['assign_auditee_id_auditee']?>', '')">
+					?>	<br>
+						<button class="btn btn-default btn-circle btn-sm" title="View LHA <?=$arr_id_auditee_2['auditee_name']?>" onclick="return set_action('getlha', '<?=$arr['assign_id'].":".$arr_id_auditee_2['assign_auditee_id_auditee']?>', '')"><i class="fa fa-search"></i></button>
 					<?
 					}
 				} else {
@@ -160,9 +162,8 @@
 					echo $programaudits->program_audit_count ( $arr [$gridDetail [$j]], "", "", "" );
 					if ($programaudit_akses) {
 						?>
-			<br> <input type="image" src="Public/images/icn_search.png"
-			title="View Audit Program"
-			Onclick="return set_action('programaudit', '<?=$arr[$gridDetail[$j]]?>', '')">
+						<br>
+						<button class="btn btn-default btn-circle btn-sm" title="View Audit Program" Onclick="return set_action('programaudit', '<?=$arr[$gridDetail[$j]]?>', '')"><i class="fa fa-search"></i></button>
 	<?
 					}
 					?>
@@ -175,14 +176,14 @@
 				}
 			}
 			?>
-		<td>
+		<td class="text-center">
 	<?php
 			if ($method == "auditassign") {
 				if ($arr ['assign_status'] == 0 || $arr ['assign_status'] == 4) {
 					if($getajukan_penugasan){
 					?>
-			<fieldset>
-				<select name="status"
+			<fieldset class="form-group mb-sm">
+				<select name="status" class="form-control"
 					onchange="return set_action('getajukan_penugasan', '<?=$arr[0]?>', this.value)">
 					<option value="">Pilih Status</option>
 					<option value="1">Ajukan</option>
@@ -193,8 +194,8 @@
 				} elseif ($arr ['assign_status'] == 1) {
 					if($getapprove_penugasan){
 					?>
-			<fieldset>
-				<select name="status"
+			<fieldset class="form-group mb-sm">
+				<select name="status" class="form-control"
 					onchange="return set_action('getapprove_penugasan', '<?=$arr[0]?>', this.value)">
 					<option value="">Pilih Status</option>
 					<option value="4">Tolak Penugasan</option>
@@ -208,26 +209,22 @@
 
 			if ($iconDetail) {
 				?>
-			<input type="image" src="Public/images/icn_alert_info.png"
-			title="Rincian Data"
-			Onclick="return set_action('getdetail', '<?=$arr[0]?>')">
-			&nbsp;&nbsp;
+			<button class="btn btn-info btn-circle btn-sm" title="Rincian Data" Onclick="return set_action('getdetail', '<?=$arr[0]?>')"><i class="fa fa-info-circle"></i></button>
+			
 	<?
 			}
 			if ($iconEdit) {
 				?>
-			<input type="image" src="Public/images/icn_edit.png" title="Ubah Data"
-			Onclick="return set_action('getedit', '<?=$arr[0]?>')">
-			&nbsp;&nbsp;
+			<button class="btn btn-warning btn-circle btn-sm" title="Ubah Data" Onclick="return set_action('getedit', '<?=$arr[0]?>')"><i class="fa fa-pencil"></i></button>
+			
 	<?
 			}
 			if ($iconDel) {
 				$ket_text = $arr[1];
 				if($method=='auditassign') $ket_text = "Penugasan Ini";
 				?>
-			<input type="image" src="Public/images/icn_trash.png" title="Hapus Data"
-			Onclick="return set_action('getdelete', '<?=$arr[0]?>', '<?=$ket_text?>')">
-			&nbsp;&nbsp;
+			<button class="btn btn-danger btn-circle btn-sm" title="Hapus Data" Onclick="return set_action('getdelete', '<?=$arr[0]?>', '<?=$ket_text?>')"><i class="fa fa-trash-o"></i></button>
+			
 	<?
 			}
 			?>
@@ -242,6 +239,7 @@
 	}
 	?>
 </table>
+
 <table width="100%">
 	<tr>
 		<td>&nbsp;</td>
@@ -252,7 +250,7 @@
 	$showPage = "";
 	$jumPage = ceil ( $recordcount / $num_row );
 	if ($noPage > 1)
-		echo "<a href='" . $paging_request . "&page=" . ($noPage - 1) . "'> <<d </a>";
+		echo "<a href='" . $paging_request . "&page=" . ($noPage - 1) . "' class='btn btn-sm btn-circle btn-primary'> <<d </a>";
 	for($page = 1; $page <= $jumPage; $page ++) {
 		if ((($page >= $noPage - 3) && ($page <= $noPage + 3)) || ($page == 1) || ($page == $jumPage)) {
 			if (($showPage == 1) && ($page != 2))
@@ -260,15 +258,16 @@
 			if (($showPage != ($jumPage - 1)) && ($page == $jumPage))
 				echo "<span class='titik_titik'>...</span>";
 			if ($page == $noPage)
-				echo "<span class='paging_aktif'>" . $page . "</span> ";
+				echo "<span class='btn btn-sm btn-circle btn-default'>" . $page . "</span> ";
 			else
-				echo " <a href='" . $paging_request . "&page=" . $page . "'>" . $page . "</a> ";
+				echo " <a href='" . $paging_request . "&page=" . $page . "' class='btn btn-sm btn-circle btn-primary'>" . $page . "</a> ";
 			$showPage = $page;
 		}
 	}
 	if ($noPage < $jumPage)
-		echo "<a href='" . $paging_request . "&page=" . ($noPage + 1) . "'> > </a>";
+		echo "<a href='" . $paging_request . "&page=" . ($noPage + 1) . "' class='btn btn-sm btn-circle btn-primary'> > </a>";
 	?>
 	</td>
 	</tr>
-</table>
+	</table>
+</div>

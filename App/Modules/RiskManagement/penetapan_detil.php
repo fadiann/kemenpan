@@ -2,11 +2,14 @@
 <?
 include "risk_view_parrent.php";
 ?>
-<article class="module width_3_quarter">
-		<fieldset>
-			<label>ANALISIS RISIKO</label>
-		</fieldset>
-		<table border='1' class="table_risk" cellspacing='0' cellpadding="0">
+<div class="row">
+	<div class="col-md-12">
+		<section class="panel">
+			<header class="panel-heading">
+				<h2 class="panel-title">ANALISIS RISIKO</h2>
+			</header>
+			<div class="panel-body wrap">
+		<table border='1' class="table table-bordered table-striped table-condensed mb-none" cellspacing='0' cellpadding="0">
 			<tr align="center">
 				<th width="2%" rowspan="2">No</th>
 				<th width="47%" colspan="5">Identifikasi Risiko</th>
@@ -77,11 +80,14 @@ include "risk_view_parrent.php";
 	}
 	?>
 </table>
-		<br>
-		<fieldset>
-			<label>EVALUASI RISIKO</label>
-		</fieldset>
-		<table border='1' class="table_risk" cellspacing='0' cellpadding="0">
+			</div>
+		</section>
+		<section class="panel">
+			<header class="panel-heading">
+				<h2 class="panel-title">EVALUASI RISIKO</h2>
+			</header>
+			<div class="panel-body wrap">
+		<table border='1' class="table table-bordered table-striped table-condensed mb-none" cellspacing='0' cellpadding="0">
 			<tr align="center">
 				<th width="2%" rowspan="2">No</th>
 				<th width="58%" colspan="7">Risiko Inhern</th>
@@ -142,11 +148,14 @@ include "risk_view_parrent.php";
 	}
 	?>
 </table>
-		<br>
-		<fieldset>
-			<label>PENANGANAN RISIKO</label>
-		</fieldset>
-		<table border='1' class="table_risk" cellspacing='0' cellpadding="0">
+			</div>
+		</section>
+		<section class="panel">
+			<header class="panel-heading">
+				<h2 class="panel-title">PENANGANAN RISIKO</h2>
+			</header>
+			<div class="panel-body wrap">
+		<table border='1' class="table table-bordered table-striped table-condensed mb-none" cellspacing='0' cellpadding="0">
 			<tr align="center">
 				<th width="2%" rowspan="2">No</th>
 				<th width="55%" colspan="5">Risiko Residu</th>
@@ -207,9 +216,15 @@ include "risk_view_parrent.php";
 	
 	?>
 </table>
+			</div>
+		</section>
 <form method="post" name="f" action="#" class="form-horizontal" onsubmit="return cek_data()">
-<fieldset class="hr">
-	<table class="view_parrent">
+<section class="panel">
+	<header class="panel-heading">
+		<h2 class="panel-title">KOMENTAR :</h2>
+	</header>
+	<div class="panel-body wrap">
+	<table class="table table-borderless table-condensed table-hover">
 		<tr>
 			<td>Detail komentar</td>
 			<td>:</td>
@@ -230,17 +245,17 @@ include "risk_view_parrent.php";
 switch ($_action) {
 	case "poststatus" :
 	?>
-<fieldset class="hr">
-	<label class="span2">Isi Komentar</label>
+<fieldset class="form-group">
+	<label class="col-sm-3 control-label">Isi Komentar</label>
 	<textarea id="komentar" name="komentar" rows="1" cols="20" style="width: 475px; height: 3em; font-size: 11px;"></textarea>
 </fieldset>
 <?
 		break;
 }
 ?>
-			<fieldset>
+			<fieldset class="form-group">
 				<center>
-					<input type="button" class="blue_btn" value="Kembali" onclick="location='<?=$def_page_request?>'">
+					<input type="button" class="btn btn-primary" value="Kembali" onclick="location='<?=$def_page_request?>'">
 			<?php
 	if($_action!='poststatus'){
 		if($cek_penanganan<>0){
@@ -268,7 +283,8 @@ switch ($_action) {
 			</fieldset>
 		</form>
 	</article>
-</section>
+	</div>
+</div>
 <script>
 function cek_data(){
 	var data = document.getElementById('status_risk').value;

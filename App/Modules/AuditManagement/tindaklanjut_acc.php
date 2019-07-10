@@ -17,13 +17,13 @@ if (! empty ( $view_parrent ))
 		switch ($_action) {
 			case "getadd" :
 				?>
-			<fieldset>
-				<label class="span2">Tindak Lanjut</label>
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Tindak Lanjut</label>
 			</fieldset>
-			<fieldset class="hr">
+			<fieldset class="form-group">
 				<textarea class="ckeditor" cols="10" rows="40" name="tl_desc" id="tl_desc"></textarea>
 			</fieldset>
-			<fieldset class="hr">
+			<fieldset class="form-group">
 				<br>
 					<input type="button" id="tambah_auditee" class="blue_btn" value="Tambah Baris">
 					<br>
@@ -50,13 +50,13 @@ if (! empty ( $view_parrent ))
 			case "getedit" :
 				$arr = $rs->FetchRow ();
 				?>
-			<fieldset>
-				<label class="span2">Tindak Lanjut</label>
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Tindak Lanjut</label>
 			</fieldset>
-			<fieldset class="hr">
+			<fieldset class="form-group">
 				<textarea class="ckeditor" cols="10" rows="40" name="tl_desc" id="tl_desc"><?php echo $arr['tl_desc']?></textarea>
 			</fieldset>
-			<fieldset class="hr">
+			<fieldset class="form-group">
 					<br>
 					<input type="button" id="tambah_auditee" class="blue_btn" value="Tambah Baris">
 					<br>
@@ -97,8 +97,8 @@ if (! empty ( $view_parrent ))
 			case "getapprove_tl" :
 				$arr = $rs->FetchRow ();
 				?>
-			<fieldset class="hr">
-				<table class="view_parrent">
+			<fieldset class="form-group">
+				<table class="table table-borderless">
 					<tr>
 						<td width="120px">Tindak Lanjut</td>
 						<td>:</td>
@@ -135,8 +135,8 @@ if (! empty ( $view_parrent ))
 					</tr>
 				</table>
 			</fieldset>
-			<fieldset class="hr">
-				<label class="span2">Isi Komentar</label>
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Isi Komentar</label>
 				<textarea id="komentar" name="komentar" rows="1" cols="20" style="width: 475px; height: 3em; font-size: 11px;"></textarea>
 			</fieldset>
 			<input type="hidden" name="status" value="<?=$status?>">
@@ -145,10 +145,10 @@ if (! empty ( $view_parrent ))
 				break;
 		}
 		?>
-			<fieldset>
+			<fieldset class="form-group">
 				<center>
-					<input type="button" class="blue_btn" value="Kembali" onclick="location='<?=$def_page_request?>'"> &nbsp;&nbsp;&nbsp; 
-					<input type="submit" class="blue_btn" value="Simpan">
+					<input type="button" class="btn btn-primary" value="Kembali" onclick="location='<?=$def_page_request?>'"> &nbsp;&nbsp;&nbsp; 
+					<input type="submit" class="btn btn-success" value="Simpan">
 				</center>
 				<input type="hidden" name="data_action" id="data_action"
 					value="<?=$_nextaction?>">

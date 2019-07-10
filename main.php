@@ -1,8 +1,10 @@
 <?php
+$position = 1;
+include_once "App/Libraries/login_history.php";
+include_once "App/Libraries/Helper.php";
+$Helper			= new Helper();
 if (isset($_REQUEST['action'])) {
 	if ($_REQUEST['action'] == 'logout') {
-		session_start();
-		$position = 1;
 		include_once "App/Classes/Login.php";
 		$logins = new Login();
 		$logins->log_out($_SESSION['ses_userId']);
@@ -10,24 +12,63 @@ if (isset($_REQUEST['action'])) {
 		header("location: index.php");
 	}
 }
+$notif_show 	= "";
+$rs_cek_count 	= $Helper->list_notif($ses_userId);
+$rs_notif 		= $Helper->list_notif($ses_userId);
+$count_notif 	= $rs_notif->RecordCount();
+if($count_notif <> 0) $notif_show = ", Anda Memiliki ".$count_notif. " Notifikasi, silahkan direviu";
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html>
-
-<head>
+<!doctype html>
+<html class="fixed">
+	<head>
+	<!-- Basic -->
+	<meta charset="UTF-8">
+	
 	<title>e-MAS | Elektronik Manajemen Audit Sistem</title>
-	<link rel="stylesheet" href="Public/css/layout.css" type="text/css" media="screen" />
 	<link rel="stylesheet" href="Public/css/loader.css">
 	<link rel="shortcut icon" href="Public/images/emas-logo.png" type="image/x-icon">
-	<!--[if lt IE 9]>
-			<link rel="stylesheet" href="Public/css/ie.css" type="text/css" media="screen" />
-		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-		<![endif]-->
+	<meta name="author" content="Fadian Adhitya Nugraha">
 
-	<script src="Public/js/jquery-3.4.1.js" type="text/javascript"></script>
+	<!-- Mobile Metas -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+	<!-- Web Fonts  -->
+	<link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800|Shadows+Into+Light" rel="stylesheet" type="text/css">
+
+	<!-- Vendor CSS -->
+	<link rel="stylesheet" href="Public/assets/vendor/bootstrap/css/bootstrap.css" />
+	<link rel="stylesheet" href="Public/assets/vendor/font-awesome/css/font-awesome.css" />
+	<link rel="stylesheet" href="Public/assets/vendor/magnific-popup/magnific-popup.css" />
+	<link rel="stylesheet" href="Public/assets/vendor/bootstrap-datepicker/css/datepicker3.css" />
+
+	<!-- Specific Page Vendor CSS -->
+	<link rel="stylesheet" href="Public/assets/vendor/jquery-ui/css/ui-lightness/jquery-ui-1.10.4.custom.css" />
+	<link rel="stylesheet" href="Public/assets/vendor/select2/select2.css" />
+	<link rel="stylesheet" href="Public/assets/vendor/bootstrap-multiselect/bootstrap-multiselect.css" />
+	<link rel="stylesheet" href="Public/assets/vendor/bootstrap-tagsinput/bootstrap-tagsinput.css" />
+	<link rel="stylesheet" href="Public/assets/vendor/bootstrap-colorpicker/css/bootstrap-colorpicker.css" />
+	<link rel="stylesheet" href="Public/assets/vendor/bootstrap-timepicker/css/bootstrap-timepicker.css" />
+	<link rel="stylesheet" href="Public/assets/vendor/dropzone/css/basic.css" />
+	<link rel="stylesheet" href="Public/assets/vendor/dropzone/css/dropzone.css" />
+	<link rel="stylesheet" href="Public/assets/vendor/bootstrap-markdown/css/bootstrap-markdown.min.css" />
+	<link rel="stylesheet" href="Public/assets/vendor/summernote/summernote.css" />
+	<link rel="stylesheet" href="Public/assets/vendor/summernote/summernote-bs3.css" />
+	<link rel="stylesheet" href="Public/assets/vendor/codemirror/lib/codemirror.css" />
+	<link rel="stylesheet" href="Public/assets/vendor/codemirror/theme/monokai.css" />
+
+	<!-- Theme CSS -->
+	<link rel="stylesheet" href="Public/assets/stylesheets/theme.css" />
+
+	<!-- Skin CSS -->
+	<link rel="stylesheet" href="Public/assets/stylesheets/skins/default.css" />
+
+	<!-- Theme Custom CSS -->
+	<link rel="stylesheet" href="Public/assets/stylesheets/theme-custom.css">
+
+	<!-- Head Libs -->
+	<script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
 	<script src="Public/js/actions.js" type="text/javascript"></script>
-	<script src="Public/js/hideshow.js" type="text/javascript"></script>
-	<script src="Public/js/jqClock.min.js" type="text/javascript"></script>
+	<script src="Public/assets/vendor/modernizr/modernizr.js"></script>
 	<script src="Public/js/pace.min.js" type="text/javascript"></script>
 	<?php
 	$position = 1;
@@ -57,16 +98,16 @@ if (isset($_REQUEST['action'])) {
 		// 		document.getElementById(id).style.display = 'block';
 		// 	}
 		// }
-		$(document).ready(function() {
-			$("#jam").clock({
-				"format": "24",
-				"calendar": "false"
-			});
-			$("div#jamcal").clock({
-				"calendar": "true",
-				"langSet": "id"
-			});
-		});
+		// $(document).ready(function() {
+		// 	$("#jam").clock({
+		// 		"format": "24",
+		// 		"calendar": "false"
+		// 	});
+		// 	$("div#jamcal").clock({
+		// 		"calendar": "true",
+		// 		"langSet": "id"
+		// 	});
+		// });
 	</script>
 	<script>
 		Pace.on("done", function() {
@@ -74,387 +115,186 @@ if (isset($_REQUEST['action'])) {
 		});
 	</script>
 
-</head>
+	</head>
+	<body>
+		<!-- start: loader -->
+		<div class="preloader"></div>
+		<div class="loading" style="display:none" >Loading&#8230;</div>
+		<!-- end: loader -->
+		<section class="body">
 
-<!-- <body onload="sh('notif', '<?//= $jml_notif ?>')"> -->
-<body>
-	<div class="preloader"></div>
-	<header id="header">
-		<hgroup>
-			<h1 class="site_title">
-				<img src="Public/images/emas-logo-app.png" height="50">
-			</h1>
-			<h2 class="section_title">
-				<div id="jam"></div>
-			</h2>
-			<div class="btn_view_site">
-				<a class="logout_user" href="?action=logout" title="Logout"><b>Logout</b></a>
+			<!-- start: header -->
+			<header class="header">
+				<div class="logo-container">
+					<a href="../" class="logo">
+						<img src="Public/images/emas-logo.png" height="35" alt="Porto Admin" />
+					</a>
+					<div class="visible-xs toggle-sidebar-left" data-toggle-class="sidebar-left-opened" data-target="html" data-fire-event="sidebar-left-opened">
+						<i class="fa fa-bars" aria-label="Toggle sidebar"></i>
+					</div>
+				</div>
+			
+				<!-- start: search & user box -->
+				<div class="header-right">
+			
+
+					<!-- MODAL NOTIFIKASI -->
+					<ul class="notifications">
+						<li>
+							<a class="notification-icon modal-basic " data-toggle="modal" data-target="#notifikasi" style="cursor: pointer;">
+								<i class="fa fa-bell"></i>
+								<!-- <span class="badge">3</span> -->
+							</a>
+						</li>
+					</ul>
+
+					<div class="modal fade" id="notifikasi" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+						<div class="modal-dialog modal-lg" role="document">
+							<div class="modal-content" >
+							<div class="modal-header">
+								<h4 class="modal-title" id="myModalLabel">Notifikasi</h4>
+							</div>
+							<div class="modal-body" style="overflow-y: scroll; max-height:300px !important;">
+							<?php
+							if($count_notif <> 0){
+							?>
+							<table class="table table-bordered table-striped table-condensed mb-none" >
+								<tr>
+									<th class="text-center">No</th>
+									<th class="text-center">Catatan Dari</th>
+									<th class="text-center">Catatan</th>
+									<th class="text-center">Aksi</th>
+								</tr>
+								<?php
+								$no_notif = 0;
+								while($arr_notif = $rs_notif->FetchRow()){
+									$no_notif++;
+								?>
+								<tr>
+									<td class="text-center"><?=$no_notif?>.</td>
+									<td><?=$arr_notif['from_auditor']?></td>
+									<td><?=$arr_notif['notif_desc']?></td>
+									<td class="text-center">
+										<a href="main.php?method=<?=$arr_notif['notif_method']?>" class="btn btn-info btn-sm"><i class="fa fa-info-circle"></i> Lihat</a>
+									</td>
+								</tr>
+								<?
+								}
+								?>
+							</table>
+							<?php } ?>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+							</div>
+							</div>
+						</div>
+					</div>
+					<!-- END MODAL NOTIFIKASI -->
+
+					<span class="separator"></span>
+			
+					<div id="userbox" class="userbox">
+						<a href="#" data-toggle="dropdown">
+							<figure class="profile-picture">
+								<img src="Public/Upload/Upload_Foto/no-picture.png" alt="Joseph Doe" class="img-circle" data-lock-picture="Public/Upload/Upload_Foto/no-picture.png" />
+							</figure>
+							<div class="profile-info" data-lock-name="John Doe" data-lock-email="johndoe@okler.com">
+								<span class="name"><?= ucwords($ses_userName)?></span>
+								<span class="role"><?=ucwords(strtolower($h_groupName))?></span>
+							</div>
+			
+							<i class="fa custom-caret"></i>
+						</a>
+			
+						<div class="dropdown-menu">
+							<ul class="list-unstyled">
+								<li class="divider"></li>
+								<li>
+									<a role="menuitem" tabindex="-1" href="main.php?method=change_pass&data_action=getedit"><i class="fa fa-user"></i> Ubah Password</a>
+								</li>
+								<!-- <li>
+									<a role="menuitem" tabindex="-1" href="#" data-lock-screen="true"><i class="fa fa-lock"></i> Lock Screen</a>
+								</!--> 
+								<li>
+									<a role="menuitem" tabindex="-1" href="?action=logout"><i class="fa fa-power-off"></i> Logout</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<!-- end: search & user box -->
+			</header>
+			<!-- end: header -->
+
+			<div class="inner-wrapper">
+				<!-- start: sidebar -->
+					<!-- start: menu -->
+					<?php include "App/Templates/Pages/Menu.php"; ?>
+					<!-- end: menu -->
+				<!-- end: sidebar -->
+
+				<section role="main" class="content-body">
+					<!-- start: breadcumb -->
+					<?php include "App/Templates/Pages/Breadcumb.php"; ?>
+					<!-- end: breadcumb -->
+
+					<!-- start: page -->
+					<?php include "App/Templates/Pages/Main.php"; ?>
+					<!-- end: page -->
+				</section>
 			</div>
-		</hgroup>
-	</header>
-	<!-- end of header bar -->
-	<section id="secondary_bar">
-		<div class="user">
-			<p><?= ucwords($ses_userName) . " [" . ucwords(strtolower($h_groupName)) . "]"; ?></p>
-		</div>
-		<div class="breadcrumbs_container">
-			<article class="breadcrumbs">
-				<a href="main.php">Home</a>
-				<?
-				include "navigation_menu.php";
-				?>
-			</article>
-			<!-- <div class="notif" id="notif">&nbsp;&nbsp;&nbsp;<? 
-																	?>&nbsp;&nbsp;&nbsp;</div> -->
-		</div>
-	</section>
-	<!-- end of secondary bar -->
-	<?
-	include "main_menu.php";
-	switch ($method) {
-			// coba pelanggan
-		case "coba_pelanggan":
-			include_once "App/Modules/CobaPelanggan/pelanggan_main.php";
-			break;
-			// risk management
-		case "risk_penetapantujuan":
-			include_once "App/Modules/RiskManagement/penetapan_main.php";
-			break;
-		case "risk_identifikasi":
-			include_once "App/Modules/RiskManagement/identifikasi_main.php";
-			break;
-		case "risk_analisa":
-			include_once "App/Modules/RiskManagement/analisa_main.php";
-			break;
-		case "risk_evaluasi":
-			include_once "App/Modules/RiskManagement/evaluasi_main.php";
-			break;
-		case "risk_penanganan":
-			include_once "App/Modules/RiskManagement/penanganan_main.php";
-			break;
-		case "risk_reviu":
-			include_once "App/Modules/RiskManagement/reviu_main.php";
-			break;
-		case "risk_monitoring":
-			include_once "App/Modules/RiskManagement/monitoring_main.php";
-			break;
-		case "benturan_kepentingan":
-			include_once "App/Modules/RiskManagement/benturan_kepentingan_main.php";
-			break;
-			// audit management
-		case "risk_result":
-			include_once "App/Modules/AuditManagement/risk_result_main.php";
-			break;
-		case "auditplan":
-			include_once "App/Modules/AuditManagement/audit_plan_main.php";
-			break;
-		case "anggota_plan":
-			include_once "App/Modules/AuditManagement/anggota_plan_main.php";
-			break;
-		case "auditassign":
-			include_once "App/Modules/AuditManagement/audit_assign_main.php";
-			break;
-		case "anggota_assign":
-			include_once "App/Modules/AuditManagement/anggota_assign_main.php";
-			break;
-		case "surattugas":
-			include_once "App/Modules/AuditManagement/surat_tugas_main.php";
-			break;
-		case "programaudit":
-			include_once "App/Modules/AuditManagement/program_audit_main.php";
-			break;
-		case "kertas_kerja":
-			include_once "App/Modules/AuditManagement/kertas_kerja_main.php";
-			break;
-		case "finding_kka":
-			include_once "App/Modules/AuditManagement/finding_main.php";
-			break;
-		case "rekomendasi":
-			include_once "App/Modules/AuditManagement/rekomendasi_main.php";
-			break;
-		case "followupassign":
-			include_once "App/Modules/AuditManagement/assign_tl_main.php";
-			break;
-		case "finding_tl":
-			include_once "App/Modules/AuditManagement/finding_tl_main.php";
-			break;
-		case "rekomendasi_tl":
-			include_once "App/Modules/AuditManagement/rekomendasi_tl_main.php";
-			break;
-		case "matrikstindaklanjut":
-		case "tindaklanjut":
-			include_once "App/Modules/AuditManagement/tindaklanjut_main.php";
-			break;
-		case "matriks_tl":
-			include_once "App/Modules/AuditManagement/matriks_tindak_lanjut.php";
-			break;
-		case "dashboardaudit":
-			include_once "App/Modules/AuditManagement/dashboard_audit.php";
-			break;
-		case  "dashboard_audit_filter":
-			include_once "App/Modules/ReportManagement/dashboard_audit_filter.php";
-			break;
-		case  "dashboard_audit":
-			include_once "App/Modules/ReportManagement/dashboard_audit.php";
-			break;
-		case  "dashboard_auditor_filter":
-			include_once "App/Modules/ReportManagement/dashboard_auditor_filter.php";
-			break;
-		case  "dashboard_auditor":
-			include_once "App/Modules/ReportManagement/dashboard_auditor.php";
-			break;
-		case  "dashboard_temuan_filter":
-			include_once "App/Modules/ReportManagement/dashboard_temuan_filter.php";
-			break;
-		case  "dashboard_temuan":
-			include_once "App/Modules/ReportManagement/dashboard_temuan.php";
-			break;
-			// laporan
-		case "laporan_monitoring_tl_filter":
-			include_once "App/Modules/ReportManagement/monitoring_tl_filter.php";
-			break;
-		case "laporan_monitoring_tl":
-			include_once "App/Modules/ReportManagement/monitoring_tl.php";
-			break;
-		case "risk_fil_report":
-			include_once "App/Modules/ReportManagement/laporan_filter_risiko.php";
-			break;
-		case "risk_report":
-			include_once "App/Modules/ReportManagement/laporan_risiko.php";
-			break;
-		case "reportaudit":
-			include_once "App/Modules/ReportManagement/listReportAudit_main.php";
-			break;
-		case "rekap_surat_tugas":
-			include_once "App/Modules/ReportManagement/rekap_surat_tugas.php";
-			break;
-		case "rekap_surat_tugas_filter":
-			include_once "App/Modules/ReportManagement/rekap_surat_tugas_filter.php";
-			break;
-		case "laporan_rekap_perencanaan_filter":
-			include_once "App/Modules/ReportManagement/laporan_filter_rekap_perencanaan.php";
-			break;
-		case "laporan_rekap_perencanaan":
-			include_once "App/Modules/ReportManagement/rekap_perencanaan.php";
-			break;
-		case "laporan_program_audit_filter":
-			include_once "App/Modules/ReportManagement/laporan_filter_program_audit.php";
-			break;
-		case "laporan_program_audit":
-			include_once "App/Modules/ReportManagement/laporan_program_audit.php";
-			break;
-		case "laporan_kka_filter":
-			include_once "App/Modules/ReportManagement/laporan_kka_filter.php";
-			break;
-		case "laporan_kka":
-			include_once "App/Modules/ReportManagement/laporan_kka.php";
-			break;
-		case "laporan_temuan_filter":
-			include_once "App/Modules/ReportManagement/laporan_temuan_filter.php";
-			break;
-		case "laporan_temuan":
-			include_once "App/Modules/ReportManagement/laporan_temuan.php";
-			break;
-		case "laporan_lha_filter":
-			include_once "App/Modules/ReportManagement/laporan_lha_filter.php";
-			break;
-		case "laporan_lha":
-			include_once "App/Modules/ReportManagement/laporan_lha.php";
-			break;
-			// auditor management
-		case "auditormgmt":
-			include_once "App/Modules/AuditorManagement/auditor_main.php";
-			break;
-		case "auditor_detil":
-			include_once "App/Modules/AuditorManagement/auditor_detil.php";
-			break;
-			// auditee management
-		case "auditeemgmt":
-			include_once "App/Modules/AuditeeManagement/auditee_main.php";
-			break;
-		case "auditee_detil":
-			include_once "App/Modules/AuditeeManagement/auditee_detil.php";
-			break;
-			// parameter management
-		case "par_risk_main":
-			include_once "App/Modules/ParameterManagement/list_parRisk.php";
-			break;
-		case "par_risk_kategori":
-			include_once "App/Modules/ParameterManagement/risk_kategori_main.php";
-			break;
-		case "par_risk_selera":
-			include_once "App/Modules/ParameterManagement/risk_selera_main.php";
-			break;
-		case "par_risk_tk":
-			include_once "App/Modules/ParameterManagement/risk_tk_main.php";
-			break;
-		case "par_risk_td":
-			include_once "App/Modules/ParameterManagement/risk_td_main.php";
-			break;
-		case "par_risk_ri":
-			include_once "App/Modules/ParameterManagement/risk_ri_main.php";
-			break;
-		case "par_risk_rr":
-			include_once "App/Modules/ParameterManagement/risk_rr_main.php";
-			break;
-		case "par_risk_peng_int":
-			include_once "App/Modules/ParameterManagement/risk_pi_main.php";
-			break;
-		case "par_risk_matrix_residu":
-			include_once "App/Modules/ParameterManagement/risk_matrix_residu_main.php";
-			break;
-		case "par_risk_penanganan":
-			include_once "App/Modules/ParameterManagement/risk_penanganan_main.php";
-			break;
-		case "par_profil":
-			include_once "App/Modules/ParameterManagement/risk_profil_main.php";
-			break;
-		case "par_td":
-			include_once "App/Modules/ParameterManagement/risk_level_main.php";
-			break;
-		case "par_audit_main":
-			include_once "App/Modules/ParameterManagement/list_parAudit.php";
-			break;
-		case "par_audit_type":
-			include_once "App/Modules/ParameterManagement/audit_type_main.php";
-			break;
-		case "par_subaudit_type":
-			include_once "App/Modules/ParameterManagement/sub_audit_type_main.php";
-			break;
-		case "par_temuan_type":
-			include_once "App/Modules/ParameterManagement/temuan_type_main.php";
-			break;
-		case "par_sub_type":
-			include_once "App/Modules/ParameterManagement/temuan_sub_type_main.php";
-			break;
-		case "par_kode_rek":
-			include_once "App/Modules/ParameterManagement/kode_rekomendasi_main.php";
-			break;
-		case "par_jenis_temuan":
-			include_once "App/Modules/ParameterManagement/temuan_jenis_main.php";
-			break;
-		case "par_holiday":
-			include_once "App/Modules/ParameterManagement/holiday_main.php";
-			break;
-		case "par_posisi_penugasan":
-			include_once "App/Modules/ParameterManagement/posisi_penugasan_main.php";
-			break;
-		case "par_sbu":
-			include_once "App/Modules/BudgetManagement/sbu_main.php";
-			break;
-		case "par_sbu_rinci":
-			include_once "App/Modules/BudgetManagement/sbu_rinci_main.php";
-			break;
-		case "par_status_tl":
-			include_once "App/Modules/ParameterManagement/status_tl_main.php";
-			break;
-		case "par_kode_penyebab":
-			include_once "App/Modules/ParameterManagement/kode_penyebab_main.php";
-			break;
-		case "par_aspek":
-			include_once "App/Modules/ParameterManagement/aspek_main.php";
-			break;
-		case "par_kategori_ref":
-			include_once "App/Modules/ParameterManagement/kat_ref_main.php";
-			break;
-		case "par_auditor_main":
-			include_once "App/Modules/ParameterManagement/list_parAuditor.php";
-			break;
-		case "par_kompetensi":
-			include_once "App/Modules/ParameterManagement/kompetensi_main.php";
-			break;
-		case "par_inspektorat":
-			include_once "App/Modules/ParameterManagement/inspektorat_main.php";
-			break;
-		case "par_pangkat":
-			include_once "App/Modules/ParameterManagement/pangkat_main.php";
-			break;
-		case "par_tipe_jabatan":
-			include_once "App/Modules/ParameterManagement/tipe_jabatan_main.php";
-			break;
-		case "par_auditee_main":
-			include_once "App/Modules/ParameterManagement/list_parAuditee.php";
-			break;
-		case "par_propinsi":
-			include_once "App/Modules/ParameterManagement/propinsi_main.php";
-			break;
-		case "par_kabupaten":
-			include_once "App/Modules/ParameterManagement/kabupaten_main.php";
-			break;
-		case "par_esselon":
-			include_once "App/Modules/ParameterManagement/unit_esselon_main.php";
-			break;
-		case "par_jabatan":
-			include_once "App/Modules/ParameterManagement/jabatan_pic_main.php";
-			break;
-		case "par_gambar":
-			include_once "App/Modules/ParameterManagement/gambar_main.php";
-			break;
-		case "par_email":
-			include_once "ParameterManagement/mail_main.php";
-			break;
-		case "save_mail":
-			include_once "ParameterManagement/save_mail.php";
-			break;
-			// user management
-		case "usermgmt":
-			include_once "App/Modules/UserManagement/user_main.php";
-			break;
-		case "par_group":
-			include_once "App/Modules/UserManagement/group_main.php";
-			break;
-		case "backuprestore":
-			include_once "App/Modules/UserManagement/backuprestore_main.php";
-			break;
-		case "log_aktifitas":
-			include_once "App/Modules/UserManagement/log_main.php";
-			break;
-			// Pustaka
-		case "ref_program":
-			include_once "App/Modules/PustakaManagement/ref_program_main.php";
-			break;
-		case "ref_audit":
-			include_once "App/Modules/PustakaManagement/ref_audit_main.php";
-			break;
-			// par_menu
-		case "par_menu":
-			include_once "App/Modules/ParameterManagement/menu_main.php";
-			break;
-			// user manual
-		case "user_manual":
-			include_once "App/Modules/ParameterManagement/user_manual_main.php";
-			break;
-		case "user_manual_donwload":
-			include_once "App/Modules/ParameterManagement/user_manual_create.php";
-			break;
-			// ubah password
-		case "change_pass":
-			include_once "App/Modules/UserManagement/change_pass_main.php";
-			break;
-		case "author":
-			include_once "App/Modules/Author/author_main.php";
-			break;
-		case "author_detil":
-			include_once "App/Modules/Author/author_detil.php";
-			break;
-		default:
-			include_once "App/Modules/dashboard.php";
-			break;
-	}
-	?>
-	<footer>
-		<div id="clear"></div>
-		<div style="background-color: #324aff; height: 30px; border-top: 2px solid black; padding-bottom: 5px;">
-			<center>
-				<!-- <p> -->
-				<br>
-				<strong>Copyright &copy; Kementerian Pendayagunaan Aparatur Negara dan Reformasi Birokrasi <?= date('Y') ?>
-					<br>
-					<!-- </p> -->
-			</center>
-		</div>
-		</div>
-	</footer>
-</body>
+		</section>
 
+		<!-- Vendor -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script> 
+		<script src="Public/assets/vendor/jquery-browser-mobile/jquery.browser.mobile.js"></script>
+		<script src="Public/assets/vendor/bootstrap/js/bootstrap.js"></script>
+		<script src="Public/assets/vendor/nanoscroller/nanoscroller.js"></script>
+		<script src="Public/assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+		<script src="Public/assets/vendor/magnific-popup/magnific-popup.js"></script>
+		<script src="Public/assets/vendor/jquery-placeholder/jquery.placeholder.js"></script>
+		
+		<!-- Specific Page Vendor -->
+		<script src="Public/assets/vendor/jquery-ui/js/jquery-ui-1.10.4.custom.js"></script>
+		<script src="Public/assets/vendor/jquery-ui-touch-punch/jquery.ui.touch-punch.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
+		<script src="Public/assets/vendor/bootstrap-multiselect/bootstrap-multiselect.js"></script>
+		<script src="Public/assets/vendor/jquery-maskedinput/jquery.maskedinput.js"></script>
+		<script src="Public/assets/vendor/bootstrap-tagsinput/bootstrap-tagsinput.js"></script>
+		<script src="Public/assets/vendor/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script>
+		<script src="Public/assets/vendor/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>
+		<script src="Public/assets/vendor/fuelux/js/spinner.js"></script>
+		<script src="Public/assets/vendor/dropzone/dropzone.js"></script>
+		<script src="Public/assets/vendor/bootstrap-markdown/js/markdown.js"></script>
+		<script src="Public/assets/vendor/bootstrap-markdown/js/to-markdown.js"></script>
+		<script src="Public/assets/vendor/bootstrap-markdown/js/bootstrap-markdown.js"></script>
+		<script src="Public/assets/vendor/codemirror/lib/codemirror.js"></script>
+		<script src="Public/assets/vendor/codemirror/addon/selection/active-line.js"></script>
+		<script src="Public/assets/vendor/codemirror/addon/edit/matchbrackets.js"></script>
+		<script src="Public/assets/vendor/codemirror/mode/javascript/javascript.js"></script>
+		<script src="Public/assets/vendor/codemirror/mode/xml/xml.js"></script>
+		<script src="Public/assets/vendor/codemirror/mode/htmlmixed/htmlmixed.js"></script>
+		<script src="Public/assets/vendor/codemirror/mode/css/css.js"></script>
+		<script src="Public/assets/vendor/summernote/summernote.js"></script>
+		<script src="Public/assets/vendor/bootstrap-maxlength/bootstrap-maxlength.js"></script>
+		<script src="Public/assets/vendor/ios7-switch/ios7-switch.js"></script>
+		
+		<!-- Theme Base, Components and Settings -->
+		<script src="Public/assets/javascripts/theme.js"></script>
+		
+		<!-- Theme Custom -->
+		<script src="Public/assets/javascripts/theme.custom.js"></script>
+		
+		<!-- Theme Initialization Files -->
+		<script src="Public/assets/javascripts/theme.init.js"></script>
+
+
+		<!-- Examples -->
+		<script src="Public/assets/javascripts/forms/examples.advanced.form.js" /></script>
+		<script type="text/javascript" src="Public/js/jquery.validate.min.js"></script>
+		<script type="text/javascript" src="Public/js/select2/select2.min.js"></script>
+		<script type="text/javascript" src="Public/ckeditor/ckeditor.js"></script>
+		<script type="text/javascript" src="Public/js/responsive-tabs.js"></script>
+	</body>
 </html>

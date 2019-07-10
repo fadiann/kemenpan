@@ -10,8 +10,8 @@
 		switch ($_action) {
 			case "getadd" :
 				?>
-			<fieldset class="hr">
-				<label class="span2">Nama Unit Eselon I</label> <input type="text"
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Nama Unit Eselon I</label> <input type="text"
 					class="span6" name="name" id="name">
 			</fieldset>
 		<?
@@ -19,8 +19,8 @@
 			case "getedit" :
 				$arr = $rs->FetchRow ();
 				?>
-			<fieldset class="hr">
-				<label class="span2">Nama Unit Eselon I</label> <input type="text"
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Nama Unit Eselon I</label> <input type="text"
 					class="span6" name="name" id="name"
 					value="<?=$arr['esselon_name']?>">
 			</fieldset>
@@ -29,11 +29,11 @@
 				break;
 		}
 		?>
-			<fieldset>
+			<fieldset class="form-group">
 				<center>
-					<input type="button" class="blue_btn" value="Kembali"
+					<input type="button" class="btn btn-primary" value="Kembali"
 						onclick="location='<?=$def_page_request?>'"> &nbsp;&nbsp;&nbsp; <input
-						type="submit" class="blue_btn" value="Simpan">
+						type="submit" class="btn btn-success" value="Simpan">
 				</center>
 				<input type="hidden" name="data_action" id="data_action"
 					value="<?=$_nextaction?>">

@@ -4,7 +4,7 @@
 			<h3 class="tabs_involved">List User Manual</h3>
 		</header>
 		<center>
-			<fieldset>
+			<fieldset class="form-group">
 				<a href="#" onclick="window.open('<?=$Helper->baseurl('user_manual')."AMS_UserManual.pdf";?>', '_blank')">Donwload User Manual</a>
 			</fieldset>
 		</center>

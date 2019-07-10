@@ -33,7 +33,7 @@ if($fil_tahun_id!="" && $fil_auditee_id!=""){
 				<td colspan="8">
 					<center>
 						<img src="Public/images/TNU-logo3.png" width="48" height="48" style="width:48pt;height:48pt;" /><br>
-						PT. Tri Nindya Utama
+						Kementerian Pendayagunaan Aparatur Negara dan Reformasi Birokrasi 
 					</center><br>
 				</td>
 			</tr>
@@ -124,7 +124,7 @@ if($fil_tahun_id!="" && $fil_auditee_id!=""){
 				<td colspan="7"><strong>Langkah Kerja:</strong></td>
 			</tr>
 		</table>
-		<table border='1' class="table_risk" cellspacing='0' cellpadding="0">
+		<table border='1' class="table table-bordered table-striped table-condensed mb-none" cellspacing='0' cellpadding="0">
 			<tr align="center">
 				<th width="2%" rowspan="2">No.</th>
 				<th width="50%" rowspan="2" colspan="2">Langkah Kerja Audit</th>

@@ -55,12 +55,12 @@ $def_page_request = $paging_request . "&page=$noPage";
 $grid = "App/Templates/Grids/grid_assign.php";
 $gridHeader = array ("Nama Kegiatan", "Obyek Audit", "Tanggal Kegiatan", "Susunan Tim", "Status Surat Tugas", "Program Audit", "Status LHA");
 $gridDetail = array ("8", "0", "1", "0", "3", "0" , "0");
-$gridWidth = array ("15", "20", "10", "10", "10", "10", "10");
+$gridWidth = array ("15", "13", "10", "8", "10", "8", "10");
 
 $key_by = array ("Nama Kegiatan");
 $key_field = array ("assign_kegiatan");
 
-$widthAksi  = "10";
+$widthAksi  = "12";
 $iconEdit   = "1";
 $iconDel    = "1";
 $iconDetail = "1";
@@ -77,9 +77,9 @@ switch ($_action) {
 		$page_title = "Reviu Penugasan";
 		break;
 	case "postkomentar" :
-		$id_assign = $Helper->replacetext ( $_POST ["data_id"] );
-		$status = $Helper->replacetext ( $_POST ["status_penugasan"] );
-		$fkomentar = $Helper->replacetext ( $_POST ["komentar"] );
+		$id_assign  = $Helper->replacetext ( $_POST ["data_id"] );
+		$status     = $Helper->replacetext ( $_POST ["status_penugasan"] );
+		$fkomentar  = $Helper->replacetext ( $_POST ["komentar"] );
 		$notif_date = $Helper->dateSql(date("d-m-Y"));
 		$Helper->hapus_notif($id_assign);
 		$group_menu_id = "";
@@ -103,9 +103,9 @@ switch ($_action) {
 			$assigns->assign_add_komentar ( $id_assign, $fkomentar, $ftanggal );
 			$Helper->js_alert_act ( 3 );
 		}
-		?>
-<script>window.open('<?=$def_page_request?>', '_self');</script>
-<?
+		// var_dump($_REQUEST);
+		// die();
+		echo "<script>window.open('".$def_page_request."', '_self');</script>";
 		$page_request = "blank.php";
 		break;
 	case "getsurattugas" :
@@ -115,13 +115,13 @@ switch ($_action) {
 		<?
 		break;
 	case "getlha" :
-		$_nextaction = "postlha";
+		$_nextaction  = "postlha";
 		$page_request = $lha_page_request;
-		$fdata_id = $Helper->replacetext ( $_REQUEST ["data_id"] );
-		$get_id = explode(":",$fdata_id );
-		$assign_id = $get_id[0];
-		$auditee_id = $get_id[1];
-		$page_title = "Laporan Hasil Audit";
+		$fdata_id     = $Helper->replacetext ( $_REQUEST ["data_id"] );
+		$get_id       = explode(":",$fdata_id );
+		$assign_id    = $get_id[0];
+		$auditee_id   = $get_id[1];
+		$page_title   = "Laporan Hasil Audit";
 		break;
 	case "anggota_assign" :
 		$_SESSION ['ses_assign_id'] = $Helper->replacetext ( $_REQUEST ["data_id"] );

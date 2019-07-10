@@ -29,7 +29,7 @@ foreach ($rs_auditees->GetArray() as $auditee) {
       <h3 class="tabs_involved">Dashboard Pengawasan<?=($tipe_audit) ? " ({$dashboards->audit_type_data_viewlist($tipe_audit)}) " : ""  ?><?=($tahun) ? " Tahun {$tahun}" : "" ?></h3>
     </header>
     <br>
-    <fieldset>
+    <fieldset class="form-group">
         <ul class="rtabs">
       <li><a href="#view1">Pengawasan</a></li>
       <li><a href="#view2">Temuan, Rekomendasi, dan Tindak Lanjut Audit</a></li>

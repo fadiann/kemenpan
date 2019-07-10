@@ -34,7 +34,7 @@
 		switch ($_action) {
 			case "getedit" :
 				?>
-		<table border='1' class="table_risk" cellspacing='0' cellpadding="0">
+		<table border='1' class="table table-bordered table-striped table-condensed mb-none" cellspacing='0' cellpadding="0">
 				<tr>
 					<td rowspan="2" colspan="2">&nbsp;</td>
 					<td colspan="<?=$jmlImp?>?>" align="center"><strong>Tingkat Risiko
@@ -103,7 +103,7 @@
 				break;
 			default :
 				?>
-		<table border='1' class="table_risk" cellspacing='0' cellpadding="0">
+		<table border='1' class="table table-bordered table-striped table-condensed mb-none" cellspacing='0' cellpadding="0">
 				<tr>
 					<td rowspan="2" colspan="2">&nbsp;</td>
 					<td colspan="<?=$jmlImp?>?>" align="center"><strong>Tingkat Risiko
@@ -171,14 +171,14 @@
 				break;
 		}
 		?>
-			<fieldset>
+			<fieldset class="form-group">
 				<center>
 				<?php
 				if ($_action == "getedit") {
 					?>
-					<input type="button" class="blue_btn" value="Kembali"
+					<input type="button" class="btn btn-primary" value="Kembali"
 						onclick="location='<?=$def_page_request?>'"> &nbsp;&nbsp;&nbsp; <input
-						type="submit" class="blue_btn" value="Simpan">	
+						type="submit" class="btn btn-success" value="Simpan">	
 				<?php
 				} else {
 					?>	

@@ -1,5 +1,5 @@
 <?php
-$PATH_ROOT = "D:/wamp64/www/kemenpan/";
+$PATH_ROOT = "D:/wamp64/www/kemenpan2/";
 $INCLUDE_DIR = $PATH_ROOT . "App/Classes/";
 
 include $PATH_ROOT . "App/Libraries/Adodb5/adodb.inc.php";
@@ -12,18 +12,18 @@ class Databases
 	var $dbdriver = 'mysqli';
 	var $debug = false;
 	var $db;
-	var $basepath = "D:/wamp64/www/kemenpan/";
-	var $baseurl = "http://localhost/kemenpan/";
+	var $basepath = "D:/wamp64/www/kemenpan2/";
+	var $baseurl = "http://localhost/kemenpan2/";
 
-	// var $dbhost = 'hekya.id';
-	// var $dbuser = 'u6559439_fadian';
+	// var $dbhost     = 'hekya.id';
+	// var $dbuser     = 'u6559439_fadian';
 	// var $dbpassword = 'fadian123';
-	// var $dbname = 'u6559439_kemenpan';
-	// var $dbdriver = 'mysqli';
-	// var $debug = false;
+	// var $dbname     = 'u6559439_kemenpan';
+	// var $dbdriver   = 'mysqli';
+	// var $debug      = false;
 	// var $db;
-	// var $basepath = "D:/wamp64/www/kemenpan/";
-	// var $baseurl = "http://localhost/kemenpan/";
+	// var $basepath = "D:/wamp64/www/kemenpan2/";
+	// var $baseurl  = "http://localhost/kemenpan2/";
 
 	//auth api
 	// var $user_api = 'simontila_server';
@@ -55,12 +55,12 @@ class Databases
 			$error_num = $this->db->ErrorNo();
 			$error_msg = str_replace("'", " (single quote) ", $this->db->ErrorMsg());
 			$this->db->RollbackTrans();
-			$params = $sqlstr . " ErrorMsg : " . $error_msg;
+			$params      = $sqlstr . " ErrorMsg : " . $error_msg;
 			$logfilename = $pathlog . date("Ymd") . ".log";
-			$strContent = $userId . "\t" . $aksinyo . "\t" . $params;
+			$strContent  = $userId . "\t" . $aksinyo . "\t" . $params;
 			$this->writeToFile($logfilename, $strContent);
-			$href = $_SERVER["HTTP_REFERER"];
-			$html = "<script>";
+			$href  = $_SERVER["HTTP_REFERER"];
+			$html  = "<script>";
 			$html += "alert('Failed to insert or update data !');";
 			$html += "window.history.back();";
 			$html += "</script>";

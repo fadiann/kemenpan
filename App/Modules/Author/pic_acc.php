@@ -9,30 +9,30 @@
 		switch ($_action) {
 			case "getadd" :
 				?>
-			<fieldset class="hr">
+			<fieldset class="form-group">
 			<label class="span1">NIP</label> <input type="text" class="span3"
-				name="nip" id="nip"><span class="mandatory">*</span>
+				name="nip" id="nip"><span class="required">*</span>
 		</fieldset>
-		<fieldset class="hr">
+		<fieldset class="form-group">
 			<label class="span1">Nama</label> <input type="text"
-				class="span3" name="name" id="name"><span class="mandatory">*</span>
+				class="span3" name="name" id="name"><span class="required">*</span>
 		</fieldset>
-		<fieldset class="hr">
+		<fieldset class="form-group">
 			<label class="span1">Jabatan</label>
 				<?=$Helper->dbCombo("jabatan_id", "par_jabatan_pic", "jabatan_pic_id", "jabatan_pic_name", "and jabatan_pic_del_st = 1 ", "", "order by jabatan_pic_sort", 1)?><span
 				class="mandatory">*</span>
 		</fieldset>
-		<fieldset class="hr">
+		<fieldset class="form-group">
 			<label class="span1">Mobile</label> <input type="text" class="span2"
 				name="mobile" id="mobile">
 		</fieldset>
-		<fieldset class="hr">
+		<fieldset class="form-group">
 			<label class="span1">Telp</label> <input type="text" class="span2"
 				name="telp" id="telp">
 		</fieldset>
-		<fieldset class="hr">
+		<fieldset class="form-group">
 			<label class="span1">Email</label> <input type="text" class="span2"
-				name="email_pic" id="email_pic"><span class="mandatory">*</span>
+				name="email_pic" id="email_pic"><span class="required">*</span>
 		</fieldset>
 		<input type="hidden" name="auditee_id" value="<?=$fdata_id?>">
 		<?
@@ -40,30 +40,30 @@
 			case "getedit" :
 				$arr = $rs->FetchRow ();
 				?>
-			<fieldset class="hr">
+			<fieldset class="form-group">
 			<label class="span1">NIP</label> <input type="text" class="span3"
 				name="nip" id="nip" value="<?=$arr['pic_nip']?>"><span
 				class="mandatory">*</span>
 		</fieldset>
-		<fieldset class="hr">
+		<fieldset class="form-group">
 			<label class="span1">Nama</label> <input type="text"
 				class="span3" name="name" id="name" value="<?=$arr['pic_name']?>"><span
 				class="mandatory">*</span>
 		</fieldset>
-		<fieldset class="hr">
+		<fieldset class="form-group">
 			<label class="span1">Jabatan</label>
 				<?=$Helper->dbCombo("jabatan_id", "par_jabatan_pic", "jabatan_pic_id", "jabatan_pic_name", "and jabatan_pic_del_st = 1 ", $arr['pic_jabatan_id'], "order by jabatan_pic_sort", 1)?><span
 				class="mandatory">*</span>
 		</fieldset>
-		<fieldset class="hr">
+		<fieldset class="form-group">
 			<label class="span1">Mobile</label> <input type="text" class="span2"
 				name="mobile" id="mobile" value="<?=$arr['pic_mobile']?>">
 		</fieldset>
-		<fieldset class="hr">
+		<fieldset class="form-group">
 			<label class="span1">Telp</label> <input type="text" class="span2"
 				name="telp" id="telp" value="<?=$arr['pic_telp']?>">
 		</fieldset>
-		<fieldset class="hr">
+		<fieldset class="form-group">
 			<label class="span1">Email</label> <input type="text" class="span2"
 				name="email_pic" id="email_pic" value="<?=$arr['pic_email']?>"><span
 				class="mandatory">*</span>
@@ -75,27 +75,27 @@
 			case "getdetail" :
 				$arr = $rs->FetchRow ();
 				?>
-			<fieldset class="hr">
+			<fieldset class="form-group">
 			<label class="span1">NIP</label>
 			<?=$arr['pic_nip']?>
 		</fieldset>
-		<fieldset class="hr">
+		<fieldset class="form-group">
 			<label class="span1">Nama</label>
 			<?=$arr['pic_name']?>
 		</fieldset>
-		<fieldset class="hr">
+		<fieldset class="form-group">
 			<label class="span1">Jabatan</label>
 			<?=$arr['jabatan_pic_name']?>
 		</fieldset>
-		<fieldset class="hr">
+		<fieldset class="form-group">
 			<label class="span1">Mobile</label>
 			<?=$arr['pic_mobile']?>
 		</fieldset>
-		<fieldset class="hr">
+		<fieldset class="form-group">
 			<label class="span1">Telp</label>
 			<?=$arr['pic_telp']?>
 		</fieldset>
-		<fieldset class="hr">
+		<fieldset class="form-group">
 			<label class="span1">Email</label>
 			<?=$arr['pic_email']?>
 		</fieldset>	
@@ -103,11 +103,11 @@
 				break;
 		}
 		?>
-			<fieldset>
+			<fieldset class="form-group">
 			<center>
-				<input type="button" class="blue_btn" value="Kembali"
+				<input type="button" class="btn btn-primary" value="Kembali"
 					onclick="location='<?=$def_page_request?>'"> &nbsp;&nbsp;&nbsp; <input
-					type="submit" class="blue_btn" value="Simpan">
+					type="submit" class="btn btn-success" value="Simpan">
 			</center>
 			<input type="hidden" name="data_action" id="data_action"
 				value="<?=$_nextaction?>">

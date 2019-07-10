@@ -112,10 +112,11 @@ class Helper
             $condition = " and role_menu_group_id = '" . $group_id . "' ";
         }
 
-        $sql = "select DISTINCT menu_id, menu_name, menu_link, menu_parrent, menu_sort from par_menu
+        $sql = "select DISTINCT menu_id, menu_name, menu_link, menu_parrent, menu_sort, menu_method from par_menu
 				left join role_group_menu on menu_id = role_menu_menu_id
 				where menu_del_st = 1 and menu_show = 1 and menu_parrent = '" . $parrent . "' " . $condition . "  order by menu_sort";
         $data = $this->db->_dbquery($sql);
+        //echo $sql;
         return $data;
     }
 
@@ -190,7 +191,7 @@ class Helper
     {
         $tahun = date('Y');
         if($value == ''){
-            $cb    = "<select name=\"" . $name . "\" id='".$id."'>";
+            $cb    = "<select name=\"" . $name . "\" id='".$id."' class='form-control'>";
             $cb   .= "<option value=''>--Tahun--</option>";
             for ($x = 2010; $x <= $tahun + 1; $x++) {
                 $cb .= "<option value='" . $x . "'>" . $x . "</option>";
@@ -212,26 +213,26 @@ class Helper
         return $cb;
     }
 
-    function dbCombo($nama, $table, $id, $show, $where, $def, $other, $lit = false, $orderby = "", $parrent = false, $all = false)
+    function dbCombo($nama, $table, $id, $show, $where, $def, $other, $lit = false, $orderby = "", $parrent = false, $all = false, $class = '')
     {
         $combo = "";
 
         if ($lit) {
-            $combo .= "<option value=\"\">=== Pilih Satu ===</option>\n";
+            $combo .= "<option value=\"\">-- Pilih Satu --</option>\n";
         }
 
         if ($parrent) {
-            $combo .= "<option value=\"\">=== Parrent ===</option>\n";
+            $combo .= "<option value=\"\">-- Parrent --</option>\n";
         }
 
         if ($all) {
-            $combo .= "<option value=\"\">=== All ===</option>\n";
+            $combo .= "<option value=\"\">-- All --</option>\n";
         }
 
         $html = "";
         $query = "select " . $id . ", " . $show . " from " . $table . " where 1=1 " . $where . $orderby;
         $data = $this->db->_dbquery($query);
-        $html .= "<select name=\"" . $nama . "\" id=\"" . $nama . "\" class=\"" . $other . "\">";
+        $html .= "<select name=\"" . $nama . "\" id=\"" . $nama . "\" class=\"form-control " . $class . "\" style=\"padding-bottom: 10px !important;\">";
         $html .= $combo;
         $rs_count = $data->RecordCount();
         if ($rs_count != 0) {
@@ -253,7 +254,7 @@ class Helper
     function buildCombo($objname, $data, $col_id, $col_show, $selected_id = "", $action_onchange = "", $style = "", $use_none = false, $use_head = false, $use_all = false, $other = "")
     {
         $combo = "";
-        $combo .= "<select name=\"$objname\" id=\"$objname\" style=\"$style\" class=\"" . $other . "\" onchange = \"return " . $action_onchange . "\">\n";
+        $combo .= "<select name=\"$objname\" id=\"$objname\" style=\"$style\"  class='form-control' onchange = \"return " . $action_onchange . "\">\n";
         if ($use_none) {
             $combo .= "<option value=\"\">==== Parent</option>\n";
         }
@@ -277,16 +278,16 @@ class Helper
         return $combo;
     }
 
-    function buildCombo_risk($objname, $data, $col_id, $col_show, $selected_id = "", $style = "", $use_none = false, $use_head = false, $use_all = false, $other = "")
+    function buildCombo_risk($objname, $data, $col_id, $col_show, $selected_id = "", $style = "", $use_none = false, $use_head = false, $use_all = false, $other = "", $classname="")
     {
         $combo = "";
-        $combo .= "<select name=\"$objname\" id=\"$objname\" style=\"$style\" class=\"" . $other . "\">\n";
+        $combo .= "<select name=\"$objname\" id=\"$objname\" style=\"$style\"  class=\"form-control populate ".$classname."\">\n";
         if ($use_none) {
             $combo .= "<option value=\"\">==== Parent</option>\n";
         }
 
         if ($use_head) {
-            $combo .= "<option value=\"\">==== Pilih Satu</option>\n";
+            $combo .= "<option value=\"\">-- Pilih Satu --</option>\n";
         }
 
         if ($use_all) {
@@ -824,7 +825,7 @@ class Helper
             $select_l = "selected";
         }
 
-        $cb = "<select name=\"" . $name . "\" id=\"" . $name . "\">";
+        $cb = "<select name=\"" . $name . "\" id=\"" . $name . "\" class='form-control'>";
         $cb .= "<option value=\"\">=== Pilih Satu ===</option>";
         $cb .= "<option value=\"Laki Laki\" " . $select_p . " >Laki Laki</option>";
         $cb .= "<option value=\"Perempuan\" " . $select_l . ">Perempuan</option>";
@@ -860,7 +861,7 @@ class Helper
             $select_hindu = "selected";
         }
 
-        $cb = "<select name=\"" . $name . "\" id=\"" . $name . "\">";
+        $cb = "<select name=\"" . $name . "\" id=\"" . $name . "\" class='form-control'>";
         $cb .= "<option value=\"\">=== Pilih Satu ===</option>";
         $cb .= "<option value=\"Islam\" " . $select_islam . " >Islam</option>";
         $cb .= "<option value=\"Katolik\" " . $select_katolik . ">Katolik</option>";

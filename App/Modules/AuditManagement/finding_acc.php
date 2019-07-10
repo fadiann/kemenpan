@@ -14,54 +14,69 @@ use Carbon\Carbon;
 if (! empty ( $view_parrent ))
 	include_once $view_parrent;
 ?>   
-	<article class="module width_3_quarter">
-		<header>
-			<h3 class="tabs_involved"><?=$page_title?></h3>
-		</header>
+<div class="row">
+	<div class="col-md-12">
+		<section class="panel">
+			<header class="panel-heading">
+				<h2 class="panel-title"><?=$page_title?></h2>
+			</header>
+			<div class="panel-body wrap">
 		<form method="post" name="f" action="#" class="form-horizontal" id="validation-form" enctype="multipart/form-data">
 		<?
 		switch ($_action) {
 			case "getadd" :
 				?>
-			<fieldset class="hr">
-				<label class="span2">No Temuan</label> <input type="text"
-					class="span1" name="finding_no" id="finding_no" />
-					<span class="mandatory">*</span>
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">No Temuan <span class="required">*</span></label> 
+				<div class="col-sm-5">
+					<input type="text" class="form-control" name="finding_no" id="finding_no" />
+				</div>
 			</fieldset>
-			<fieldset>
-				<label class="span2">Kelompok Temuan</label>
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Kelompok Temuan</label> 
+				<div class="col-sm-5">
+					
 				<?
 				$rs_kel = $params->finding_type_data_viewlist ();
 				$arr_kel = $rs_kel->GetArray ();
 				echo $Helper->buildCombo ( "finding_type", $arr_kel, 0, 2, "", "propinsiOnChange_1(this.value, 'finding_sub_id', 'finding_jenis_id')", "", false, true, false );
 				?>
+				</div>
 			</fieldset>
-			<fieldset>
-				<label class="span2">&nbsp;</label>
-				<select name="finding_sub_id" id="finding_sub_id" onchange = "return propinsiOnChange_2(this.value, 'finding_jenis_id')">
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">&nbsp;</label>
+				<div class="col-sm-5">
+				<select name="finding_sub_id" id="finding_sub_id" class="form-control" onchange = "return propinsiOnChange_2(this.value, 'finding_jenis_id')">
 					<option value="">Pilih Kelompok Temuan</option>
 				</select>
+				</div>
 			</fieldset>
-			<fieldset class="hr">
-				<label class="span2">&nbsp;</label>
-				<select name="finding_jenis_id" id="finding_jenis_id">
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">&nbsp;</label>
+				<div class="col-sm-5">
+				<select name="finding_jenis_id" id="finding_jenis_id" class="form-control">
 					<option value="">Pilih Kelompok Temuan</option>
-				</select><span class="mandatory">*</span>
+				</select>
+				</div>
 			</fieldset>
-			<!-- <fieldset class="hr">
-				<label class="span2">Temuan Dominan</label>
+			<!-- <fieldset class="form-group">
+				<label class="col-sm-3 control-label">Temuan Dominan</label>
 				<?=$Helper->dbCombo("finding_penyebab_id", "par_kode_penyebab", "kode_penyebab_id", "kode_penyebab_name", "and kode_penyebab_del_st = 1 ", "", "", 1)?>
 			</fieldset> -->
-			<fieldset class="hr">
-				<label class="span2">Judul temuan</label> <input type="text" class="span7" name="finding_judul" id="finding_judul">
-				<span class="mandatory">*</span>
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Judul temuan</label>
+				<div class="col-sm-5"><input type="text" class="form-control" name="finding_judul" id="finding_judul">
+				</div>
+				
 			</fieldset>
-			<fieldset class="hr">
-				<label class="span2">Tanggal temuan</label> <input type="text"
-					class="span1" name="finding_date" id="finding_date"><span
-					class="mandatory">*</span>
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Tanggal temuan <span class="mandatory">*</span></label> 
+				<div class="col-sm-5"><input type="text" class="form-control" name="finding_date" id="finding_date">
+					
+				</div>
 			</fieldset>
-			<fieldset>
+			<fieldset class="form-group">
+				<div class="col-md-12">
 				<ul class="rtabs">
 					<li><a href="#view1">Kondisi</a></li>
 					<li><a href="#view2">Kriteria</a></li>
@@ -88,65 +103,79 @@ if (! empty ( $view_parrent ))
 				<div id="view6">
 					<textarea class="ckeditor" cols="10" rows="40" name="tanggapan_auditor" id="tanggapan_auditor"></textarea>
 				</div>
+			</div>
 			</fieldset>
-			<fieldset class="hr">
-				<label class="span2">Nilai temuan</label> <input type="text" class="span7" name="finding_nilai" id="finding_nilai">
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Nilai temuan</label> <div class="col-sm-5"><input type="text" class="form-control" name="finding_nilai" id="finding_nilai"></div>
 			</fieldset>
-			<fieldset class="hr">
-				<label class="span2">Lampiran</label> <input type="file" class="span4" name="finding_attach" id="finding_attach">
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Lampiran</label> 
+				<div class="col-sm-5">
+				<input type="file" class="form-control" name="finding_attach" id="finding_attach">
+				</div>
+
 			</fieldset>
-			<input type="hidden" class="span1" name="finding_auditee" id="finding_auditee" value="<?=$auditee_kka?>" />
+			<input type="hidden" class="form-control" name="finding_auditee" id="finding_auditee" value="<?=$auditee_kka?>" />
 		<?
 				break;
 			case "getedit" :
 				$arr = $rs->FetchRow ();
 				?>
-			<fieldset class="hr">
-				<label class="span2">No Temuan</label> <input type="text"
-					class="span1" name="finding_no" id="finding_no"
-					value="<?=$arr['finding_no']?>" /><span class="mandatory">*</span>
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">No Temuan <span class="mandatory">*</span></label> 
+				<div class="col-sm-5">
+				<input type="text" class="form-control" name="finding_no" id="finding_no" value="<?=$arr['finding_no']?>" />
+				</div>
 			</fieldset>
-			<fieldset>
-				<label class="span2">Kelompok Temuan</label>
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Kelompok Temuan</label>
+				<div class="col-sm-5">
 				<?
 				$rs_kel = $params->finding_type_data_viewlist ();
 				$arr_kel = $rs_kel->GetArray ();
 				echo $Helper->buildCombo ( "finding_type", $arr_kel, 0, 2, $arr['finding_type_id'], "propinsiOnChange_1(this.value, 'finding_sub_id', 'finding_jenis_id')", "", false, true, false );
 				?>
+				</div>
 			</fieldset>
-			<fieldset>
-				<label class="span2">&nbsp;</label>
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">&nbsp;</label>
+				<div class="col-sm-5">
 				<?
 				$rs_sub = $params->kel_sub_kel ($arr['finding_type_id']);
 				$arr_sub = $rs_sub->GetArray ();
 				echo $Helper->buildCombo ( "finding_sub_id", $arr_sub, 0, 1, $arr['finding_sub_id'], "propinsiOnChange_2(this.value, 'finding_jenis_id')", "", false, true, false );
 				?>
+				</div>
 			</fieldset>
-			<fieldset class="hr">
-				<label class="span2">&nbsp;</label>
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">&nbsp;</label>
+				<div class="col-sm-5">
 				<?
 				$rs_jenis = $params->jenis_temuan_kel ($arr['finding_sub_id']);
 				$arr_jenis = $rs_jenis->GetArray ();
 				echo $Helper->buildCombo ( "finding_jenis_id", $arr_jenis, 0, 2, $arr['finding_jenis_id'], "", "", false, true, false );
 				?>
-				<span class="mandatory">*</span>
+				</div>
 			</fieldset>
-			<!-- <fieldset class="hr">
-				<label class="span2">Temuan Dominan</label>
+			<!-- <fieldset class="form-group">
+				<label class="col-sm-3 control-label">Temuan Dominan</label>
 				<?=$Helper->dbCombo("finding_penyebab_id", "par_kode_penyebab", "kode_penyebab_id", "kode_penyebab_name", "and kode_penyebab_del_st = 1 ", $arr['finding_penyebab_id'], "", 1)?>
 			</fieldset> -->
-			<fieldset class="hr">
-				<label class="span2">Judul temuan</label> <input type="text"
-					class="span7" name="finding_judul" id="finding_judul"
-					value="<?=$arr['finding_judul']?>"><span class="mandatory">*</span>
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Judul temuan <span class="mandatory">*</span></label> 
+				<div class="col-sm-5">
+					<input type="text" class="form-control" name="finding_judul" id="finding_judul" value="<?=$arr['finding_judul']?>">
+				</div>
 			</fieldset>
-			<fieldset class="hr">
-				<label class="span2">Tanggal temuan</label> <input type="text"
-					class="span1" name="finding_date" id="finding_date"
-					value="<?=$Helper->dateIndo($arr['finding_date'])?>"><span
-					class="mandatory">*</span>
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Tanggal temuan <span class="mandatory">*</span></label>
+				<div class="col-sm-5">
+				<input type="text" class="form-control" name="finding_date" id="finding_date" value="<?=$Helper->dateIndo($arr['finding_date'])?>">
+				
+				</div>
 			</fieldset>
-			<fieldset>
+			<fieldset class="form-group">
+				<div class="col-sm-12">
 				<ul class="rtabs">
 					<li><a href="#view1">Kondisi</a></li>
 					<li><a href="#view2">Kriteria</a></li>
@@ -173,25 +202,32 @@ if (! empty ( $view_parrent ))
 				<div id="view6">
 					<textarea class="ckeditor" cols="10" rows="40" name="tanggapan_auditor" id="tanggapan_auditor"><?=$arr['finding_tanggapan_auditor']?></textarea>
 				</div>
+			</div>
 			</fieldset>
-			<fieldset class="hr">
-				<label class="span2">Nilai temuan</label> <input type="text" class="span7" name="finding_nilai" id="finding_nilai" value="<?=$arr['finding_nilai']?>">
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Nilai temuan</label>
+				<div class="col-sm-5">
+				<input type="text" class="form-control" name="finding_nilai" id="finding_nilai" value="<?=$arr['finding_nilai']?>">
+				</div>
 			</fieldset>
-			<fieldset class="hr">
-				<label class="span2">Lampiran</label>
-				<input type="hidden" class="span4" name="finding_attach_old" value="<?=$arr['finding_attachment']?>"> 
-				<input type="file" class="span4" name="finding_attach" id="finding_attach">
-				<label class="span2"><a href="#" Onclick="window.open('<?=$Helper->baseurl("Upload_Temuan").$arr['finding_attachment']?>','_blank')"><?=$arr['finding_attachment']?></a></label>
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Lampiran</label>
+				<div class="col-sm-5">
+				<input type="hidden" class="form-control" name="finding_attach_old" value="<?=$arr['finding_attachment']?>"> 
+				<input type="file" class="form-control" name="finding_attach" id="finding_attach">
+				<label class="col-sm-3 control-label"><a href="#" Onclick="window.open('<?=$Helper->baseurl("Upload_Temuan").$arr['finding_attachment']?>','_blank')"><?=$arr['finding_attachment']?></a></label>
+				</div>
 			</fieldset>
 			<input type="hidden" name="data_id" value="<?=$arr['finding_id']?>">
-			<input type="hidden" class="span1" name="finding_auditee" id="finding_auditee" value="<?=$auditee_kka?>" />
+			<input type="hidden" class="form-control" name="finding_auditee" id="finding_auditee" value="<?=$auditee_kka?>" />
 		<?
 				break;
 			case "getdetail" :
 				$arr = $rs->FetchRow ();
 				?>
-			<fieldset class="hr">
-				<table class="view_parrent">
+			<fieldset class="form-group">
+				<div class="col-sm-12">
+				<table class="table table-borderless">
 					<tr>
 						<td width="150px">No Temuan</td>
 						<td width="3px">:</td>
@@ -252,7 +288,7 @@ if (! empty ( $view_parrent ))
 						<td>Detail komentar</td>
 						<td>:</td>
 						<td>
-						<table border="0">
+						<table border="0" class="table table-borderless">
 						<?php 
 						$z = 0;
 						$rs_komentar = $findings->finding_komentar_viewlist ( $arr ['finding_id'] );
@@ -263,7 +299,7 @@ if (! empty ( $view_parrent ))
 				// 			echo $z.". ".$arr_komentar['auditor_name']." : ".$Helper->text_show($arr_komentar['find_comment_desc'])."<br>";
 							?>
 								    <tr>
-										<td><?= $z ?>. </td><td><?= $arr_komentar['auditor_name'] ?> :</td><td>"<?= $Helper->text_show($arr_komentar['find_comment_desc']) ?>"</td><td style="text-align: left;"><?= $diff->diffForHumans() ?></td>
+										<td width="2%"><?= $z ?>. </td><td width="20%"><?= $arr_komentar['auditor_name'] ?> : </td><td width="50%">" <?= $Helper->text_show($arr_komentar['find_comment_desc']) ?>"</td><td style="text-align: left;"><?= $diff->diffForHumans() ?></td>
 									</tr>
 							<?
 						}
@@ -272,6 +308,7 @@ if (! empty ( $view_parrent ))
 						</td>
 					</tr>
 				</table>
+				</div>
 			</fieldset>
 		<?
 				break;
@@ -279,8 +316,8 @@ if (! empty ( $view_parrent ))
 			case "getapprove_temuan" :
 				$arr = $rs->FetchRow ();
 				?>
-			<fieldset class="hr">
-				<table class="view_parrent">
+			<fieldset class="form-group">
+				<table class="table table-borderless">
 					<tr>
 						<td width="150px">No Temuan</td>
 						<td width="3px">:</td>
@@ -357,8 +394,8 @@ if (! empty ( $view_parrent ))
 					</tr>
 				</table>
 			</fieldset>
-			<fieldset class="hr">
-				<label class="span2">Isi Komentar</label>
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Isi Komentar</label>
 				<textarea id="komentar" name="komentar" rows="1" cols="20" style="width: 475px; height: 3em; font-size: 11px;"></textarea>
 			</fieldset>
 			<input type="hidden" name="data_id" value="<?=$arr['finding_id']?>">	
@@ -368,23 +405,24 @@ if (! empty ( $view_parrent ))
 				break;
 		}
 		?>
-			<fieldset>
+			<fieldset class="form-group">
 				<center>
-					<input type="button" class="blue_btn" value="Kembali" onclick="location='<?=$def_page_request?>'"> &nbsp;&nbsp;&nbsp; 
+					<input type="button" class="btn btn-primary" value="Kembali" onclick="location='<?=$def_page_request?>'"> 
 					<?
 					if($_action!='getdetail'){
 					?>
-					<input type="submit" class="blue_btn" value="Simpan">
+					<input type="submit" class="btn btn-success" value="Simpan">
 					<?
 					}
 					?>
 				</center>
-				<input type="hidden" name="data_action" id="data_action"
-					value="<?=$_nextaction?>">
+				<input type="hidden" name="data_action" id="data_action" value="<?=@$_nextaction?>">
 			</fieldset>
 		</form>
-	</article>
-</section>
+			</div>
+		</section>
+	</div>
+</div>
 <script>
 $("#finding_date").datepicker({
 	dateFormat: 'dd-mm-yy',

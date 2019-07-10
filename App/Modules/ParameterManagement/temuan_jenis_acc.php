@@ -10,27 +10,27 @@
 		switch ($_action) {
 			case "getadd" :
 				?>
-			<fieldset class="hr">
-				<label class="span2">Kelompok Temuan</label>
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Kelompok Temuan</label>
 				<?
 				$rs_kel = $params->finding_type_data_viewlist ();
 				$arr_kel = $rs_kel->GetArray ();
 				echo $Helper->buildCombo ( "kel_temuan", $arr_kel, 0, 2, "", "propinsiOnChange(this.value, 'sub_id')", "", false, true, false );
 				?>
-				<span class="mandatory">*</span>
+				<span class="required">*</span>
 			</fieldset>
-			<fieldset class="hr">
-				<label class="span2">Kode Sub Kelompok</label>
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Kode Sub Kelompok</label>
 				<select name="sub_id" id="sub_id">
 					<option value="0">Pilih Kelompok Temuan</option>
 				</select>
-				<span class="mandatory">*</span>
+				<span class="required">*</span>
 			</fieldset>
-			<fieldset class="hr">
-				<label class="span2">Kode Jenis Temuan</label> <input type="text" class="span1" name="code" id="code"><span class="mandatory">*</span>
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Kode Jenis Temuan</label> <input type="text" class="form-control" name="code" id="code"><span class="required">*</span>
 			</fieldset>
-			<fieldset class="hr">
-				<label class="span2">Jenis Temuan</label> <input type="text" class="span5" name="name" id="name"><span class="mandatory">*</span>
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Jenis Temuan</label> <input type="text" class="span5" name="name" id="name"><span class="required">*</span>
 			</fieldset>
 		<?
 				break;
@@ -39,40 +39,40 @@
 				$rs_get_type =  $params->sub_kel_data_viewlist ( $arr['jenis_temuan_id_sub_type'] );
 				$arr_get_type = $rs_get_type->FetchRow ();
 				?>
-			<fieldset class="hr">
-				<label class="span2">Kelompok Temuan</label>
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Kelompok Temuan</label>
 				<?
 				$rs_kel = $params->finding_type_data_viewlist ();
 				$arr_kel = $rs_kel->GetArray ();
 				echo $Helper->buildCombo ( "kel_temuan", $arr_kel, 0, 2, $arr_get_type['sub_type_id_type'], "propinsiOnChange(this.value, 'sub_id')", "", false, true, false );
 				?>
-				<span class="mandatory">*</span>
+				<span class="required">*</span>
 			</fieldset>
-			<fieldset class="hr">
-				<label class="span2">Kode Sub Kelompok</label>
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Kode Sub Kelompok</label>
 				<?
 				$rs_sub = $params->kel_sub_kel ($arr_get_type['sub_type_id_type']);
 				$arr_sub = $rs_sub->GetArray ();
 				echo $Helper->buildCombo ( "sub_id", $arr_sub, 0, 1, $arr['jenis_temuan_id_sub_type'], "", "", false, true, false );
 				?>
-				<span class="mandatory">*</span>
+				<span class="required">*</span>
 			</fieldset>
-			<fieldset class="hr">
-				<label class="span2">Kode Jenis Temuan</label> <input type="text" class="span1" name="code" id="code" value="<?=$arr['jenis_temuan_code']?>"><span class="mandatory">*</span>
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Kode Jenis Temuan</label> <input type="text" class="form-control" name="code" id="code" value="<?=$arr['jenis_temuan_code']?>"><span class="required">*</span>
 			</fieldset>
-			<fieldset class="hr">
-				<label class="span2">Jenis Temuan</label> <input type="text" class="span5" name="name" id="name" value="<?=$arr['jenis_temuan_name']?>"><span class="mandatory">*</span>
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Jenis Temuan</label> <input type="text" class="span5" name="name" id="name" value="<?=$arr['jenis_temuan_name']?>"><span class="required">*</span>
 			</fieldset>
 			<input type="hidden" name="data_id" value="<?=$arr['jenis_temuan_id']?>">	
 		<?
 				break;
 		}
 		?>
-			<fieldset>
+			<fieldset class="form-group">
 				<center>
-					<input type="button" class="blue_btn" value="Kembali"
+					<input type="button" class="btn btn-primary" value="Kembali"
 						onclick="location='<?=$def_page_request?>'"> &nbsp;&nbsp;&nbsp; <input
-						type="submit" class="blue_btn" value="Simpan">
+						type="submit" class="btn btn-success" value="Simpan">
 				</center>
 				<input type="hidden" name="data_action" id="data_action"
 					value="<?=$_nextaction?>">

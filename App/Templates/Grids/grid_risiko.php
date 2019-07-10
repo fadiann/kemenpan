@@ -1,13 +1,14 @@
-<table class="table_grid" cellspacing="0" cellpadding="0">
+<div class="table-responsive mt-md">
+	<table class="table table-bordered table-striped table-condensed mb-none">
 	<tr>
 		<?
 		$jmlHeader = count ( $gridHeader );
-		echo ("<th width='5%'>No</th>");
+		echo ("<th width='5%' class='text-center'>No</th>");
 		for($j = 0; $j < $jmlHeader; $j ++) {
-			echo ("<th width='" . $gridWidth [$j] . "%'>" . $gridHeader [$j] . "</th>");
+			echo ("<th class='text-center' width='" . $gridWidth [$j] . "%'>" . $gridHeader [$j] . "</th>");
 		}
 		if ($widthAksi != "0") {
-			echo ("<th width='" . $widthAksi . "%'>Aksi</th>");
+			echo ("<th class='text-center' width='" . $widthAksi . "%'>Aksi</th>");
 		}
 		?>
 	</tr>
@@ -18,7 +19,7 @@
 			$i ++;
 			?>
 	<tr>
-		<td><?=$i+$offset?></td> 
+		<td class='text-center'><?=$i+$offset?>.</td>
 	<?
 			for($j = 0; $j < count ( $gridDetail ); $j ++) {
 				if ($gridHeader [$j] == "Identifikasi") {
@@ -29,9 +30,8 @@
 					if ($risk_identifikasi) {
 						if ($arr ['penetapan_status'] == 0 || $arr ['penetapan_status'] == 3) {
 							?>
-			<br> <input type="image" src="Public/images/icn_search.png"
-			title="View Identifikasi"
-			Onclick="return set_action('risk_identifikasi', '<?=$arr[$gridDetail[$j]]?>', '')">
+			<br> 
+			<button class="btn btn-default btn-circle btn-sm" title="View Identifikasi" Onclick="return set_action('risk_identifikasi', '<?=$arr[$gridDetail[$j]]?>', '')"><i class="fa fa-search"></i></button>
 			<?php
 						}
 					}
@@ -47,9 +47,8 @@
 					if ($view_analisa) {
 						if ($arr ['penetapan_status'] == 0 || $arr ['penetapan_status'] == 3) {
 							?>
-			<br> <input type="image" src="Public/images/icn_search.png"
-			title="View Analisa"
-			Onclick="return set_action('view_analisa', '<?=$arr[0]?>', '')">
+			<br>
+			<button class="btn btn-default btn-circle btn-sm" title="View Analisa" Onclick="return set_action('view_analisa', '<?=$arr[0]?>', '')"><i class="fa fa-search"></i></button>
 			<?php
 						}
 					}
@@ -66,8 +65,8 @@
 					if ($view_evaluasi) {
 						if(!empty($arr['penetapan_profil_risk'])){
 						?>
-			<input type="image" src="Public/images/icn_search.png" title="View Evaluasi"
-			Onclick="return set_action('view_evaluasi', '<?=$arr[0]?>', '')">
+			
+			<button class="btn btn-default btn-circle btn-sm" title="View Evaluasi" Onclick="return set_action('view_evaluasi', '<?=$arr[0]?>', '')"><i class="fa fa-search"></i></button>
 			<?php
 						}
 					}
@@ -83,32 +82,48 @@
 						$count_risk_penanganan = $risks->list_penanganan ( $arr_penanganan ['risk_penanganan_id'], $arr [$gridDetail [$j]] );
 						echo $arr_penanganan ['risk_penanganan_jenis'] . " = " . $count_risk_penanganan . "<br>";
 					}
-					if ($view_penanganan) {
-						if(!empty($arr['penetapan_profil_risk_residu'])){
-						?>
-			<input type="image" src="Public/images/icn_search.png"
-			title="View Penanganan"
-			Onclick="return set_action('view_penanganan', '<?=$arr[$gridDetail[$j]]?>', '')">
-			<?php
-						}
-					}
+					//if ($view_penanganan) {
+					//	if(!empty($arr['penetapan_profil_risk_residu'])){
+					?>
+			<button class="btn btn-default btn-circle btn-sm" title="View Penanganan" Onclick="return set_action('view_penanganan', '<?=$arr[$gridDetail[$j]]?>', '')"><i class="fa fa-search"></i></button>
+					<?php
+					//	}
+					//}
 					?>
 		</td> 
-	<?
-				} elseif ($gridHeader [$j] == "Rencana Waktu") {
-					?>
+		<?php } elseif ($gridHeader [$j] == "Rencana Waktu") { ?>
 		<td align="center">
 			<?php echo $Helper->dateIndo($arr[$gridDetail[$j]]);?>
 		</td> 
-	<?
-				} else {
-					?>
+
+		<!-- Start: Detail Identifikasi Risiko -->
+		<?php } elseif ($gridHeader [$j] == "Indikator") { ?>
+		<td>
+			<?=$risks->get_identifikasi_detail_byKolom($arr[$gridDetail[$j]], 'indikator_kinerja')?>
+		</td> 
+		<?php } elseif ($gridHeader [$j] == "Kejadian") { ?>
+		<td>
+			<?=$risks->get_identifikasi_detail_byKolom($arr[$gridDetail[$j]], 'kejadian_risiko')?>
+		</td> 
+		<?php } elseif ($gridHeader [$j] == "Kategori") { ?>
+		<td>
+			<?=$risks->get_identifikasi_detail_byKolom($arr[$gridDetail[$j]], 'risk_kategori')?>
+		</td> 
+		<?php } elseif ($gridHeader [$j] == "Penyebab") { ?>
+		<td>
+			<?=$risks->get_identifikasi_detail_byKolom($arr[$gridDetail[$j]], 'penyebab_risiko')?>
+		<?php } elseif ($gridHeader [$j] == "Dampak") { ?>
+		<td>
+			<?=$risks->get_identifikasi_detail_byKolom($arr[$gridDetail[$j]], 'dampak_risiko')?>
+		</td> 
+		<!-- End: Detail Identifikasi Risiko -->
+		<?php } else { ?>
 		<td><?=$arr[$gridDetail[$j]]?></td> 
-	<?
+		<?php
 				}
 			}
-			?>
-		<td>
+		?>
+		<td class="text-center">
 	<?
 			if ($iconDetail) {
 				if ($method == 'risk_reviu') {
@@ -117,22 +132,20 @@
 					$action = "getdetail";
 				}
 				?>
-			<input type="image" src="Public/images/icn_alert_info.png" title="Rincian Data" Onclick="return set_action('<?=$action?>', '<?=$arr[0]?>')">
-			&nbsp;&nbsp;
+					<button class="btn btn-info btn-circle btn-sm" title="Rincian Data" Onclick="return set_action('getdetail', '<?=$arr[0]?>')"><i class="fa fa-info-circle"></i></button>
+			
 	<?
 			}
 			if ($arr ['penetapan_status'] == 0 || $arr ['penetapan_status'] == 3 || ($method == 'risk_monitoring')) {
 				if ($iconEdit) {
 					?>
-				<input type="image" src="Public/images/icn_edit.png" title="Ubah Data"
-			Onclick="return set_action('getedit', '<?=$arr[0]?>')">
-				&nbsp;&nbsp;
+					<button class="btn btn-warning btn-circle btn-sm" title="Ubah Data" Onclick="return set_action('getedit', '<?=$arr[0]?>')"><i class="fa fa-pencil"></i></button>
+				
 		<?
 				}
 				if ($iconDel) {
 					?>
-				<input type="image" src="Public/images/icn_trash.png" title="Hapus Data"
-			Onclick="return set_action('getdelete', '<?=$arr[0]?>', '<?=$arr[1]?>')">
+					<button class="btn btn-danger btn-circle btn-sm" title="Hapus Data" Onclick="return set_action('getdelete', '<?=$arr[0]?>', '<?=$arr[1]?>')"><i class="fa fa-trash-o"></i></button>
 		<?
 				}
 			}
@@ -166,7 +179,7 @@
 	$showPage = "";
 	$jumPage = ceil ( $recordcount / $num_row );
 	if ($noPage > 1)
-		echo "<a href='" . $paging_request . "&page=" . ($noPage - 1) . "'> <<d </a>";
+		echo "<a href='" . $paging_request . "&page=" . ($noPage - 1) . "' class='btn btn-sm btn-circle btn-primary'> <<d </a>";
 	for($page = 1; $page <= $jumPage; $page ++) {
 		if ((($page >= $noPage - 3) && ($page <= $noPage + 3)) || ($page == 1) || ($page == $jumPage)) {
 			if (($showPage == 1) && ($page != 2))
@@ -174,16 +187,16 @@
 			if (($showPage != ($jumPage - 1)) && ($page == $jumPage))
 				echo "<span class='titik_titik'>...</span>";
 			if ($page == $noPage)
-				echo "<span class='paging_aktif'>" . $page . "</span> ";
+				echo "<span class='btn btn-sm btn-circle btn-default'>" . $page . "</span> ";
 			else
-				echo " <a href='" . $paging_request . "&page=" . $page . "'>" . $page . "</a> ";
+				echo " <a href='" . $paging_request . "&page=" . $page . "' class='btn btn-sm btn-circle btn-primary'>" . $page . "</a> ";
 			$showPage = $page;
 		}
 	}
 	if ($noPage < $jumPage)
-		echo "<a href='" . $paging_request . "&page=" . ($noPage + 1) . "'> > </a>";
+		echo "<a href='" . $paging_request . "&page=" . ($noPage + 1) . "' class='btn btn-sm btn-circle btn-primary'> > </a>";
 	?>
 	</td>
 	</tr>
-</table>
-
+	</table>
+</div>

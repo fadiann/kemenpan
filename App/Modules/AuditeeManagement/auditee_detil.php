@@ -19,40 +19,40 @@ $arr = $rs->FetchRow ();
 				</ul>
 				<div class="panel-container">
 					<div id="view1">
-						<fieldset class="hr">
-							<label class="span3">Kode Auditee</label> <label class="span2">: <?=$arr['auditee_kode']?></label>
+						<fieldset class="form-group">
+							<label class="span3">Kode Auditee</label> <label class="col-sm-3 control-label">: <?=$arr['auditee_kode']?></label>
 						</fieldset>
-						<fieldset class="hr">
+						<fieldset class="form-group">
 							<label class="span3">Nama Auditee</label> <label class="span5">: <?=$arr['auditee_name']?></label>
 						</fieldset>
-						<fieldset class="hr">
+						<fieldset class="form-group">
 							<label class="span3">Unit Penanggung Jawab</label> <label
 								class="span6">: <?=$arr['nama_parrent']?></label>
 						</fieldset>
-						<fieldset class="hr">
+						<fieldset class="form-group">
 							<label class="span3">Inspektorat Penanggung Jawab</label> <label
 								class="span6">: <?=$arr['inspektorat_name']?></label>
 						</fieldset>
-						<fieldset class="hr">
+						<fieldset class="form-group">
 							<label class="span3">Propinsi</label> <label class="span5">: <?=$arr['propinsi_name']?></label>
 						</fieldset>
-						<fieldset class="hr">
+						<fieldset class="form-group">
 							<label class="span3">Kabupaten</label> <label class="span5">: <?=$arr['kabupaten_name']?></label>
 						</fieldset>
-						<fieldset class="hr">
+						<fieldset class="form-group">
 							<label class="span3">Alamat</label> <label class="span6">: <?=$arr['auditee_alamat']?></label>
 						</fieldset>
-						<fieldset class="hr">
-							<label class="span3">Telp</label> <label class="span2">: <?=$arr['auditee_telp']?></label>
+						<fieldset class="form-group">
+							<label class="span3">Telp</label> <label class="col-sm-3 control-label">: <?=$arr['auditee_telp']?></label>
 						</fieldset>
-						<fieldset class="hr">
-							<label class="span3">Ext</label> <label class="span2">: <?=$arr['auditee_ext']?></label>
+						<fieldset class="form-group">
+							<label class="span3">Ext</label> <label class="col-sm-3 control-label">: <?=$arr['auditee_ext']?></label>
 						</fieldset>
-						<fieldset class="hr">
-							<label class="span3">Email</label> <label class="span2">: <?=$arr['auditee_email']?></label>
+						<fieldset class="form-group">
+							<label class="span3">Email</label> <label class="col-sm-3 control-label">: <?=$arr['auditee_email']?></label>
 						</fieldset>
-						<fieldset class="hr">
-							<label class="span3">Fax</label> <label class="span2">: <?=$arr['auditee_fax']?></label>
+						<fieldset class="form-group">
+							<label class="span3">Fax</label> <label class="col-sm-3 control-label">: <?=$arr['auditee_fax']?></label>
 						</fieldset>
 					</div>
 					<div id="view2">

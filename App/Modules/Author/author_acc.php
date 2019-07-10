@@ -10,38 +10,38 @@
 			switch ($_action) {
 			case "getadd" :
 			?>
-			<fieldset class="hr">
+			<fieldset class="form-group">
 				<label class="span3">Kode Author</label> <input type="text"
-				class="span2" name="kode_author" id="kode_author"><span class="mandatory">*</span>
+				class="span2" name="kode_author" id="kode_author"><span class="required">*</span>
 			</fieldset>
-			<fieldset class="hr">
+			<fieldset class="form-group">
 				<label class="span3">Nama Author</label> <input type="text"
-				class="span5" name="nama_author" id="nama_author"><span class="mandatory">*</span>
+				class="span5" name="nama_author" id="nama_author"><span class="required">*</span>
 			</fieldset>
 			<?
 			break;
 			case "getedit" :
 			?>
-			<fieldset class="hr">
+			<fieldset class="form-group">
 				<label class="span3">Kode Author</label> <input type="text"
 				class="span2" name="kode_author" id="kode_author"
-				value="<?=$arr['kode_author']?>"><span class="mandatory">*</span>
+				value="<?=$arr['kode_author']?>"><span class="required">*</span>
 			</fieldset>
 			<fieldset class="hr" >
 				<label class="span3">Nama Author</label> <input type="text"
 				class="span5" name="nama_author" id="nama_author"
-				value="<?=$arr['nama_author']?>"><span class="mandatory">*</span>
+				value="<?=$arr['nama_author']?>"><span class="required">*</span>
 			</fieldset>
 			<input type="hidden" name="data_id" value="<?=$arr['id_author']?>">
 			<?
 			break;
 			}
 			?>
-			<fieldset>
+			<fieldset class="form-group">
 				<center>
-				<input type="button" class="blue_btn" value="Kembali"
+				<input type="button" class="btn btn-primary" value="Kembali"
 				onclick="location='<?=$def_page_request?>'"> &nbsp;&nbsp;&nbsp; <input
-				type="submit" class="blue_btn" value="Simpan">
+				type="submit" class="btn btn-success" value="Simpan">
 				</center>
 				<input type="hidden" name="data_action" id="data_action"
 				value="<?=$_nextaction?>">

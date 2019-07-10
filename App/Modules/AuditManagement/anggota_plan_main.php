@@ -82,18 +82,18 @@ switch ($_action) {
 		echo "<script>window.open('" . $acc_page_request_detil . "&auditor=" . $fdata_id . "', '_self');</script>";
 		break;
 	case "postadd" :
-		$count	= count($_POST['auditee_id']);
+		$count			= count($_POST ["anggota_id"]);
+		$fauditee_id 	= $Helper->replacetext ( $_POST ["auditee_id"]);
+		$ftanggal_awal 		= $Helper->date_db ( $Helper->replacetext ( $_POST ["tanggal_awal"]) );
+		$ftanggal_akhir 	= $Helper->date_db ( $Helper->replacetext ( $_POST ["tanggal_akhir"]) );
+		$convert_tgl_awal	= $Helper->date_db ($ftanggal_awal);
+		$convert_tgl_akhir 	= $Helper->date_db ($ftanggal_akhir);
+		$count_plan_date 	= (($convert_tgl_akhir - $convert_tgl_awal) / 86400) + 1;
+		$count_weekend 		= $Helper->cek_holiday ( $convert_tgl_awal, $convert_tgl_akhir );
+		$hari_kerja 		= $count_plan_date - $count_weekend;
 		for($x = 0; $x < $count; $x++){
-			$fauditee_id 		= $Helper->replacetext ( $_POST ["auditee_id"][$x] );
 			$fanggota_id 		= $Helper->replacetext ( $_POST ["anggota_id"][$x] );
-			$fposisi_id 		= $Helper->replacetext ( $_POST ["posisi_id"][$x] );
-			$ftanggal_awal 		= $Helper->date_db ( $Helper->replacetext ( $_POST ["tanggal_awal"][$x] ) );
-			$ftanggal_akhir 	= $Helper->date_db ( $Helper->replacetext ( $_POST ["tanggal_akhir"][$x] ) );
-			$convert_tgl_awal	= $Helper->date_db ($ftanggal_awal);
-			$convert_tgl_akhir 	= $Helper->date_db ($ftanggal_akhir);
-			$count_plan_date 	= (($convert_tgl_akhir - $convert_tgl_awal) / 86400) + 1;
-			$count_weekend 		= $Helper->cek_holiday ( $convert_tgl_awal, $convert_tgl_akhir );
-			$hari_kerja 		= $count_plan_date - $count_weekend;		
+			$fposisi_id 		= $Helper->replacetext ( $_POST ["posisi_id"][$x] );		
 			if ($fauditee_id != "" && $fanggota_id != "" && $fposisi_id != "") {
 				$id_plan_anggota = $plannings->uniq_id ();
 				$plannings->plan_auditor_add ( $id_plan_anggota, $fauditee_id, $fanggota_id, $fposisi_id, $convert_tgl_awal, $convert_tgl_akhir, $count_plan_date, $ses_plan_id, $hari_kerja );
@@ -121,15 +121,15 @@ switch ($_action) {
 		$page_request = "blank.php";
 		break;
 	case "postedit" :
-		$fdata_id = $Helper->replacetext ( $_POST ["data_id"] );
-		$fauditee_id = $Helper->replacetext ( $_POST ["auditee_id"] );
-		$fanggota_id = $Helper->replacetext ( $_POST ["anggota_id"] );
-		$fposisi_id = $Helper->replacetext ( $_POST ["posisi_id"] );
-		$ftanggal_awal = $Helper->date_db ( $Helper->replacetext ( $_POST ["tanggal_awal"] ) );
-		$ftanggal_akhir = $Helper->date_db ( $Helper->replacetext ( $_POST ["tanggal_akhir"] ) );
+		$fdata_id        = $Helper->replacetext ( $_POST ["data_id"] );
+		$fauditee_id     = $Helper->replacetext ( $_POST ["auditee_id"] );
+		$fanggota_id     = $Helper->replacetext ( $_POST ["anggota_id"] );
+		$fposisi_id      = $Helper->replacetext ( $_POST ["posisi_id"] );
+		$ftanggal_awal   = $Helper->date_db ( $Helper->replacetext ( $_POST ["tanggal_awal"] ) );
+		$ftanggal_akhir  = $Helper->date_db ( $Helper->replacetext ( $_POST ["tanggal_akhir"] ) );
 		$count_plan_date = (($ftanggal_akhir - $ftanggal_awal) / 86400) + 1;
-		$count_weekend = $Helper->cek_holiday ( $ftanggal_awal, $ftanggal_akhir );
-		$hari_kerja = $count_plan_date - $count_weekend;
+		$count_weekend   = $Helper->cek_holiday ( $ftanggal_awal, $ftanggal_akhir );
+		$hari_kerja      = $count_plan_date - $count_weekend;
 		// $fidsbu = $_POST ["idsbu"];
 		// $fjml_hari = $_POST ["jml_hari"];
 		// $fnilai = $_POST ["nilai"];

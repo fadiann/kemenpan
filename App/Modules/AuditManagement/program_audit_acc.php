@@ -1,50 +1,73 @@
 <script type="text/javascript" src="Public/js/jquery.validate.min.js"></script>
-<script type="text/javascript" src="Public/js/jquery-ui-1.10.1.custom.min.js"></script>
+<!-- <script type="text/javascript" src="Public/js/jquery-ui-1.10.1.custom.min.js"></script> -->
 <link rel="stylesheet" href="Public/css/jquery.ui.datepicker.css">
-<link rel="stylesheet" href="Public/js/select2/select2.css" type="text/css" />
-<script type="text/javascript" src="Public/js/select2/select2.min.js"></script>
+<!-- <link rel="stylesheet" href="Public/js/select2/select2.css" type="text/css" />
+<script type="text/javascript" src="Public/js/select2/select2.min.js"></script> -->
 <script type="text/javascript" src="Public/js/jquery.loadTemplate-1.4.1.min.js"></script>
 <link rel="stylesheet" href="Public/css/jquery.ui.datepicker.css">
 
-
-<section id="main" class="column">
-	<article class="module width_3_quarter">
-		<header>
-			<h3 class="tabs_involved"><?=$page_title?></h3>
-		</header>
+<div class="row">
+	<div class="col-md-12">
+		<section class="panel">
+			<header class="panel-heading">
+				<h4 class="panel-title"><?=$page_title?></h4>
+			</header>
+			<div class="panel-body wrap">
 		<form method="post" name="f" action="#" class="form-horizontal" id="validation-form" enctype="multipart/form-data">
 		<?
 		switch ($_action) {
 			case "getadd" :
 				?>
-			<fieldset class="hr">
-				<label class="span2">Satuan Kerja</label>
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Satuan Kerja <span class="required">*</span></label>
+				<div class="col-sm-5">
 				<?php
 				$rs_auditee = $assigns->assign_auditee_viewlist ( $ses_assign_id );
 				$arr_auditee = $rs_auditee->GetArray ();
 				echo $Helper->buildCombo ( "auditee", $arr_auditee, 0, 1, "", "", "", false, true, false );
-				?><span class="mandatory">*</span>
+				?>
+				</div>
 			</fieldset>
-			<fieldset class="hr">
-				<label class="span2">Auditor</label>
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Auditor <span class="required">*</span></label>
+				<div class="col-sm-5">
 				<?php
 				$rs_auditor = $assigns->view_auditor_assign ( $ses_assign_id );
 				$arr_auditor = $rs_auditor->GetArray ();
 				echo $Helper->buildCombo ( "auditor", $arr_auditor, 0, 1, "", "", "", false, true, false );
-				?><span class="mandatory">*</span>
+				?>
+				</div>
 			</fieldset>
-			<fieldset class="hr">
-				<label class="span2">Waktu ( Jam )</label> 
-				<input type="text" class="span0" name="jamm" id="jamm">
-				<span class="mandatory">*</span>
+			<!-- <fieldset class="form-group">
+				<label class="col-sm-3 control-label">Waktu ( Jam ) <span class="required">*</span></label> 
+				<div class="col-sm-2">
+				<input type="number" class="form-control" name="jamm" id="jamm">
+				</div>
+			</fieldset> -->
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Aspek Program Audit</label>
+				<div class="col-sm-5">
+					<?=$Helper->dbCombo("aspek_id", "par_aspek", "aspek_id", "aspek_name", "and aspek_del_st  = 1 ", "", "", 1)?>
+					<!-- <input type="hidden" name="ref_program" id="ref_program" class="select2 multiple form-control"/> -->
+				</div>
 			</fieldset>
-			<fieldset class="hr">
-				<label class="span2">Referensi Program Audit</label>
-				&nbsp;&nbsp;&nbsp;<input type="hidden" name="ref_program" id="ref_program" class="select2 multiple"/>
+			<fieldset class="form-group">
+				<label class="col col-md-3 control-label">Referensi Program Audit</label>
+				<span class="col col-md-9">
+					<div id="daftar_pka"></div>
+				</span>
 			</fieldset>
-			<fieldset>
-				<label class="span2">Rincian Ref</label>
-				<table border="1" cellpadding="0" cellspacing="0" class="table_risk">
+			<!-- <fieldset class="form-group">
+				<label class="col-sm-3 control-label">Referensi Program Audit</label>
+				<div class="col-sm-5">
+					<?=$Helper->dbCombo("aspek_id", "par_aspek", "aspek_id", "aspek_name", "and aspek_del_st  = 1 ", "", "", 1)?>
+					<input type="hidden" name="ref_program" id="ref_program" class="select2 multiple form-control"/>
+				</div>
+			</fieldset> -->
+			<!-- <fieldset class="form-group">
+				<label class="col-sm-3 control-label">Rincian Ref</label>
+				<div class="col-sm-5">
+				<table border="1" cellpadding="0" cellspacing="0" class="table table-bordered table-striped table-condensed mb-none">
 					<thead>
 						<tr>
 							<th width="10%">kode</th>
@@ -56,10 +79,11 @@
 
 					</tbody>
 				</table>
+				</div> -->
 			</fieldset>
-			<fieldset class="hr">
-				<label class="span2">Lampiran</label>
-				&nbsp;&nbsp;&nbsp;<input type="file" class="span4" name="attach" id="attach">
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Lampiran</label>
+				<div class="col-sm-5"><input type="file" class="form-control" name="attach" id="attach"></div>
 			</fieldset>
 		<?
 				break;
@@ -67,66 +91,80 @@
 				$arr = $rs->FetchRow ();
 				?>
 			
-			<fieldset class="hr">
-				<label class="span2">Satuan Kerja</label>
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Satuan Kerja <span class="required">*</span></label>
+				<div class="col-sm-5">
 				<?php
 				$rs_auditee = $assigns->assign_auditee_viewlist ( $ses_assign_id );
 				$arr_auditee = $rs_auditee->GetArray ();
 				echo $Helper->buildCombo ( "auditee_id", $arr_auditee, 0, 1, $arr ['program_id_auditee'], "", "", false, true, false );
-				?><span class="mandatory">*</span>
+				?> 
+				</div>
 			</fieldset>
-			<fieldset class="hr">
-				<label class="span2">Auditor</label>
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Auditor <span class="required">*</span></label>
+				<div class="col-sm-5">
 				<?php
 				$rs_auditor = $assigns->view_auditor_assign ( $ses_assign_id );
 				$arr_auditor = $rs_auditor->GetArray ();
 				echo $Helper->buildCombo ( "auditor", $arr_auditor, 0, 1, $arr ['program_id_auditor'], "", "", false, true, false );
-				?><span class="mandatory">*</span>
-			</fieldset>
-			<fieldset class="hr">
-				<label class="span2">Waktu ( Jam )</label> 
-				<input type="text" class="span0" name="jamm" id="jamm" value="<?=$arr['program_jam'];?>">
-				<span class="mandatory">*</span>
-			</fieldset>
-			<fieldset class="hr">
-				<label class="span2">Referensi Program Audit</label>
-				<?php
-				$rsRef = $params->ref_program_data_viewlist ();
-				$arr_ref = $rsRef->GetArray ();
-				echo $Helper->buildCombo_risk ( "ref_program", $arr_ref, 0, 2, $arr ['program_id_ref'], "", false, true, false );
 				?>
+				</div>
 			</fieldset>
-			<fieldset>
-				<label class="span2">Rincian Ref</label>
-				<table border="1" cellpadding="0" cellspacing="0" class="table_risk">
-					<thead>
-						<tr>
-							<th width="10%">kode</th>
-							<th width="30%">Judul</th>
-							<th width="60%">Procedure</th>
+			<!-- <fieldset class="form-group">
+				<label class="col-sm-3 control-label">Waktu ( Jam ) <span class="required">*</span></label> 
+				<div class="col-sm-2">
+				<input type="number" class="form-control" name="jamm" id="jamm" value="<?=$arr['program_jam'];?>">
+				</div>
+			</fieldset> -->
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Aspek Program Audit</label>
+				<div class="col-sm-5">
+					<?=$Helper->dbCombo("aspek_id", "par_aspek", "aspek_id", "aspek_name", "and aspek_del_st  = 1 ", "", "", 1)?>
+					<!-- <input type="hidden" name="ref_program" id="ref_program" class="select2 multiple form-control"/> -->
+				</div>
+			</fieldset>
+			<fieldset class="form-group">
+				<label class="col col-md-3 control-label">Referensi Program Audit</label>
+				<span class="col col-md-9">
+					<div id="daftar_pka"></div>
+				</span>
+			</fieldset>
+			<fieldset class="form-group">
+					<label class="col-md-3 control-label">Rincian Ref</label>
+					<span class="col-md-9">
+					<table border="1" cellpadding="0" cellspacing="0" class="table table-bordered table-hover">
+						<thead>
+							<tr>
+								<th width="10%">kode</th>
+								<th width="30%">Judul</th>
+								<th width="60%">Procedure</th>
+							</tr>
+						</thead>
+						<tbody id="table_desc">
+						<?php
+						$rs_detail = $params->get_ref_desc ( $arr ['program_id_ref'] );
+						while ( $arr_detil = $rs_detail->FetchRow () ) {
+						?>
+						<tr class="row_item">
+							<td><span data-content="kode"><?=$arr_detil ['ref_program_code']?></span></td>
+							<td><span data-content="judul"><?=$arr_detil ['ref_program_title']?></span></td>
+							<td><span data-content="procedure"><?=$arr_detil ['ref_program_procedure']?></span></td>
 						</tr>
-					</thead>
-					<tbody id="table_desc">
-					<?php
-					$rs_detail = $params->get_ref_desc ( $arr ['program_id_ref'] );
-					while ( $arr_detil = $rs_detail->FetchRow () ) {
-					?>
-					<tr class="row_item">
-						<td><span data-content="kode"><?=$arr_detil ['ref_program_code']?></span></td>
-						<td><span data-content="judul"><?=$arr_detil ['ref_program_title']?></span></td>
-						<td><span data-content="procedure"><?=$arr_detil ['ref_program_procedure']?></span></td>
-					</tr>
-					<?
-					}
-					?>
-					</tbody>
-				</table>
+						<?
+						}
+						?>
+						</tbody>
+					</table>
+					</span>
 			</fieldset>
-			<fieldset class="hr">
-				<label class="span2">Lampiran</label>
-				<input type="hidden" class="span4" name="attach_old" value="<?=$arr['program_lampiran']?>"> 
-				<input type="file" class="span4" name="attach" id="attach">
-				<label class="span2"><a href="#" Onclick="window.open('<?=$Helper->baseurl("Upload_ProgramAudit").$arr['program_lampiran']?>','_blank')"><?=$arr['program_lampiran']?></a></label>
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Lampiran</label>
+				<div class="col-sm-5">
+				<input type="hidden" class="form-control" name="attach_old" value="<?=$arr['program_lampiran']?>"> 
+				<input type="file" class="form-control" name="attach" id="attach">
+				<label class="col-sm-3 control-label"><a href="#" Onclick="window.open('<?=$Helper->baseurl("Upload_ProgramAudit").$arr['program_lampiran']?>','_blank')"><?=$arr['program_lampiran']?></a></label>
+				</div>
 			</fieldset>
 			<input type="hidden" name="data_id" value="<?=$arr['program_id']?>">	
 		<?
@@ -135,20 +173,20 @@
 				$arr = $rs->FetchRow ();
 				?>
 			
-			<fieldset class="hr">
-				<label class="span2">Satuan Kerja</label>
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Satuan Kerja</label>
 				<?=$arr['auditee_name']?>
 			</fieldset>
-			<fieldset class="hr">
-				<label class="span2">Auditor</label>
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Auditor</label>
 				<?=$arr['auditor_name']?>
 			</fieldset>
-			<fieldset class="hr">
-				<label class="span2">Waktu ( Jam )</label> <label class="span0"><?=$arr['program_jam']?></label>
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Waktu ( Jam )</label> <label class="col-md-5"><?=$arr['program_jam']?></label>
 			</fieldset>
-			<fieldset>
-				<label class="span2">Referensi Program Audit</label>
-				<table border="1" cellpadding="0" cellspacing="0" class="table_risk">
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Referensi Program Audit</label>
+				<table border="1" cellpadding="0" cellspacing="0" class="table table-bordered table-striped table-condensed mb-none">
 					<thead>
 						<tr>
 							<th width="10%">kode</th>
@@ -172,9 +210,9 @@
 					</tbody>
 				</table>
 			</fieldset>
-			<fieldset class="hr">
-				<label class="span2">Lampiran</label>
-				<label class="span2"><a href="#" Onclick="window.open('<?=$Helper->baseurl("Upload_ProgramAudit").$arr['program_lampiran']?>','_blank')"><?=$arr['program_lampiran']?></a></label>
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Lampiran</label>
+				<label class="col-sm-3 control-label"><a href="#" Onclick="window.open('<?=$Helper->baseurl("Upload_ProgramAudit").$arr['program_lampiran']?>','_blank')"><?=$arr['program_lampiran']?></a></label>
 			</fieldset>
 		<?
 				break;
@@ -183,20 +221,20 @@
 				$arr = $rs->FetchRow ();
 				?>
 			
-			<fieldset class="hr">
-				<label class="span2">Satuan Kerja</label>
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Satuan Kerja</label>
 				<label class="span7"><?=$arr['auditee_name']?></label>
 			</fieldset>
-			<fieldset class="hr">
-				<label class="span2">Auditor</label>
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Auditor</label>
 				<label class="span07"><?=$arr['auditor_name']?></label>
 			</fieldset>
-			<fieldset class="hr">
-				<label class="span2">Waktu ( Jam )</label> <label class="span0"><?=$arr['program_jam']?></label>
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Waktu ( Jam )</label> <label class="span0"><?=$arr['program_jam']?></label>
 			</fieldset>
-			<fieldset>
-				<label class="span2">Referensi Program Audit</label>
-				<table border="1" cellpadding="0" cellspacing="0" class="table_risk">
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Referensi Program Audit</label>
+				<table border="1" cellpadding="0" cellspacing="0" class="table table-bordered table-striped table-condensed mb-none">
 					<thead>
 						<tr>
 							<th width="10%">kode</th>
@@ -220,16 +258,16 @@
 					</tbody>
 				</table>
 			</fieldset>
-			<fieldset class="hr">
-				<label class="span2">Lampiran</label>
-				<label class="span2"><a href="#" Onclick="window.open('<?=$Helper->baseurl("Upload_ProgramAudit").$arr['program_lampiran']?>','_blank')"><?=$arr['program_lampiran']?></a></label>
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Lampiran</label>
+				<label class="col-sm-3 control-label"><a href="#" Onclick="window.open('<?=$Helper->baseurl("Upload_ProgramAudit").$arr['program_lampiran']?>','_blank')"><?=$arr['program_lampiran']?></a></label>
 			</fieldset>		
 			<?php
 			$z = 0;
 			$rs_komentar = $programaudits->program_audit_komentar_viewlist ( $arr ['program_id'] );
 				?>
-			<fieldset>
-				<label class="span2">detail komentar</label>
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">detail komentar</label>
 					<table>
 					<tbody>
 						<?php
@@ -246,8 +284,8 @@
 					</tbody>
 				</table>
 			</fieldset>
-			<fieldset class="hr">
-				<label class="span2">Isi Komentar</label> <input type="text" class="span7" name="komentar">
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Isi Komentar</label> <input type="text" class="span7" name="komentar">
 			</fieldset>
 			<input type="hidden" name="data_id" value="<?=$arr['program_id']?>">
 			<input type="hidden" name="status_pka" value="<?=$status?>">
@@ -255,21 +293,23 @@
 				break;
 		}
 		?>
-			<fieldset>
+			<fieldset class="form-group">
 				<center>
-					<input type="button" class="blue_btn" value="Kembali"
+					<input type="button" class="btn btn-primary" value="Kembali"
 						onclick="location='<?=$def_page_request?>'">
 					<?php if($_action!='getdetail'){?>
 					&nbsp;&nbsp;&nbsp;
-					<input type="submit" class="blue_btn" value="Simpan">
+					<input type="submit" class="btn btn-success" value="Simpan">
 				</center>
 				<input type="hidden" name="data_action" id="data_action"
 					value="<?=$_nextaction?>">
 					<?php }?>	
 			</fieldset>
 		</form>
-	</article>
-</section>
+			</div>
+		</section>
+	</div>
+</div>
 <script>
 var data = [];
 <?php
@@ -298,7 +338,7 @@ $("#ref_program").on("change", function(){
 	  var id_sub = $(this).val();
 	  console.log(id_sub);
 	  $.ajax({
-		url: 'AuditManagement/ajax.php?data_action=getDesc_refProg',
+		url: 'App/Modules/AuditManagement/ajax.php?data_action=getDesc_refProg',
 		type: 'POST',
 		dataType: 'json',
 		data: {id_sub: id_sub},
@@ -336,7 +376,36 @@ $(function() {
 		}
 	});
 });
+
+/*FUNGSI PKA*/
+$('#aspek_id').change(function(){
+    $.ajax({
+		/*var id	= $(this).val();*/
+		type: 'post',
+		data: {'id':  $(this).val() },
+		url: 'App/Modules/AuditManagement/ajax.php?data_action=getpka',
+		dataType: 'html',
+		success: function(res){
+			/*console.log(res);*/
+			$('#daftar_pka').empty();
+		   	$('#daftar_pka').append(res);
+		}
+	});
+});
+function check_uncheck_checkbox(isChecked) {
+	if(isChecked) {
+		$('input[name="ref_program[]"]').each(function() {
+			this.checked = true;
+		});
+	} else {
+		$('input[name="ref_program[]"]').each(function() {
+			this.checked = false;
+		});
+	}
+}
 </script>
+
+
 <script type="text/html" id="table_tmp">
 	<tr class="row_item">
 		<td><span data-content="kode"></span></td>

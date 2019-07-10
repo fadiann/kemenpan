@@ -202,6 +202,7 @@ switch ($_action) {
 		$page_request = "blank.php";
 		break;
 	default :
+		$back			= "window.open('main.php?method=programaudit', '_self');";
 		$recordcount = $kertas_kerjas->kertas_kerja_count ( $ses_program_id, $key_search, $val_search, $key_field );
 		$rs = $kertas_kerjas->kertas_kerja_view_grid ( $ses_program_id, $key_search, $val_search, $key_field, $offset, $num_row );
 		$page_title = "Daftar Kertas Kerja Audit";

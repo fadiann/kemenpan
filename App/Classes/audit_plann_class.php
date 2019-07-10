@@ -73,6 +73,7 @@ class planning {
 				left join user_apps as b on audit_plan_userID_approve = b.user_id
 				where 1=1 ".$condition." order by audit_plan_start_date DESC
 				LIMIT $offset, $num_row";
+				//echo $sql;
 		$data = $this->_db->_dbquery ( $sql );
 		return $data;
 	}

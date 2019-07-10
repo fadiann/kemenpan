@@ -11,24 +11,24 @@
 		switch ($_action) {
 			case "getadd" :
 				?>
-			<fieldset class="hr">
-				<label class="span2">Tingkat Risiko Residu</label> <input
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Tingkat Risiko Residu</label> <input
 					type="text" class="span5" name="name" id="name">
 			</fieldset>
-			<fieldset class="hr">
-				<label class="span2">Nilai Bawah (>)</label> <input type="text"
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Nilai Bawah (>)</label> <input type="text"
 					class="span3" name="bawah" id="bawah">
 			</fieldset>
-			<fieldset class="hr">
-				<label class="span2">Nilai Atas (<=)</label> <input type="text"
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Nilai Atas (<=)</label> <input type="text"
 					class="span3" name="atas" id="atas">
 			</fieldset>
-			<fieldset class="hr">
-				<label class="span2">Nilai</label> <input type="text" class="span3"
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Nilai</label> <input type="text" class="span3"
 					name="nilai" id="nilai">
 			</fieldset>
-			<fieldset class="hr">
-				<label class="span2">Warna</label> <input type="text" class="color"
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Warna</label> <input type="text" class="color"
 					name="warna" id="warna">
 			</fieldset>
 		<?
@@ -36,25 +36,25 @@
 			case "getedit" :
 				$arr = $rs->FetchRow ();
 				?>
-			<fieldset class="hr">
-				<label class="span2">Tingkat Risiko Residu</label> <input
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Tingkat Risiko Residu</label> <input
 					type="text" class="span5" name="name" id="name"
 					value="<?=$arr['rr_name']?>">
 			</fieldset>
-			<fieldset class="hr">
-				<label class="span2">Nilai Bawah (>)</label> <input type="text"
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Nilai Bawah (>)</label> <input type="text"
 					class="span3" name="bawah" id="bawah" value="<?=$arr['rr_bawah']?>">
 			</fieldset>
-			<fieldset class="hr">
-				<label class="span2">Nilai Atas (<=)</label> <input type="text"
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Nilai Atas (<=)</label> <input type="text"
 					class="span3" name="atas" id="atas" value="<?=$arr['rr_atas']?>">
 			</fieldset>
-			<fieldset class="hr">
-				<label class="span2">Nilai</label> <input type="text" class="span3"
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Nilai</label> <input type="text" class="span3"
 					name="nilai" id="nilai" value="<?=$arr['rr_value']?>">
 			</fieldset>
-			<fieldset class="hr">
-				<label class="span2">Warna</label> <input type="text" class="color"
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Warna</label> <input type="text" class="color"
 					name="warna" id="warna" value="<?=$arr['rr_warna']?>">
 			</fieldset>
 			<input type="hidden" name="data_id" value="<?=$arr['rr_id']?>">	
@@ -62,11 +62,11 @@
 				break;
 		}
 		?>
-			<fieldset>
+			<fieldset class="form-group">
 				<center>
-					<input type="button" class="blue_btn" value="Kembali"
+					<input type="button" class="btn btn-primary" value="Kembali"
 						onclick="location='<?=$def_page_request?>'"> &nbsp;&nbsp;&nbsp; <input
-						type="submit" class="blue_btn" value="Simpan">
+						type="submit" class="btn btn-success" value="Simpan">
 				</center>
 				<input type="hidden" name="data_action" id="data_action"
 					value="<?=$_nextaction?>">

@@ -28,83 +28,88 @@ while ( $arr_id_auditee = $rs_id_auditee->FetchRow () ) {
 	$assign_auditee .= "<br>";
 }
 ?>
-<article class="module width_3_quarter">
-	<fieldset>
-		<table class="view_parrent">
-			<tr>
-				<td width="150">Tipe Audit</td>
-				<td>:</td>
-				<td><?=$arr_assign['audit_type_name']?></td>
-			</tr>
-			<tr>
-				<td>Obyek Audit</td>
-				<td>:</td>
-				<td>
-			<?php
-			if ($method == 'finding_kka') {
-				echo $arr_kka ['auditee_name'];
-			} else {
-				echo $assign_auditee;
-			}
-			?>
-			</td>
-			</tr>
-			<tr>
-				<td>Tahun Audit</td>
-				<td>:</td>
-				<td><?=$arr_assign['assign_tahun']?></td>
-			</tr>
-			<tr>
-				<td>Tanggal Audit</td>
-				<td>:</td>
-				<td><?=$Helper->dateIndo($arr_assign['assign_start_date'])?> s/d <?=$Helper->dateIndo($arr_assign['assign_end_date'])?></td>
-			</tr>
-	<?php
-	if ($method == 'finding_kka') {
-	?>
-			<tr>
-				<td>No KKA</td>
-				<td>:</td>
-				<td><?=$arr_kka ['kertas_kerja_no']?></td>
-			</tr>
-			<tr>
-				<td>Bidang Substansi</td>
-				<td>:</td>
-				<td><?=$arr_kka ['ref_program_title']?></td>
-			</tr>
-	<?php
-	}
-	?>
-		</table>
-	</fieldset>
-	<?php
-	if ($method == 'programaudit') {
-	?>
-	<fieldset>
-		<label class="span2">Susunan Tim</label>
-		<table border="1" cellpadding="0" cellspacing="0" class="table_risk">
-			<thead>
+<div class="row">
+	<div class="col-md-12">
+		<section class="panel">
+			<div class="panel-body">
+			<table class="table table-borderless">
 				<tr>
-					<th width="80%">Nama Anggota</th>
-					<th width="20%">Posisi</th>
+					<td width="15%">Tipe Audit</td>
+					<td width="3%">:</td>
+					<td><?=$arr_assign['audit_type_name']?></td>
 				</tr>
-			</thead>
-			<tbody id="table_desc">
-			<?
-			$rs_detail = $assigns->view_auditor_assign ( $ses_assign_id );
-			while ( $arr_detil = $rs_detail->FetchRow () ) {
-			?>
-				<tr class="row_item">
-					<td><?=$arr_detil ['auditor_name']?></td>
-					<td><?=$arr_detil ['posisi_name']?></td>
+				<tr>
+					<td>Obyek Audit</td>
+					<td>:</td>
+					<td>
+				<?php
+				if ($method == 'finding_kka') {
+					echo $arr_kka ['auditee_name'];
+				} else {
+					echo $assign_auditee;
+				}
+				?>
+				</td>
 				</tr>
-			<?
-			}
-			?>
-			</tbody>
-		</table>
-	</fieldset>
-	<?
-	}
-	?>
-</article>
+				<tr>
+					<td>Tahun Audit</td>
+					<td>:</td>
+					<td><?=$arr_assign['assign_tahun']?></td>
+				</tr>
+				<tr>
+					<td>Tanggal Audit</td>
+					<td>:</td>
+					<td><?=$Helper->dateIndo($arr_assign['assign_start_date'])?> s/d <?=$Helper->dateIndo($arr_assign['assign_end_date'])?></td>
+				</tr>
+		<?php
+		if ($method == 'finding_kka') {
+		?>
+				<tr>
+					<td>No KKA</td>
+					<td>:</td>
+					<td><?=$arr_kka ['kertas_kerja_no']?></td>
+				</tr>
+				<tr>
+					<td>Bidang Substansi</td>
+					<td>:</td>
+					<td><?=$arr_kka ['ref_program_title']?></td>
+				</tr>
+		<?php
+		}
+		?>
+			</table>
+		</fieldset>
+		<?php
+		if ($method == 'programaudit') {
+		?>
+		<fieldset class="form-group">
+			<label class="col-sm-3 control-label">Susunan Tim</label>
+			<table border="1" cellpadding="0" cellspacing="0" class="table table-bordered table-striped table-condensed mb-none">
+				<thead>
+					<tr>
+						<th width="80%">Nama Anggota</th>
+						<th width="20%">Posisi</th>
+					</tr>
+				</thead>
+				<tbody id="table_desc">
+				<?
+				$rs_detail = $assigns->view_auditor_assign ( $ses_assign_id );
+				while ( $arr_detil = $rs_detail->FetchRow () ) {
+				?>
+					<tr class="row_item">
+						<td><?=$arr_detil ['auditor_name']?></td>
+						<td><?=$arr_detil ['posisi_name']?></td>
+					</tr>
+				<?
+				}
+				?>
+				</tbody>
+			</table>
+		</fieldset>
+		<?
+		}
+		?>
+			</div>
+		</section>
+	</div>
+</div>

@@ -33,7 +33,7 @@ $acc_page_request = "anggota_assign_acc.php";
 $list_page_request = "audit_view.php";
 
 // ==== buat grid ===//
-$num_row = 10;
+$num_row = 5;
 @$str_page = $Helper->replacetext ( $_GET ['page'] );
 if (isset ( $str_page )) {
 	if (is_numeric ( $str_page ) && $str_page != 0) {

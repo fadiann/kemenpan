@@ -3,8 +3,8 @@ $rs_penetapan = $risks->penetapan_data_viewlist ( $ses_penetapan_id );
 $arr_penetapan = $rs_penetapan->FetchRow ();
 ?>
 <article class="module width_3_quarter">
-	<fieldset>
-		<table class="view_parrent">
+	<fieldset class="form-group">
+		<table class="table table-borderless">
 			<tr>
 				<td width="150">Satuan Kerja</td>
 				<td>:</td>

@@ -38,13 +38,13 @@ $arr = $rs->FetchRow();
 
 					<div id="view1">
 
-						<fieldset class="hr">
+						<fieldset class="form-group">
 
-							<label class="span3">Kode Author</label> <label class="span2">: <?=$arr['kode_author']?></label>
+							<label class="span3">Kode Author</label> <label class="col-sm-3 control-label">: <?=$arr['kode_author']?></label>
 
 						</fieldset>
 
-						<fieldset class="hr">
+						<fieldset class="form-group">
 
 							<label class="span3">Nama author</label> <label class="span5">: <?=$arr['nama_author']?></label>
 

@@ -4,8 +4,8 @@ $arr_rek = $rs_rek->FetchRow ();
 ?>
 <form method="post" name="x" action="main.php?method=tindaklanjut&data_action=update_status" class="form-horizontal" onsubmit="return confirm('Anda Yakin Rekomendasi Telah Selesai Ditindak Lanjuti Dengan Benar');">
 <article class="module width_3_quarter">
-	<fieldset>
-		<table class="view_parrent">
+	<fieldset class="form-group">
+		<table class="table table-borderless">
 			<tr>
 				<td>No Temuan</td>
 				<td>:</td>
@@ -42,7 +42,7 @@ $arr_rek = $rs_rek->FetchRow ();
 								echo "Selesai";
 							}else{
 					?>
-							<input type="submit" class="blue_btn" value="Selesai">
+							<input type="submit" class="btn btn-success" value="Selesai">
 					<?php 
 							}
 						}else{

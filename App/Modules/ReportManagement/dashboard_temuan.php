@@ -17,7 +17,7 @@ foreach ($rs_finding_types->GetArray() as $finding_type) {
       <h3 class="tabs_involved">Dashboard Temuan<?=($tipe_audit) ? " ({$dashboards->audit_type_data_viewlist($tipe_audit)}) " : ""  ?><?=($tahun) ? " Tahun {$tahun}" : "" ?></h3>
     </header>
     <br>
-    <fieldset>
+    <fieldset class="form-group">
       <center>
         <div  style="width: 600px !important; height: 400px !important">
           <canvas id="myChart" ></canvas>

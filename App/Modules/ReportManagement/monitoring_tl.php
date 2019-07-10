@@ -14,7 +14,7 @@ $rs_auditees = $dashboards->auditee_list($tahun, $tipe_audit);
       <h3 class="tabs_involved">Monitoring Tindak Lanjut <?=($tahun) ? " Tahun {$tahun}" : "" ?></h3>
     </header>
     <br>
-    <table border='1' class="table_risk" width="5%" cellspacing='0' cellpadding="0">
+    <table border='1' class="table table-bordered table-striped table-condensed mb-none" width="5%" cellspacing='0' cellpadding="0">
         <tr><th width="3%" align="center" class="text-center">No</th><th align="center" colspan="5" class="text-center">Obyek Audit</th></tr>
         <?php $rs_auditees2 = $dashboards->auditee_list($tahun, $tipe_audit, $status) ?>
         <?php if ($rs_auditees2->RecordCount() > 0): ?>
@@ -77,7 +77,7 @@ $rs_auditees = $dashboards->auditee_list($tahun, $tipe_audit);
         <?php endif ?>
     </table>
     <br><br>
-    <fieldset>
+    <fieldset class="form-group">
             <center>
                 <input type="button" class="blue_btn" value="ms-excel" onclick="window.open('ReportManagement/monitoring_tl_excel.php?fil_tahun_id=<?= $tahun ?>&status_tl=<?= $status ?>','toolbar=no, location=no, status=no, menubar=yes, scrollbars=yes, resizable=yes');">
             </center>

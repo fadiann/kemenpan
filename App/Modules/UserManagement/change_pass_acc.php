@@ -1,45 +1,58 @@
 <script src="Public/js/jquery.validate.min.js" type="text/javascript"></script>
-<section id="main" class="column">
-	<article class="module width_3_quarter">
-		<header>
-			<h3 class="tabs_involved"><?=$page_title?></h3>
-		</header>
+
+<div class="row">
+	<div class="col-md-12">
+		<section class="panel">
+			<header class="panel-heading">
+				<h2 class="panel-title"><?=$page_title?></h2>
+			</header>
+			<div class="panel-body wrap">
 		<form method="post" name="f" action="#" class="form-horizontal" id="validation-form">
 			<?
 			switch ($_action) {
 				case "getedit" :
 					?>
-			<fieldset class="hr">
-				<label class="span2">User Name</label>
-				<input type="text" class="span2" name="name" id="name" value="<?=$ses_userName?>" readonly>
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">User Name</label>
+					<div class="col-sm-6">
+				<input type="text" class="form-control" name="name" id="name" value="<?=$ses_userName?>" readonly>
+					</div>
 			</fieldset>
-			<fieldset class="hr">
-				<label class="span2">Password Lama</label>
-				<input type="password" class="span2" name="password_old" id="password_old">
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Password Lama</label>
+					<div class="col-sm-6">
+				<input type="password" class="form-control" name="password_old" id="password_old">
+					</div>
 			</fieldset>
-			<fieldset class="hr">
-				<label class="span2">Password Baru</label>
-				<input type="password" class="span2" name="password_new" id="password_new">
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Password Baru</label>
+					<div class="col-sm-6">
+				<input type="password" class="form-control" name="password_new" id="password_new">
+					</div>
 			</fieldset>
-			<fieldset class="hr">
-				<label class="span2">Konfirmasi Password Baru</label>
-				<input type="password" class="span2" name="password_confirm_new" id="password_confirm_new">
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Konfirmasi Password Baru</label>
+					<div class="col-sm-6">
+				<input type="password" class="form-control" name="password_confirm_new" id="password_confirm_new">
+					</div>
 			</fieldset>
 				<input type="hidden" name="cuser_id" id="cuser_id" value="<?=$ses_userId?>">
 			<?
 					break;
 			}
 			?>
-			<fieldset>
+			<fieldset class="form-group mt-md">
 				<center>
-					<input type="button" class="blue_btn" value="Kembali" onclick="location='<?=$def_page_request?>'"> &nbsp;&nbsp;&nbsp; 
-					<input type="submit" class="blue_btn" value="Simpan">
+					<input type="button" class="btn btn-primary" value="Kembali" onclick="location='<?=@$def_page_request?>'"> 
+					<input type="submit" class="btn btn-success" value="Simpan">
 				</center>
-				<input type="hidden" name="data_action" id="data_action" value="<?=$_nextaction?>">
+				<input type="hidden" name="data_action" id="data_action" value="<?=@$_nextaction?>">
 			</fieldset>
 		</form>
-	</article>
-</section>
+			</div>
+		</section>
+	</div>
+</div>
 <script> 
 $("#password_old").on('change', function(){
 	var pass_old = $(this).val(),
