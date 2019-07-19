@@ -89,14 +89,16 @@ switch ($_action) {
 		echo "<script>window.open('" . $acc_page_request_detil . "&auditor=" . $fdata_id . "', '_self');</script>";
 		break;
 	case "postadd" :
-		$fno_surat = $Helper->replacetext ( $_POST ["no_surat"] );
+		$fno_surat      = $Helper->replacetext ( $_POST ["no_surat"] );
 		$ftanggal_surat = $Helper->date_db ( $Helper->replacetext ( $_POST ["tanggal_surat"] ) );
-		$fttd_id = $Helper->replacetext ( $_POST ["ttd_id"] );
+		$fttd_id        = $Helper->replacetext ( $_POST ["ttd_id"] );
 		$fjabatan_surat = $Helper->replacetext ( $_POST ["jabatan_surat"] );
-		$ftembusan = $Helper->replacetext ( $_POST ["tembusan"] );
+		$ftembusan      = $Helper->replacetext ( $_POST ["tembusan"] );
+		$fmenimbang		= $Helper->replacetext ( $_POST ["menimbang"] );
+		$fdasar			= $Helper->replacetext ( $_POST ["dasar"] );
 		if ($fno_surat != "" && $ftanggal_surat != "" && $fttd_id != "" && $fjabatan_surat != "") {
 			$id_surat_tugas = $assigns->uniq_id();
-			$assigns->surat_tugas_add ( $ses_assign_id, $id_surat_tugas, $fno_surat, $ftanggal_surat, $fttd_id, $fjabatan_surat, $ftembusan );
+			$assigns->surat_tugas_add ( $ses_assign_id, $id_surat_tugas, $fno_surat, $ftanggal_surat, $fttd_id, $fjabatan_surat, $ftembusan, $fmenimbang, $fdasar);
 			$Helper->js_alert_act ( 3 );
 		} else {
 			$Helper->js_alert_act ( 5 );
@@ -107,14 +109,16 @@ switch ($_action) {
 		$page_request = "blank.php";
 		break;
 	case "postedit" :
-		$fdata_id = $Helper->replacetext ( $_POST ["data_id"] );
-		$fno_surat = $Helper->replacetext ( $_POST ["no_surat"] );
+		$fdata_id       = $Helper->replacetext ( $_POST ["data_id"] );
+		$fno_surat      = $Helper->replacetext ( $_POST ["no_surat"] );
 		$ftanggal_surat = $Helper->date_db ( $Helper->replacetext ( $_POST ["tanggal_surat"] ) );
-		$fttd_id = $Helper->replacetext ( $_POST ["ttd_id"] );
+		$fttd_id        = $Helper->replacetext ( $_POST ["ttd_id"] );
 		$fjabatan_surat = $Helper->replacetext ( $_POST ["jabatan_surat"] );
-		$ftembusan = $Helper->replacetext ( $_POST ["tembusan"] );
+		$ftembusan      = $Helper->replacetext ( $_POST ["tembusan"] );
+		$menimbang      = $Helper->replacetext ( $_POST ["menimbang"] );
+		$dasar      	= $Helper->replacetext ( $_POST ["dasar"] );
 		if ($fno_surat != "" && $ftanggal_surat != "" && $fttd_id != "" && $fjabatan_surat != "") {
-			$assigns->surat_tugas_edit ( $fdata_id, $fno_surat, $ftanggal_surat, $fttd_id, $fjabatan_surat, $ftembusan );
+			$assigns->surat_tugas_edit ( $fdata_id, $fno_surat, $ftanggal_surat, $fttd_id, $fjabatan_surat, $ftembusan, $menimbang, $dasar);
 			
 			$Helper->js_alert_act ( 1 );
 		} else {

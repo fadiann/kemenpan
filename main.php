@@ -143,7 +143,7 @@ if($count_notif <> 0) $notif_show = ", Anda Memiliki ".$count_notif. " Notifikas
 						<li>
 							<a class="notification-icon modal-basic " data-toggle="modal" data-target="#notifikasi" style="cursor: pointer;">
 								<i class="fa fa-bell"></i>
-								<!-- <span class="badge">3</span> -->
+								<span class="badge"><?=$count_notif?></span>
 							</a>
 						</li>
 					</ul>

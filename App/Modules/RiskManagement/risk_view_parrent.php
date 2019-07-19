@@ -29,6 +29,9 @@ $arr_penetapan = $rs_penetapan->FetchRow ();
 				<td><?=$arr_penetapan['penetapan_tujuan']?></td>
 			</tr>
 			*/ ?>
+			<?php
+			if($arr_penetapan['penetapan_profil_risk'] != "" || $arr_penetapan['penetapan_profil_risk_residu'] != ""):
+			?>
 			<tr>
 				<td>Profil Risiko Inheren</td>
 				<td>:</td>
@@ -39,6 +42,7 @@ $arr_penetapan = $rs_penetapan->FetchRow ();
 				<td>:</td>
 				<td><?=$arr_penetapan['penetapan_profil_risk_residu']?></td>
 			</tr>
+			<?php endif; ?>
 			<tr>
 				<td>Status</td>
 				<td>:</td>

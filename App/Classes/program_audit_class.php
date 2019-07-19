@@ -62,11 +62,12 @@ class programaudit {
 		return $data;
 	}
 	function program_audit_viewlist($id) {
-		$sql = "select program_id, program_id_assign, program_id_auditee, program_id_ref, program_id_auditor, program_start, program_end, program_day, auditee_name, auditor_name, ref_program_title, ref_program_code, ref_program_procedure, program_jam, program_lampiran
+		$sql = "select program_id, program_id_assign, program_id_auditee, program_id_ref, program_id_auditor, program_start, program_end, program_day, auditee_name, auditor_name, ref_program_title, ref_program_code, ref_program_procedure, program_jam, program_lampiran, par_aspek.aspek_id
 				FROM program_audit 
 				left join auditee on program_id_auditee = auditee_id
 				left join auditor on program_id_auditor = auditor_id
 				left join ref_program_audit on program_id_ref = ref_program_id
+				left join par_aspek on ref_program_audit.ref_program_aspek_id = par_aspek.aspek_id
 				where program_id = '".$id."' ";
 		$data = $this->_db->_dbquery ( $sql );
 		return $data;
@@ -124,6 +125,11 @@ class programaudit {
 				left join ref_program_audit on program_id_ref = ref_program_id
 				left join par_aspek on ref_program_aspek_id = aspek_id
 				where program_id_assign = '".$id_assign."' and program_id_auditee = '".$id_auditee."' "; 
+		$data = $this->_db->_dbquery ( $sql );
+		return $data;
+	}
+	function program_audit_delete_byRef($ref_id) {
+		$sql = "DELETE FROM program_audit WHERE program_id_ref = '".$ref_id."'"; 
 		$data = $this->_db->_dbquery ( $sql );
 		return $data;
 	}

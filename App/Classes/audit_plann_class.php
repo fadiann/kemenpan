@@ -193,7 +193,7 @@ class planning {
 	function plan_tipe_viewlist($tahun="", $opsi="") {
 		$condition = "";
 		if($tahun!="") $condition = " and audit_plan_tahun = '".$tahun."' ";
-		if($opsi!="") $condition = " and audit_type_opsi != '".$opsi."' ";
+		// if($opsi!="") $condition = " and audit_type_opsi != '".$opsi."' ";
 		$sql = "select DISTINCT audit_type_id, audit_type_name, audit_type_opsi, audit_type_code
 				FROM audit_plan
 				left join par_audit_type on audit_plan_tipe_id = audit_type_id

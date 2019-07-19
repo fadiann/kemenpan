@@ -23,39 +23,42 @@ foreach ($rs_auditees->GetArray() as $auditee) {
     array_push($followups, $dashboards->tindak_lanjut_count($auditee['auditee_id'], $tahun));
 }
 ?>
-<section id="main" class="column">
-  <article class="module width_3_quarter">
-    <header>
-      <h3 class="tabs_involved">Dashboard Pengawasan<?=($tipe_audit) ? " ({$dashboards->audit_type_data_viewlist($tipe_audit)}) " : ""  ?><?=($tahun) ? " Tahun {$tahun}" : "" ?></h3>
-    </header>
-    <br>
-    <fieldset class="form-group">
-        <ul class="rtabs">
-      <li><a href="#view1">Pengawasan</a></li>
-      <li><a href="#view2">Temuan, Rekomendasi, dan Tindak Lanjut Audit</a></li>
-    </ul>
-    <div id="view1">
-      <center>
-        <div  style="width: 600px !important; height: 400px !important">
-          <canvas id="myChart" ></canvas>
-        </div>
-      </center>
+<div class="row">
+	<div class="col-md-12">
+		<section class="panel">
+			<header class="panel-heading">
+				<h2 class="panel-title">Dashboard Pengawasan<?=($tipe_audit) ? " ({$dashboards->audit_type_data_viewlist($tipe_audit)}) " : ""  ?><?=($tahun) ? " Tahun {$tahun}" : "" ?></h2>
+			</header>
+			<div class="panel-body">
+                <fieldset class="form-group">
+                    <ul class="rtabs">
+                <li><a href="#view1">Pengawasan</a></li>
+                <li><a href="#view2">Temuan, Rekomendasi, dan Tindak Lanjut Audit</a></li>
+                </ul>
+                <div id="view1">
+                <center>
+                    <div  style="width: 600px !important; height: 400px !important"> n
+                    <canvas id="myChart" ></canvas>
+                    </div>
+                </center>
+                </div>
+                <div id="view2" >
+                <br>
+                <div style="width: 1000px; height: 350px !important">
+                    <center>
+                            <canvas id="myChart1" style="height: 350px !important"></canvas>
+                    </center>
+                </div>
+                <center><img id="loading" src="Public/images/loading_icon.gif" style="display:none;width: 140px;height:100px; "/></center>
+                <div id="html">
+                    
+                </div>
+                </div>
+                </fieldset>
+            </div>
+        </section>
     </div>
-    <div id="view2" >
-      <br>
-      <div style="width: 1000px; height: 350px !important">
-          <center>
-                <canvas id="myChart1" style="height: 350px !important"></canvas>
-          </center>
-      </div>
-      <center><img id="loading" src="Public/images/loading_icon.gif" style="display:none;width: 140px;height:100px; "/></center>
-      <div id="html">
-          
-      </div>
-    </div>
-    </fieldset>
-  </article>
-</section>
+</div>
 <script type="text/javascript" src="Public/js/Chart.min.js"></script>
 <script>
 var ctx = document.getElementById("myChart").getContext("2d");
@@ -147,7 +150,7 @@ document.getElementById("myChart1").onclick = function(evt) {
         $("#loading").show();
         setTimeout(function() {
             $.ajax({
-                url  : 'AuditManagement/ajax.php?data_action=getassigndata',
+                url  : 'App/Modules/AuditManagement/ajax.php?data_action=getassigndata',
                 type : 'POST',
                 data : {
                     labels: label,

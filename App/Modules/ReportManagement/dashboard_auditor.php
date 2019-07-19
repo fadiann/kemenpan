@@ -15,20 +15,22 @@ foreach ($rs_auditors->GetArray() as $auditor) {
     array_push($counts, $dashboards->count_per($auditor['auditor_id'], $tahun, $tipe_audit));
 }
 ?>
-<section id="main" class="column">
-  <article class="module width_3_quarter">
-    <header>
-      <h3 class="tabs_involved">Dashboard Auditor<?=($tipe_audit) ? " ({$dashboards->audit_type_data_viewlist($tipe_audit)})" : ""  ?><?=($tahun) ? " Tahun {$tahun}" : ""?></h3>
-    </header>
-    <br>
-      <br>
-      <div style="width: 1000px;">
-      <center>
-            <canvas id="myChart1" style="height: 400px !important"></canvas>
-      </center>
-      </div>
-  </article>
-</section>
+<div class="row">
+	<div class="col-md-12">
+		<section class="panel">
+			<header class="panel-heading">
+				<h2 class="panel-title">Dashboard Auditor<?=($tipe_audit) ? " ({$dashboards->audit_type_data_viewlist($tipe_audit)})" : ""  ?><?=($tahun) ? " Tahun {$tahun}" : ""?></h2>
+			</header>
+			<div class="panel-body">
+                <div style="width: 1000px;">
+                <center>
+                        <canvas id="myChart1" style="height: 400px !important"></canvas>
+                </center>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
 <script type="text/javascript" src="Public/js/Chart.min.js"></script>
 <script>
 var ctx1 = document.getElementById("myChart1").getContext("2d");

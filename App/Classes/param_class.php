@@ -25,9 +25,7 @@ class param {
 				left join par_audit_type on ref_program_id_type = audit_type_id
 				left join par_aspek on ref_program_aspek_id = aspek_id
 				where ref_program_del_st = 1 " . $condition; //echo $sql;
-        $data      = $this
-            ->_db
-            ->_dbquery($sql);
+        $data      = $this->_db->_dbquery($sql);
         //echo $sql;
         return $data;
     }
@@ -366,6 +364,7 @@ class param {
 	function audit_type_lit_by_opsi($opsi) {
 		$sql = "select audit_type_id, audit_type_name, audit_type_code FROM par_audit_type where audit_type_opsi = '".$opsi."' and audit_type_del_st = 1 ";
 		$data = $this->_db->_dbquery ( $sql );
+		echo $sql;
 		return $data;
 	}
 	// end Tipe Audit
@@ -2504,6 +2503,11 @@ class param {
 		$sql = "update par_mail set value = '".$value."' where par_mail.key = '".$key."'";
 
 		$this->_db->_dbquery($sql);
+	}
+	function aspek_view_combo() {
+		$sql = "select aspek_id, aspek_name FROM par_aspek"; //echo $sql;
+		$data = $this->_db->_dbquery ( $sql );
+		return $data;
 	}
 }
 ?>

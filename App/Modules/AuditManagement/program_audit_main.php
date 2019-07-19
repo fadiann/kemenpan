@@ -57,13 +57,13 @@ if (isset ( $str_page )) {
 $offset = ($noPage - 1) * $num_row;
 
 $def_page_request = $paging_request . "&page=$noPage";
-$view_parrent = "assign_view_parrent.php";
-$grid = "App/Templates/Grids/grid_program_audit.php";
-$gridHeader = array ("Satuan Kerja", "Kode", "Prosedur", "Auditor", "Status", "KKA");
-$gridDetail = array ("auditee_name", "ref_program_code", "ref_program_procedure", "auditor_name", "program_status", "program_id");
-$gridWidth = array ("15", "10", "25", "15", "10", "5");
+$view_parrent     = "assign_view_parrent.php";
+$grid             = "App/Templates/Grids/grid_program_audit.php";
+$gridHeader       = array ("Satuan Kerja", "Kode", "Prosedur", "Auditor", "Status", "KKA");
+$gridDetail       = array ("auditee_name", "ref_program_code", "ref_program_procedure", "auditor_name", "program_status", "program_id");
+$gridWidth        = array ("15", "10", "25", "15", "10", "5");
 
-$key_by = array ("Satuan Kerja", "Kode", "Sub Bidang Subtansi", "Auditor");
+$key_by    = array ("Satuan Kerja", "Kode", "Sub Bidang Subtansi", "Auditor");
 $key_field = array ("auditee_name", "ref_program_code", "ref_program_title", "auditor_name");
 
 $widthAksi = "15";
@@ -228,36 +228,38 @@ switch ($_action) {
 			for ($i = 0; $i < $cek_ref_program; $i++) {
 				$programaudits->program_audit_add($ses_assign_id, $fauditee, $ex_ref_program[$i], $fauditor, $program_jam, $flampiran, $ftanggal);
 			}
-			$Helper->js_alert_act(3);
 		}
-		else {
-			$Helper->js_alert_act(5);
-		}
-		echo "HALLO";
+		$Helper->js_alert_act(3);
+		//echo "HALLO";
         echo "<script>window.open('$def_page_request', '_self');</script>";
 		$page_request = "_includes/pages/template/blank.php";
 	break;
 	case "postedit":
-		$fdata_id      = $Helper->replacetext($_POST["data_id"]);
-		$fauditee      = $Helper->replacetext($_POST["auditee_id"]);
-		$fauditor      = $Helper->replacetext($_POST["auditor"]);
-		$program_jam   = 0;
-		$fref_program  = $Helper->replacetext($_POST["ref_program"]);
-		$flampiran     = $Helper->replacetext($_FILES["attach"]["name"]);
-		$flampiran_old = $Helper->replacetext($_POST["attach_old"]);
-		if ($fauditee != "" && $fauditor != "" && $fref_program != "") {
+		$fdata_id        = $Helper->replacetext($_POST["data_id"]);
+		$fauditee        = $Helper->replacetext($_POST["auditee_id"]);
+		$fauditor        = $Helper->replacetext($_POST["auditor"]);
+		$program_jam     = 0;
+		$flampiran       = $Helper->replacetext($_FILES["attach"]["name"]);
+		$flampiran_old   = $Helper->replacetext($_POST["attach_old"]);
+		$fref_id_old     = $Helper->replacetext($_POST["ref_id_old"]);
+		$ex_ref_program  = $_POST['ref_program'];
+		$cek_ref_program = count($_POST["ref_program"]);
+		$ftanggal        = $Helper->date_db(date("d-m-Y H:i:s"));
+
+		$programaudits->program_audit_delete_byRef($fref_id_old);
+
+		if ($fauditee != "" && $fauditor != "" && $cek_ref_program != "0") {
 			if (!empty($flampiran)) {
 				$Helper->UploadFile("Upload_ProgramAudit", "attach", $flampiran_old);
 			}
 			else {
 				$flampiran = $flampiran_old;
 			}
-			$programaudits->program_audit_edit($fdata_id, $fauditee, $fref_program, $fauditor, $program_jam, $flampiran);
-			$Helper->js_alert_act(1);
+			for ($i = 0; $i < $cek_ref_program; $i++) {
+				$programaudits->program_audit_add($ses_assign_id, $fauditee, $ex_ref_program[$i], $fauditor, $program_jam, $flampiran, $ftanggal);
+			}
 		}
-		else {
-			$Helper->js_alert_act(5);
-		}
+		$Helper->js_alert_act(1);
 		echo "<script>window.open('".$def_page_request."', '_self');</script>";
 		$page_request = "_includes/pages/template/blank.php";
 	break;

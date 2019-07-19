@@ -1,0 +1,16 @@
+fe262a407870ffc998f263a7e9cfedbd0369eba0	2019-07-17 22:00:42	::1	Menambah Identifikasi Risiko id ca07d75df1d59a29a5f038e5ff3b1ac059ea13d2	Sukses
+fe262a407870ffc998f263a7e9cfedbd0369eba0	2019-07-17 22:18:54	::1	Menambah Identifikasi Risiko id 39fe249b62159c7952063dfa35b98863b323f478	Sukses
+fe262a407870ffc998f263a7e9cfedbd0369eba0	2019-07-17 22:21:12	::1	Menambah Identifikasi Risiko id 12ab54f44d2b238e097b7a846e6271445b29669c	Sukses
+fe262a407870ffc998f263a7e9cfedbd0369eba0	2019-07-17 22:22:21	::1	Menambah Identifikasi Risiko id 3742d4489299c810b9871176fa9a5813c08c71d7	Sukses
+fe262a407870ffc998f263a7e9cfedbd0369eba0	2019-07-17 22:22:21	::1	Menambah Identifikasi Risiko id 3742d4489299c810b9871176fa9a5813c08c71d7	Sukses
+fe262a407870ffc998f263a7e9cfedbd0369eba0	2019-07-17 22:22:21	::1	Menambah Identifikasi Risiko id 3742d4489299c810b9871176fa9a5813c08c71d7	Sukses
+fe262a407870ffc998f263a7e9cfedbd0369eba0	Menambah Identifikasi Risiko id 3742d4489299c810b9871176fa9a5813c08c71d7	insert into risk_identifikasi (identifikasi_id, identifikasi_penetapan_id, identifikasi_no_risiko, identifikasi_nama_risiko, identifikasi_kategori_id, identifikasi_penyebab, analisa_dampak_name)
+				values
+				('3742d4489299c810b9871176fa9a5813c08c71d7','c327855fe47758d2da7e822463e64db2fecc7c16','unit06001','Kejadian 2','454b438cdbaf48c9122627c2d8312a2ba6c648c7','Penyebab 2','Beban Keuangan Negara (Non Fraud)') ErrorMsg : fe262a407870ffc998f263a7e9cfedbd0369eba0	2019-07-17 22:27:14	::1	Menambah Identifikasi Risiko id 653debcc94725f8caa41657e7985f6c7362d2309	Sukses
+fe262a407870ffc998f263a7e9cfedbd0369eba0	2019-07-17 22:27:14	::1	Menambah Identifikasi Risiko id f3ab93d88b213de7b894de78ac10bd73e4b08a7c	Sukses
+fe262a407870ffc998f263a7e9cfedbd0369eba0	2019-07-17 22:29:21	::1	Menambah Identifikasi Risiko id 1a04a189080ff7ed9f76913d435a825bd5968e70	Sukses
+fe262a407870ffc998f263a7e9cfedbd0369eba0	2019-07-17 22:29:21	::1	Menambah Identifikasi Risiko id fc5a50470772c4d71f5d631f3d651fa422a5ab20	Sukses
+fe262a407870ffc998f263a7e9cfedbd0369eba0	2019-07-17 22:41:54	::1	Menambah Identifikasi Risiko id afb034029c9182e0e01db6f17c0ac80d05d7c22a	Sukses
+fe262a407870ffc998f263a7e9cfedbd0369eba0	2019-07-17 22:41:54	::1	Menambah Identifikasi Risiko id 56871ae04c9b469e4874bfa734177dd96fabc958	Sukses
+fe262a407870ffc998f263a7e9cfedbd0369eba0	2019-07-17 23:05:05	::1	Menambah Identifikasi Risiko id 9e674c010723dd737ef760b9c8cee45963fdd14a	Sukses
+fe262a407870ffc998f263a7e9cfedbd0369eba0	2019-07-17 23:05:05	::1	Menambah Identifikasi Risiko id 38673c0ba4e03abfff025ead3284b45aba26032d	Sukses

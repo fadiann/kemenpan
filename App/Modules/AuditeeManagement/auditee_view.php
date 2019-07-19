@@ -28,7 +28,7 @@
 						?>
 					</select>
 					<input type="text" name="val_search" id="val_search" class="form-control" value=<?=@$val_search?>>
-					<a href="#" OnClick="return set_action('');" class="btn btn-primary">Cari</a>
+					<button type="submit OnClick="return set_action('');" class="btn btn-primary">Cari</button>
 				</div>
 			</form>
 <?

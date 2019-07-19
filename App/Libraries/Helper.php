@@ -4,7 +4,7 @@ if (@$position == 1) {
 } elseif (@$position == 2) {
 	include_once "../../Config/Databases.php";
 } else {
-	include_once "App/Config/Databases.php";
+	include_once "../App/Config/Databases.php";
 }
 
 class Helper
@@ -232,6 +232,119 @@ class Helper
         $html = "";
         $query = "select " . $id . ", " . $show . " from " . $table . " where 1=1 " . $where . $orderby;
         $data = $this->db->_dbquery($query);
+        $html .= "<select name=\"" . $nama . "\" id=\"" . $nama . "\" class=\"form-control " . $class . "\" style=\"padding-bottom: 10px !important;\" data-plugin-selectTwo>";
+        $html .= $combo;
+        $rs_count = $data->RecordCount();
+        if ($rs_count != 0) {
+            while ($rs = $data->FetchRow()) {
+                if ($rs[0] == $def) {
+                    $selected = " selected ";
+                } else {
+                    $selected = "";
+                }
+                $html .= "<option value=\"" . $rs[0] . "\" " . $selected . ">" . $rs[1] . "</option>";
+            }
+        } else {
+            $html .= "<option value=\"\" >No Record</option>";
+        }
+        $html .= "</select>";
+        return $html;
+    }
+
+    function dbComboXSelect($nama, $table, $id, $show, $where, $def, $other, $lit = false, $orderby = "", $parrent = false, $all = false, $class = '')
+    {
+        $combo = "";
+
+        if ($lit) {
+            $combo .= "<option value=\"\">-- Pilih Satu --</option>\n";
+        }
+
+        if ($parrent) {
+            $combo .= "<option value=\"\">-- Parrent --</option>\n";
+        }
+
+        if ($all) {
+            $combo .= "<option value=\"\">-- All --</option>\n";
+        }
+
+        $html = "";
+        $query = "select " . $id . ", " . $show . " from " . $table . " where 1=1 " . $where . $orderby;
+        $data = $this->db->_dbquery($query);
+        $html .= "<select name=\"" . $nama . "\" id=\"" . $nama . "\" class=\"form-control " . $class . "\" style=\"padding-bottom: 10px !important;\">";
+        $html .= $combo;
+        $rs_count = $data->RecordCount();
+        if ($rs_count != 0) {
+            while ($rs = $data->FetchRow()) {
+                if ($rs[0] == $def) {
+                    $selected = " selected ";
+                } else {
+                    $selected = "";
+                }
+                $html .= "<option value=\"" . $rs[0] . "\" " . $selected . ">" . $rs[1] . "</option>";
+            }
+        } else {
+            $html .= "<option value=\"\" >No Record</option>";
+        }
+        $html .= "</select>";
+        return $html;
+    }
+
+    function dbComboPerencanaan($nama, $table, $id, $show, $where, $def, $other, $lit = false, $orderby = "", $parrent = false, $all = false, $class = '')
+    {
+        $combo = "";
+
+        if ($lit) {
+            $combo .= "<option value=\"\">-- Pilih Satu --</option>\n";
+        }
+
+        if ($parrent) {
+            $combo .= "<option value=\"\">-- Parrent --</option>\n";
+        }
+
+        if ($all) {
+            $combo .= "<option value=\"\">-- All --</option>\n";
+        }
+
+        $html = "";
+        $query = "select " . $id . ", " . $show . " from " . $table . " where 1=1 " . $where . $orderby;
+        $data = $this->db->_dbquery($query);
+        $html .= "<select name=\"" . $nama . "\" id=\"" . $nama . "\" class='form-control'>";
+        $html .= $combo;
+        $rs_count = $data->RecordCount();
+        if ($rs_count != 0) {
+            while ($rs = $data->FetchRow()) {
+                if ($rs[0] == $def) {
+                    $selected = " selected ";
+                } else {
+                    $selected = "";
+                }
+                $html .= "<option value=\"" . $rs[0] . "\" " . $selected . ">" . $rs[1] . "</option>";
+            }
+        } else {
+            $html .= "<option value=\"\" >No Record</option>";
+        }
+        $html .= "</select>";
+        return $html;
+    }
+    function dbComboAuditor($nama, $table, $id, $show, $where, $def, $other, $lit = false, $orderby = "", $parrent = false, $all = false, $class = '')
+    {
+        $combo = "";
+
+        if ($lit) {
+            $combo .= "<option value=\"\">-- Pilih Satu --</option>\n";
+        }
+
+        if ($parrent) {
+            $combo .= "<option value=\"\">-- Parrent --</option>\n";
+        }
+
+        if ($all) {
+            $combo .= "<option value=\"\">-- All --</option>\n";
+        }
+
+        $html = "";
+        $query = "select " . $id . ", " . $show . " from " . $table . " where 1=1 " . $where . $orderby;
+        $data = $this->db->_dbquery($query);
         $html .= "<select name=\"" . $nama . "\" id=\"" . $nama . "\" class=\"form-control " . $class . "\" style=\"padding-bottom: 10px !important;\">";
         $html .= $combo;
         $rs_count = $data->RecordCount();
@@ -260,11 +373,11 @@ class Helper
         }
 
         if ($use_head) {
-            $combo .= "<option value=\"\">==== Pilih Satu</option>\n";
+            $combo .= "<option value=\"\">-- Pilih Satu --</option>\n";
         }
 
         if ($use_all) {
-            $combo .= "<option value=\"\">==== All ====</option>\n";
+            $combo .= "<option value=\"\">-- All --</option>\n";
         }
 
         foreach ($data as $row) {
@@ -282,6 +395,33 @@ class Helper
     {
         $combo = "";
         $combo .= "<select name=\"$objname\" id=\"$objname\" style=\"$style\"  class=\"form-control populate ".$classname."\">\n";
+        if ($use_none) {
+            $combo .= "<option value=\"\">==== Parent</option>\n";
+        }
+
+        if ($use_head) {
+            $combo .= "<option value=\"\">-- Pilih Satu --</option>\n";
+        }
+
+        if ($use_all) {
+            $combo .= "<option value=\"\">==== All ====</option>\n";
+        }
+
+        foreach ($data as $row) {
+            if ($row[$col_id] == $selected_id) {
+                $combo .= "<option value=\"$row[$col_id]\" selected>$row[$col_show]</option>\n";
+            } else {
+                $combo .= "<option value=\"$row[$col_id]\">$row[$col_show]</option>\n";
+            }
+        }
+        $combo .= "</select>\n";
+        return $combo;
+    }
+
+    function buildCombo_risk_analisa($objname, $data, $col_id, $col_show, $selected_id = "", $style = "", $use_none = false, $use_head = false, $use_all = false, $other = "", $classname="")
+    {
+        $combo = "";
+        $combo .= "<select name=\"$objname\" id=\"$objname\" style=\"$style\"  class=\"form-control ".$classname."\">\n";
         if ($use_none) {
             $combo .= "<option value=\"\">==== Parent</option>\n";
         }
@@ -398,6 +538,62 @@ class Helper
             return $xxx;
         }
     }
+    function selisih_tanggal($start, $end){
+        $start = date("Y-m-d", $start);
+        $end   = date("Y-m-d", $end);
+        $start = strtotime($start);
+        $end   = strtotime($end);
+        $selisih = $end - $start;
+        $hari = floor($selisih / (60 * 60 * 24));
+        if($hari == 0){
+            $hari = 1;
+        }else{
+            $hari = $hari;
+        }
+        return $hari;
+    }
+
+    function penyebut($nilai) {
+		$nilai = abs($nilai);
+		$huruf = array("", "satu", "dua", "tiga", "empat", "lima", "enam", "tujuh", "delapan", "sembilan", "sepuluh", "sebelas");
+		$temp = "";
+		if ($nilai < 12) {
+			$temp = " ". $huruf[$nilai];
+		} else if ($nilai <20) {
+			$temp = penyebut($nilai - 10). " belas";
+		} else if ($nilai < 100) {
+			$temp = penyebut($nilai/10)." puluh". penyebut($nilai % 10);
+		} else if ($nilai < 200) {
+			$temp = " seratus" . penyebut($nilai - 100);
+		} else if ($nilai < 1000) {
+			$temp = penyebut($nilai/100) . " ratus" . penyebut($nilai % 100);
+		} else if ($nilai < 2000) {
+			$temp = " seribu" . penyebut($nilai - 1000);
+		} else if ($nilai < 1000000) {
+			$temp = penyebut($nilai/1000) . " ribu" . penyebut($nilai % 1000);
+		} else if ($nilai < 1000000000) {
+			$temp = penyebut($nilai/1000000) . " juta" . penyebut($nilai % 1000000);
+		} else if ($nilai < 1000000000000) {
+			$temp = penyebut($nilai/1000000000) . " milyar" . penyebut(fmod($nilai,1000000000));
+		} else if ($nilai < 1000000000000000) {
+			$temp = penyebut($nilai/1000000000000) . " trilyun" . penyebut(fmod($nilai,1000000000000));
+		}     
+		return $temp;
+	}
+ 
+	function terbilang($nilai) {
+		if($nilai<0) {
+			$hasil = "minus ". trim($this->penyebut($nilai));
+		} else {
+			$hasil = trim($this->penyebut($nilai));
+        }     		
+        if($hasil == ''){
+            $hasil = 1;
+        }else{
+            $hasil = $hasil;
+        }
+		return $hasil;
+	}
 
     function combo_hari_indo($hari, $name)
     {
@@ -445,9 +641,9 @@ class Helper
         if ($tgl != "") {
             $tgl = $this->dateIndo($tgl);
             $exp = explode("-", $tgl);
-            $tgl = $exp[0];
-            $thn = $exp[2];
-            $bln = $exp[1];
+            $tgl = @$exp[0];
+            $thn = @$exp[2];
+            $bln = @$exp[1];
             if ($bln == 1) {
                 $bln = "Januari";
             }
@@ -1034,6 +1230,29 @@ class Helper
             $action = 0;
         }
         return $action;
+    }
+
+    public function hitungRisiko($kemungkinan, $dampak ) {
+        $deretnilai = array(
+                        9, 15, 16, 23, 25, 
+                        6, 12, 16, 19, 24, 
+                        4, 10, 14, 17, 22, 
+                        2, 7, 11, 13, 21,
+                        1, 3, 5, 8, 20
+                    );
+        $x           = 0;
+        $jumlahderet = 6;
+        $kemungkinan = $jumlahderet - $kemungkinan;
+        for($i=1; $i <=5; $i++){
+            for($j=1; $j<=5; $j++){
+                $y[$i][$j] = $deretnilai[$x];
+                if($i == $kemungkinan && $j == $dampak){
+                    $nilaiRisiko = $y[$i][$j];
+                }
+                $x++;
+            }
+        }
+        return $nilaiRisiko;
     }
 }
 ?>

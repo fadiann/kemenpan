@@ -2,7 +2,7 @@
 if (@$position == 1) {
 	include_once "App/Config/Databases.php";
 } else {
-	include_once "../Config/Databases.php";
+	include_once "../App/Config/Databases.php";
 }
 class Login {
 	var $_db = null;

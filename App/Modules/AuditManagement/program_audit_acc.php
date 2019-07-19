@@ -60,7 +60,7 @@
 			<!-- <fieldset class="form-group">
 				<label class="col-sm-3 control-label">Referensi Program Audit</label>
 				<div class="col-sm-5">
-					<?=$Helper->dbCombo("aspek_id", "par_aspek", "aspek_id", "aspek_name", "and aspek_del_st  = 1 ", "", "", 1)?>
+					<?//=$Helper->dbCombo("aspek_id", "par_aspek", "aspek_id", "aspek_name", "and aspek_del_st  = 1 ", "", "", 1)?>
 					<input type="hidden" name="ref_program" id="ref_program" class="select2 multiple form-control"/>
 				</div>
 			</fieldset> -->
@@ -114,15 +114,19 @@
 			<!-- <fieldset class="form-group">
 				<label class="col-sm-3 control-label">Waktu ( Jam ) <span class="required">*</span></label> 
 				<div class="col-sm-2">
-				<input type="number" class="form-control" name="jamm" id="jamm" value="<?=$arr['program_jam'];?>">
+				<input type="number" class="form-control" name="jamm" id="jamm" value="<?//=$arr['program_jam'];?>">
 				</div>
 			</fieldset> -->
 			<fieldset class="form-group">
 				<label class="col-sm-3 control-label">Aspek Program Audit</label>
 				<div class="col-sm-5">
-					<?=$Helper->dbCombo("aspek_id", "par_aspek", "aspek_id", "aspek_name", "and aspek_del_st  = 1 ", "", "", 1)?>
-					<!-- <input type="hidden" name="ref_program" id="ref_program" class="select2 multiple form-control"/> -->
+					<?php
+					$rs_type  = $params->aspek_view_combo ();
+					$arr_type = $rs_type->GetArray ();
+					echo $Helper->buildCombo ("aspek_id", $arr_type, 0, 1, $arr['aspek_id'], "", "", false, true, false );
+					?>
 				</div>
+				<input type="hidden" name="ref_id_old" value="<?=$arr ['program_id_ref']?>" id="ref_id_old">
 			</fieldset>
 			<fieldset class="form-group">
 				<label class="col col-md-3 control-label">Referensi Program Audit</label>
@@ -131,41 +135,18 @@
 				</span>
 			</fieldset>
 			<fieldset class="form-group">
-					<label class="col-md-3 control-label">Rincian Ref</label>
-					<span class="col-md-9">
-					<table border="1" cellpadding="0" cellspacing="0" class="table table-bordered table-hover">
-						<thead>
-							<tr>
-								<th width="10%">kode</th>
-								<th width="30%">Judul</th>
-								<th width="60%">Procedure</th>
-							</tr>
-						</thead>
-						<tbody id="table_desc">
-						<?php
-						$rs_detail = $params->get_ref_desc ( $arr ['program_id_ref'] );
-						while ( $arr_detil = $rs_detail->FetchRow () ) {
-						?>
-						<tr class="row_item">
-							<td><span data-content="kode"><?=$arr_detil ['ref_program_code']?></span></td>
-							<td><span data-content="judul"><?=$arr_detil ['ref_program_title']?></span></td>
-							<td><span data-content="procedure"><?=$arr_detil ['ref_program_procedure']?></span></td>
-						</tr>
-						<?
-						}
-						?>
-						</tbody>
-					</table>
-					</span>
-			</fieldset>
-			<fieldset class="form-group">
 				<label class="col-sm-3 control-label">Lampiran</label>
 				<div class="col-sm-5">
 				<input type="hidden" class="form-control" name="attach_old" value="<?=$arr['program_lampiran']?>"> 
 				<input type="file" class="form-control" name="attach" id="attach">
-				<label class="col-sm-3 control-label"><a href="#" Onclick="window.open('<?=$Helper->baseurl("Upload_ProgramAudit").$arr['program_lampiran']?>','_blank')"><?=$arr['program_lampiran']?></a></label>
-				</div>
 			</fieldset>
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Lampiran</label>
+				<div class="col-sm-5">
+				<label class="col-sm-10 control-label">
+					<a href="#" Onclick="window.open('<?=$Helper->baseurl("Upload_ProgramAudit").$arr['program_lampiran']?>','_blank')"><?=$arr['program_lampiran']?></a></label>
+				</div>
+			</fieldset> 
 			<input type="hidden" name="data_id" value="<?=$arr['program_id']?>">	
 		<?
 				break;
@@ -382,7 +363,7 @@ $('#aspek_id').change(function(){
     $.ajax({
 		/*var id	= $(this).val();*/
 		type: 'post',
-		data: {'id':  $(this).val() },
+		data: {'id': $("#aspek_id").val(), 'ref_id_old' : $("#ref_id_old").val() },
 		url: 'App/Modules/AuditManagement/ajax.php?data_action=getpka',
 		dataType: 'html',
 		success: function(res){
@@ -403,8 +384,21 @@ function check_uncheck_checkbox(isChecked) {
 		});
 	}
 }
-</script>
-
+$(document).ready(function(){ 
+    $.ajax({
+		/*var id	= $(this).val();*/
+		type: 'post',
+		data: {'id': $("#aspek_id").val(), 'ref_id_old' : $("#ref_id_old").val() },
+		url: 'App/Modules/AuditManagement/ajax.php?data_action=getpka',
+		dataType: 'html',
+		success: function(res){
+			/*console.log(res);*/
+			$('#daftar_pka').empty();
+		   	$('#daftar_pka').append(res);
+		}
+	});
+});
+</script> 
 
 <script type="text/html" id="table_tmp">
 	<tr class="row_item">

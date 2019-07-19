@@ -143,7 +143,7 @@ class assign {
 		return $arr [0];
 	}
 	function view_auditor_assign($assign_id) {
-		$sql = "select auditor_id, auditor_name, auditor_nip, posisi_name, MIN(assign_auditor_start_date) as start_date, MAX(assign_auditor_end_date) as end_date, pangkat_name,  jenis_jabatan, jenis_jabatan_sub, assign_auditor_prepday, assign_auditor_execday, assign_auditor_reportday
+		$sql = "select auditor_id, auditor_name, auditor_nip, posisi_name, MIN(assign_auditor_start_date) as start_date, MAX(assign_auditor_end_date) as end_date, pangkat_name,  jenis_jabatan, jenis_jabatan_sub, assign_auditor_prepday, assign_auditor_execday, assign_auditor_reportday, auditor_nip
 				FROM assignment_auditor
 				left join auditor on assign_auditor_id_auditor = auditor_id
 				left join par_pangkat_auditor on auditor_id_pangkat = pangkat_id
@@ -352,20 +352,20 @@ class assign {
 		$data = $this->_db->_dbquery ( $sql );
 		return $data;
 	}
-	function surat_tugas_add ( $assign_id, $id, $no_surat, $tanggal_surat, $ttd_id, $jabatan_surat, $tembusan ) {
+	function surat_tugas_add ( $assign_id, $id, $no_surat, $tanggal_surat, $ttd_id, $jabatan_surat, $tembusan, $menimbang, $dasar ) {
 		$sql = "insert into assignment_surat_tugas
-				(assign_surat_id_assign, assign_surat_id, assign_surat_no, assign_surat_tgl, assign_surat_id_auditorTTD, assign_surat_jabatanTTD, assign_surat_tembusan)
+				(assign_surat_id_assign, assign_surat_id, assign_surat_no, assign_surat_tgl, assign_surat_id_auditorTTD, assign_surat_jabatanTTD, assign_surat_tembusan, assign_surat_menimbang, assign_surat_dasar)
 				values
-				('".$assign_id."', '".$id."', '".$no_surat."', '".$tanggal_surat."', '".$ttd_id."', '".$jabatan_surat."', '".$tembusan."')";
+				('".$assign_id."', '".$id."', '".$no_surat."', '".$tanggal_surat."', '".$ttd_id."', '".$jabatan_surat."', '".$tembusan."', '".$menimbang."', '".$dasar."')";
 		$this->_db->_dbquery ( $sql );
 	}
-	function surat_tugas_edit ( $id, $no_surat, $tanggal_surat, $ttd_id, $jabatan_surat, $tembusan ) {
-		$sql = "update assignment_surat_tugas set assign_surat_no = '".$no_surat."', assign_surat_tgl = '".$tanggal_surat."', assign_surat_id_auditorTTD = '".$ttd_id."', assign_surat_jabatanTTD = '".$jabatan_surat."', assign_surat_tembusan = '".$tembusan."' where assign_surat_id = '".$id."' ";
+	function surat_tugas_edit ( $id, $no_surat, $tanggal_surat, $ttd_id, $jabatan_surat, $tembusan, $menimbang, $dasar) {
+		$sql = "update assignment_surat_tugas set assign_surat_no = '".$no_surat."', assign_surat_tgl = '".$tanggal_surat."', assign_surat_id_auditorTTD = '".$ttd_id."', assign_surat_jabatanTTD = '".$jabatan_surat."', assign_surat_tembusan = '".$tembusan."', assign_surat_menimbang = '".$menimbang."', assign_surat_dasar = '".$dasar."' where assign_surat_id = '".$id."' ";
 		$aksinyo = "Mengubah Surat Tugas dengan ID ".$id;
 		$this->_db->_dbexecquery ( $sql, $this->userId, $aksinyo );
 	}
 	function surat_tugas_viewlist($id) {
-		$sql = "select assign_surat_id, assign_surat_no, assign_surat_tgl, assign_surat_id_auditorTTD, assign_surat_tembusan, auditor_name, assign_surat_jabatanTTD
+		$sql = "select assign_surat_id, assign_surat_no, assign_surat_tgl, assign_surat_id_auditorTTD, assign_surat_tembusan, auditor_name, assign_surat_jabatanTTD, assign_surat_menimbang, assign_surat_dasar
 				from assignment_surat_tugas
 				left join auditor on assign_surat_id_auditorTTD = auditor_id
 				where assign_surat_id = '".$id."' ";
@@ -373,7 +373,7 @@ class assign {
 		return $data;
 	}
 	function surat_assign_viewlist($id) {
-		$sql = "select assign_surat_id, assign_surat_no, assign_surat_tgl, assign_dasar, assign_surat_tembusan, auditor_name, assign_surat_jabatanTTD, assign_surat_id_assign, assign_tahun, auditor_nip, assign_surat_status, audit_type_opsi, assign_kegiatan, assign_hari_persiapan, assign_hari_pelaksanaan, assign_hari_pelaporan, assign_start_date, assign_end_date, assign_pendanaan, assign_keterangan, assign_hari, jenis_jabatan_sub
+		$sql = "select assign_surat_id, assign_surat_no, assign_surat_tgl, assign_dasar, assign_surat_tembusan, auditor_name, assign_surat_jabatanTTD, assign_surat_id_assign, assign_tahun, auditor_nip, assign_surat_status, audit_type_opsi, assign_kegiatan, assign_hari_persiapan, assign_hari_pelaksanaan, assign_hari_pelaporan, assign_start_date, assign_end_date, assign_pendanaan, assign_keterangan, assign_hari, jenis_jabatan_sub, assign_surat_menimbang, assign_surat_dasar
 				from assignment_surat_tugas
 				left join auditor on assign_surat_id_auditorTTD = auditor_id
 				left join assignment on assign_surat_id_assign = assign_id

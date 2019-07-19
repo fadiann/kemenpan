@@ -1,0 +1,21 @@
+fe262a407870ffc998f263a7e9cfedbd0369eba0	2019-07-15 00:25:43	::1	Mengubah Menu dengan ID 19	Sukses
+fe262a407870ffc998f263a7e9cfedbd0369eba0	2019-07-15 00:25:57	::1	Mengubah Menu dengan ID 21	Sukses
+fe262a407870ffc998f263a7e9cfedbd0369eba0	2019-07-15 00:26:13	::1	Mengubah Menu dengan ID 28	Sukses
+fe262a407870ffc998f263a7e9cfedbd0369eba0	2019-07-15 00:26:28	::1	Mengubah Menu dengan ID 29	Sukses
+fe262a407870ffc998f263a7e9cfedbd0369eba0	2019-07-15 00:26:55	::1	Mengubah Menu dengan ID 26	Sukses
+fe262a407870ffc998f263a7e9cfedbd0369eba0	2019-07-15 00:27:19	::1	Mengubah Menu dengan ID 26	Sukses
+fe262a407870ffc998f263a7e9cfedbd0369eba0	2019-07-15 00:28:43	::1	Menambah Menu Dashboard Audit	Sukses
+fe262a407870ffc998f263a7e9cfedbd0369eba0	2019-07-15 00:29:39	::1	Mengubah Data Group ID a38c99db8e8777d33b3b358d59a47ae1a0c69d66	Sukses
+fe262a407870ffc998f263a7e9cfedbd0369eba0	2019-07-15 00:30:39	::1	Mengubah Data Group ID 98ab4eb2262a169acc9716882a6cac9d0a07e6f3	Sukses
+fe262a407870ffc998f263a7e9cfedbd0369eba0	2019-07-15 00:32:20	::1	Mengubah Data Group ID 24e3c696dcb9ff44b17eafb85d9d15ffe330b80d	Sukses
+fe262a407870ffc998f263a7e9cfedbd0369eba0	2019-07-15 00:33:22	::1	Mengubah Data Group ID 3c4b7c1ac41e48962a837470d96af3ca244113ba	Sukses
+fe262a407870ffc998f263a7e9cfedbd0369eba0	2019-07-15 00:34:31	::1	Mengubah Data Group ID 4d6cb5538c7cfbd6b1ccbd881e0e97e69183b4a0	Sukses
+fe262a407870ffc998f263a7e9cfedbd0369eba0	2019-07-15 03:02:34	::1	Menambah Identifikasi Risiko id 0b699a17455a8be3a3876f726729375864f33d16	Sukses
+fe262a407870ffc998f263a7e9cfedbd0369eba0	2019-07-15 03:03:51	::1	Menambah Identifikasi Risiko id aec23b10170906c61293405dce826d62eaa1c8a0	Sukses
+fe262a407870ffc998f263a7e9cfedbd0369eba0	2019-07-15 03:37:45	::1	Menambah Identifikasi Risiko id ae59c657bc1b65261659f7d2582efcfc95ff2f64	Sukses
+fe262a407870ffc998f263a7e9cfedbd0369eba0	2019-07-15 03:42:40	::1	Menambah Identifikasi Risiko id 3846669d7cc557ac1cc57f86e8d2886a7a191de6	Sukses
+fe262a407870ffc998f263a7e9cfedbd0369eba0	2019-07-15 03:42:40	::1	Menambah Identifikasi Risiko id 3846669d7cc557ac1cc57f86e8d2886a7a191de6	Sukses
+fe262a407870ffc998f263a7e9cfedbd0369eba0	2019-07-15 03:42:40	::1	Menambah Identifikasi Risiko id 3846669d7cc557ac1cc57f86e8d2886a7a191de6	Sukses
+fe262a407870ffc998f263a7e9cfedbd0369eba0	Menambah Identifikasi Risiko id 3846669d7cc557ac1cc57f86e8d2886a7a191de6	insert into risk_identifikasi (identifikasi_id, identifikasi_penetapan_id, identifikasi_no_risiko, identifikasi_selera, identifikasi_nama_risiko, identifikasi_kategori_id, identifikasi_penyebab, analisa_dampak_name)
+				values
+				('3846669d7cc557ac1cc57f86e8d2886a7a191de6','c327855fe47758d2da7e822463e64db2fecc7c16','unit06002','Indikator 2','Kejadian 2','','Penyebab 2','Penurunan Reputasi') ErrorMsg : 

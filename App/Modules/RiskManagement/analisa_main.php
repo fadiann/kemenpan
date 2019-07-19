@@ -2,15 +2,15 @@
 include_once "App/Classes/risk_class.php";
 include_once "App/Classes/param_class.php";
 
-$risks  = new risk ( $ses_userId );
-$params = new param ( $ses_userId );
-
-@$_action = $Helper->replacetext ( $_REQUEST ["data_action"] );
-
+$risks            = new risk ( $ses_userId );
+$params           = new param ( $ses_userId );
+@$_action         = $Helper->replacetext ( $_REQUEST ["data_action"] );
 $ses_penetapan_id = $_SESSION ['ses_penetapan_id'];
+
 $paging_request   = "main.php?method=risk_penetapantujuan";
 $acc_page_request = "analisa_acc.php";
 
+//START PAGING
 $num_row   = 10;
 @$str_page = $Helper->replacetext ( $_GET ['page'] );
 if (isset ( $str_page )) {
@@ -23,14 +23,14 @@ if (isset ( $str_page )) {
 	$noPage = 1;
 }
 $offset = ($noPage - 1) * $num_row;
-
 $def_page_request = $paging_request . "&page=$noPage";
+//END PAGING
 
 switch ($_action) {
 	case "getadd" :
-		$_nextaction = "postadd";
+		$_nextaction  = "postadd";
 		$page_request = $acc_page_request;
-		$page_title = "Analisa Risiko";
+		$page_title   = "Analisa Risiko";
 		break;
 	case "postadd" :
 		$no = 0;
@@ -43,14 +43,19 @@ switch ($_action) {
 				$tk = $Helper->replacetext ( $_POST ["tk_id_$no"] );
 				$td = $Helper->replacetext ( $_POST ["td_id_$no"] );
 				// $ri = $risks->cek_range_ri($tk*$td);
-				$ri = $tk * $td;
-				$bobot_ri = $Helper->replacetext ( $_POST ["bobot_risiko_$no"] );
-				$nilai_ri = round ( $ri * $bobot_ri / 100, 2 );
-				$bobot_kat_ri = $Helper->replacetext ( $_POST ["bobot_kat_risiko_$no"] );
+				$ri           = $Helper->hitungRisiko($tk, $td);
+				$bobot_ri     = 0;
+				$nilai_ri     = round ( $ri * $bobot_ri / 100, 2 );
+				$bobot_kat_ri = 0;
+				// $bobot_ri     = $Helper->replacetext ( $_POST ["bobot_risiko_$no"] );
+				// $nilai_ri     = round ( $ri * $bobot_ri / 100, 2 );
+				// $bobot_kat_ri = $Helper->replacetext ( $_POST ["bobot_kat_risiko_$no"] );
 				
+				// print_r($ri);
+				// die();
 				$get_nama_tk = $risks->get_nama_risk ( 'par_risk_tk', 'tk_value', 'tk_name', $tk );
 				$get_nama_td = $risks->get_nama_risk ( 'par_risk_td', 'td_value', 'td_name', $td );
-				$rs_nama_ri = $risks->cek_range_ri ( $ri );
+				$rs_nama_ri  = $risks->cek_range_ri ( $ri );
 				$get_nama_ri = $rs_nama_ri->FetchRow ();
 				
 				$risks->update_analisa ( $arr_iden ['identifikasi_id'], $tk, $td, $ri, $get_nama_tk, $get_nama_td, $get_nama_ri ['ri_name'], $bobot_ri, $nilai_ri, $bobot_kat_ri );
@@ -68,7 +73,7 @@ switch ($_action) {
 		}
 	$risks->update_profil ( $ses_penetapan_id, $nilai_profil );
 	$Helper->js_alert_act ( 3 );
-	echo "<script>window.open('".$def_page_request."', '_self');</script>";
+	echo "<script>window.open('main.php?method=risk_analisa&data_action=getadd', '_self');</script>";
 	$page_request = "blank.php";
 		break;
 }

@@ -30,11 +30,12 @@
 					<tbody>
 						<tr id="1">
 							<td align="center">1.</td>
-							<td><?=$Helper->dbCombo("auditee_id[]", "auditee", "auditee_id", "auditee_name", "and auditee_del_st = 1 ", "", "", 1)?></td>
-							<input class="form-control" type="hidden" name="jml_hari[]" value="0">
+							<td><?=$Helper->dbComboPerencanaan("auditee_id[]", "auditee", "auditee_id", "auditee_name", "and auditee_del_st = 1 ", "", "", 1)?>
+							</td>
+							<td><input class="form-control" type="number" name="jml_hari[]" size="4" placeholder="jumlah hari"></td>
 							<td>
-							<button id="tambah_auditee" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Tambah</button>
-						</td>
+							<button id="tambah_auditee" class="btn btn-primary btn-circle"><i class="fa fa-plus-circle"></i></button>
+							</td>
 						</tr>
 					</tbody>
 				</table>
@@ -83,13 +84,13 @@
 					</div>
 			</fieldset>
 			<fieldset class="form-group">
-				<label class="col-sm-3 control-label">Rencana Kegiatan <span class="required">*</span></label> 
+				<label class="col-sm-3 control-label">Rencana Mulai Penugasan <span class="required">*</span></label> 
 					<div class="col-sm-2">
 				<input type="text" class="form-control" name="tanggal_awal" id="tanggal_awal" autocomplete="off">
 					</div>
-					<div class="col-sm-1 text-center"> 
-				s/d
-					</div>
+			</fieldset>
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Rencana Penerbitan Laporan <span class="required">*</span></label> 
 					<div class="col-sm-2">
 				<input type="text" class="form-control" name="tanggal_akhir" id="tanggal_akhir" autocomplete="off">
 					</div>
@@ -121,7 +122,7 @@
 			<fieldset class="form-group">
 				<label class="col-sm-3 control-label">Obyek Audit</label>
 				<div class="col-sm-5">
-				<button id="tambah_auditee" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Tambah</button>
+				<!-- <button id="tambah_auditee" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Tambah</button> -->
 				<table id="tabel_auditee" width="100%" class="table table-borderless">
 					<tbody>
 						<?
@@ -133,8 +134,10 @@
 						<input type="hidden" name="plan_auditee_id[]" value="<?=$arr_auditee['audit_plan_auditee_id']?>">
 						<tr id="<?=$no_auditee?>">
 							<td align="center" width="10%"><?=$no_auditee?>.</td>
-							<td><?=$Helper->dbCombo("auditee_id[]", "auditee", "auditee_id", "auditee_name", "and auditee_del_st = 1 ", $arr_auditee['audit_plan_auditee_id_auditee'], "", 1)?></td>
-							<input class="form-control" type="hidden" name="jml_hari[]" value="0">
+							<td><?=$Helper->dbComboPerencanaan("auditee_id[]", "auditee", "auditee_id", "auditee_name", "and auditee_del_st = 1 ", $arr_auditee['audit_plan_auditee_id_auditee'], "", 1)?></td>
+							<td>
+								<input class="form-control" type="number" name="jml_hari[]" value="<?=$arr_auditee['audit_plan_auditee_hari']?>">
+							</td>
 							<td>&nbsp</td>
 						</tr>
 						<?
@@ -142,9 +145,11 @@
 						?>
 						<tr id="<?=$no_auditee+1?>">
 							<td align="center"><?=$no_auditee+1?>.</td>
-							<td><?=$Helper->dbCombo("auditee_id[]", "auditee", "auditee_id", "auditee_name", "and auditee_del_st = 1 ", "", "", 1)?></td>
-							<input class="form-control" type="hidden" value="0" name="jml_hari[]">
-							<td>&nbsp</td>
+							<td><?=$Helper->dbComboPerencanaan("auditee_id[]", "auditee", "auditee_id", "auditee_name", "and auditee_del_st = 1 ", "", "", 1)?></td>
+							<td>
+								<input class="form-control" type="number" name="jml_hari[]" placeholder="jumlah hari" value="">
+							</td>
+							<td><a id="tambah_auditee" class="btn btn-primary btn-circle"><i class="fa fa-plus-circle"></i></a></td>
 						</tr>
 					</tbody>
 				</table>
@@ -218,11 +223,13 @@
 					</div>
 			</fieldset>
 			<fieldset class="form-group">
-				<label class="col-sm-3 control-label">Rencana Kegiatan <span class="required">*</span></label> 
+				<label class="col-sm-3 control-label">Rencana Mulai Penugasan <span class="required">*</span></label> 
 					<div class="col-sm-2">
 				<input type="text" class="form-control" name="tanggal_awal" id="tanggal_awal" value="<?=$Helper->dateIndo($arr['audit_plan_start_date'])?>" autocomplete="off"> 
 					</div>
-					<div class="col-sm-1 text-center"> s/d </div>
+			</fieldset>
+			<fieldset class="form-group">
+				<label class="col-sm-3 control-label">Rencana Penerbitan Laporan <span class="required">*</span></label> 
 					<div class="col-sm-2">
 				<input type="text" class="form-control" name="tanggal_akhir" id="tanggal_akhir" value="<?=$Helper->dateIndo($arr['audit_plan_end_date'])?>" autocomplete="off">
 					</div>
@@ -284,11 +291,16 @@
 					<td><?=$arr['audit_plan_periode']?></td>
 				</tr>
 				<tr>
-					<td>Rencana Kegiatan</td>
+					<td>Rencana Mulai Penugasan</td>
 					<td>:</td>
 					<td>
 						<?=$Helper->dateIndo($arr['audit_plan_start_date'])?>
-						s/d
+					</td>
+				</tr>
+				<tr>
+					<td>Rencana Penerbitan Laporan</td>
+					<td>:</td>
+					<td>
 						<?=$Helper->dateIndo($arr['audit_plan_end_date'])?>
 					</td>
 				</tr>
@@ -424,7 +436,7 @@ $(document).ready(function() {
 		var new_row = '<tr id="'+no+'">'
 			+ '<td align="center">'+no+'.</td>'
 			+ '<td>'+select_auditee+'</td>'
-			+ '<input class="form-control" type="hidden" name="jml_hari[]" value="0"></<input>'
+			+ '<td><input class="form-control" type="number" name="jml_hari[]" size="4" placeholder="jumlah hari"></td>'
 			+ '<td><button class="btn btn-danger btn-circle auditee_remove"><i class="fa fa-times-circle"></i></button></td>'
 			+ '</tr>';
 		$('#tabel_auditee tbody').append(new_row);
@@ -436,18 +448,24 @@ $(document).ready(function() {
 	});  
 
 	$("#tanggal_awal").datepicker({
-		dateFormat: 'dd-mm-yy',
-		 nextText: "",
-		 prevText: "",
-		 changeYear: true,
-		 changeMonth: true
+  		dateFormat: "yy-mm-dd",
+		nextText: "",
+		prevText: "",
+		changeYear: true,
+		changeMonth: true,                
+		viewMode: "months",
+		minViewMode: "months",
+		autoClose: true
 	});  
 	$("#tanggal_akhir").datepicker({
-		dateFormat: 'dd-mm-yy',
+		dateFormat: 'mm-yy',
 		 nextText: "",
 		 prevText: "",
 		 changeYear: true,
-		 changeMonth: true
+		 changeMonth: true,                
+		 viewMode: "months",
+                minViewMode: "months",
+                autoClose: true
 	});  
 	$("#biaya_audit").maskMoney({precision: 0});
 	

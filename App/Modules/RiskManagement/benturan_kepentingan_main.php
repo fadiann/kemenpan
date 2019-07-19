@@ -80,8 +80,8 @@ switch ($_action) {
 			$Helper->postData('tahun'),
 			$ses_id_int
 		];
-		var_dump($_POST);
-		die();
+		// var_dump($_POST);
+		// die();
 		$risks->benturan_kepentingan_add($data);
 		$Helper->js_alert_act(3);
 		echo "<script>window.open('" . $def_page_request . "', '_self');</script>";

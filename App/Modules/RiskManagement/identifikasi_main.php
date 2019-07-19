@@ -26,11 +26,11 @@ if (@$method != @$val_method) {
 $ses_penetapan_id  = $_SESSION['ses_penetapan_id'];
 $paging_request    = "main.php?method=risk_identifikasi";
 $acc_page_request  = "identifikasi_acc.php";
-$list_page_request = "risk_view.php";
+$list_page_request = "risk_identifikasi_view.php";
 $rs_penetapan      = $risks->penetapan_data_viewlist($ses_penetapan_id);
 $arr_penetapan     = $rs_penetapan->FetchRow();
 
-// ==== buat grid ===//
+// create grid
 $num_row = 10;
 @$str_page = $Helper->replacetext($_GET['page']);
 if (isset($str_page)) {
@@ -42,11 +42,10 @@ if (isset($str_page)) {
 } else {
 	$noPage = 1;
 }
-$offset = ($noPage - 1) * $num_row;
-
+$offset           = ($noPage - 1) * $num_row;
 $def_page_request = $paging_request . "&page=$noPage";
+$grid             = "App/Templates/Grids/grid_risiko.php";
 
-$grid       = "App/Templates/Grids/grid_risiko.php";
 $gridHeader = array("Nomor Risiko", "Sasaran", "Indikator", "Kejadian", "Kategori", "Penyebab", "Dampak");
 $gridDetail = array("identifikasi_no_risiko", "identifikasi_selera", "identifikasi_id", "identifikasi_id", "identifikasi_id", "identifikasi_id", "identifikasi_id");
 $gridWidth  = array("10", "20", "10", "10", "10", "10", "10");
@@ -58,7 +57,7 @@ $widthAksi  = "10";
 $iconEdit   = "1";
 $iconDel    = "1";
 $iconDetail = "0";
-// === end grid ===//
+// end grid
 
 switch ($_action) {
 	case "getadd":
@@ -74,40 +73,31 @@ switch ($_action) {
 		$page_title   = "Ubah Identifikasi";
 		break;
 	case "postadd":
-		$id					= $Helper->unixid();
+		$id_identifikasi	= $Helper->unixid();
+		$id_sasaran			= $Helper->unixid();
+		$id_indikator		= $Helper->unixid();
 		$sasaran            = $Helper->replacetext($_POST["sasaran"]);
-		$count				= count($_POST['indikator']);
-		// echo "<pre>";
-		// print_r($count);
-		// echo "</pre>";
-		// die();
+		$count				= count($_POST['nama']);
 		$rs_get_penetapan   = $risks->penetapan_data_viewlist($ses_penetapan_id);
 		$arr_get_penetapan  = $rs_get_penetapan->FetchRow();
 		$count_identifikasi = trim($risks->get_count_identifikasi($ses_penetapan_id));
 		$loopUntil          = 3 - strlen($count_identifikasi);
 		$no_identifikasi    = str_repeat('0', $loopUntil) . $count_identifikasi;
 		$nomor_risiko       = $arr_get_penetapan['auditee_kode'] . $no_identifikasi;
+		$indikator          = $Helper->replacetext($_POST["indikator"]);
 		
 		if ($sasaran != "") {
-			$risks->identifikasi_add( $id, $ses_penetapan_id, $nomor_risiko, $sasaran);
+			$risks->identifikasi_sasaran_add($id_sasaran, $id_identifikasi, $ses_penetapan_id, $sasaran);
+			$risks->identifikasi_indikator_add($id_indikator, $id_sasaran, $indikator);
 			for($x = 0; $x < $count; $x++){
 				$data_detail	= array();
-				$indikator		= $Helper->replacetext($_POST["indikator"][$x]);
 				$kejadian		= $Helper->replacetext($_POST["nama"][$x]);
 				$kategori		= $Helper->replacetext($_POST["kategori"][$x]);
 				$penyebab		= $Helper->replacetext($_POST["penyebab"][$x]);
 				$dampak			= $Helper->replacetext($_POST["dampak"][$x]);
-	
-				$data_detail = [
-					$id,
-					$indikator,
-					$kejadian,
-					$kategori,
-					$penyebab,
-					$dampak
-				];
-				$risks->identifikasi_detail_add($data_detail);
+				$risks->identifikasi_add($ses_penetapan_id, $id_indikator, $nomor_risiko, $kejadian, $kategori, $penyebab, $dampak);
 			}
+			//die();
 			$risks->reset_data_risk($ses_penetapan_id);
 			$Helper->js_alert_act(3);
 		} else {
@@ -129,7 +119,7 @@ switch ($_action) {
 		];
 		if ($fnama != "" && $fkategori != "" && $fpenyebab != "" && $fdampak != "") {
 			$risks->identifikasi_edit($fdata_id, $fnama, $fkategori, $fpenyebab, $fdampak);
-			$risks->identifikasi_detail_edit($data_detail);
+			//$risks->identifikasi_detail_edit($data_detail);
 			$risks->reset_data_risk($ses_penetapan_id);
 			$Helper->js_alert_act(1);
 		} else {
@@ -141,7 +131,6 @@ switch ($_action) {
 	case "getdelete":
 		$fdata_id = $Helper->replacetext($_REQUEST["data_id"]);
 		$risks->identifikasi_delete($fdata_id);
-		$risks->identifikasi_detail_delete($fdata_id);
 		$risks->reset_data_risk($ses_penetapan_id);
 		$Helper->js_alert_act(2);
 		echo "<script>window.open('" . $def_page_request . "', '_self');</script>";
@@ -149,8 +138,8 @@ switch ($_action) {
 	break;
 
 	default:
-		$recordcount  = $risks->identifikasi_count($ses_penetapan_id, $key_search, $val_search, $key_field);
-		$rs           = $risks->identifikasi_view_grid($ses_penetapan_id, $key_search, $val_search, $key_field, $offset, $num_row);
+		// $recordcount  = $risks->identifikasi_count($ses_penetapan_id, $key_search, $val_search, $key_field);
+		$rs_sasaran   = $risks->identifikasi_sasaran_viewlist($ses_penetapan_id);
 		$page_title   = "Daftar Identifikasi Risiko";
 		$page_request = $list_page_request;
 	break;

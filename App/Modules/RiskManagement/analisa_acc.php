@@ -9,140 +9,106 @@
 				<h2 class="panel-title"><?=$page_title?></h2>
 			</header>
 			<div class="panel-body wrap">
-		<form method="post" name="f" action="#" class="form-horizontal" id="validation-form">
-			<?
-			switch ($_action) {
-				case "getadd":
-					?>
-				<table border='1' class="table table-bordered table-striped table-condensed mb-none" cellspacing='0' cellpadding="0">
-					<tr align="center">
-						<th width="2%" rowspan="2">No</th>
-						<th width="47%" colspan="6">Identifikasi Risiko</th>
-						<th width="47%" colspan="6">Risiko Inheren</th>
-					</tr>
-					<tr align="center">
-						<th>Kategori Risiko</th>
-						<th>Sasaran Organisasi</th>
-						<th>Indikator Kinerja</th>
-						<!-- <th>No Risiko</th> -->
-						<th>Kejadian Risiko</th>
-						<th>Penyebab Risiko</th>
-						<th>Dampak Risiko</th>
-						<th>Level Kemungkinan</th>
-						<th>Level Dampak</th>
-						<th>Besaran Risiko</th>
-						<th>Level Risiko</th>
-						<!-- <th>Bobot<br>Risiko<br>(%)
-																</th>
-																<th>Nilai<br>Risiko<br>Inheren
-																</th>
-																<th>Bobot<br>Kategori<br>Risiko<br>(%)
-																</th> -->
-					</tr>
-					<?php
-					$i           = 0;
-					$no          = 0;
-					$kat         = 'A';
-					$rs_kategori = $params->risk_kategori_data_viewlist();
-					while ($arr_kategori = $rs_kategori->FetchRow()) {
-						$x = 0;
-						$rs_iden 	= $risks->list_identifikasi($arr_kategori['risk_kategori_id'], $ses_penetapan_id);
-						$countKat 	= $rs_iden->RecordCount();
-						while ($arr_iden = $rs_iden->FetchRow()) {
-							$x++;
-							$no++;
+				<form method="post" name="f" action="#" class="form-horizontal" id="validation-form">
+					<?
+					switch ($_action) {
+						case "getadd":
 							?>
-							<input type="hidden" name="indentifikasi_id" value="<?= $arr_iden['identifikasi_id']; ?>">
+						<table class="table table-bordered table-striped table-condensed mb-none">
 							<tr>
-								<?php
-								if ($x == 1) {
-									$i++;
+								<th width="5%" rowspan="2" class="text-center">No.</th>
+								<th width="50%" colspan="4" class="text-center">Identifikasi Risiko</th>
+								<th width="45%" colspan="6" class="text-center">Risiko Inheren</th>
+							</tr>
+							<tr>
+								<th width="5%">Kategori Risiko</th>
+								<th width="10%">Kejadian Risiko</th>
+								<th width="10%">Penyebab Risiko</th>
+								<th width="10%">Dampak Risiko</th>
+								<th width="10%">Level Kemungkinan</th>
+								<th width="10%">Level Dampak</th>
+								<th width="10%">Besaran Risiko</th>
+								<th width="10%">Level Risiko</th>
+							</tr>
+							<?php
+							$i           = 0;
+							$no          = 0;
+							$kat         = 'A';
+							$rs_kategori = $params->risk_kategori_data_viewlist();
+							while ($arr_kategori = $rs_kategori->FetchRow()) {
+								$x = 0;
+								$rs_iden 	= $risks->list_identifikasi($arr_kategori['risk_kategori_id'], $ses_penetapan_id);
+								$countKat 	= $rs_iden->RecordCount();
+								while ($arr_iden = $rs_iden->FetchRow()) {
+									$x++;
+									$no++;
 									?>
-									<td rowspan=<?= $countKat ?>><?= $i ?></td>
-									<td rowspan=<?= $countKat ?>><?= $arr_iden['risk_kategori']; ?></td>
+									<input type="hidden" name="indentifikasi_id" value="<?= $arr_iden['identifikasi_id']; ?>">
+									<tr>
+										<td class="text-center"><?= $x ?>.</td>
+										<td><?= $arr_iden['risk_kategori']; ?></td>
+										<td><?= $arr_iden['identifikasi_nama_risiko']; ?></td>
+										<td><?= $arr_iden['identifikasi_penyebab']; ?></td>
+										<td><?= $arr_iden['identifikasi_dampak']; ?></td>
+										<td align="center">
+											<?
+											$rs_tk = $params->risk_tk_data_viewlist();
+											$arr_tk = $rs_tk->GetArray();
+											echo $Helper->buildCombo_risk_analisa("tk_id_" . $no, $arr_tk, 2, 3, $arr_iden['analisa_kemungkinan'], "font-size:8pt", false, true, false, "tingkat_kemungkinan");
+											?>
+										</td>
+										<td align="center">
+											<?
+											$rs_td = $params->risk_td_data_viewlist();
+											$arr_td = $rs_td->GetArray();
+											echo $Helper->buildCombo_risk_analisa("td_id_" . $no, $arr_td, 2, 3, $arr_iden['analisa_dampak'], "font-size:8pt", false, true, false, "tingkat_dampak");
+											?>
+										</td>
+										<td align="center"><label class="ri"><?= $arr_iden['analisa_ri'] ?></label></td>
+										<td align="center">
+											<label class="levelrisk">
+												<?php
+												$risk_level = $arr_iden['analisa_ri'];
+												if ($risk_level == '' || $risk_level == 0) {
+													echo "Belum Terhitung";
+												} elseif ($risk_level > 0 && $risk_level <= 5) {
+													echo "Sangat Rendah";
+												} elseif ($risk_level >= 6 && $risk_level <= 10) {
+													echo "Rendah";
+												} elseif ($risk_level >= 11 && $risk_level <= 15) {
+													echo "Sedang";
+												} elseif ($risk_level >= 16 && $risk_level <= 20) {
+													echo "Tinggi";
+												} elseif ($risk_level >= 21 && $risk_level <= 25) {
+													echo "Sangat Tinggi";
+												}
+												?>
+											</label>
+										</td>
+									</tr>
 								<?php
 							}
-							?>
-								<td><?= $arr_iden['sasaran_organisasi']; ?></td>
-								<td><?= $arr_iden['indikator_kinerja']; ?></td>
-								<? /*<td><?= $arr_iden['identifikasi_no_risiko']; ?>
-					</td> */ ?>
-								<td><?= $arr_iden['identifikasi_nama_risiko']; ?></td>
-								<td><?= $arr_iden['identifikasi_penyebab']; ?></td>
-								<td><?= $arr_iden['identifikasi_selera']; ?></td>
-								<td align="center">
-									<?
-									$rs_tk = $params->risk_tk_data_viewlist();
-									$arr_tk = $rs_tk->GetArray();
-									echo $Helper->buildCombo_risk("tk_id_" . $no, $arr_tk, 2, 3, $arr_iden['analisa_kemungkinan'], "font-size:8pt", false, true, false, "tingkat_kemungkinan");
-									?>
-								</td>
-								<td align="center">
-									<?
-									$rs_td = $params->risk_td_data_viewlist();
-									$arr_td = $rs_td->GetArray();
-									echo $Helper->buildCombo("td_id_" . $no, $arr_td, 2, 3, $arr_iden['analisa_dampak'], "", "font-size:8pt", false, true, false, "tingkat_dampak");
-									?>
-								</td>
-								<td align="center"><label class="ri"><?= $arr_iden['analisa_ri'] ?></label></td>
-								<td align="center">
-									<label class="levelrisk">
-										<?php
-										$risk_level = $arr_iden['analisa_ri'];
-										if ($risk_level == '' || $risk_level == 0) {
-											echo "Belum Terhitung";
-										} elseif ($risk_level > 0 && $risk_level <= 5) {
-											echo "Sangat Rendah";
-										} elseif ($risk_level >= 6 && $risk_level <= 10) {
-											echo "Rendah";
-										} elseif ($risk_level >= 11 && $risk_level <= 15) {
-											echo "Sedang";
-										} elseif ($risk_level >= 16 && $risk_level <= 20) {
-											echo "Tinggi";
-										} elseif ($risk_level >= 21 && $risk_level <= 25) {
-											echo "Sangat Tinggi";
-										}
-										?>
-									</label>
-								</td>
-								<? /*
-					<td align="center"><input type="text" name="bobot_risiko_<?=$no?>"
-					id="bobot_risiko" size="2" class="cmb_risk bobot_ri_<?=$kat?>"
-					maxlength="3" value="<?=$arr_iden['analisa_bobot_risk']?>"
-					data-group="bobot_ri_<?=$kat?>"></td>
-					<td align="center"><label class="nilai_inhern"><?=$arr_iden['analisa_nilai_ri']?></label></td>
-					<?php
-						if ($x == 1) {
-							?>
-					<td align="center" rowspan=<?=$countKat?>><input type="text" name="bobot_kat_risiko_<?=$no?>" size="2" class="txt_risk bobot_kat" maxlength="3" value="<?=$arr_iden['analisa_bobot_kat_risk']?>" data-group="bobot_kat"></td>
-					<?php
+							$kat++;
 						}
 						?>
-					*/ ?>
-							</tr>
-						<?php
-					}
-					$kat++;
+						</table>
+						<?
+						break;
+					case "getedit":
+						$arr = $rs->FetchRow();
+						?>
+						<?
+						break;
 				}
 				?>
-				</table>
-				<?
-				break;
-			case "getedit":
-				$arr = $rs->FetchRow();
-				?>
-				<?
-				break;
-		}
-		?>
-			<fieldset class="form-group mt-md">
-				<center>
-					<input type="button" class="btn btn-primary" value="Kembali" onclick="location='<?= $def_page_request ?>'">
-					<input type="submit" class="btn btn-success" value="Simpan">
-				</center>
-				<input type="hidden" name="data_action" id="data_action" value="<?= $_nextaction ?>">
-			</fieldset>
-		</form>
+					<fieldset class="form-group mt-md">
+						<center>
+							<input type="button" class="btn btn-primary" value="Kembali" onclick="location='<?= $def_page_request ?>'">
+							<input type="submit" class="btn btn-success" value="Simpan">
+						</center>
+						<input type="hidden" name="data_action" id="data_action" value="<?= $_nextaction ?>">
+					</fieldset>
+				</form>
 			</div>
 		</section>
 	</div>

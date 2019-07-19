@@ -53,7 +53,7 @@
 				<fieldset class="form-group">
 					<label class="col-sm-3 control-label">Auditor <span class="mandatory">*</span></label>
 					<div class="col-sm-5">
-					<?=$Helper->dbCombo("anggota_id[]", "auditor", "auditor_id", "auditor_name", "and auditor_del_st = 1 ", "", "", 1, "order by auditor_name", "", "", "selectsatu")?>
+					<?=$Helper->dbComboAuditor("anggota_id[]", "auditor", "auditor_id", "auditor_name", "and auditor_del_st = 1 ", "", "", 1, "order by auditor_name", "", "", "selectsatu")?>
 					<? /*
 					<label class="form-control">Golongan : </label> 
 					<label class="span0" id="gol"></label> <span class="required">*</span>
@@ -63,7 +63,7 @@
 				<fieldset class="form-group">
 					<label class="col-sm-3 control-label">Posisi <span class="mandatory">*</span></label>
 					<div class="col-sm-5">
-					<?=$Helper->dbCombo("posisi_id[]", "par_posisi_penugasan", "posisi_id", "posisi_name", "and posisi_del_st = 1 ", "", "", 1, "order by posisi_sort", "", "", "selectdua")?>
+					<?=$Helper->dbComboAuditor("posisi_id[]", "par_posisi_penugasan", "posisi_id", "posisi_name", "and posisi_del_st = 1 ", "", "", 1, "order by posisi_sort", "", "", "selectdua")?>
 					</div>
 				</fieldset>
 				</div>

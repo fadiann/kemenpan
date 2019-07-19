@@ -8,63 +8,71 @@
 require 'vendor/autoload.php';
 
 use Carbon\Carbon;
- ?>
-<section id="main" class="column">			
+ ?>	
 <?
 if (! empty ( $view_parrent ))
 	include_once $view_parrent;
 ?>   
-	<article class="module width_3_quarter">
-		<header>
-			<h3 class="tabs_involved"><?=$page_title?></h3>
-		</header>
+<div class="row">
+	<div class="col-md-12">
+		<section class="panel">
+			<header class="panel-heading">
+				<h4 class="panel-title"><?=$page_title?></h4>
+			</header>
+			<div class="panel-body wrap">
 		<form method="post" name="f" action="#" class="form-horizontal" id="validation-form" enctype="multipart/form-data">
 		<?
 		switch ($_action) {
 			case "getadd" :
 				?>
 			<fieldset class="form-group">
-				<label class="col-sm-3 control-label">No Kertas Kerja Audit</label>
-				<input type="text" class="span2" name="no_kka" id="no_kka">
-				<span class="required">*</span>
+				<label class="col-sm-3 control-label">No Kertas Kerja Audit <span class="required">*</span></label>
+				<div class="col-sm-5">
+				<input type="text" class="form-control" name="no_kka" id="no_kka">
+				</div>
 			</fieldset>
 			<fieldset class="form-group">
-				<label class="col-sm-3 control-label">Tanggal Kertas Kerja Audit</label>
+				<label class="col-sm-3 control-label">Tanggal Kertas Kerja Audit <span class="required">*</span></label>
+				<div class="col-sm-5">
 				<input type="text" class="form-control" name="kertas_kerja_date" id="kertas_kerja_date">
-				<span class="required">*</span>
+				</div>
 			</fieldset>
 			<fieldset class="form-group">
+				<div class="col-sm-12">
 				<ul class="rtabs">
 					<li><a href="#view1">Uraian</a></li>
 					<li><a href="#view2">Kesimpulan</a></li>
 				</ul>
 				<div id="view1">
 					<textarea class="ckeditor" cols="10" rows="40" name="kertas_kerja" id="kertas_kerja"></textarea>
-					<br>
 <!-- 					<label>Lampiran :</label>
 					<br> -->
-					<input type="button" id="tambah_auditee" class="blue_btn" value="Tambah Baris">
-					<br>
-					<br>
-					<table id="tabel_auditee" width="60%">
+				</div>
+				<div id="view2">
+					<textarea class="ckeditor" cols="10" rows="40" name="kesimpulan" id="kesimpulan"></textarea>
+				</div>
+				</div>
+			</fieldset>
+			<fieldset class="form-group">
+				<div class="col-sm-12">
+					<button id="tambah_auditee" class="btn btn-success">
+						<i class="fa fa-plus-circle"></i> Tambah File</button>
+					<table id="tabel_auditee" class="table table-bordered table-hover mt-md" width="60%">
 						<thead>
 							<tr>
-								<th align="center" width="5%">No.</th>
-								<th align="left" width="30%">Lampiran</th>
+								<th class="text-center" width="1%">No.</th>
+								<th class="text-left" width="30%">Lampiran</th>
 								<th width="5%">&nbsp;</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr id="1">
-								<td align="center">1.</td>
+								<td class="text-center">1.</td>
 								<td><input type="file" class="span4" name="kka_attach[]"></td>
-								<td>&nbsp;</td>
+								<td class="text-center">&nbsp;</td>
 							</tr>
 						</tbody>
 					</table>
-				</div>
-				<div id="view2">
-					<textarea class="ckeditor" cols="10" rows="40" name="kesimpulan" id="kesimpulan"></textarea>
 				</div>
 			</fieldset>
 		<?
@@ -73,45 +81,55 @@ if (! empty ( $view_parrent ))
 				$arr = $rs->FetchRow ();
 				?>
 			<fieldset class="form-group">
-				<label class="col-sm-3 control-label">No Kertas Kerja Audit</label> <input type="text"
-					class="span2" name="no_kka" id="no_kka"
-					value="<?=$arr['kertas_kerja_no']?>"><span class="required">*</span>
+				<label class="col-sm-3 control-label">No Kertas Kerja Audit</label> 
+				<div class="col-sm-5"><input type="text"
+					class="form-control" name="no_kka" id="no_kka"
+					value="<?=$arr['kertas_kerja_no']?>">
+					</div>
 			</fieldset>
 			<fieldset class="form-group">
-				<label class="col-sm-3 control-label">Tanggal Kertas Kerja Audit</label> <input type="text"
-					class="span1" name="kertas_kerja_date" id="kertas_kerja_date"
-					value="<?=$Helper->dateIndo($arr['kertas_kerja_date'])?>"><span
-					class="mandatory">*</span>
+				<label class="col-sm-3 control-label">Tanggal Kertas Kerja Audit</label> 
+				<div class="col-sm-5">
+					<input type="text"
+					class="form-control" name="kertas_kerja_date" id="kertas_kerja_date"
+					value="<?=$Helper->dateIndo($arr['kertas_kerja_date'])?>">
+				</div>
 			</fieldset>
 			<fieldset class="form-group">
+				<div class="col-sm-12">
 				<ul class="rtabs">
 					<li><a href="#view1">Uraian</a></li>
 					<li><a href="#view2">Kesimpulan</a></li>
 				</ul>
 				<div id="view1">
-					<textarea class="ckeditor" cols="10" rows="40" name="kertas_kerja"
-						id="kertas_kerja"><?php echo $arr['kertas_kerja_desc']?></textarea>
-						<br>
-					<input type="button" id="tambah_auditee" class="blue_btn" value="Tambah Baris">
-					<br>
-					<br>
-					<table id="tabel_auditee" width="60%">
+					<textarea class="ckeditor" cols="10" rows="40" name="kertas_kerja" id="kertas_kerja"><?php echo $arr['kertas_kerja_desc']?></textarea>
+				</div>
+				<div id="view2">
+					<textarea class="ckeditor" cols="10" rows="40" name="kesimpulan" id="kesimpulan"><?php echo $arr['kertas_kerja_kesimpulan']?></textarea>
+				</div>
+				</div>
+
+			</fieldset>
+			<fieldset class="form-group">
+				<div class="col-sm-12">
+					<button id="tambah_auditee" class="btn btn-success">
+						<i class="fa fa-plus-circle"></i> Tambah File</button>
+					<table id="tabel_auditee" class="table table-bordered table-hover mt-md" width="60%">
 						<thead>
 							<tr>
-								<th align="center" width="5%">No.</th>
-								<th align="left" width="30%">Lampiran</th>
+								<th class="text-center" width="5%">No.</th>
+								<th class="text-left" width="30%">Lampiran</th>
 								<th width="5%">&nbsp;</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr id="1">
-								<td align="center">1.</td>
+								<td class="text-center">1.</td>
 								<td><input type="file" class="span4" name="kka_attach[]"></td>
-								<td>&nbsp;</td>
+								<td class="text-center">&nbsp;</td>
 							</tr>
 						</tbody>
 					</table>
-					<br>
 				<?php 
 					$z=0;
 					$rs_file = $kertas_kerjas->list_kka_lampiran($arr['kertas_kerja_id']);
@@ -122,14 +140,10 @@ if (! empty ( $view_parrent ))
 						<a href="#" onclick="window.open('<?=$Helper->baseurl("Upload_KKA").$arr_file['kka_attach_filename']?>','_blank')"><?=$arr_file['kka_attach_filename']?></a>
 					<?php 
 					}
-					?>
-				</div>
-				<div id="view2">
-					<textarea class="ckeditor" cols="10" rows="40" name="kesimpulan" id="kesimpulan"><?php echo $arr['kertas_kerja_kesimpulan']?></textarea>
+					?><span class="required">* Centang Untuk Menghapus File</span>
 				</div>
 			</fieldset>
-			<input type="hidden" name="data_id"
-				value="<?=$arr['kertas_kerja_id']?>">	
+			<input type="hidden" name="data_id" value="<?=$arr['kertas_kerja_id']?>">	
 		<?
 				break;
 			case "getdetail" :
@@ -137,7 +151,7 @@ if (! empty ( $view_parrent ))
 				$rs_komentar = $kertas_kerjas->kka_komentar_viewlist ( $arr ['kertas_kerja_id'] );
 				?>
 			<fieldset class="form-group">
-				<table class="table table-borderless">
+				<table class="table table-bordered table-hover">
 					<tr>
 						<td width="120px">No KKA</td>
 						<td>:</td>
@@ -292,7 +306,7 @@ if (! empty ( $view_parrent ))
 				<?php 
 				}else{
 				?>	
-					<input type="button" class="blue_btn" value="ms-word" onClick="window.open('AuditManagement/kertas_kerja_print.php?id=<?=$arr['kertas_kerja_id']?>', '_blank','toolbar=no,location=no,status=no,menubar=yes,scrollbars=yes,resizable=yes');">
+					<input type="button" class="btn btn-primary" value="ms-word" onClick="window.open('App/Modules/AuditManagement/kertas_kerja_print.php?id=<?=$arr['kertas_kerja_id']?>', '_blank','toolbar=no,location=no,status=no,menubar=yes,scrollbars=yes,resizable=yes');">
 				<?
 				}
 				?>
@@ -300,8 +314,10 @@ if (! empty ( $view_parrent ))
 				<input type="hidden" name="data_action" id="data_action" value="<?=$_nextaction?>">
 			</fieldset>
 		</form>
-	</article>
-</section>
+			</div>
+		</section>
+	</div>
+</div>
 <script>
 $('#tambah_auditee').on('click', function(e){
 	e.preventDefault();
@@ -310,7 +326,7 @@ $('#tambah_auditee').on('click', function(e){
 	var new_row = '<tr id="'+no+'">'
 			+ '<td align="center">'+no+'.</td>'
 			+ '<td><input type="file" class="span4" name="kka_attach[]"></td>'
-			+ '<td><button class="btn auditee_remove" style="color: #000 !important">X</button></td>'
+			+ '<td class="text-center"><button class="btn btn-danger auditee_remove btn-circle"><i class="fa fa-trash-o"></i></button></td>'
 		+ '</tr>';
 	$('#tabel_auditee tbody').append(new_row);
 });

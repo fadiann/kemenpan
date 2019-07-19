@@ -168,7 +168,7 @@ if (@$_POST ['submit'] == "Login") {
 					</div>
 				</div>
 
-				<p class="text-center text-muted mt-md mb-md">&copy; Copyright Kementerian Pendayagunaan Aparatur Negara 2019.</p>
+				<p class="text-center text-muted mt-md mb-md">&copy; Kementerian Pendayagunaan Aparatur Negara & Reformasi Birokrasi 2019.</p>
 			</div>
 		</section>
 		<!-- end: page -->

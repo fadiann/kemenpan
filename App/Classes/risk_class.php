@@ -180,7 +180,7 @@ class risk {
 				$condition = " and (" . $condition . ")";
 			}
 		}
-		$sql = "SELECT identifikasi_id, identifikasi_no_risiko, identifikasi_nama_risiko, risk_kategori, identifikasi_penyebab, identifikasi_selera, penetapan_status
+		$sql = "SELECT identifikasi_id, identifikasi_no_risiko, identifikasi_selera, identifikasi_nama_risiko, risk_kategori, identifikasi_penyebab, identifikasi_selera, penetapan_status
 				FROM risk_identifikasi
 				LEFT JOIN risk_penetapan on identifikasi_penetapan_id = penetapan_id
 				LEFT JOIN par_risk_kategori on identifikasi_kategori_id = risk_kategori_id
@@ -292,37 +292,93 @@ class risk {
 
 	//end benturan kepentingan
 
+	// function identifikasi_data_viewlist($id) {
+	// 	$sql = "SELECT risk_identifikasi.identifikasi_id, identifikasi_selera, identifikasi_no_risiko, 
+	// 			identifikasi_nama_risiko, identifikasi_kategori_id, identifikasi_penyebab, identifikasi_selera, monitoring_action, monitoring_date, monitoring_plan_action, monitoring_tenggat_waktu, indikator_kinerja
+	// 			FROM risk_identifikasi LEFT JOIN risk_identifikasi_detail 
+	// 			ON risk_identifikasi.identifikasi_id = risk_identifikasi_detail.identifikasi_id
+	// 			WHERE risk_identifikasi.identifikasi_id = '" . $id . "' ";
+	// 	$data = $this->db->_dbquery ( $sql );
+	// 	//echo $sql;
+	// 	return $data;
+	// }
 	function identifikasi_data_viewlist($id) {
-		$sql = "SELECT risk_identifikasi.identifikasi_id, identifikasi_selera, identifikasi_no_risiko, 
-				identifikasi_nama_risiko, identifikasi_kategori_id, identifikasi_penyebab, identifikasi_selera, monitoring_action, monitoring_date, monitoring_plan_action, monitoring_tenggat_waktu, indikator_kinerja
-				FROM risk_identifikasi LEFT JOIN risk_identifikasi_detail 
-				ON risk_identifikasi.identifikasi_id = risk_identifikasi_detail.identifikasi_id
+		$sql = "SELECT risk_identifikasi_sasaran.identifikasi_sasaran, risk_identifikasi_sasaran.identifikasi_sasaran_id, 
+		risk_identifikasi_indikator.identifikasi_indikator_name, risk_identifikasi_indikator.identifikasi_indikator_id, 
+		risk_identifikasi.identifikasi_kategori_id, risk_identifikasi.identifikasi_no_risiko, risk_identifikasi.identifikasi_nama_risiko, risk_identifikasi.identifikasi_penyebab, risk_identifikasi.identifikasi_dampak , risk_identifikasi.identifikasi_id
+		FROM risk_identifikasi INNER JOIN risk_identifikasi_indikator 
+		ON risk_identifikasi.identifikasi_selera = risk_identifikasi_indikator.identifikasi_indikator_id INNER JOIN risk_identifikasi_sasaran 
+		ON risk_identifikasi_sasaran.identifikasi_sasaran_id = risk_identifikasi_indikator.identifikasi_sasaran_id
 				WHERE risk_identifikasi.identifikasi_id = '" . $id . "' ";
 		$data = $this->db->_dbquery ( $sql );
 		//echo $sql;
 		return $data;
 	}
-	// function identifikasi_add($id, $penetapan_id, $nomor, $nama, $kategori, $penyebab, $selera) {
-	// 	$sql = "insert into risk_identifikasi (identifikasi_id, identifikasi_penetapan_id, identifikasi_no_risiko, identifikasi_nama_risiko, identifikasi_kategori_id, identifikasi_penyebab, identifikasi_selera)
-	// 			values
-	// 			('" . $id . "','" . $penetapan_id . "','" . $nomor . "','" . $nama . "','" . $kategori . "','" . $penyebab . "','" . $selera . "')";
-	// 	$aksinyo = "Menambah Identifikasi Risiko id " . $id;
-	// 	$this->db->_dbexecquery ( $sql, $this->userId, $aksinyo );
-	//}
-	function identifikasi_add($id, $penetapan_id, $nomor, $sasaran) {
-		$sql = "insert into risk_identifikasi (identifikasi_id, identifikasi_penetapan_id, identifikasi_no_risiko, identifikasi_selera)
+
+	function identifikasi_add($penetapan_id, $id, $nomor, $nama, $kategori, $penyebab, $dampak) {
+		$sql = "insert into risk_identifikasi (identifikasi_id, identifikasi_selera, identifikasi_penetapan_id, identifikasi_no_risiko, identifikasi_nama_risiko, identifikasi_kategori_id, identifikasi_penyebab, identifikasi_dampak)
 				values
-				('" . $id . "','" . $penetapan_id . "','" . $nomor . "','" . $sasaran . "')";
-		$aksinyo = "Menambah Identifikasi Risiko id " . $id;
+				('" . $this->uniq_id() . "','" . $id . "','" . $penetapan_id . "','" . $nomor . "','" . $nama . "','" . $kategori . "','" . $penyebab . "','" . $dampak . "')";
+		$aksinyo = "Menambah Identifikasi Risiko id " . $this->uniq_id();
+		//echo $sql;
 		$this->db->_dbexecquery ( $sql, $this->userId, $aksinyo );
 	}
-	function identifikasi_detail_add($data) {
-		$sql = "INSERT INTO risk_identifikasi_detail (identifikasi_detail_id, identifikasi_id, indikator_kinerja, kejadian_risiko, kategori_risiko, penyebab_risiko, dampak_risiko) VALUES ('".$this->uniq_id()."', ?, ?, ?, ?, ?, ?)";
-		$this->db->bind($sql, $data);
+	function indikator_view_bySasaran($id) {
+		$sql = "SELECT * FROM risk_identifikasi_indikator WHERE risk_identifikasi_indikator.identifikasi_sasaran_id = '" . $id . "' "; //selera digunakan sebagai id sasaran
+		$data = $this->db->_dbquery ( $sql );
+		//echo $sql;
+		return $data;
 	}
-	function identifikasi_edit($id, $nama, $kategori, $penyebab, $selera) {
+	function identifikasi_view_byIndikator($id) {
+		$sql = "SELECT risk_identifikasi.identifikasi_kategori_id, risk_identifikasi.identifikasi_no_risiko, 
+		risk_identifikasi.identifikasi_nama_risiko, risk_identifikasi.identifikasi_penyebab, risk_identifikasi.identifikasi_dampak, 
+		risk_identifikasi.identifikasi_id, par_risk_kategori.risk_kategori FROM risk_identifikasi 
+		INNER JOIN par_risk_kategori ON risk_identifikasi.identifikasi_kategori_id = par_risk_kategori.risk_kategori_id 
+		WHERE risk_identifikasi.identifikasi_selera = '" . $id . "' "; //selera digunakan sebagai id sasaran
+		$data = $this->db->_dbquery ( $sql );
+		//echo $sql;
+		return $data;
+	}
+	function identifikasi_view_byId($id) {
+		$sql = "SELECT risk_identifikasi.identifikasi_kategori_id, risk_identifikasi.identifikasi_no_risiko, risk_identifikasi.identifikasi_nama_risiko, risk_identifikasi.identifikasi_penyebab, risk_identifikasi.identifikasi_dampak , risk_identifikasi.identifikasi_id, par_risk_kategori.risk_kategori FROM risk_identifikasi INNER JOIN 
+		risk_identifikasi.identifikasi_kategori_id = par_risk_kategori.risk_kategori_id
+		WHERE risk_identifikasi.identifikasi_id = '" . $id . "' "; //selera digunakan sebagai id sasaran
+		$data = $this->db->_dbquery ( $sql );
+		//echo $sql;
+		return $data;
+	}
+	function rowspanIndikator($id) {
+		$sql = "SELECT COUNT(*) FROM risk_identifikasi 
+				INNER JOIN risk_identifikasi_indikator 
+				ON risk_identifikasi_indikator.identifikasi_indikator_id = risk_identifikasi.identifikasi_selera 
+				INNER JOIN risk_identifikasi_sasaran 
+				ON risk_identifikasi_sasaran.identifikasi_sasaran_id =  risk_identifikasi_indikator.identifikasi_sasaran_id
+				WHERE risk_identifikasi_sasaran.identifikasi_sasaran_id = '" . $id . "' "; //selera digunakan sebagai id sasaran
+		$data = $this->db->_dbquery($sql)->FetchRow();
+		//echo $sql;
+		return $data[0];
+	}
+
+	function identifikasi_sasaran_add($id_sasaran, $id_identifikasi, $ses_penetapan_id, $sasaran) {
+		$sql = "insert into risk_identifikasi_sasaran (identifikasi_sasaran_id, identifikasi_id, identifikasi_penetapan_id, identifikasi_sasaran)
+				values ('".$id_sasaran."','" . $id_identifikasi . "','" . $ses_penetapan_id . "','" . $sasaran . "')";
+		$this->db->_dbquery($sql);
+	}
+	function identifikasi_indikator_add($id_indikator, $indikator_sasaran_id, $indikator_name) {
+		$sql = "insert into risk_identifikasi_indikator (identifikasi_indikator_id, identifikasi_sasaran_id, 
+		identifikasi_indikator_name) values ('".$id_indikator."','" . $indikator_sasaran_id . "','" . $indikator_name . "')";
+		$this->db->_dbquery($sql);
+	}
+	function identifikasi_sasaran_viewlist($id) {
+		$sql = "SELECT * FROM risk_identifikasi_sasaran WHERE identifikasi_penetapan_id = '" . $id . "' ";
+		$data = $this->db->_dbquery ( $sql );
+		//echo $sql;
+		return $data;
+	}
+	
+	function identifikasi_edit($id, $nama, $kategori, $penyebab, $dampak) {
 		$sql = "update risk_identifikasi set
-				identifikasi_nama_risiko = '" . $nama . "', identifikasi_kategori_id = '" . $kategori . "', identifikasi_penyebab = '" . $penyebab . "', identifikasi_selera = '" . $selera . "'
+				identifikasi_nama_risiko = '" . $nama . "', identifikasi_kategori_id = '" . $kategori . "', identifikasi_penyebab = '" . $penyebab . "', identifikasi_dampak = '" . $dampak . "'
 				WHERE identifikasi_id = '" . $id . "' ";
 		$aksinyo = "Mengubah Identifikasi Risiko ID " . $id;
 		$this->db->_dbexecquery ( $sql, $this->userId, $aksinyo );
@@ -335,6 +391,7 @@ class risk {
 	function identifikasi_delete($id) {
 		$sql = "DELETE FROM risk_identifikasi WHERE identifikasi_id = '" . $id . "' ";
 		$aksinyo = "Menghapus Identifikasi Risiko ID " . $id;
+		//echo $sql;
 		$this->db->_dbexecquery ( $sql, $this->userId, $aksinyo );
 	}
 	function identifikasi_detail_delete($id) {
@@ -347,7 +404,7 @@ class risk {
 	public function identifikasi_get_detail($risk_id)
 	{
 		$sql = "SELECT 
-				WHERE risk_identifikasi_detail.identifikasi_id = '" . $id . "' ";
+				WHERE risk_identifikasi_detail.identifikasi_id = '" . $risk_id . "' ";
 		$data = $this->db->_dbquery ( $sql );
 		//echo $sql;
 		return $data;
@@ -377,7 +434,7 @@ class risk {
 				evaluasi_risiko_residu, evaluasi_komponen, evaluasi_efektifitas, evaluasi_risiko_residu, evaluasi_efektifitas_name, evaluasi_risiko_residu_name,
 				penanganan_risiko_id, penanganan_plan, penanganan_date, penanganan_pic_id, risk_penanganan_jenis, pic_name,
 				penetapan_auditee_id,
-				monitoring_action, monitoring_date, monitoring_plan_action, monitoring_tenggat_waktu, identifikasi_selera, indikator_kinerja
+				monitoring_action, monitoring_date, monitoring_plan_action, monitoring_tenggat_waktu, identifikasi_selera, indikator_kinerja, risk_identifikasi.identifikasi_dampak
 				FROM risk_identifikasi
 				LEFT JOIN risk_penetapan on identifikasi_penetapan_id = penetapan_id
 				LEFT JOIN par_risk_kategori on identifikasi_kategori_id = risk_kategori_id

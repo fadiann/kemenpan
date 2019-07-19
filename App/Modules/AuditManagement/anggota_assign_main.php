@@ -82,59 +82,72 @@ switch ($_action) {
 		echo "<script>window.open('" . $acc_page_request_detil . "&auditor=" . $fdata_id . "', '_self');</script>";
 		break;
 	case "postadd" :
-		$fauditee_id = $Helper->replacetext ( $_POST ["auditee_id"] );
-		$fanggota_id = $Helper->replacetext ( $_POST ["anggota_id"] );
-		$fposisi_id = $Helper->replacetext ( $_POST ["posisi_id"] );
-		$ftanggal_awal = $Helper->date_db ( $Helper->replacetext ( $_POST ["tanggal_awal"] ) );
-		$ftanggal_akhir = $Helper->date_db ( $Helper->replacetext ( $_POST ["tanggal_akhir"] ) );
+		$fauditee_id       = $Helper->replacetext ( $_POST ["auditee_id"] );
+		$ftanggal_awal     = $Helper->date_db ( $Helper->replacetext ( $_POST ["tanggal_awal"] ) );
+		$ftanggal_akhir    = $Helper->date_db ( $Helper->replacetext ( $_POST ["tanggal_akhir"] ) );
 		$count_assign_date = (($ftanggal_akhir - $ftanggal_awal) / 86400) + 1;
-		$count_weekend = $Helper->cek_holiday ( $ftanggal_awal, $ftanggal_akhir );
-		$hari_kerja = $count_assign_date - $count_weekend;
-		$fhari_persiapan = $Helper->replacetext ( $_POST ["hari_persiapan"] );
+		$count_weekend     = $Helper->cek_holiday ( $ftanggal_awal, $ftanggal_akhir );
+		$hari_kerja        = $count_assign_date - $count_weekend;
+		$fhari_persiapan   = $Helper->replacetext ( $_POST ["hari_persiapan"] );
 		$fhari_pelaksanaan = $Helper->replacetext ( $_POST ["hari_pelaksanaan"] );
-		$fhari_pelaporan = $Helper->replacetext ( $_POST ["hari_pelaporan"] );
-		$fidsbu = $_POST ["idsbu"];
-		$fjml_hari = $_POST ["jml_hari"];
-		$fnilai = $_POST ["nilai"];
-		$ftotal_biaya = $_POST ["total_biaya"];
-		$sum_biaya = 0;
-		if ($fauditee_id != "" && $fanggota_id != "" && $fposisi_id != "") {
-			$id_assign_anggota = $assigns->uniq_id ();
+		$fhari_pelaporan   = $Helper->replacetext ( $_POST ["hari_pelaporan"] );
+		$count             = count($_POST ["anggota_id"]);
+		$fanggota_id       = $Helper->replacetext ( $_POST ["anggota_id"] );
+		$fposisi_id        = $Helper->replacetext ( $_POST ["posisi_id"] );
+
+		// $fidsbu            = $_POST ["idsbu"];
+		// $fjml_hari         = $_POST ["jml_hari"];
+		// $fnilai            = $_POST ["nilai"];
+		// $ftotal_biaya      = $_POST ["total_biaya"];
+		$fidsbu       = 0;
+		$fjml_hari    = 0;
+		$fnilai       = 0;
+		$ftotal_biaya = 0;
+		$sum_biaya    = 0;
+
+		// var_dump($_POST);
+		// die();
+		for($x = 0; $x < $count; $x++){
+			$fanggota_id 		= $Helper->replacetext ( $_POST ["anggota_id"][$x] );
+			$fposisi_id 		= $Helper->replacetext ( $_POST ["posisi_id"][$x] );	
+			$id_assign_anggota 	= $assigns->uniq_id ();
 			$assigns->assign_auditor_add ( $id_assign_anggota, $fauditee_id, $fanggota_id, $fposisi_id, $ftanggal_awal, $ftanggal_akhir, $count_assign_date, $ses_assign_id, $hari_kerja, $fhari_persiapan, $fhari_pelaksanaan, $fhari_pelaporan );
-			
 			for($i = 0; $i < count ( $fidsbu ); $i ++) {
 				$assigns->assign_auditor_detil_add ( $id_assign_anggota, $fidsbu [$i], $fjml_hari [$i], $fnilai [$i], $ftotal_biaya [$i] );
 				$sum_biaya = $sum_biaya+$ftotal_biaya [$i];
 			}
 			$assigns->assign_auditor_update_sum_biaya( $id_assign_anggota, $sum_biaya);
-			
-			$Helper->js_alert_act ( 3 );
-		} else {
-			$Helper->js_alert_act ( 5 );
 		}
+		$Helper->js_alert_act ( 3 );
 		?>
 <script>window.open('<?=$def_page_request?>', '_self');</script>
 <?
 		$page_request = "blank.php";
 		break;
 	case "postedit" :
-		$fdata_id = $Helper->replacetext ( $_POST ["data_id"] );
-		$fauditee_id = $Helper->replacetext ( $_POST ["auditee_id"] );
-		$fanggota_id = $Helper->replacetext ( $_POST ["anggota_id"] );
-		$fposisi_id = $Helper->replacetext ( $_POST ["posisi_id"] );
-		$ftanggal_awal = $Helper->date_db ( $Helper->replacetext ( $_POST ["tanggal_awal"] ) );
-		$ftanggal_akhir = $Helper->date_db ( $Helper->replacetext ( $_POST ["tanggal_akhir"] ) );
+		$fdata_id          = $Helper->replacetext ( $_POST ["data_id"] );
+		$fauditee_id       = $Helper->replacetext ( $_POST ["auditee_id"] );
+		$fanggota_id       = $Helper->replacetext ( $_POST ["anggota_id"] );
+		$fposisi_id        = $Helper->replacetext ( $_POST ["posisi_id"] );
+		$ftanggal_awal     = $Helper->date_db ( $Helper->replacetext ( $_POST ["tanggal_awal"] ) );
+		$ftanggal_akhir    = $Helper->date_db ( $Helper->replacetext ( $_POST ["tanggal_akhir"] ) );
 		$count_assign_date = (($ftanggal_akhir - $ftanggal_awal) / 86400) + 1;
-		$count_weekend = $Helper->cek_holiday ( $ftanggal_awal, $ftanggal_akhir );
-		$hari_kerja = $count_assign_date - $count_weekend;
-		$fhari_persiapan = $Helper->replacetext ( $_POST ["hari_persiapan"] );
+		$count_weekend     = $Helper->cek_holiday ( $ftanggal_awal, $ftanggal_akhir );
+		$hari_kerja        = $count_assign_date - $count_weekend;
+		$fhari_persiapan   = $Helper->replacetext ( $_POST ["hari_persiapan"] );
 		$fhari_pelaksanaan = $Helper->replacetext ( $_POST ["hari_pelaksanaan"] );
-		$fhari_pelaporan = $Helper->replacetext ( $_POST ["hari_pelaporan"] );
-		$fidsbu = $_POST ["idsbu"];
-		$fjml_hari = $_POST ["jml_hari"];
-		$fnilai = $_POST ["nilai"];
-		$ftotal_biaya = $_POST ["total_biaya"];
-		$sum_biaya = 0;
+		$fhari_pelaporan   = $Helper->replacetext ( $_POST ["hari_pelaporan"] );
+		// $fidsbu            = $_POST ["idsbu"];
+		// $fjml_hari         = $_POST ["jml_hari"];
+		// $fnilai            = $_POST ["nilai"];
+		// $ftotal_biaya      = $_POST ["total_biaya"];
+		// $sum_biaya         = 0;
+		$fidsbu       = 0;
+		$fjml_hari    = 0;
+		$fnilai       = 0;
+		$ftotal_biaya = 0;
+		$sum_biaya    = 0;
+
 		if ($fauditee_id != "" && $fanggota_id != "" && $fposisi_id != "") {
 			$assigns->assign_auditor_edit ( $fdata_id, $fauditee_id, $fanggota_id, $fposisi_id, $ftanggal_awal, $ftanggal_akhir, $count_assign_date, $hari_kerja, $fhari_persiapan, $fhari_pelaksanaan, $fhari_pelaporan );
 
