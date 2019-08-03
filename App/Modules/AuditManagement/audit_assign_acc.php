@@ -710,70 +710,61 @@ $(document).ready(function() {
 		data: data
 	});
   	$("#tanggal_awal").datepicker({
-		dateFormat: 'dd-mm-yy',
-		nextText: "",
-		prevText: "",
-		changeYear: true,
-		changeMonth: true
+		format: 'dd-mm-yyyy',
+		 nextText: "",
+		 prevText: "",
+        autoClose: true
 	});
 	$("#tanggal_akhir").datepicker({
-		dateFormat: 'dd-mm-yy',
-		nextText: "",
-		prevText: "",
-		changeYear: true,
-		changeMonth: true
+		format: 'dd-mm-yyyy',
+		 nextText: "",
+		 prevText: "",
+        autoClose: true
 	});
 	$("#tanggal_surat").datepicker({
-		dateFormat: 'dd-mm-yy',
-		nextText: "",
-		prevText: "",
-		changeYear: true,
-		changeMonth: true
+		format: 'dd-mm-yyyy',
+		 nextText: "",
+		 prevText: "",
+        autoClose: true
 	});
 
 	$("#tanggal_persiapan_awal").datepicker({
-		dateFormat: 'dd-mm-yy',
-		nextText: "",
-		prevText: "",
-		changeYear: true,
-		changeMonth: true
+		format: 'dd-mm-yyyy',
+		 nextText: "",
+		 prevText: "",
+        autoClose: true
 	});
 	$("#tanggal_persiapan_akhir").datepicker({
-		dateFormat: 'dd-mm-yy',
-		nextText: "",
-		prevText: "",
-		changeYear: true,
-		changeMonth: true
+		format: 'dd-mm-yyyy',
+		 nextText: "",
+		 prevText: "",
+        autoClose: true
 	});
 
 	$("#tanggal_pelaksanaan_awal").datepicker({
-		dateFormat: 'dd-mm-yy',
-		nextText: "",
-		prevText: "",
-		changeYear: true,
-		changeMonth: true
+		format: 'dd-mm-yyyy',
+		 nextText: "",
+		 prevText: "",
+        autoClose: true
 	});
 	$("#tanggal_pelaksanaan_akhir").datepicker({
-		dateFormat: 'dd-mm-yy',
-		nextText: "",
-		prevText: "",
-		changeYear: true,
-		changeMonth: true
+		format: 'dd-mm-yyyy',
+		 nextText: "",
+		 prevText: "",
+        autoClose: true
 	});
 
 	$("#tanggal_pelaporan_awal").datepicker({
-		dateFormat: 'dd-mm-yy',
-		nextText: "",
-		prevText: "",
-		changeYear: true,
-		changeMonth: true
+		format: 'dd-mm-yyyy',
+		 nextText: "",
+		 prevText: "",
+        autoClose: true
 	});
 	$("#tanggal_pelaporan_akhir").datepicker({
-		dateFormat: 'dd-mm-yy',
-		nextText: "",
-		prevText: "",
-		changeYear: true,
-		changeMonth: true
+		format: 'dd-mm-yyyy',
+		 nextText: "",
+		 prevText: "",
+        autoClose: true
 	});
 
 });

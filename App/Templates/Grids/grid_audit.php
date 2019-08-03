@@ -37,16 +37,22 @@
 			}
 			?>
 		</td>
-		<?
-		} else if ($gridHeader [$j] == "Rencana Kegiatan" || $gridHeader [$j] == "Tanggal Audit") {
-		?>
+		<? } else if ($gridHeader [$j] == "Rencana Kegiatan" || $gridHeader [$j] == "Tanggal Audit") { ?>
 		<td align="center">
 			<?=$Helper->dateIndo($arr['audit_plan_start_date']) . " s.d " . $Helper->dateIndo($arr['audit_plan_end_date']);
 			?>
 		</td>
-		<?
-		} else if ($gridHeader [$j] == "Tim Audit") {
-		?>
+		<?php } else if ($gridHeader [$j] == "Rencana Mulai Penugasan") { ?>
+		<td align="center">
+			<?=$Helper->bulanTahun($Helper->dateIndoLengkap($arr['audit_plan_start_date']));
+			?>
+		</td>		
+		<? } else if ($gridHeader [$j] == "Rencana Penerbitan Laporan") {  ?>
+		<td align="center">
+			<?=$Helper->bulanTahun($Helper->dateIndoLengkap($arr['audit_plan_end_date']));
+			?>
+		</td>
+		<? } else if ($gridHeader [$j] == "Tim Audit") { ?>
 		<td align="center">
 			<?
 			$count_anggota = 0;

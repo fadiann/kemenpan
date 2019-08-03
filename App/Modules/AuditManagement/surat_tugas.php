@@ -1,5 +1,11 @@
 <?php
 $arr = $rs->FetchRow();
+$rs_id_auditee = $assigns->assign_auditee_viewlist ( $arr ['assign_surat_id_assign'] );
+$assign_auditee = "";
+while ( $arr_id_auditee = $rs_id_auditee->FetchRow () ) {
+	$assign_auditee .= $arr_id_auditee ['auditee_name'];
+}
+$selisihHari = $Helper->selisih_tanggal($arr['assign_start_date'], $arr['assign_end_date']);
 ?>
 	<div class="row">
 		<div class="col-md-12">
@@ -36,7 +42,7 @@ $arr = $rs->FetchRow();
 		</table>
 		<table align="center" width="70%">
 			<tr>
-				<td colspan="7" align="center"><strong><u>SURAT PERINTAH TUGAS<u></u></td>
+				<td colspan="7" align="center"><strong><u>SURAT TUGAS<u></u></td>
 			</tr>
 			<tr>
 				<td colspan="7" align="center">NOMOR : <?=$arr['assign_surat_no']?></td>
@@ -82,11 +88,26 @@ $arr = $rs->FetchRow();
 					Daftar Terlampir
 				</td>
 			</tr>
+			<?php /*
 			<tr>
 				<td valign="top">Untuk</td>
 				<td align="center" valign="top">:</td>
-				<td colspan="4">
-				<p>Melaksanakan <?=$Helper->text_show($arr['assign_kegiatan'])?> di Lingkungan Sekretariat Kementerian Tahun 2019 selama <?=$Helper->selisih_tanggal($arr['assign_start_date'], $arr['assign_end_date'])?> (<?//=$Helper->terbilang($Helper->selisih_tanggal($arr['assign_start_date'], $arr['assign_end_date']))?>) hari kerja, mulai tanggal <?=$Helper->dateIndoLengkap($arr['assign_start_date'])?> s.d. tanggal <?=$Helper->dateIndoLengkap($arr['assign_end_date'])?> dengan ketentuan:</p>
+				<td colspan="4" align="justify" >
+				<p align="justify" >Melaksanakan <?=$Helper->text_show($arr['assign_kegiatan'])?> pada <?=$assign_auditee?> Tahun 2019 selama <?=$selisihHari?> (<?=$Helper->jumlahHari($selisihHari)?> ) hari kerja, mulai tanggal <?=$Helper->dateIndoLengkap($arr['assign_start_date'])?> s.d. tanggal <?=$Helper->dateIndoLengkap($arr['assign_end_date'])?> dengan ketentuan:</p>
+				<ol>
+				<li>Melaksanakan Tugas dengan sebaik-baiknya dan penuh tanggung jawab serta melaporkan hasilnya;</li>
+				<li>Biaya yang timbul atas diterbitkannya surat tugas ini dibebankan pada DIPA Kementerian Pendayagunaan Aparatur Negara dan Reformasi Birokrasi tahun 2019 </li>
+				</ol>
+				<?//=$Helper->text_show($arr['assign_kegiatan'])?>
+				</td>
+			</tr>
+
+			<? */ ?>
+			<tr>
+				<td valign="top">Untuk</td>
+				<td align="center" valign="top">:</td>
+				<td colspan="4" align="justify" >
+				<p align="justify" >Melaksanakan <?=$Helper->text_show($arr['assign_kegiatan'])?> pada <?=$assign_auditee?> Tahun 2019 selama <?=$selisihHari?> (<?=$Helper->jumlahHari($selisihHari)?> ) hari kerja, terhitung mulai tanggal <?=$Helper->dateIndoLengkap($arr['assign_start_date'])?> dengan ketentuan:</p>
 				<ol>
 				<li>Melaksanakan Tugas dengan sebaik-baiknya dan penuh tanggung jawab serta melaporkan hasilnya;</li>
 				<li>Biaya yang timbul atas diterbitkannya surat tugas ini dibebankan pada DIPA Kementerian Pendayagunaan Aparatur Negara dan Reformasi Birokrasi tahun 2019 </li>
@@ -115,19 +136,40 @@ $arr = $rs->FetchRow();
 			</tr> */ ?>
 		</table>
 		<br><br><br><br><br>
-		<table align="center" width="70%">
+		
+		<table width="70%" align="center">
 			<tr>
 				<td width="60%">&nbsp;</td>
 				<td>
-					Ditetapkan di Jakarta<br>
-					Pada Tanggal <?=$Helper->dateIndoLengkap($arr['assign_surat_tgl'])?><br><br>
-					<?=$arr['jenis_jabatan_sub']?>,<br><br><br><br><br>
+					<table width="100%">
+						<tr>
+							<td>Ditetapkan di&nbsp;</td>
+							<td>&nbsp;:&nbsp;</td>
+							<td>&nbsp;Jakarta</td>
+						</tr>
+						<tr>
+							<td>Pada Tanggal&nbsp;</td>
+							<td>&nbsp;:&nbsp;</td>
+							<td>&nbsp;<?=$Helper->dateIndoLengkap($arr['assign_surat_tgl'])?></td>
+						</tr>
+						<tr>
+							<td><strong><?=$arr['jenis_jabatan_sub']?></strong></td>
+							<td></td>
+							<td></td>
+						</tr>
+					</table>
+					<br><br><br><br>
 					<u><?=$arr['auditor_name']?></u><br>
 					NIP. <?=$arr['auditor_nip']?>
 				</td>
 			</tr>
-			<?
-			if($arr ['assign_surat_tembusan']!=""){
+		</table>
+		<table align="center" width="70%">
+			<?php
+			//var_dump($arr['assign_surat_tembusan']);
+			if($arr['assign_surat_tembusan'] == "-"){
+
+			} else if($arr ['assign_surat_tembusan'] != ""){
 			?>
 			<tr>
 				<td colspan="2">
@@ -147,7 +189,7 @@ $arr = $rs->FetchRow();
 			}
 			?>
 		</table>
-		<br><br><br><br><br><br><br><br><br><br><br><br>
+		<br><br><br><br><br><br><br><br><br>
 		<table cellpadding="0" cellspacing="0" width="70%" align="center">
 		<tr>
 			<th class="text-right" colspan='2' align="right" width="75%">&nbsp</th>
@@ -192,9 +234,24 @@ $arr = $rs->FetchRow();
 		<tr>
 			<td width="60%">&nbsp;</td>
 			<td>
-				Ditetapkan di Jakarta<br>
-				Pada Tanggal <?=$Helper->dateIndoLengkap($arr['assign_surat_tgl'])?><br><br>
-				<?=$arr['jenis_jabatan_sub']?>,<br><br><br><br><br>
+				<table width="100%">
+					<tr>
+						<td>Ditetapkan di&nbsp;</td>
+						<td>&nbsp;:&nbsp;</td>
+						<td>&nbsp;Jakarta</td>
+					</tr>
+					<tr>
+						<td>Pada Tanggal&nbsp;</td>
+						<td>&nbsp;:&nbsp;</td>
+						<td>&nbsp;<?=$Helper->dateIndoLengkap($arr['assign_surat_tgl'])?></td>
+					</tr>
+					<tr>
+						<td><strong><?=$arr['jenis_jabatan_sub']?></strong></td>
+						<td></td>
+						<td></td>
+					</tr>
+				</table>
+				<br><br><br><br>
 				<u><?=$arr['auditor_name']?></u><br>
 				NIP. <?=$arr['auditor_nip']?>
 			</td>
@@ -245,10 +302,14 @@ $arr = $rs->FetchRow();
 				} else if($arr ['assign_surat_status'] == 2){
 				?>
 				<!-- <input type="button" class="blue_btn" value="ms-word" onclick="window.open('Api/surat_tugas_print.php?id_surat=<? //=$arr['assign_surat_id']?>','toolbar=no, location=no, status=no, menubar=yes, scrollbars=yes, resizable=yes');"> -->
+				<a class="btn btn-info" href="Api/surat_tugas_print.php?id_surat=<?=$arr['assign_surat_id']?>" target="_blank"><i class="fa fa-download"> </i> Cetak</a>
 				<?
 				}
+				if($arr ['assign_surat_status'] != 2){
+				if($_SESSION['ses_groupId'] == 'a38c99db8e8777d33b3b358d59a47ae1a0c69d66' || $_SESSION['ses_groupId'] == '46e8d25b481a17e5fe2ac046b4c734fd27d3491b'){
 				?>
-				<a class="btn btn-info" href="Api/surat_tugas_print.php?id_surat=<?=$arr['assign_surat_id']?>" target="_blank"><i class="fa fa-download"> </i> Download</a>
+				<a class="btn btn-info" href="Api/surat_tugas_print.php?id_surat=<?=$arr['assign_surat_id']?>" target="_blank"><i class="fa fa-download"> </i> Cetak</a>
+				<?php } }?>
 				<input type="hidden" name="data_id" id="data_id" value="<?=$arr['assign_surat_id']?>">
 				<input type="hidden" name="status" id="status" value="">
 				<input type="hidden" name="data_action" id="data_action" value="<?=$_nextaction?>">

@@ -51,9 +51,9 @@ $def_page_request = $paging_request . "&page=$noPage";
 
 $view_parrent = "";
 $grid = "App/Templates/Grids/grid_audit.php";
-$gridHeader = array ("Nama Kegiatan", "Obyek Audit", "Tipe Audit", "Rencana Kegiatan", "Tim Audit", "Status");
-$gridDetail = array ("3","0", "1", "0", "0", "2");
-$gridWidth = array ("15", "20", "10", "15", "5", "10");
+$gridHeader = array ("Nama Kegiatan", "Obyek Audit", "Tipe Audit", "Rencana Mulai Penugasan", "Rencana Penerbitan Laporan", "Tim Audit", "Status");
+$gridDetail = array ("3","0", "1", "0", "0", "0", "2");
+$gridWidth = array ("15", "20", "10", "10",  "10", "5", "10");
 
 $key_by = array ("Nama Kegiatan");
 $key_field = array ("audit_plan_kegiatan");

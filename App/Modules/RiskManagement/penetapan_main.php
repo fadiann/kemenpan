@@ -52,7 +52,7 @@ $grid = "App/Templates/Grids/grid_risiko.php";
 // $gridDetail = array ("auditee_name", "penetapan_tahun", "penetapan_id", "penetapan_profil_risk", "penetapan_profil_risk_residu", "penetapan_id");
 // $gridWidth = array ("30", "8", "9", "9", "9", "10");
 
-$gridHeader = array ("Satuan Kerja", "Tahun", "Identifikasi", "Analisis", "Keputusan Penanganan");
+$gridHeader = array ("Satuan Kerja", "Tahun", "Identifikasi", "Analisis dan Evaluasi", "Rencana Tindak Pengendalian");
 $gridDetail = array ("auditee_name", "penetapan_tahun", "penetapan_id", "penetapan_profil_risk", "penetapan_id");
 $gridWidth = array ("30", "8", "9", "9", "9", "10");
 
@@ -101,10 +101,11 @@ switch ($_action) {
 		$page_title = "Ubah Penetapan Tujuan";
 		break;
 	case "getdetail" :
-		$_nextaction = "poststatus";
-		$page_request = $acc_page_request_detil;
-		$ses_penetapan_id = $Helper->replacetext ( $_REQUEST ["data_id"] );
-		$page_title = "Detail Risiko";
+		$_nextaction      = "poststatus";
+		$page_request     = $acc_page_request_detil;
+		$ses_penetapan_id = $Helper->replacetext($_REQUEST ["data_id"]);
+		$page_title       = "Detail Risiko";
+		$rs_identifikasi  = $risks->identifikasi_sasaran_viewlist($ses_penetapan_id);
 		break;
 	case "postadd" :
 		$fsatker = $Helper->replacetext ( $_POST ["satker"] );

@@ -3,6 +3,8 @@
 <!-- <link rel="stylesheet" href="Public/css/jquery.ui.datepicker.css"> -->
 <link rel="stylesheet" href="Public/js/select2/select2.css" type="text/css" />
 
+<!-- <script src="Public/js/jquery-ui.js"></script> -->
+
 
 <div class="row">
 	<div class="col-md-12">
@@ -25,14 +27,14 @@
 			<fieldset class="form-group">
 				
 				<label class="col-sm-3 control-label">Objek Audit</label>
-				<div class="col-md-6">
+				<div class="col-md-8">
 				<table id="tabel_auditee" class="table table-borderless" width="100%">
 					<tbody>
 						<tr id="1">
 							<td align="center">1.</td>
-							<td><?=$Helper->dbComboPerencanaan("auditee_id[]", "auditee", "auditee_id", "auditee_name", "and auditee_del_st = 1 ", "", "", 1)?>
+							<td width="70%"><?=$Helper->dbComboPerencanaan("auditee_id[]", "auditee", "auditee_id", "auditee_name", "and auditee_del_st = 1 ", "", "", 1)?>
 							</td>
-							<td><input class="form-control" type="number" name="jml_hari[]" size="4" placeholder="jumlah hari"></td>
+							<td><input class="form-control" type="number" name="jml_hari[]" size="5" placeholder="jumlah hari"></td>
 							<td>
 							<button id="tambah_auditee" class="btn btn-primary btn-circle"><i class="fa fa-plus-circle"></i></button>
 							</td>
@@ -225,7 +227,7 @@
 			<fieldset class="form-group">
 				<label class="col-sm-3 control-label">Rencana Mulai Penugasan <span class="required">*</span></label> 
 					<div class="col-sm-2">
-				<input type="text" class="form-control" name="tanggal_awal" id="tanggal_awal" value="<?=$Helper->dateIndo($arr['audit_plan_start_date'])?>" autocomplete="off"> 
+				<input type="text" class="form-control" name="tanggal_awal" id="tanggal_awal" value="<?=$Helper->dateIndo($arr['audit_plan_start_date'])?>" autocomplete="off"> <?=$Helper->dateIndo($arr['audit_plan_start_date'])?>
 					</div>
 			</fieldset>
 			<fieldset class="form-group">
@@ -448,24 +450,16 @@ $(document).ready(function() {
 	});  
 
 	$("#tanggal_awal").datepicker({
-  		dateFormat: "yy-mm-dd",
-		nextText: "",
-		prevText: "",
-		changeYear: true,
-		changeMonth: true,                
-		viewMode: "months",
-		minViewMode: "months",
-		autoClose: true
-	});  
-	$("#tanggal_akhir").datepicker({
-		dateFormat: 'mm-yy',
+		format: 'dd-mm-yyyy',
 		 nextText: "",
 		 prevText: "",
-		 changeYear: true,
-		 changeMonth: true,                
-		 viewMode: "months",
-                minViewMode: "months",
-                autoClose: true
+        autoClose: true
+	});  
+	$("#tanggal_akhir").datepicker({
+		format: 'dd-mm-yyyy',
+		 nextText: "",
+		 prevText: "",
+        autoClose: true
 	});  
 	$("#biaya_audit").maskMoney({precision: 0});
 	
@@ -538,7 +532,6 @@ function propinsiOnChange(objValue, cmbNext){
 }
 </script>
 
-<script src="Public/js/jquery-ui.js"></script>
 <script type="text/javascript" src="Public/js/jquery.validate.min.js"></script>
 <script type="text/javascript" src="Public/js/select2/select2.min.js"></script>
 <script type="text/javascript" src="Public/ckeditor/ckeditor.js"></script>

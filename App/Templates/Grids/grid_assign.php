@@ -125,21 +125,21 @@
 		<td align="center">
 					<?
 				if($arr['assign_status']==2 || $arr['assign_status']==3){
-					if($arr ['lha_status']==0){
+					if($arr ['status']==0){
 						echo "Belum Diajukan";
-					} else if($arr ['lha_status']==1){
+					} else if($arr ['status']==1){
 						echo "Sudah Diajukan Katim, Sedang Direviu Oleh Pengendali Teknis";
-					} else if($arr ['lha_status']==2){
-						echo "Sudah Diajukan Pengendali Teknis, Sedang Direviu Oleh Pengendali Mutu";
-					} else if($arr ['lha_status']==3){
-						echo "Sudah Diajukan Penggendali Mutu, Sedang Direviu Oleh Inspektur";
-					} else if($arr ['lha_status']==4){
+					} else if($arr ['status']==2){
+						echo "Sudah Diajukan Pengendali Teknis, Sedang Direviu Oleh Pengendali Inspektur";
+					} else if($arr ['status']==3){
+						echo "Sudah Diajukan Pengendali Teknis, Sedang Direviu Oleh Inspektur";
+					} else if($arr ['status']==4){
 						echo "Telah Disetujui Inspektur";
-					} else if($arr ['lha_status']==5){
+					} else if($arr ['status']==5){
 						echo "Ditolak oleh Pengendali Teknis";
-					} else if($arr ['lha_status']==6){
+					} else if($arr ['status']==6){
 						echo "Ditolak oleh Pengendali Mutu";
-					} else if($arr ['lha_status']==7){
+					} else if($arr ['status']==7){
 						echo "Ditolak oleh Inspektur";
 					}
 

@@ -31,7 +31,7 @@ switch ($_action) {
 	case "getadd" :
 		$_nextaction = "postadd";
 		$page_request = $acc_page_request;
-		$page_title = "Penanganan Risiko";
+		$page_title = "Rencana Tindak Pengendalian";
 		break;
 	case "postadd" :
 		$no = 0;
@@ -43,24 +43,24 @@ switch ($_action) {
 			while ( $arr_iden = $rs_iden->FetchRow () ) {
 				$no ++;
 				$pil_penanganan = $Helper->replacetext ( $_POST ["pil_penanganan_$no"] );
-				$penanganan = $Helper->replacetext ( $_POST ["penanganan_$no"] );
-				$date = $Helper->date_db ( $Helper->replacetext ( $_POST ["date_$no"] ) );
-				$pic_id = $Helper->replacetext ( $_POST ["pic_$no"] );
-				$rs_cek = $params->risk_penanganan_data_viewlist ( $pil_penanganan );
-				$arr_cek = $rs_cek->fetchRow ();
+				$penanganan     = $Helper->replacetext ( $_POST ["penanganan_$no"] );
+				$date           = $Helper->date_db ( $Helper->replacetext ( $_POST ["date_$no"] ) );
+				$pic_id         = $Helper->replacetext ( $_POST ["pic_$no"] );
+				$rs_cek         = $params->risk_penanganan_data_viewlist ( $pil_penanganan );
+				$arr_cek        = $rs_cek->fetchRow ();
 				$cek_penanganan = $arr_cek ['risk_penanganan_status'];
-				if ($cek_penanganan != 1) {
-					$penanganan = "";
-					$date = "";
-					$pic_id = "";
-				}
+				// var_dump($_POST);
+				// die();
+				// if ($cek_penanganan != 1) {
+				// 	$penanganan = "";
+				// 	$date       = "";
+				// 	$pic_id     = "";
+				// }
 				$risks->update_penanganan ( $arr_iden ['identifikasi_id'], $pil_penanganan, $penanganan, $date, $pic_id );
 			}
 		}
 		$Helper->js_alert_act ( 3 );
-		?>
-<script>window.open('<?=$def_page_request?>', '_self');</script>
-<?
+		echo "<script>window.open('main.php?method=risk_penanganan&data_action=getadd', '_self');</script>";
 		$page_request = "blank.php";
 		break;
 }

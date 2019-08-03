@@ -38,6 +38,25 @@ class dashboard
         $arr  = $data->FetchRow();
         return $arr[0];
     }
+    public function dashboard_non_assign_count($year="", $tipe_audit = "")
+    {
+        $condition = "";
+        if ($year != "") {
+            $condition .= " and assign_tahun = '" . $year . "'";
+        }
+        if ($tipe_audit != "") {
+            $condition .= " and audit_type_id = '" . $tipe_audit . "'";
+        }
+
+        $sql = "select count(distinct assign_id) FROM assignment
+                left join assignment_auditor on assign_id = assign_auditor_id_assign
+                left join assignment_lha on assign_id = lha_id_assign
+                left join par_audit_type on assign_tipe_id = audit_type_id
+                where 1=1 AND assign_id_plan = '' " . $condition;
+        $data = $this->_db->_dbquery($sql);
+        $arr  = $data->FetchRow();
+        return $arr[0];
+    }
 
     public function dashboard_plan_count($year="", $tipe_audit = "")
     {
@@ -70,7 +89,7 @@ class dashboard
         if ($status != "") {
             $condition .= " and tl_status = '" . $status . "'";
         }
-        $sql = "select DISTINCT auditee_id, concat(auditee_kode,'-',auditee_name) as auditee_title, auditee_name
+        $sql = "select DISTINCT auditee_id, concat(auditee_kode) as auditee_title, auditee_name
                 FROM auditee
                 left join finding_internal on finding_auditee_id = auditee_id
                 left join assignment on assign_id = finding_assign_id
@@ -104,7 +123,7 @@ class dashboard
     public function get_auditor()
     {
         $sql = "select DISTINCT auditor_id, auditor_name
-                FROM auditor";
+                FROM auditor WHERE auditor_del_st = '1'";
         $data = $this->_db->_dbquery($sql);
         return $data;
     }
@@ -487,5 +506,43 @@ class dashboard
         // echo $sql;
         $arr = $data->FetchRow();
         return $arr[0];
+    }
+    public function rekap_penugasan_by_auditor($auditor_id, $tahun)
+    {
+        $sql = "SELECT `assignment`.`assign_id`, assignment.`assign_tahun`, assignment.`assign_end_date`, 
+                assignment.`assign_kegiatan`, auditee.`auditee_name`, par_audit_type.`audit_type_name`, 
+                auditor.`auditor_id`, auditor.`auditor_name`, ref_program_audit.`ref_program_title`, program_audit.`program_status`, program_audit.`program_id` FROM `assignment`
+                INNER JOIN assignment_auditee ON assignment.`assign_id` = assignment_auditee.`assign_auditee_id_assign`
+                INNER JOIN auditee ON assignment_auditee.`assign_auditee_id_auditee` = auditee.`auditee_id`
+                INNER JOIN par_audit_type ON assignment.`assign_tipe_id` = par_audit_type.`audit_type_id`
+                INNER JOIN program_audit ON assignment.`assign_id` = program_audit.`program_id_assign`
+                INNER JOIN ref_program_audit ON program_audit.`program_id_ref` = ref_program_audit.`ref_program_id`
+                INNER JOIN auditor ON program_audit.`program_id_auditor` = auditor.`auditor_id`
+                WHERE assignment.`assign_tahun` = '$tahun' AND program_audit.`program_id_auditor` = '$auditor_id' ORDER BY assignment.`assign_end_date` DESC";
+        // echo $sql;
+        $data = $this->_db->_dbquery($sql);
+        return $data;
+    }
+    public function rekap_kka_by_pka($pka_id)
+    {
+		$sql = "select kertas_kerja_id, kertas_kerja_desc, kertas_kerja_no, kertas_kerja_kesimpulan, kertas_kerja_date, kertas_kerja_attach, auditee_name, auditee_id, ref_program_title, kertas_kerja_id_program, ref_program_code, create_by.auditor_name as create_name, kerja_kerja_created_date, approve_by.auditor_name as approve_name, kertas_kerja_approve_date, assign_tahun, kertas_kerja_status
+				FROM kertas_kerja 
+				join program_audit on kertas_kerja_id_program = program_id
+				join assignment on program_id_assign = assign_id
+				left join auditee on program_id_auditee = auditee_id
+				left join ref_program_audit on program_id_ref = ref_program_id
+				left join auditor as create_by on kertas_kerja_created_by = create_by.auditor_id
+				left join auditor as approve_by on kertas_kerja_approve_by = approve_by.auditor_id
+				where kertas_kerja_id_program = '" . $pka_id . "' ";
+		$data = $this->_db->_dbquery ( $sql );
+		return $data;
+    }
+    public function rekap_finding_by_kka($kka_id)
+    {
+		$sql = "SELECT finding_status FROM finding_internal 
+                INNER JOIN kertas_kerja ON finding_internal.`finding_kka_id` = kertas_kerja.`kertas_kerja_id`
+				where kertas_kerja.`kertas_kerja_id` = '" . $kka_id . "' ";
+		$data = $this->_db->_dbquery ( $sql );
+		return $data;
     }
 }

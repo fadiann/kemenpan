@@ -20,7 +20,7 @@
             $i++;
     ?>
             <tr>
-                <td><?= $i + $offset ?>.</td>
+                <td class="text-center"><?= $i + $offset ?>.</td>
 
                 <?php for ($j = 0; $j < count($gridDetail); $j++) : ?>
 
@@ -35,7 +35,7 @@
                     <?php endif ?>
 
                 <?php endfor; ?>
-                <td>
+                <td class="text-center">
                     <?php if ($iconDetail) : ?>
                         <button class="btn btn-info btn-circle btn-sm" title="Rincian Data" Onclick="return set_action('getdetail', '<?=$arr[0]?>')"><i class="fa fa-info-circle"></i></button>
                     <?php endif ?>

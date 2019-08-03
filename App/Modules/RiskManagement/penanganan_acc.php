@@ -11,89 +11,81 @@
 				<h2 class="panel-title"><?=$page_title?></h2>
 			</header>
 			<div class="panel-body wrap">
-		<form method="post" name="f" action="#" class="form-horizontal">
-		<?
-		switch ($_action) {
-			case "getadd" :
-				?>
-		<table border='1' class="table table-bordered table-striped table-condensed mb-none" cellspacing='0' cellpadding="0">
-				<tr align="center">
-					<th width="2%" rowspan="2">No</th>
-					<th width="40%" colspan="5">Risiko Residu</th>
-					<th width="10%" rowspan="2">Pilihan<br>Penanganan<br>Risiko
-					</th>
-					<th width="48%" colspan="3">Penanganan Risiko</th>
-				</tr>
-				<tr align="center">
-					<th width="25">Kategori Risiko</th>
-					<th>No Risiko</th>
-					<th width="40">Nama Risiko</th>
-					<th>Selera Risiko</th>
-					<th>Nilai<br>Risiko<br>Residu</th>
-					<th width="15%">Mitigasi</th>
-					<th width="10%">Batas Waktu</th>
-					<th width="10%">Penanggung Jawab</th>
-				</tr>
-			<?php
-				$i = 0;
-				$no = 0;
-				$rs_kategori = $params->risk_kategori_data_viewlist ();
-				while ( $arr_kategori = $rs_kategori->FetchRow () ) {
-					$x = 0;
-					$rs_iden = $risks->list_identifikasi ( $arr_kategori ['risk_kategori_id'], $ses_penetapan_id );
-					$countKat = $rs_iden->RecordCount ();
-					while ( $arr_iden = $rs_iden->FetchRow () ) {
-						$x ++;
-						$no ++;
+				<form method="post" name="f" action="#" class="form-horizontal">
+				<?
+				switch ($_action) {
+					case "getadd" :
 						?>
-				<tr>
+				<table class="table table-bordered table-striped table-condensed mb-none">
+						<tr>
+							<th class="text-center" width="5%" rowspan="2">No</th>
+							<th class="text-center" width="35%" colspan="3">Hasil Analisis Risiko</th>
+							<th class="text-center" width="15%" rowspan="2">Pilihan<br>Penanganan<br>Risiko</th>
+							<th class="text-center" width="45%" colspan="3">Tindak Pengendalian</th>
+						</tr>
+						<tr>
+							<th class="text-center" width="15%">Kategori Risiko</th>
+							<th class="text-center" width="20%">Nama Risiko</th>
+							<!-- <th>Nilai<br>Risiko<br>Residu</th> -->
+							<th class="text-center" width="10%">Besaran Risiko</th>
+							<th class="text-center" width="20%">Mitigasi</th>
+							<th class="text-center" width="10%">Batas Waktu</th>
+							<th class="text-center" width="20%">Penanggung Jawab</th>
+						</tr>
 					<?php
-						if ($x == 1) {
-							$i ++;
-							?>
-					<td rowspan=<?=$countKat?>><?=$i?></td>
-					<td rowspan=<?=$countKat?>><?=$arr_iden['risk_kategori'];?></td>
+						$i = 0;
+						$no = 0;
+						$rs_kategori = $params->risk_kategori_data_viewlist ();
+						while ( $arr_kategori = $rs_kategori->FetchRow () ) {
+							$x = 0;
+							$rs_iden = $risks->list_identifikasi ( $arr_kategori ['risk_kategori_id'], $ses_penetapan_id );
+							$countKat = $rs_iden->RecordCount ();
+							while ( $arr_iden = $rs_iden->FetchRow () ) {
+								$x ++;
+								$no ++;
+								?>
+						<tr>
+							<?php
+									$i ++;
+									?>
+							<td class="text-center"><?=$i?>.</td>
+							<td><?=$arr_iden['risk_kategori'];?></td>
+							<td><?=$arr_iden['identifikasi_nama_risiko'];?></td>
+							<td class="text-center"><?= $arr_iden['analisa_ri'] ?></td>
+							<td align="center">
+							<?
+								$rs_td = $params->risk_penanganan_data_viewlist ();
+								$arr_td = $rs_td->GetArray ();
+								echo $Helper->buildCombo_risk ( "pil_penanganan_" . $no, $arr_td, 0, 1, $arr_iden ['penanganan_risiko_id'], "", false, true, false, "penanganan_risk" );
+								?>
+							</td>
+							<td align="center">
+								<textarea name="penanganan_<?=$no?>" rows="2" class="form-control"><?=$arr_iden['penanganan_plan']?></textarea>
+							</td>
+							<td align="center"><input type="text" class="form-control" name="date_<?=$no?>" id="date_<?=$no?>" value="<?=$Helper->dateIndo($arr_iden['penanganan_date'])?>"></td>
+							<td align="center">
+								<?//=$Helper->dbCombo("pic_".$no, "auditee_pic", "pic_id", "pic_name", "and pic_del_st = 1 and pic_auditee_id = '".$arr_iden['penetapan_auditee_id']."'", $arr_iden['penanganan_pic_id'], "cmb_risk", 1)?>
+								<input type="text" name="<?="pic_".$no?>" value="<?=$arr_iden['penanganan_pic_id']?>" class="form-control">
+							</td>
+						</tr>
 					<?php
+							}
 						}
 						?>
-					<td><?=$arr_iden['identifikasi_no_risiko'];?></td>
-					<td><?=$arr_iden['identifikasi_nama_risiko'];?></td>
-					<td><?=$arr_iden['identifikasi_selera'];?></td>
-					<td><?=$arr_iden['evaluasi_risiko_residu'];?></td>
-					<td align="center">
-					<?
-						$rs_td = $params->risk_penanganan_data_viewlist ();
-						$arr_td = $rs_td->GetArray ();
-						echo $Helper->buildCombo_risk ( "pil_penanganan_" . $no, $arr_td, 0, 1, $arr_iden ['penanganan_risiko_id'], "", false, true, false, "penanganan_risk" );
-						?>
-					</td>
-					<td align="center">
-						<textarea name="penanganan_<?=$no?>" rows="3" class="span9"><?=$arr_iden['penanganan_plan']?></textarea>
-					</td>
-					<td align="center"><input type="text" class="span9" name="date_<?=$no?>" id="date_<?=$no?>" value="<?=$Helper->dateIndo($arr_iden['penanganan_date'])?>"></td>
-					<td align="center">
-						<?//=$Helper->dbCombo("pic_".$no, "auditee_pic", "pic_id", "pic_name", "and pic_del_st = 1 and pic_auditee_id = '".$arr_iden['penetapan_auditee_id']."'", $arr_iden['penanganan_pic_id'], "cmb_risk", 1)?>
-						<input type="text" name="<?="pic_".$no?>" class="span9">
-					</td>
-				</tr>
-			<?php
-					}
+				</table>
+				<?
+						break;
 				}
 				?>
-		</table>
-		<?
-				break;
-		}
-		?>
-			<fieldset class="form-group mt-md">
-				<center>
-					<input type="button" class="btn btn-primary" value="Kembali" onclick="location='<?=$def_page_request?>'"> 
-					<input type="submit" class="btn btn-success" value="Simpan">
-				</center>
-				<input type="hidden" name="data_action" id="data_action"
-					value="<?=$_nextaction?>">
-			</fieldset>
-		</form>
+					<fieldset class="form-group mt-md">
+						<center>
+							<input type="button" class="btn btn-primary" value="Kembali" onclick="location='<?=$def_page_request?>'"> 
+							<input type="submit" class="btn btn-success" value="Simpan">
+						</center>
+						<input type="hidden" name="data_action" id="data_action"
+							value="<?=$_nextaction?>">
+					</fieldset>
+				</form>
 			</div>
 		</section>
 	</div>

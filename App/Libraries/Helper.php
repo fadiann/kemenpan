@@ -212,6 +212,56 @@ class Helper
         }
         return $cb;
     }
+    function tahunComboMulti($name, $id, $value = '')
+    {
+        $tahun = date('Y');
+        if($value == ''){
+            $cb    = "<select name=\"" . $name . "\" id='".$id."' class='form-control populate' required data-plugin-selectTwo>";
+            $cb   .= "<option value=''>--Tahun--</option>";
+            for ($x = 2010; $x <= $tahun + 1; $x++) {
+                $cb .= "<option value='" . $x . "'>" . $x . "</option>";
+            }
+            $cb .= "</select>";
+        }else{
+            $cb    = "<select name=\"" . $name . "\" id='".$id."' class='form-control populate' data-plugin-selectTwo>";
+            $cb   .= "<option value=''>--Tahun--</option>";
+            for ($x = 2010; $x <= $tahun + 1; $x++) {
+                if($x == $value){
+                    $selected = 'selected';
+                }else{
+                    $selected = '';
+                }
+                $cb .= "<option value='" . $x . "'".$selected.">" . $x . "</option>";
+            }
+            $cb .= "</select>";
+        }
+        return $cb;
+    }
+    function tahunComboMultiRequired($name, $id, $value = '')
+    {
+        $tahun = date('Y');
+        if($value == ''){
+            $cb    = "<select name=\"" . $name . "\" id='".$id."' class='form-control populate' data-plugin-selectTwo required>";
+            $cb   .= "<option value=''>-- Pilih Satu --</option>";
+            for ($x = 2010; $x <= $tahun + 1; $x++) {
+                $cb .= "<option value='" . $x . "'>" . $x . "</option>";
+            }
+            $cb .= "</select>";
+        }else{
+            $cb    = "<select name=\"" . $name . "\" id='".$id."' class='form-control populate' data-plugin-selectTwo>";
+            $cb   .= "<option value=''>--Tahun--</option>";
+            for ($x = 2010; $x <= $tahun + 1; $x++) {
+                if($x == $value){
+                    $selected = 'selected';
+                }else{
+                    $selected = '';
+                }
+                $cb .= "<option value='" . $x . "'".$selected.">" . $x . "</option>";
+            }
+            $cb .= "</select>";
+        }
+        return $cb;
+    }
 
     function dbCombo($nama, $table, $id, $show, $where, $def, $other, $lit = false, $orderby = "", $parrent = false, $all = false, $class = '')
     {
@@ -230,9 +280,48 @@ class Helper
         }
 
         $html = "";
-        $query = "select " . $id . ", " . $show . " from " . $table . " where 1=1 " . $where . $orderby;
-        $data = $this->db->_dbquery($query);
+        $query = "SELECT " . $id . ", " . $show . " FROM " . $table . " WHERE 1=1 " . $where . $orderby;
+		$data = $this->db->_dbquery($query);
+		//echo $query;
         $html .= "<select name=\"" . $nama . "\" id=\"" . $nama . "\" class=\"form-control " . $class . "\" style=\"padding-bottom: 10px !important;\" data-plugin-selectTwo>";
+        $html .= $combo;
+        $rs_count = $data->RecordCount();
+        if ($rs_count != 0) {
+            while ($rs = $data->FetchRow()) {
+                if ($rs[0] == $def) {
+                    $selected = " selected ";
+                } else {
+                    $selected = "";
+                }
+                $html .= "<option value=\"" . $rs[0] . "\" " . $selected . ">" . $rs[1] . "</option>";
+            }
+        } else {
+            $html .= "<option value=\"\" >No Record</option>";
+        }
+        $html .= "</select>";
+        return $html;
+    }
+    function dbComboRequired($nama, $table, $id, $show, $where, $def, $other, $lit = false, $orderby = "", $parrent = false, $all = false, $class = '')
+    {
+        $combo = "";
+
+        if ($lit) {
+            $combo .= "<option value=\"\">-- Pilih Satu --</option>\n";
+        }
+
+        if ($parrent) {
+            $combo .= "<option value=\"\">-- Parrent --</option>\n";
+        }
+
+        if ($all) {
+            $combo .= "<option value=\"\">-- All --</option>\n";
+        }
+
+        $html = "";
+        $query = "SELECT " . $id . ", " . $show . " FROM " . $table . " WHERE 1=1 " . $where . $orderby;
+		$data = $this->db->_dbquery($query);
+		//echo $query;
+        $html .= "<select name=\"" . $nama . "\" id=\"" . $nama . "\" class=\"form-control " . $class . "\" style=\"padding-bottom: 10px !important;\" data-plugin-selectTwo required>";
         $html .= $combo;
         $rs_count = $data->RecordCount();
         if ($rs_count != 0) {
@@ -368,6 +457,59 @@ class Helper
     {
         $combo = "";
         $combo .= "<select name=\"$objname\" id=\"$objname\" style=\"$style\"  class='form-control' onchange = \"return " . $action_onchange . "\">\n";
+        if ($use_none) {
+            $combo .= "<option value=\"\">==== Parent</option>\n";
+        }
+
+        if ($use_head) {
+            $combo .= "<option value=\"\">-- Pilih Satu --</option>\n";
+        }
+
+        if ($use_all) {
+            $combo .= "<option value=\"\">-- All --</option>\n";
+        }
+
+        foreach ($data as $row) {
+            if ($row[$col_id] == $selected_id) {
+                $combo .= "<option value=\"$row[$col_id]\" selected>$row[$col_show]</option>\n";
+            } else {
+                $combo .= "<option value=\"$row[$col_id]\">$row[$col_show]</option>\n";
+            }
+        }
+        $combo .= "</select>\n";
+        return $combo;
+    }
+
+    function buildComboAuditor($objname, $data, $col_id, $col_show, $selected_id = "", $action_onchange = "", $style = "", $use_none = false, $use_head = false, $use_all = false, $other = "")
+    {
+        $combo = "";
+        $combo .= "<select name=\"$objname\" id=\"$objname\" style=\"$style\"  class='form-control populate' onchange = \"return " . $action_onchange . "\" data-plugin-selectTwo>\n";
+        if ($use_none) {
+            $combo .= "<option value=\"\">==== Parent</option>\n";
+        }
+
+        if ($use_head) {
+            $combo .= "<option value=\"\">-- Pilih Satu --</option>\n";
+        }
+
+        if ($use_all) {
+            $combo .= "<option value=\"\">-- All --</option>\n";
+        }
+
+        foreach ($data as $row) {
+            if ($row[$col_id] == $selected_id) {
+                $combo .= "<option value=\"$row[$col_id]\" selected>$row[$col_show]</option>\n";
+            } else {
+                $combo .= "<option value=\"$row[$col_id]\">$row[$col_show]</option>\n";
+            }
+        }
+        $combo .= "</select>\n";
+        return $combo;
+    }
+    function buildComboAuditorRequired($objname, $data, $col_id, $col_show, $selected_id = "", $action_onchange = "", $style = "", $use_none = false, $use_head = false, $use_all = false, $other = "")
+    {
+        $combo = "";
+        $combo .= "<select name=\"$objname\" id=\"$objname\" style=\"$style\"  class='form-control populate' onchange = \"return " . $action_onchange . "\" data-plugin-selectTwo required>\n";
         if ($use_none) {
             $combo .= "<option value=\"\">==== Parent</option>\n";
         }
@@ -1210,6 +1352,11 @@ class Helper
         $data   = $this->filter($_POST[$name]);
         return $data;
     }
+    public function getData($name)
+    {
+        $data   = $this->filter($_GET[$name]);
+        return $data;
+    }
     function unixid()
     {
         $a = sha1(microtime());
@@ -1253,6 +1400,49 @@ class Helper
             }
         }
         return $nilaiRisiko;
+    }
+    public function bulanTahun($date){
+        $tanggal = explode(" ", $date);
+        $out     = $tanggal[1]."-".$tanggal[2];
+        return $out;
+    }
+    public function jumlahHari($nilai) {
+        $huruf = array("", "Satu", "Dua", "Tiga", "Empat", "Lima", "Enam", "Tujuh", "Delapan", "Sembilan", "Sepuluh", "Sebelas");
+        if($nilai==0){
+            return "Kosong";
+        }elseif ($nilai < 12&$nilai!=0) {
+            return "" . $huruf[$nilai];
+        } elseif ($nilai < 20) {
+            return $this->jumlahHari($nilai - 10) . " Belas ";
+        } elseif ($nilai < 100) {
+            return $this->jumlahHari($nilai / 10) . " Puluh " . $this->jumlahHari($nilai % 10);
+        } elseif ($nilai < 200) {
+            return " Seratus " . $this->jumlahHari($nilai - 100);
+        } elseif ($nilai < 1000) {
+            return $this->jumlahHari($nilai / 100) . " Ratus " . $this->jumlahHari($nilai % 100);
+        } elseif ($nilai < 2000) {
+            return " Seribu " . $this->jumlahHari($nilai - 1000);
+        } elseif ($nilai < 1000000) {
+            return $this->jumlahHari($nilai / 1000) . " Ribu " . $this->jumlahHari($nilai % 1000);
+        } elseif ($nilai < 1000000000) {
+            return $this->jumlahHari($nilai / 1000000) . " Juta " . $this->jumlahHari($nilai % 1000000);
+        }elseif ($nilai < 1000000000000) {
+            return $this->jumlahHari($nilai / 1000000000) . " Milyar " . $this->jumlahHari($nilai % 1000000000);
+        }elseif ($nilai < 100000000000000) {
+            return $this->jumlahHari($nilai / 1000000000000) . " Trilyun " . $this->jumlahHari($nilai % 1000000000000);
+        }elseif ($nilai <= 100000000000000) {
+            return "Maaf Tidak Dapat di Prose Karena Jumlah nilai Terlalu Besar ";
+        }
+    }
+    function filterCk($data) {
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+        return $data;
+    }
+    function showHtml($data) {
+        $data = htmlspecialchars_decode(htmlspecialchars_decode($data));
+        return $data;
     }
 }
 ?>

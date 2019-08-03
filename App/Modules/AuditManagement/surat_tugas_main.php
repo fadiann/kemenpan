@@ -66,11 +66,11 @@ $arr_assign = $rs_assign->FetchRow();
 
 switch ($_action) {
 	case "viewsurattugas" :
-		$_nextaction = "postkomentar";
+		$_nextaction  = "postkomentar";
 		$page_request = $surat_page_request;
-		$fdata_id = $Helper->replacetext ( $_REQUEST ["data_id"] );
-		$rs = $assigns->surat_assign_viewlist ( $fdata_id );
-		$page_title = "SURAT TUGAS";
+		$fdata_id     = $Helper->replacetext ( $_REQUEST ["data_id"] );
+		$rs           = $assigns->surat_assign_viewlist ( $fdata_id );
+		$page_title   = "SURAT TUGAS";
 		break;
 	case "getadd" :
 		$_nextaction = "postadd";

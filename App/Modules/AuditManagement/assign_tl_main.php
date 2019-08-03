@@ -52,9 +52,9 @@ $offset = ($noPage - 1) * $num_row;
 
 $def_page_request = $paging_request . "&page=$noPage";
 $grid = "App/Templates/Grids/grid_monitoring.php";
-$gridHeader = array ("Obyek Audit", "No & Tanggal SPT", "Tahun", "Upload Data Awal", "Temuan Audit", "Matriks TL");
-$gridDetail = array ("0", "5", "4", "0", "0", "0");
-$gridWidth = array ("35", "15", "10", "10", "10", "10");
+$gridHeader = array ("Nama Kegiatan", "Obyek Audit", "No & Tanggal SPT", "Tahun", "Upload Data Awal", "Temuan Audit", "Matriks TL");
+$gridDetail = array ("0", "0", "5", "4", "0", "0", "0");
+$gridWidth = array ("35", "35", "15", "10", "10", "10", "10");
 
 $key_by = array ("Tahun");
 $key_field = array ("assign_tahun");

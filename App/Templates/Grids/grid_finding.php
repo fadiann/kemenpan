@@ -47,7 +47,7 @@
 				} else if ($gridHeader [$j] == "Status") {
 					?>
 		<td>
-	<?
+					<?php
 					if ($arr ['finding_status'] == 1) {
 						echo "Sedang direviu Katim";
 					} elseif ($arr ['finding_status'] == 2) {

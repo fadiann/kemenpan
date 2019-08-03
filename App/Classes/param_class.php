@@ -924,6 +924,14 @@ class param {
 		$data = $this->_db->_dbquery ( $sql );
 		return $data;
 	}
+	function risk_kategori_data_viewlist_bySasaran($id = "") {
+		$condition = "";
+		if ($id != "")
+			$condition = " and risk_kategori_id = '".$id."'";
+		$sql = "select risk_kategori_id, risk_kategori FROM par_risk_kategori where 1=1 ".$condition;
+		$data = $this->_db->_dbquery ( $sql );
+		return $data;
+	}
 	function cek_nama_risk_kategori($nama, $data_id = "") {
 		$condition = "";
 		if ($data_id != "")
@@ -1742,6 +1750,7 @@ class param {
 				(select count(*) from par_menu where menu_parrent = a.menu_id and menu_del_st=1) as jml_sub
 				FROM par_menu as a
 				where a.menu_parrent = '".$parrent."' and a.menu_del_st = '1' order by a.menu_sort LIMIT $offset, $num_row";
+		// echo $sql;
 		$data = $this->_db->_dbquery ( $sql );
 		return $data;
 	}

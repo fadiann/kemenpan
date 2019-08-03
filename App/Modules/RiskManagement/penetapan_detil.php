@@ -6,148 +6,200 @@ include "risk_view_parrent.php";
 	<div class="col-md-12">
 		<section class="panel">
 			<header class="panel-heading">
-				<h2 class="panel-title">ANALISIS RISIKO</h2>
+				<h2 class="panel-title">IDENTIFIKASI RISIKO</h2>
 			</header>
 			<div class="panel-body wrap">
-		<table border='1' class="table table-bordered table-striped table-condensed mb-none" cellspacing='0' cellpadding="0">
-			<tr align="center">
-				<th width="2%" rowspan="2">No</th>
-				<th width="47%" colspan="5">Identifikasi Risiko</th>
-				<th width="47%" colspan="6">Risiko Inheren</th>
-			</tr>
-			<tr align="center">
-				<th>Kategori Risiko</th>
-				<th>No Risiko</th>
-				<th>Nama Risiko</th>
-				<th>Faktor <br>Penyebab Risiko
-				</th>
-				<th>Selera Risiko</th>
-				<th>TK</th>
-				<th>TD</th>
-				<th>&nbsp;&nbsp;&nbsp;&nbsp;RI&nbsp;&nbsp;&nbsp;&nbsp;</th>
-				<th>Bobot<br>Risiko
-				</th>
-				<th>Nilai<br>Risiko<br>Inhern
-				</th>
-				<th>Bobot<br>Kategori<br>Risiko
-				</th>
-			</tr>
-	<?php
-	$i = 0;
-	$no = 0;
-	$rs_kategori = $params->risk_kategori_data_viewlist ();
-	while ( $arr_kategori = $rs_kategori->FetchRow () ) {
-		$x = 0;
-		$rs_iden = $risks->list_identifikasi ( $arr_kategori ['risk_kategori_id'], $ses_penetapan_id );
-		$countKat = $rs_iden->RecordCount ();
-		while ( $arr_iden = $rs_iden->FetchRow () ) {
-			$x ++;
-			$no ++;
-			$rs_val_ri = $risks->cek_range_ri ( $arr_iden ['analisa_ri'] );
-			$get_val_ri = $rs_val_ri->FetchRow ();
-			?>
-		<input type="hidden" name="indentifikasi_id"
-				value="<?=$arr_iden['identifikasi_id'];?>">
-			<tr>
-			<?php
-			if ($x == 1) {
-				$i ++;
-				?>
-			<td rowspan=<?=$countKat?>><?=$i?></td>
-				<td rowspan=<?=$countKat?>><?=$arr_iden['risk_kategori'];?></td>
-			<?php
-			}
-			?>
-			<td><?=$arr_iden['identifikasi_no_risiko'];?></td>
-				<td><?=$arr_iden['identifikasi_nama_risiko'];?></td>
-				<td><?=$arr_iden['identifikasi_penyebab'];?></td>
-				<td><?=$arr_iden['identifikasi_selera'];?></td>
-				<td><?=$arr_iden['analisa_kemungkinan_name'];?> (<?=$arr_iden['analisa_kemungkinan'];?>)</td>
-				<td><?=$arr_iden['analisa_dampak_name'];?> (<?=$arr_iden['analisa_dampak'];?>)</td>
-				<td align="center"><label class="ri"><?=$get_val_ri['ri_name']?> (<?=$arr_iden['analisa_ri']?>)</label></td>
-				<td align="center"><?=$arr_iden['analisa_bobot_risk']?> %</td>
-				<td align="center"><label class="nilai_inhern"><?=$arr_iden['analisa_nilai_ri']?></label></td>	
-			<?php
-			if ($x == 1) {
-				?>			
-			<td align="center" rowspan=<?=$countKat?>><?=$arr_iden['analisa_bobot_kat_risk']?> %</td>
-			<?php
-			}
-			?>
-		</tr>
-	<?php
-		}
-	}
-	?>
-</table>
+				<table class="table table-bordered table-striped table-condensed mb-none">
+					<tr>
+						<th width="2%" rowspan="2" class="text-center">No.</th>
+						<th width="15%" rowspan="2" class="text-center">Sasaran Organisasi</th>
+						<th width="10%" colspan="2" class="text-center">Indikator Kinerja</th>
+						<th width="20%" colspan="4" class="text-center">Identifikasi Risiko</th>
+						<th width="10%" rowspan="2" class="text-center">Kategori Risiko</th>
+					</tr>
+					<tr>
+						<th width="2%" class="text-center">No.</th>
+						<th width="10%" class="text-center">Indikator Kinerja</th>
+						<th class="text-center">No.</th>
+						<th width="20%" class="text-center">Kejadian Risiko</th>
+						<th width="20%" class="text-center">Penyebab Risiko</th>
+						<th width="20%" class="text-center">Dampak Risiko</th>
+					</tr>
+					<?php
+						$x = 0;
+						$y = 0;
+						$rs_identifikasi  = $risks->identifikasi_sasaran_viewlist($ses_penetapan_id);
+						foreach($rs_identifikasi as $row_sasaran):
+							$x++;
+							$rowspan_sasaran = $risks->rowspanSasaran($row_sasaran['identifikasi_sasaran_id']);
+							$rs_indikator    = $risks->indikator_view_bySasaran($row_sasaran['identifikasi_sasaran_id']);
+							$count_indikator = $rs_indikator->recordCount();
+							$jumlah_indikator = $risks->cek_jumlah_indikator($row_sasaran['identifikasi_sasaran_id']);
+							//$cek_jumlah_indikator = $risks->cek_jumlah_indikator($row_sasaran['identifikasi_sasaran_id']);
+							if($rowspan_sasaran == 0){
+								$jumlah_indikator = $risks->cek_jumlah_indikator($row_sasaran['identifikasi_sasaran_id']);
+								if($jumlah_indikator != 0){
+									$rowspan_sasaran = $jumlah_indikator;
+								}else{
+									$rowspan_sasaran = 1;
+								}
+							}
+						?>
+						<tr>
+							<td class="text-center" rowspan="<?=$rowspan_sasaran?>"><?=$x?>.</td>
+							<td rowspan="<?=$rowspan_sasaran?>">
+								<?=$row_sasaran['identifikasi_sasaran']?>
+							</td>
+							<?php
+							$no_indikator = 0;
+							foreach($rs_indikator as $row_indikator):
+								$rowspan_indikator  = $risks->rowspanIndikator($row_indikator['identifikasi_indikator_id']);
+								$rs_identifikasi    = $risks->identifikasi_view_byIndikator($row_indikator['identifikasi_indikator_id']);
+								$count_identifikasi = $rs_identifikasi->recordCount();
+								if($rowspan_indikator == 0){
+									$rowspan_indikator = 1;
+								}
+								$no_indikator++;
+							?>
+								<td rowspan="<?=$rowspan_indikator?>" class="text-center">
+									<?=$no_indikator?>
+								</td>
+								<td rowspan="<?=$rowspan_indikator?>">
+									<?=$row_indikator['identifikasi_indikator_name']?>
+								</td>
+									<?php 
+									$no_risiko = 0;
+									foreach($rs_identifikasi as $row_identifikasi):
+										$y++;
+										$no_risiko++;
+									?>	
+										<td width="3%" class="text-center"><?=$no_risiko?>.</td>
+										<td>
+											<?=$row_identifikasi['identifikasi_nama_risiko']?>
+										</td>
+										<td><?=$row_identifikasi['identifikasi_penyebab']?></td>
+										<td><?=$row_identifikasi['identifikasi_dampak']?></td>
+										<td><?=$row_identifikasi['risk_kategori']?></td>
+										</tr>
+									<?php endforeach ?>
+								</tr>
+							<?php endforeach ?>
+						<?php endforeach ?>
+					</table>
 			</div>
 		</section>
 		<section class="panel">
 			<header class="panel-heading">
-				<h2 class="panel-title">EVALUASI RISIKO</h2>
+				<h2 class="panel-title">ANALISIS DAN EVALUASI</h2>
 			</header>
 			<div class="panel-body wrap">
-		<table border='1' class="table table-bordered table-striped table-condensed mb-none" cellspacing='0' cellpadding="0">
-			<tr align="center">
-				<th width="2%" rowspan="2">No</th>
-				<th width="58%" colspan="7">Risiko Inhern</th>
-				<th width="30%" colspan="2">Pengendalian Internal</th>
-				<th width="6%" rowspan="2">Risiko Residu</th>
-			</tr>
-			<tr align="center">
-				<th>Kategori Risiko</th>
-				<th>Bobot<br>Kategori<br>Risiko
-				</th>
-				<th>No Risiko</th>
-				<th>Nama Risiko</th>
-				<th>Selera Risiko</th>
-				<th>RI</th>
-				<th>Bobot<br>Risiko
-				</th>
-				<th>Komponen<br> Pengendalian
-				</th>
-				<th>Efektifitas<br>Pengendalian
-				</th>
-			</tr>
-	<?php
-	$i = 0;
-	$no = 0;
-	$rs_kategori = $params->risk_kategori_data_viewlist ();
-	while ( $arr_kategori = $rs_kategori->FetchRow () ) {
-		$x = 0;
-		$rs_iden = $risks->list_identifikasi ( $arr_kategori ['risk_kategori_id'], $ses_penetapan_id );
-		$countKat = $rs_iden->RecordCount ();
-		while ( $arr_iden = $rs_iden->FetchRow () ) {
-			$x ++;
-			$no ++;
-			$rs_val_ri = $risks->cek_range_ri ( $arr_iden ['analisa_ri'] );
-			$get_val_ri = $rs_val_ri->FetchRow ();
-			?>
-		<tr>
-			<?php
-			if ($x == 1) {
-				$i ++;
-				?>
-			<td rowspan=<?=$countKat?>><?=$i?></td>
-				<td rowspan=<?=$countKat?>><?=$arr_iden['risk_kategori'];?></td>
-				<td rowspan=<?=$countKat?>><?=$arr_iden['analisa_bobot_kat_risk'];?> (%)</td>
-			<?php
-			}
-			?>
-			<td><?=$arr_iden['identifikasi_no_risiko'];?></td>
-				<td><?=$arr_iden['identifikasi_nama_risiko'];?></td>
-				<td><?=$arr_iden['identifikasi_selera'];?></td>
-				<td><label class="label_ri"><?=$get_val_ri['ri_name'];?> (<?=$get_val_ri['ri_value'];?>)</label></td>
-				<td><?=$arr_iden['analisa_bobot_risk'];?> %</td>
-				<td><?=$arr_iden['evaluasi_komponen'];?></td>
-				<td><?=$arr_iden['evaluasi_efektifitas_name'];?> (<?=$arr_iden['evaluasi_efektifitas'];?>)</td>
-				<td><label class="rr"><?=$arr_iden['evaluasi_risiko_residu_name']?> (<?=$arr_iden['evaluasi_risiko_residu']?>)</label></td>
-			</tr>
-	<?php
-		}
-	}
-	?>
-</table>
+		
+				<table class="table table-bordered table-striped table-condensed mb-none">
+					<tr>
+						<th width="5%" rowspan="2" class="text-center">No.</th>
+						<th width="20%" colspan="3" class="text-center">Identifikasi Risiko</th>
+						<th width="10%" rowspan="2" class="text-center">Kategori Risiko</th>
+						<th width="10%" colspan="2" class="text-center">Analisis Dan Evaluasi</th>
+					</tr>
+					<tr>
+						<th width="20%" class="text-center">Kejadian Risiko</th>
+						<th width="20%" class="text-center">Penyebab Risiko</th>
+						<th width="20%" class="text-center">Dampak Risiko</th>
+						<th width="5%" class="text-center">Besaran Risiko</th>
+						<th width="20%" class="text-center">Level Risiko</th>
+					</tr>
+					<?php
+						$x = 0;
+						$y = 0;
+						$rs_analisis  = $risks->identifikasi_sasaran_viewlist($ses_penetapan_id);
+						foreach($rs_analisis as $row_analisis):
+							$x++;
+							$rowspan_sasaran = $risks->rowspanSasaran($row_analisis['identifikasi_sasaran_id']);
+							$rs_indikator    = $risks->indikator_view_bySasaran($row_analisis['identifikasi_sasaran_id']);
+							$count_indikator = $rs_indikator->recordCount();
+							$jumlah_indikator = $risks->cek_jumlah_indikator($row_analisis['identifikasi_sasaran_id']);
+							//$cek_jumlah_indikator = $risks->cek_jumlah_indikator($row_sasaran['identifikasi_sasaran_id']);
+							if($rowspan_sasaran == 0){
+								$jumlah_indikator = $risks->cek_jumlah_indikator($row_analisis['identifikasi_sasaran_id']);
+								if($jumlah_indikator != 0){
+									$rowspan_sasaran = $jumlah_indikator;
+								}else{
+									$rowspan_sasaran = 1;
+								}
+							}
+						?>
+						<tr>
+							<?php
+							$no_indikator = 0;
+							foreach($rs_indikator as $row_indikator):
+								$rowspan_indikator  = $risks->rowspanIndikator($row_indikator['identifikasi_indikator_id']);
+								$rs_identifikasi    = $risks->identifikasi_view_byIndikator($row_indikator['identifikasi_indikator_id']);
+								$count_identifikasi = $rs_identifikasi->recordCount();
+								if($rowspan_indikator == 0){
+									$rowspan_indikator = 1;
+								}
+								$no_indikator++;
+							?>
+									<?php 
+									$no_risiko = 0;
+									foreach($rs_identifikasi as $row_identifikasi):
+										$y++;
+										$no_risiko++;
+									?>	
+										<td width="5%" class="text-center"><?=$x.".".$no_indikator.".".$no_risiko?>.</td>
+										<td>
+											<?=$row_identifikasi['identifikasi_nama_risiko']?>
+										</td>
+										<td><?=$row_identifikasi['identifikasi_penyebab']?></td>
+										<td><?=$row_identifikasi['identifikasi_dampak']?></td>
+										<td class="text-center"><?=$row_identifikasi['risk_kategori']?></td>
+
+										<td class="text-center"><?=$row_identifikasi['analisa_ri'] ?></td><?php
+										$risk_level = $row_identifikasi['analisa_ri'];
+										if ($risk_level == '' || $risk_level == 0) {
+											echo "<td align='center'>";
+											echo "<label class='levelrisk'>";
+											echo "Belum Terhitung";
+											echo "</label>";
+											echo "</td>";
+										} elseif ($risk_level > 0 && $risk_level <= 5) {
+											echo "<td align='center' style='background-color: blue; color: #FFFFFF'>";
+											echo "<label class='levelrisk'>";
+											echo "Sangat Rendah";
+											echo "</label>";
+											echo "</td>";
+										} elseif ($risk_level >= 6 && $risk_level <= 11) {
+											echo "<td align='center' style='background-color: green; color: #FFFFFF'>";
+											echo "<label class='levelrisk'>";
+											echo "Rendah";
+											echo "</label>";
+											echo "</td>";
+										} elseif ($risk_level >= 12 && $risk_level <= 15) {
+											echo "<td align='center' style='background-color: yellow; color: #FFFFFF'>";
+											echo "<label class='levelrisk'>";
+											echo "Sedang";
+											echo "</label>";
+											echo "</td>";
+										} elseif ($risk_level >= 16 && $risk_level <= 19) {
+											echo "<td align='center' style='background-color: orange; color: #FFFFFF'>";
+											echo "<label class='levelrisk'>";
+											echo "Tinggi";
+											echo "</label>";
+											echo "</td>";
+										} elseif ($risk_level >= 20 && $risk_level <= 25) {
+											echo "<td align='center' style='background-color: red; color: #FFFFFF'>";
+											echo "<label class='levelrisk'>";
+											echo "Sangat Tinggi";
+											echo "</label>";
+											echo "</td>";
+										}
+										?>
+										</tr>
+									<?php endforeach ?>
+								</tr>
+							<?php endforeach ?>
+						<?php endforeach ?>
+				</table>
 			</div>
 		</section>
 		<section class="panel">
@@ -155,69 +207,83 @@ include "risk_view_parrent.php";
 				<h2 class="panel-title">PENANGANAN RISIKO</h2>
 			</header>
 			<div class="panel-body wrap">
-		<table border='1' class="table table-bordered table-striped table-condensed mb-none" cellspacing='0' cellpadding="0">
-			<tr align="center">
-				<th width="2%" rowspan="2">No</th>
-				<th width="55%" colspan="5">Risiko Residu</th>
-				<th width="10%" rowspan="2">Pilihan<br>Penanganan<br>Risiko
-				</th>
-				<th width="33%" colspan="3">Penanganan Risiko</th>
-			</tr>
-			<tr align="center">
-				<th width="25">Kategori Risiko</th>
-				<th>No Risiko</th>
-				<th width="40">Nama Risiko</th>
-				<th>Selera Risiko</th>
-				<th>Nilai<br>Risiko<br>Residu
-				</th>
-				<th>Rencana<br>Aksi
-				</th>
-				<th>Rencana<br> Waktu
-				</th>
-				<th>Penanggung<br>Jawab
-				</th>
-			</tr>
-	<?php
-	$cek_penanganan = $risks->cek_penanganan($ses_penetapan_id);
-	$i = 0;
-	$no = 0;
-	$rs_kategori = $params->risk_kategori_data_viewlist ();
-	while ( $arr_kategori = $rs_kategori->FetchRow () ) {
-		$x = 0;
-		$rs_iden = $risks->list_identifikasi ( $arr_kategori ['risk_kategori_id'], $ses_penetapan_id );
-		$countKat = $rs_iden->RecordCount ();
-		while ( $arr_iden = $rs_iden->FetchRow () ) {
-			$x ++;
-			$no ++;
-			?>
-		<tr>
-			<?php
-			if ($x == 1) {
-				$i ++;
-				?>
-			<td rowspan=<?=$countKat?>><?=$i?></td>
-				<td rowspan=<?=$countKat?>><?=$arr_iden['risk_kategori'];?></td>
-			<?php
-			}
-			?>
-			<td><?=$arr_iden['identifikasi_no_risiko'];?></td>
-				<td><?=$arr_iden['identifikasi_nama_risiko'];?></td>
-				<td><?=$arr_iden['identifikasi_selera'];?></td>
-				<td><?=$arr_iden['evaluasi_risiko_residu_name'];?> (<?=$arr_iden['evaluasi_risiko_residu'];?>)</td>
-				<td><?=$arr_iden['risk_penanganan_jenis'];?></td>
-				<td><?=$arr_iden['penanganan_plan']?></td>
-				<td><?=$Helper->dateIndo($arr_iden['penanganan_date'])?></td>
-				<td><?=$arr_iden['pic_name']?></td>
-			</tr>
-	<?php
-		}
-	}
-	
-	
-	?>
-</table>
+			<table class="table table-bordered table-striped table-condensed mb-none">
+					<tr>
+						<th width="5%" rowspan="2" class="text-center">No.</th>
+						<th width="10%" rowspan="2" class="text-center">Kategori Risiko</th>
+						<th width="20%" colspan="2" class="text-center">Hasil Analisis Risiko</th>
+						<th width="10%" colspan="2" class="text-center">Tindak Pengendalian</th>
+					</tr>
+					<tr>
+						<th width="20%" class="text-center">Kejadian Risiko</th>
+						<th width="5%" class="text-center">Besaran Risiko</th>
+						<th width="20%" class="text-center">Penanganan</th>
+						<th width="20%" class="text-center">Mitigasi</th>
+					</tr>
+					<?php
+						$x = 0;
+						$y = 0;
+						$rs_penanganan  = $risks->identifikasi_sasaran_viewlist($ses_penetapan_id);
+						foreach($rs_penanganan as $row_penanganan):
+							$x++;
+							$rowspan_sasaran = $risks->rowspanSasaran($row_penanganan['identifikasi_sasaran_id']);
+							$rs_indikator    = $risks->indikator_view_bySasaran($row_penanganan['identifikasi_sasaran_id']);
+							$count_indikator = $rs_indikator->recordCount();
+							$jumlah_indikator = $risks->cek_jumlah_indikator($row_penanganan['identifikasi_sasaran_id']);
+							//$cek_jumlah_indikator = $risks->cek_jumlah_indikator($row_sasaran['identifikasi_sasaran_id']);
+							if($rowspan_sasaran == 0){
+								$jumlah_indikator = $risks->cek_jumlah_indikator($row_penanganan['identifikasi_sasaran_id']);
+								if($jumlah_indikator != 0){
+									$rowspan_sasaran = $jumlah_indikator;
+								}else{
+									$rowspan_sasaran = 1;
+								}
+							}
+						?>
+						<tr>
+							<?php
+							$no_indikator = 0;
+							foreach($rs_indikator as $row_indikator):
+								$rowspan_indikator  = $risks->rowspanIndikator($row_indikator['identifikasi_indikator_id']);
+								$rs_identifikasi    = $risks->identifikasi_view_byIndikator($row_indikator['identifikasi_indikator_id']);
+								$count_identifikasi = $rs_identifikasi->recordCount();
+								if($rowspan_indikator == 0){
+									$rowspan_indikator = 1;
+								}
+								$no_indikator++;
+							?>
+									<?php 
+									$no_risiko = 0;
+									foreach($rs_identifikasi as $row_identifikasi):
+										$y++;
+										$no_risiko++;
+									?>	
+										<td width="5%" class="text-center"><?=$x.".".$no_indikator.".".$no_risiko?>.</td>
+										<td><?=$row_identifikasi['risk_kategori']?></td>
+										<td>
+											<?=$row_identifikasi['identifikasi_nama_risiko']?>
+										</td>
+										<td class="text-center"><?=$row_identifikasi['analisa_ri'] ?></td>
+										<td class="text-center">
+											<?php
+											if($row_identifikasi['penanganan_risiko_id'] == ''){
+
+											}else{
+											?>
+											<?=$params->risk_penanganan_data_viewlist($row_identifikasi['penanganan_risiko_id'])->FetchRow()['risk_penanganan_jenis']?>
+											<?//=$row_identifikasi['penanganan_risiko_id'] ?>
+											<?php } ?>
+										</td>
+										<td class="text-center"><?=$row_identifikasi['penanganan_plan'] ?></td>
+										</tr>
+									<?php endforeach ?>
+								</tr>
+							<?php endforeach ?>
+						<?php endforeach ?>
+				</table>
 			</div>
 		</section>
+<?php /*
 <form method="post" name="f" action="#" class="form-horizontal" onsubmit="return cek_data()">
 <section class="panel">
 	<header class="panel-heading">
@@ -282,9 +348,11 @@ switch ($_action) {
 				<input type="hidden" name="data_action" id="data_action" value="<?=$_nextaction?>">
 			</fieldset>
 		</form>
+		*/ ?>
 	</article>
 	</div>
 </div>
+
 <script>
 function cek_data(){
 	var data = document.getElementById('status_risk').value;

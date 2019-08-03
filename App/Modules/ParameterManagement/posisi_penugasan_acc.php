@@ -1,9 +1,11 @@
 <script src="Public/js/jquery.validate.min.js" type="text/javascript"></script>
-<section id="main" class="column">
-	<article class="module width_3_quarter">
-		<header>
-			<h3 class="tabs_involved"><?=$page_title?></h3>
-		</header>
+<div class="row">
+	<div class="col-md-12">
+		<section class="panel">
+			<header class="panel-heading">
+				<h2 class="panel-title"><?=$page_title?></h2>
+			</header>
+			<div class="panel-body wrap">
 		<form method="post" name="f" action="#" class="form-horizontal"
 			id="validation-form">
 		<?
@@ -11,12 +13,14 @@
 			case "getadd" :
 				?>
 			<fieldset class="form-group">
-				<label class="col-sm-3 control-label">Posisi Penugasan</label> <input type="text"
-					class="span3" name="name" id="name">
+				<label class="col-sm-3 control-label">Posisi Penugasan</label> 
+				<div class="col-sm-5"><input type="text"
+					class="form-control" name="name" id="name"></div>
 			</fieldset>
 			<fieldset class="form-group">
-				<label class="col-sm-3 control-label">Urutan</label> <input type="text"
-					class="span7" name="sort" id="sort">
+				<label class="col-sm-3 control-label">Urutan</label> 
+				<div class="col-sm-5"><input type="number"
+					class="form-control" name="sort" id="sort"></div>
 			</fieldset>
 			<fieldset class="form-group">
 				<label class="span1">Hak Akses</label>
@@ -56,14 +60,16 @@
 				$arr = $rs->FetchRow ();
 				?>
 			<fieldset class="form-group">
-				<label class="col-sm-3 control-label">Posisi Penugasan</label> <input type="text"
-					class="span3" name="name" id="name"
-					value="<?=$arr['posisi_name']?>">
+				<label class="col-sm-3 control-label">Posisi Penugasan</label> 
+				<div class="col-sm-5"><input type="text"
+					class="form-control" name="name" id="name"
+					value="<?=$arr['posisi_name']?>"></div>
 			</fieldset>
 			<fieldset class="form-group">
-				<label class="col-sm-3 control-label">Urutan</label> <input type="text"
-					class="span7" name="sort" id="sort"
-					value="<?=$arr['posisi_sort']?>">
+				<label class="col-sm-3 control-label">Urutan</label> 
+				<div class="col-sm-5"><input type="number"
+					class="form-control" name="sort" id="sort"
+					value="<?=$arr['posisi_sort']?>"></div>
 			</fieldset>
 			<fieldset class="form-group">
 				<label class="span1">Hak Akses</label>
@@ -113,8 +119,10 @@
 					value="<?=$_nextaction?>">
 			</fieldset>
 		</form>
-	</article>
-</section>
+			</div>
+		</section>
+	</div>
+</div>
 <script>  
 $(function() {
 	$("#validation-form").validate({

@@ -60,11 +60,12 @@ class assign {
 			}
 		}
 
-		$sql = "select distinct assign_id, assign_start_date, assign_end_date, assign_status, assign_tahun, assign_surat_no, assign_no_lha, lha_status, assign_kegiatan
+		$sql = "select distinct assign_id, assign_start_date, assign_end_date, assign_status, assign_tahun, assign_surat_no, assign_no_lha, lha_status, assign_kegiatan, status
 				from assignment
 				left join assignment_surat_tugas on assign_id = assign_surat_id_assign
 				left join assignment_auditor on assign_id = assign_auditor_id_assign
 				left join assignment_lha on assign_id = lha_id_assign
+				left join assignment_laporan on assign_id = assignment_id
 				where 1=1 ".$condition.$condition2." order by assign_start_date DESC LIMIT $offset, $num_row";
 		$data = $this->_db->_dbquery ( $sql );
 		return $data;
@@ -580,5 +581,66 @@ class assign {
 		return $data;
 	}
 	//end assign tl
+
+	//laporan baru
+	public function update_laporan($fdata_id, $ringkasan, $dasar, $tujuan, $ruang, $metodologi, $uraian, $rekomendasi, $lainlain, $apresiasi, $status_lha)
+	{
+		$this->update_status_laporan($fdata_id, $status_lha);
+		$sql = "UPDATE assignment_laporan SET
+				ringkasan = '".$ringkasan."', dasar = '".$dasar."', tujuan = '".$tujuan."', 
+				ruang = '".$ruang."', metodologi = '".$metodologi."', uraian = '".$uraian."', 
+				rekomendasi = '".$rekomendasi."', lainlain = '".$lainlain."', apresiasi = '".$apresiasi."', assignment_laporan.status = '".$status_lha."'
+				WHERE assignment_laporan_id = '".$fdata_id."'";
+		$aksinyo = "Mengubah LHA dengan ID ".$fdata_id;
+		// echo $sql;
+		// die();
+		$this->_db->_dbexecquery ( $sql, $this->userId, $aksinyo );
+	}
+	public function update_status_laporan($fdata_id, $status_lha)
+	{
+		$sql = "UPDATE assignment_lha SET
+				lha_status = '".$status_lha."'
+				WHERE lha_id_assign = '".$fdata_id."'";
+		// echo $sql;
+		// die();
+		$this->_db->_dbquery ( $sql );
+	}
+	public function create_laporan($assign_id, $laporan_id)
+	{
+		$sql = "INSERT INTO assignment_laporan
+				(assignment_laporan_id, assignment_id)
+				VALUES
+				('".$laporan_id."', '".$assign_id."')";
+		$aksinyo = "Menambahkan LHA dengan ID ".$laporan_id;
+		// echo $sql;
+		// die();
+		$this->_db->_dbexecquery ( $sql, $this->userId, $aksinyo );
+	}
+	public function cek_laporan($assign_id)
+	{
+		$sql = "SELECT COUNT(*) FROM assignment_laporan WHERE assignment_id = '".$assign_id."'";
+		$data = $this->_db->_dbquery ( $sql )->FetchRow();
+		$cek = $data[0];
+		if($cek == 0){
+			$laporan_id = $this->uniq_id();
+			$this->create_laporan($assign_id, $laporan_id);
+			$laporan_id = $this->ambil_laporan_id($assign_id);
+		}else{
+			$laporan_id = $this->ambil_laporan_id($assign_id);
+		}
+		return $laporan_id;
+	}
+	public function ambil_laporan_id($assign_id)
+	{
+		$sql = "SELECT assignment_laporan_id FROM assignment_laporan WHERE assignment_id = '".$assign_id."'";
+		$data = $this->_db->_dbquery ( $sql )->FetchRow();
+		return $data[0];
+	}
+	public function ambil_laporan_for_edit($laporan_id)
+	{
+		$sql = "SELECT * FROM assignment_laporan WHERE assignment_laporan_id = '".$laporan_id."'";
+		$data = $this->_db->_dbquery ( $sql )->FetchRow();
+		return $data;
+	}
 }
 ?>

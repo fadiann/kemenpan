@@ -30,9 +30,9 @@ if(@$method!=@$val_method){
 	$val_method = "";
 }
 
-$paging_request = "main.php?method=auditassign";
-$acc_page_request = "audit_assign_acc.php";
-$lha_page_request = "hasil_audit.php";
+$paging_request    = "main.php?method=auditassign";
+$acc_page_request  = "audit_assign_acc.php";
+$lha_page_request  = "hasil_audit.php";
 $list_page_request = "audit_view.php";
 
 unset ( $_SESSION ['ses_kka_id'] );
@@ -120,7 +120,9 @@ switch ($_action) {
 		$fdata_id     = $Helper->replacetext ( $_REQUEST ["data_id"] );
 		$get_id       = explode(":",$fdata_id );
 		$assign_id    = $get_id[0];
-		$auditee_id   = $get_id[1];
+		//$auditee_id   = $get_id[1];
+		$laporan_id   = $assigns->cek_laporan($assign_id);
+		$row_laporan	  = $assigns->ambil_laporan_for_edit($laporan_id);
 		$page_title   = "Laporan Hasil Audit";
 		break;
 	case "anggota_assign" :
@@ -155,86 +157,121 @@ switch ($_action) {
 		$page_title = "Rincian Pelaksanaan Audit";
 		break;
 	case "postlha" :
-		$fdata_id = $Helper->replacetext ( $_POST ["data_id"] );
+		// $fdata_id = $Helper->replacetext ( $_POST ["data_id"] );
 		$flha_id = $Helper->replacetext ( $_POST ["lha_id"] );
-		$fno_lha = $Helper->replacetext ( $_POST ["no_lha"] );
-		$ftanggal_lha = $Helper->date_db ( $Helper->replacetext ( $_POST ["tanggal_lha"] ) );
-		//bab 1
-		$fringkasan = $Helper->replacetext ( $_POST ["ringkasan"] );
-		//bab 2
-		$fdasar_audit = $Helper->replacetext ( $_POST ["dasar_audit"] );
-		$ftujuan_audit = $Helper->replacetext ( $_POST ["tujuan_audit"] );
-		$fruang_lingkup = $Helper->replacetext ( $_POST ["ruang_lingkup"] );
-		$fbatasan_tanggung_jawab = $Helper->replacetext ( $_POST ["batasan_tanggung_jawab"] );
-		$fmetodologi_audit = $Helper->replacetext ( $_POST ["metodologi_audit"] );
-		$fstrategi_laporan = $Helper->replacetext ( $_POST ["strategi_laporan"] );
-		$fdata_umum_auditan = $Helper->replacetext ( $_POST ["data_umum_auditan"] );
-		$fhasil_yang_dicapai = $Helper->replacetext ( $_POST ["hasil_yang_dicapai"] );
-		//bab 3
-		$fpenutup = $Helper->replacetext ( $_POST ["penutup"] );
+		// $fno_lha = $Helper->replacetext ( $_POST ["no_lha"] );
+		// $ftanggal_lha = $Helper->date_db ( $Helper->replacetext ( $_POST ["tanggal_lha"] ) );
+		// //bab 1
+		// $fringkasan = $Helper->replacetext ( $_POST ["ringkasan"] );
+		// //bab 2
+		// $fdasar_audit = $Helper->replacetext ( $_POST ["dasar_audit"] );
+		// $ftujuan_audit = $Helper->replacetext ( $_POST ["tujuan_audit"] );
+		// $fruang_lingkup = $Helper->replacetext ( $_POST ["ruang_lingkup"] );
+		// $fbatasan_tanggung_jawab = $Helper->replacetext ( $_POST ["batasan_tanggung_jawab"] );
+		// $fmetodologi_audit = $Helper->replacetext ( $_POST ["metodologi_audit"] );
+		// $fstrategi_laporan = $Helper->replacetext ( $_POST ["strategi_laporan"] );
+		// $fdata_umum_auditan = $Helper->replacetext ( $_POST ["data_umum_auditan"] );
+		// $fhasil_yang_dicapai = $Helper->replacetext ( $_POST ["hasil_yang_dicapai"] );
+		// //bab 3
+		// $fpenutup = $Helper->replacetext ( $_POST ["penutup"] );
 		
-		$fstatus_lha = $Helper->replacetext ( $_POST ["status_lha"] );
-		$flampiran = $_FILES ["attach"] ["name"];
+		// $fstatus_lha = $Helper->replacetext ( $_POST ["status_lha"] );
+		// $flampiran = $_FILES ["attach"] ["name"];
 		
-		$rs_file = $assigns->list_lha_lampiran($fdata_id);
-		$z=0;
-		while($arr_file = $rs_file->FetchRow()){
-		$z++;
-			$nama_file = $Helper->replacetext ( @$_POST ["nama_file_".$z] );
-			$assigns->delete_lampiran_kka ($fdata_id, $nama_file);
-			$Helper->HapusFile ( "Upload_KKA", $nama_file);
-		}
+		// $rs_file = $assigns->list_lha_lampiran($fdata_id);
+		// $z=0;
+		// while($arr_file = $rs_file->FetchRow()){
+		// $z++;
+		// 	$nama_file = $Helper->replacetext ( @$_POST ["nama_file_".$z] );
+		// 	$assigns->delete_lampiran_kka ($fdata_id, $nama_file);
+		// 	$Helper->HapusFile ( "Upload_KKA", $nama_file);
+		// }
 		
-		$jml_attach = count( $flampiran );
-		if ($jml_attach <> 0) {
-			for($i=0;$i<$jml_attach;$i++){
-				if($flampiran[$i]!="") {
-					$Helper->UploadFileMulti ( "Upload_LHA", "attach");
-					$assigns->insert_lampiran_lha ( $fdata_id, $flampiran[$i] );
-				}
-			}
-		}
-		$assigns->assign_update_lha ( $fdata_id, $fno_lha, $ftanggal_lha);
-		$assigns->lha_update ( $fdata_id, $fno_lha, $ftanggal_lha, $fringkasan, $fdasar_audit, $ftujuan_audit, $fruang_lingkup, $fbatasan_tanggung_jawab, $fmetodologi_audit, $fstrategi_laporan, $fdata_umum_auditan, $fhasil_yang_dicapai, $fpenutup, $fstatus_lha);
+		// $jml_attach = count( $flampiran );
+		// if ($jml_attach <> 0) {
+		// 	for($i=0;$i<$jml_attach;$i++){
+		// 		if($flampiran[$i]!="") {
+		// 			$Helper->UploadFileMulti ( "Upload_LHA", "attach");
+		// 			$assigns->insert_lampiran_lha ( $fdata_id, $flampiran[$i] );
+		// 		}
+		// 	}
+		// }
+		// $assigns->assign_update_lha ( $fdata_id, $fno_lha, $ftanggal_lha);
+		// $assigns->lha_update ( $fdata_id, $fno_lha, $ftanggal_lha, $fringkasan, $fdasar_audit, $ftujuan_audit, $fruang_lingkup, $fbatasan_tanggung_jawab, $fmetodologi_audit, $fstrategi_laporan, $fdata_umum_auditan, $fhasil_yang_dicapai, $fpenutup, $fstatus_lha);
 					
-		$fkomentar = $Helper->replacetext ( $_POST ["komentar"] );
-		$finpektorat_id = $Helper->replacetext ( $_POST ["inpektorat_id"] );
+		// $fkomentar = $Helper->replacetext ( $_POST ["komentar"] );
+		// $finpektorat_id = $Helper->replacetext ( $_POST ["inpektorat_id"] );
 
-		$Helper->hapus_notif($flha_id);
-		if ($fstatus_lha != "") {
-			if($fstatus_lha==1){ 
-				$get_user_id = $assigns->get_user_by_posisi($fdata_id, '9e8e412b0bc5071b5d47e30e0507fe206bdf8dbd');
-				$notif_to_user_id = $get_user_id; //ke dalnis
-			}elseif($fstatus_lha==2){ 
-				$get_user_id = $assigns->get_user_by_posisi($fdata_id, '1fe7f8b8d0d94d54685cbf6c2483308aebe96229');
-				$notif_to_user_id = $get_user_id; //ke daltu
-			}elseif($fstatus_lha==3){ 
-				//inpektorat
-			}elseif($fstatus_lha==4){ //penugasan selesai
-				$assigns->assign_update_status ( $id, 3 );
-			}elseif($fstatus_lha==5){ 
-				$get_user_id = $assigns->get_user_by_posisi($fdata_id, '8918ca5378a1475cd0fa5491b8dcf3d70c0caba7');
-				$notif_to_user_id = $get_user_id; //ke katim
-			}elseif($fstatus_lha==6){ 
-				$get_user_id = $assigns->get_user_by_posisi($fdata_id, '9e8e412b0bc5071b5d47e30e0507fe206bdf8dbd');
-				$notif_to_user_id = $get_user_id; //ke dalnis
-			}elseif($fstatus_lha==7){ 
-				$get_user_id = $assigns->get_user_by_posisi($fdata_id, '1fe7f8b8d0d94d54685cbf6c2483308aebe96229');
-				$notif_to_user_id = $get_user_id; //ke daltu
-			}
-			if($notif_to_user_id!=""){
-				$Helper->insert_notif($flha_id, $ses_userId, $notif_to_user_id, 'auditassign', '(LHA)...'.$fkomentar, $Helper->date_db(date('d-m-Y')));
-			}
-		}
-		$ftanggal = $Helper->date_db ( date ( "d-m-Y H:i:s" ) );
-		if ($fkomentar != "") {
-			$assigns->lha_add_komentar ( $flha_id, $fkomentar, $ftanggal );
-		}
-				
-			$Helper->js_alert_act ( 3 );
-		?>
-<script>window.open('<?=$def_page_request?>', '_self');</script>
-<?
+		// $Helper->hapus_notif($flha_id);
+		// if ($fstatus_lha != "") {
+		// 	if($fstatus_lha==1){ 
+		// 		$get_user_id = $assigns->get_user_by_posisi($fdata_id, '9e8e412b0bc5071b5d47e30e0507fe206bdf8dbd');
+		// 		$notif_to_user_id = $get_user_id; //ke dalnis
+		// 	}elseif($fstatus_lha==2){ 
+		// 		$get_user_id = $assigns->get_user_by_posisi($fdata_id, '1fe7f8b8d0d94d54685cbf6c2483308aebe96229');
+		// 		$notif_to_user_id = $get_user_id; //ke daltu
+		// 	}elseif($fstatus_lha==3){ 
+		// 		//inpektorat
+		// 	}elseif($fstatus_lha==4){ //penugasan selesai
+		// 		$assigns->assign_update_status ( $id, 3 );
+		// 	}elseif($fstatus_lha==5){ 
+		// 		$get_user_id = $assigns->get_user_by_posisi($fdata_id, '8918ca5378a1475cd0fa5491b8dcf3d70c0caba7');
+		// 		$notif_to_user_id = $get_user_id; //ke katim
+		// 	}elseif($fstatus_lha==6){ 
+		// 		$get_user_id = $assigns->get_user_by_posisi($fdata_id, '9e8e412b0bc5071b5d47e30e0507fe206bdf8dbd');
+		// 		$notif_to_user_id = $get_user_id; //ke dalnis
+		// 	}elseif($fstatus_lha==7){ 
+		// 		$get_user_id = $assigns->get_user_by_posisi($fdata_id, '1fe7f8b8d0d94d54685cbf6c2483308aebe96229');
+		// 		$notif_to_user_id = $get_user_id; //ke daltu
+		// 	}
+		// 	if($notif_to_user_id!=""){
+		// 		$Helper->insert_notif($flha_id, $ses_userId, $notif_to_user_id, 'auditassign', '(LHA)...'.$fkomentar, $Helper->date_db(date('d-m-Y')));
+		// 	}
+		// }
+		// $ftanggal = $Helper->date_db ( date ( "d-m-Y H:i:s" ) );
+		// if ($fkomentar != "") {
+		// 	$assigns->lha_add_komentar ( $flha_id, $fkomentar, $ftanggal );
+		// }
+		// 'ringkasan' => string '<p>1</p>
+		// ' (length=10)
+		//   'dasar' => string '<p>2</p>
+		// ' (length=10)
+		//   'tujuan' => string '<p>3</p>
+		// ' (length=10)
+		//   'ruang' => string '<p>4</p>
+		// ' (length=10)
+		//   'metodologi' => string '<p>5</p>
+		// ' (length=10)
+		//   'uraian' => string '<p>6</p>
+		// ' (length=10)
+		//   'rekomendasi' => string '<p>7</p>
+		// ' (length=10)
+		//   'lainlain' => string '<p>8</p>
+		// ' (length=10)
+		//   'apresiasi' => string '<p>9</p>
+		// ' (length=10)
+		//   'status_lha' => string '' (length=0)
+		$id 		 = $Helper->unixid();
+		$fdata_id    = $Helper->filterCk ( $_POST ["data_id"] );
+		$laporan_id    = $Helper->filterCk ( $_POST ["laporan_id"] );
+		$ringkasan   = $Helper->filterCk ( $_POST ["ringkasan"] );
+		$dasar       = $Helper->filterCk ( $_POST ["dasar"] );
+		$tujuan      = $Helper->filterCk ( $_POST ["tujuan"] );
+		$ruang       = $Helper->filterCk ( $_POST ["ruang"] );
+		$metodologi  = $Helper->filterCk ( $_POST ["metodologi"] );
+		$uraian      = $Helper->filterCk ( $_POST ["uraian"] );
+		$rekomendasi = $Helper->filterCk ( $_POST ["rekomendasi"] );
+		$lainlain    = $Helper->filterCk ( $_POST ["lainlain"] );
+		$apresiasi   = $Helper->filterCk ( $_POST ["apresiasi"] );
+		$status_lha  = $Helper->filterCk ( $_POST ["status_lha"] );
+		$assigns->update_laporan($laporan_id, $ringkasan, $dasar, $tujuan, $ruang, $metodologi, $uraian, $rekomendasi, $lainlain, $apresiasi, $status_lha);
+		$assigns->update_status_laporan($flha_id, $status_lha);
+		// var_dump($_POST);
+		// die();
+		// var_dump($flha_id);
+		// die();
+		$Helper->js_alert_act ( 3 );
+		echo "<script>window.open('".$def_page_request."&data_action=getlha&data_id=".$fdata_id."', '_self');</script>";
 		$page_request = "blank.php";
 		break;
 	case "postadd" :

@@ -30,7 +30,7 @@ switch ($_action) {
 	case "getadd" :
 		$_nextaction  = "postadd";
 		$page_request = $acc_page_request;
-		$page_title   = "Analisa Risiko";
+		$page_title   = "Analisis dan Evaluasi Risiko";
 		break;
 	case "postadd" :
 		$no = 0;

@@ -22,15 +22,15 @@
 							<a class="btn btn-danger btn-md btn-circle hapus"><i class="fa fa-times-circle"></i></a>
 						</div>
 					</fieldset>
-					<fieldset class="form-group">
-						<label class="col-sm-3 control-label">Indikator Kinerja<span class="required">*</span></label> 
-						<div class="col-sm-5">
-							<input type="text" class="form-control" name="indikator" id="indikator"> 
-						</div>
-					</fieldset>
 					<!-- FIELD BARU -->
 					<div class="clone">
 					<fieldset class="form-group mt-md">
+						<label class="col-sm-3 control-label">Indikator Kinerja<span class="required">*</span></label> 
+						<div class="col-sm-5">
+							<input type="text" class="form-control" name="indikator[]" id="indikator"> 
+						</div>
+					</fieldset>
+					<fieldset class="form-group">
 						<label class="col-sm-3 control-label">Kejadian Risiko<span class="required">*</span></label> 
 						<div class="col-sm-5">
 							<input type="text" class="form-control" name="nama[]" id="nama"> 

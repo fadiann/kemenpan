@@ -36,6 +36,10 @@
 				<button class="btn btn-primary" Onclick="window.open('main.php?method=par_holiday', '_self');"><i class="fa fa-info-circle"></i> Hari Libur</button>
 				<button class="btn btn-primary" Onclick="window.open('main.php?method=par_gambar', '_self');"><i class="fa fa-info-circle"></i> Gambar Dashboard</button>
 			</fieldset>
+			<fieldset class="form-group">
+				<button class="btn btn-primary" Onclick="window.open('main.php?method=par_posisi_penugasan', '_self');"><i class="fa fa-info-circle"></i> Posisi Penugasan</button>
+				<!-- <button class="btn btn-primary" Onclick="window.open('main.php?method=par_gambar', '_self');"><i class="fa fa-info-circle"></i> Gambar Dashboard</button> -->
+			</fieldset>
 		</center>
 				</div>
 		</section>

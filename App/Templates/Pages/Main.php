@@ -1,5 +1,9 @@
 <?php
 switch ($method) :
+        // dashboard
+    case "dashboard":
+        include_once "App/Modules/Dashboard/dashboard_main.php";
+        break;
         // coba pelanggan
     case "coba_pelanggan":
         include_once "App/Modules/CobaPelanggan/pelanggan_main.php";

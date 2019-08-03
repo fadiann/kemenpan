@@ -29,25 +29,36 @@ if (@$_POST ['submit'] == "Login") {
 			$rs_user = $logins->data_user ( $username );
 			$arr_user = $rs_user->FetchRow ();
 			$userStatusAktif = $arr_user ['user_status'];
-			if ($userStatusAktif == "1") {
-				$cekLogin = $logins->cekLogin ( $arr_user ['user_id'] );
-				if ($cekLogin == 1) {
-					$date = $Helper->date_db ( date ( "Y-m-d H:i:s" ) );
-					$logins->insertStatus ( $arr_user ['user_id'], $date );
+			// echo $userStatusAktif;
+			// die();
 
-					$_SESSION ['ses_userId'] = $arr_user ['user_id'];
-					$_SESSION ['ses_userName'] = $arr_user ['user_username'];
-					$_SESSION ['ses_groupId'] = $arr_user ['user_id_group'];
-					$_SESSION ['ses_id_int'] = $arr_user ['user_id_internal'];
-					$_SESSION ['ses_id_eks'] = $arr_user ['user_id_ekternal'];
-					echo "<script>location.href='main.php';</script>";
-				} else {
-					$pending = $logins->cekPending ( $arr_user ['user_id'] );
-					echo "<script>alert('$pending'); location.href='" . $index . "';</script>";
-				}
-			} else {
-				echo "<script>alert('Username Anda Telah Dihapus/Inactive, Silahkan Hubungi Administrator'); location.href='" . $index . "';</script>";
-			}
+			//login bisa all user
+			$_SESSION ['ses_userId']   = $arr_user ['user_id'];
+			$_SESSION ['ses_userName'] = $arr_user ['user_username'];
+			$_SESSION ['ses_groupId']  = $arr_user ['user_id_group'];
+			$_SESSION ['ses_id_int']   = $arr_user ['user_id_internal'];
+			$_SESSION ['ses_id_eks']   = $arr_user ['user_id_ekternal'];
+			echo "<script>location.href='main.php';</script>";
+
+			// if ($userStatusAktif == "1") {
+			// 	$cekLogin = $logins->cekLogin ( $arr_user ['user_id'] );
+			// 	if ($cekLogin == 1) {
+			// 		$date = $Helper->date_db ( date ( "Y-m-d H:i:s" ) );
+			// 		$logins->insertStatus ( $arr_user ['user_id'], $date );
+
+			// 		$_SESSION ['ses_userId'] = $arr_user ['user_id'];
+			// 		$_SESSION ['ses_userName'] = $arr_user ['user_username'];
+			// 		$_SESSION ['ses_groupId'] = $arr_user ['user_id_group'];
+			// 		$_SESSION ['ses_id_int'] = $arr_user ['user_id_internal'];
+			// 		$_SESSION ['ses_id_eks'] = $arr_user ['user_id_ekternal'];
+			// 		echo "<script>location.href='main.php';</script>";
+			// 	} else {
+			// 		$pending = $logins->cekPending ( $arr_user ['user_id'] );
+			// 		echo "<script>alert('$pending'); location.href='" . $index . "';</script>";
+			// 	}
+			// } else {
+			// 	echo "<script>alert('Username Anda Telah Dihapus/Inactive, Silahkan Hubungi Administrator'); location.href='" . $index . "';</script>";
+			// }
 		} else {
 			$alert = "Verifikasi Username dan Password dengan benar dan coba kembali !!!";
 			echo "<script>alert('$alert'); location.href='" . $index . "?user=".$username."';</script>";
@@ -146,7 +157,7 @@ if (@$_POST ['submit'] == "Login") {
 							<div class="form-group mb-lg">
 								<div class="clearfix">
 									<label class="pull-left">Password</label>
-									<a href="#" class="pull-right">Lost Password?</a>
+									<!-- <a href="#" class="pull-right">Lost Password?</a> -->
 								</div>
 								<div class="input-group input-group-icon">
 									<input name="password" type="password" class="form-control input-lg" required />

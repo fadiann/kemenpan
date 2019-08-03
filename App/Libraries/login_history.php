@@ -20,6 +20,8 @@ $logins = new Login ();
 @$ses_id_int   = $_SESSION ['ses_id_int'];
 @$ses_id_eks   = $_SESSION ['ses_id_eks'];
 
+// var_dump($_SESSION);
+
 $h_groupName = $logins->getGroup_name($ses_group_id);
 
 @$method = $Helper->replacetext ( $_GET ['method'] );
@@ -47,9 +49,9 @@ if ($ses_userId) {
 		/**
 		 * No Data *
 		 */
-		case 4 :
-			echo "<script>alert('Silahkan Login Terlebih Dahulu'); parent.location.href='" . $index . "';</script>";
-			break;
+		// case 4 :
+		// 	echo "<script>alert('Silahkan Login Terlebih Dahulu'); parent.location.href='" . $index . "';</script>";
+		// 	break;
 		/**
 		 * masa aktif expired *
 		 */
@@ -80,6 +82,7 @@ $view_analisa      = $Helper->cek_akses ( $ses_group_id, $method, 'view_analisa'
 $view_evaluasi     = $Helper->cek_akses ( $ses_group_id, $method, 'view_evaluasi' );
 $view_penanganan   = $Helper->cek_akses ( $ses_group_id, $method, 'view_penanganan' );
 $view_monitoring   = $Helper->cek_akses ( $ses_group_id, $method, 'view_monitoring' );
+$view_report       = $Helper->cek_akses ( $ses_group_id, $method, 'view_report' );
 
 // menejemen audit
 $set_perencanaan = $Helper->cek_akses ( $ses_group_id, $method, 'view_plan' );

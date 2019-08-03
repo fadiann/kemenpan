@@ -18,7 +18,7 @@
 							<tr>
 								<th width="5%" rowspan="2" class="text-center">No.</th>
 								<th width="50%" colspan="4" class="text-center">Identifikasi Risiko</th>
-								<th width="45%" colspan="6" class="text-center">Risiko Inheren</th>
+								<th width="45%" colspan="6" class="text-center">Hasil Analisis dan Evaluasi</th>
 							</tr>
 							<tr>
 								<th width="5%">Kategori Risiko</th>
@@ -33,7 +33,8 @@
 							<?php
 							$i           = 0;
 							$no          = 0;
-							$kat         = 'A';
+							$kat         = 0;
+							$rs_sasaran = $risks->identifikasi_sasaran_viewlist($ses_penetapan_id);
 							$rs_kategori = $params->risk_kategori_data_viewlist();
 							while ($arr_kategori = $rs_kategori->FetchRow()) {
 								$x = 0;
@@ -45,7 +46,7 @@
 									?>
 									<input type="hidden" name="indentifikasi_id" value="<?= $arr_iden['identifikasi_id']; ?>">
 									<tr>
-										<td class="text-center"><?= $x ?>.</td>
+										<td class="text-center"><?=$kat?>.<?= $x ?>.</td>
 										<td><?= $arr_iden['risk_kategori']; ?></td>
 										<td><?= $arr_iden['identifikasi_nama_risiko']; ?></td>
 										<td><?= $arr_iden['identifikasi_penyebab']; ?></td>
@@ -65,26 +66,46 @@
 											?>
 										</td>
 										<td align="center"><label class="ri"><?= $arr_iden['analisa_ri'] ?></label></td>
-										<td align="center">
-											<label class="levelrisk">
-												<?php
-												$risk_level = $arr_iden['analisa_ri'];
-												if ($risk_level == '' || $risk_level == 0) {
-													echo "Belum Terhitung";
-												} elseif ($risk_level > 0 && $risk_level <= 5) {
-													echo "Sangat Rendah";
-												} elseif ($risk_level >= 6 && $risk_level <= 10) {
-													echo "Rendah";
-												} elseif ($risk_level >= 11 && $risk_level <= 15) {
-													echo "Sedang";
-												} elseif ($risk_level >= 16 && $risk_level <= 20) {
-													echo "Tinggi";
-												} elseif ($risk_level >= 21 && $risk_level <= 25) {
-													echo "Sangat Tinggi";
-												}
-												?>
-											</label>
-										</td>
+										<?php
+										$risk_level = $arr_iden['analisa_ri'];
+										if ($risk_level == '' || $risk_level == 0) {
+											echo "<td align='center'>";
+											echo "<label class='levelrisk'>";
+											echo "Belum Terhitung";
+											echo "</label>";
+											echo "</td>";
+										} elseif ($risk_level > 0 && $risk_level <= 5) {
+											echo "<td align='center' style='background-color: blue; color: #FFFFFF'>";
+											echo "<label class='levelrisk'>";
+											echo "Sangat Rendah";
+											echo "</label>";
+											echo "</td>";
+										} elseif ($risk_level >= 6 && $risk_level <= 11) {
+											echo "<td align='center' style='background-color: green; color: #FFFFFF'>";
+											echo "<label class='levelrisk'>";
+											echo "Rendah";
+											echo "</label>";
+											echo "</td>";
+										} elseif ($risk_level >= 12 && $risk_level <= 15) {
+											echo "<td align='center' style='background-color: yellow; color: #FFFFFF'>";
+											echo "<label class='levelrisk'>";
+											echo "Sedang";
+											echo "</label>";
+											echo "</td>";
+										} elseif ($risk_level >= 16 && $risk_level <= 19) {
+											echo "<td align='center' style='background-color: orange; color: #FFFFFF'>";
+											echo "<label class='levelrisk'>";
+											echo "Tinggi";
+											echo "</label>";
+											echo "</td>";
+										} elseif ($risk_level >= 20 && $risk_level <= 25) {
+											echo "<td align='center' style='background-color: red; color: #FFFFFF'>";
+											echo "<label class='levelrisk'>";
+											echo "Sangat Tinggi";
+											echo "</label>";
+											echo "</td>";
+										}
+										?>
 									</tr>
 								<?php
 							}

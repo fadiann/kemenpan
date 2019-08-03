@@ -37,7 +37,7 @@ foreach ($rs_auditees->GetArray() as $auditee) {
                 </ul>
                 <div id="view1">
                 <center>
-                    <div  style="width: 600px !important; height: 400px !important"> n
+                    <div  style="width: 600px !important; height: 400px !important">
                     <canvas id="myChart" ></canvas>
                     </div>
                 </center>

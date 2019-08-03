@@ -1,0 +1,16 @@
+fe262a407870ffc998f263a7e9cfedbd0369eba0	2019-07-24 02:04:59	::1	Mengubah LHA dengan ID 049527da958bd479e9ff3f95d42f8015868ed200	Sukses
+fe262a407870ffc998f263a7e9cfedbd0369eba0	2019-07-24 02:04:59	::1	Mengubah LHA dengan ID 049527da958bd479e9ff3f95d42f8015868ed200	Sukses
+fe262a407870ffc998f263a7e9cfedbd0369eba0	Mengubah LHA dengan ID 049527da958bd479e9ff3f95d42f8015868ed200	INSERT INTO assignment_laporan
+				(assignment_laporan_id, assignment_id, ringkasan, dasar, tujuan, ruang, metodologi, uraian, rekomendasi, lainlain, apresiasi)
+				VALUES
+				('0689532a41f9faeb26c7f5cac82624ecc42c81a8', '<p>1</p>', '<p>2</p>', '<p>3</p>', '<p>4</p>', '<p>5</p>', '<p>6</p>', '<p>7</p>', '<p>8</p>', '<p>9</p>', ) ErrorMsg : fe262a407870ffc998f263a7e9cfedbd0369eba0	2019-07-24 02:13:20	::1	Mengubah LHA dengan ID 71d7938a27b836aac150d97e1df7844864575d04	Sukses
+fe262a407870ffc998f263a7e9cfedbd0369eba0	2019-07-24 02:29:41	::1	Menambahkan LHA dengan ID 	Sukses
+fe262a407870ffc998f263a7e9cfedbd0369eba0	2019-07-24 02:31:02	::1	Menambahkan LHA dengan ID 59c3fb9a9ae2b92981e179a831fc2ffc2572d0fc	Sukses
+fe262a407870ffc998f263a7e9cfedbd0369eba0	2019-07-24 02:52:19	::1	Mengubah LHA dengan ID 71d7938a27b836aac150d97e1df7844864575d04	Sukses
+fe262a407870ffc998f263a7e9cfedbd0369eba0	2019-07-24 03:02:18	::1	Mengubah LHA dengan ID 71d7938a27b836aac150d97e1df7844864575d04	Sukses
+fe262a407870ffc998f263a7e9cfedbd0369eba0	2019-07-24 03:03:20	::1	Mengubah LHA dengan ID 71d7938a27b836aac150d97e1df7844864575d04	Sukses
+fe262a407870ffc998f263a7e9cfedbd0369eba0	2019-07-24 03:03:23	::1	Menambahkan LHA dengan ID ffe70aedbf37e43fd4e7428bbf5a82f153c0fa8f	Sukses
+fe262a407870ffc998f263a7e9cfedbd0369eba0	2019-07-24 03:05:54	::1	Mengubah LHA dengan ID 71d7938a27b836aac150d97e1df7844864575d04	Sukses
+fe262a407870ffc998f263a7e9cfedbd0369eba0	2019-07-24 12:52:53	::1	Menambah Identifikasi Risiko id d4c2876d8bf0bd5d0fa6221ccdc8bc5b0b4eeed2	Sukses
+fe262a407870ffc998f263a7e9cfedbd0369eba0	2019-07-24 12:52:53	::1	Menambah Identifikasi Risiko id d7210576f4cf759914512fba26370311dd66c5ff	Sukses
+fe262a407870ffc998f263a7e9cfedbd0369eba0	2019-07-24 13:20:37	::1	Menambah Identifikasi Risiko id 7a0641593ce963900035df421b610300664e7f7b	Sukses

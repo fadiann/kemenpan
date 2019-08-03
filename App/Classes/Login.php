@@ -137,5 +137,9 @@ class Login {
 		$sql = "delete from login_expired where login_exp_last_acces < '".$date."' ";
 		$this->_db->_dbquery($sql);
 	}
+	public function get_auditee_by_eksId($ses_id_eks)
+	{
+		# code...
+	}
 }
 ?>

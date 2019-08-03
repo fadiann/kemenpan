@@ -38,7 +38,7 @@
 					?>
 		</td> 
 	<?
-				} elseif ($gridHeader [$j] == "Analisis") {
+				} elseif ($gridHeader [$j] == "Analisis dan Evaluasi") {
 					$get_warna_risk = $risks->get_nama_risk ( 'par_risk_ri', 'ri_name', 'ri_warna', $arr [$gridDetail[$j]] );
 					?>
 		<td align="center" bgcolor="<?=$get_warna_risk?>">
@@ -73,7 +73,7 @@
 					?>
 		</td> 
 	<?
-				} elseif ($gridHeader [$j] == "Keputusan Penanganan") {
+				} elseif ($gridHeader [$j] == "Rencana Tindak Pengendalian") {
 					?>
 		<td align="center">
 			<?

@@ -136,6 +136,13 @@ class userm {
 		$data = $this->_db->_dbquery ( $sql );
 		return $data;
 	}
+	function list_all_auditor() {
+		$sql = "select auditor_id, auditor_name
+				from auditor
+				where auditor_del_st = 1 order by auditor_name";
+		$data = $this->_db->_dbquery ( $sql );
+		return $data;
+	}
 	function cek_pass_old($username, $passwd) {
 		$passwd = md5 ( crypt ( $passwd, md5 ( $username ) ) );
 		$sql = "SELECT count(*) FROM user_apps WHERE user_username = '" . $username . "' and user_password = '" . $passwd . "' ";

@@ -44,5 +44,28 @@ switch ($_action) {
 		echo $result;
 		exit ();
 		break;
+ 
+	case "getindikator":
+        $idsasaran      = $Helper->replacetext($_REQUEST['id']);
+        @$ref_id_old    = $Helper->replacetext($_REQUEST['ref_id_old']);
+        //echo $idbidang;
+        $rs            = $params->ref_program_viewlist_byAspek($idbidang);
+        echo "<table class='table table-bordered table-hover'>";
+        $x = 0;
+        echo "<tr><th width='5%' class='text-center'>No.</th><th width='5%' class='text-center'><label class='customcheck'><input type='checkbox' name='checkall' id='checkall' onClick='check_uncheck_checkbox(this.checked);'><span class='checkmark'></span></label></th><th class='text-center'>Kode & Judul</th></tr>";
+        while ($row = $rs->FetchRow()):
+            $x++;
+            if($ref_id_old == $row['ref_program_id']){
+                $checked = 'checked';
+            }else{
+                $checked = '';
+            }
+            echo "<tr><td width='5%' class='text-center'>" . $x . "</td><td width='5%' class='text-center'><label class='customcheck'><input type='checkbox' name='ref_program[]' value='" . $row['ref_program_id'] . "' ".$checked."><span class='checkmark'></span></label></td><td>" . $row['ref_program_procedure'] . "</td></tr>";
+            //echo "<label class='customcheck'>One <input type='checkbox' checked='checked'><span class='checkmark'></span></label>";
+
+        endwhile;
+        echo "</table>";
+        exit();
+    break;
 }
 ?>

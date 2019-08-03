@@ -2,14 +2,14 @@
 <script src="Public/js/responsive-tabs.js" type="text/javascript"></script>
 <?
 include_once "App/Classes/dashboard_class.php";
-$dashboards = new dashboard ( $ses_userId );
-$tahun = "";
-$tahun = $Helper->replacetext($_POST["fil_tahun_id"]);
-$tipe_audit = $Helper->replacetext($_POST["tipe_audit"]);
+$dashboards  = new dashboard ( $ses_userId );
+$tahun       = "";
+$tahun       = $Helper->replacetext($_POST["fil_tahun_id"]);
+$tipe_audit  = $Helper->replacetext($_POST["tipe_audit"]);
 $rs_auditors = $dashboards->get_auditor();
 // $arr_auditor_name = $rs_auditors->FetchRow();
 $auditors = array();
-$counts = array();
+$counts   = array();
 foreach ($rs_auditors->GetArray() as $auditor) {
     array_push($auditors, $auditor['auditor_name']);
     array_push($counts, $dashboards->count_per($auditor['auditor_id'], $tahun, $tipe_audit));

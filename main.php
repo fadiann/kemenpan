@@ -90,24 +90,6 @@ if($count_notif <> 0) $notif_show = ", Anda Memiliki ".$count_notif. " Notifikas
 				location.href = "App/Config/Logout.php";
 			}
 		}
-
-		// function sh(id, jml) {
-		// 	if (jml == '0') {
-		// 		document.getElementById(id).style.display = 'none';
-		// 	} else {
-		// 		document.getElementById(id).style.display = 'block';
-		// 	}
-		// }
-		// $(document).ready(function() {
-		// 	$("#jam").clock({
-		// 		"format": "24",
-		// 		"calendar": "false"
-		// 	});
-		// 	$("div#jamcal").clock({
-		// 		"calendar": "true",
-		// 		"langSet": "id"
-		// 	});
-		// });
 	</script>
 	<script>
 		Pace.on("done", function() {
