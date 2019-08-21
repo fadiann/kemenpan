@@ -89,7 +89,7 @@ class dashboard
         if ($status != "") {
             $condition .= " and tl_status = '" . $status . "'";
         }
-        $sql = "select DISTINCT auditee_id, concat(auditee_kode) as auditee_title, auditee_name
+        $sql = "SELECT DISTINCT auditee_id, concat(auditee_kode) as auditee_title, auditee_name
                 FROM auditee
                 left join finding_internal on finding_auditee_id = auditee_id
                 left join assignment on assign_id = finding_assign_id

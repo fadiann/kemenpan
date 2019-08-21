@@ -123,7 +123,7 @@ switch ($_action) {
 		//$auditee_id   = $get_id[1];
 		$laporan_id   = $assigns->cek_laporan($assign_id);
 		$row_laporan	  = $assigns->ambil_laporan_for_edit($laporan_id);
-		$page_title   = "Laporan Hasil Audit";
+		$page_title   = "Laporan Hasil";
 		break;
 	case "anggota_assign" :
 		$_SESSION ['ses_assign_id'] = $Helper->replacetext ( $_REQUEST ["data_id"] );
@@ -251,9 +251,9 @@ switch ($_action) {
 		//   'apresiasi' => string '<p>9</p>
 		// ' (length=10)
 		//   'status_lha' => string '' (length=0)
-		$id 		 = $Helper->unixid();
+		$id          = $Helper->unixid();
 		$fdata_id    = $Helper->filterCk ( $_POST ["data_id"] );
-		$laporan_id    = $Helper->filterCk ( $_POST ["laporan_id"] );
+		$laporan_id  = $Helper->filterCk ( $_POST ["laporan_id"] );
 		$ringkasan   = $Helper->filterCk ( $_POST ["ringkasan"] );
 		$dasar       = $Helper->filterCk ( $_POST ["dasar"] );
 		$tujuan      = $Helper->filterCk ( $_POST ["tujuan"] );
@@ -264,8 +264,17 @@ switch ($_action) {
 		$lainlain    = $Helper->filterCk ( $_POST ["lainlain"] );
 		$apresiasi   = $Helper->filterCk ( $_POST ["apresiasi"] );
 		$status_lha  = $Helper->filterCk ( $_POST ["status_lha"] );
-		$assigns->update_laporan($laporan_id, $ringkasan, $dasar, $tujuan, $ruang, $metodologi, $uraian, $rekomendasi, $lainlain, $apresiasi, $status_lha);
-		$assigns->update_status_laporan($flha_id, $status_lha);
+		$old_fake_laporan  = $Helper->filterCk ( $_POST ["old_fake_laporan"] );
+		$fake_laporan = $Helper->replacetext ( $_FILES ["fake_laporan"] ["name"] );
+		$assigns->update_laporan($laporan_id, $ringkasan, $dasar, $tujuan, $ruang, $metodologi, $uraian, $rekomendasi, $lainlain, $apresiasi, $status_lha, $fake_laporan);
+		$assigns->update_status_laporan($laporan_id, $status_lha);
+		if(empty($old_fake_laporan)){
+			$Helper->UploadFile ( "Upload_Audit", "fake_laporan", "" );
+			$assigns->upload_laporan($laporan_id, $fake_laporan);
+		}else{
+			$assigns->upload_laporan($laporan_id, $old_fake_laporan);
+		}
+
 		// var_dump($_POST);
 		// die();
 		// var_dump($flha_id);

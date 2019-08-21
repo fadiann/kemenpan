@@ -105,9 +105,26 @@
 					<option value="2">Setujui</option>
 				</select>
 			</fieldset>
-	<?
+			<?php
 				}
 			}
+			?>
+
+			<?php if($_SESSION ['ses_groupId'] == '4d6cb5538c7cfbd6b1ccbd881e0e97e69183b4a0'): ?>
+				<?php if($arr ['program_status'] == 1): ?>
+			<fieldset class="form-group">
+				<select name="status" class="form-control"
+					onchange="return set_action('getapprove_pka', '<?=$arr[0]?>', this.value)">
+					<option value="">Pilih Status</option>
+					<option value="3">Tolak Pengajuan</option>
+					<option value="2">Setujui</option>
+				</select>
+			</fieldset>
+				<?php endif ?>
+			<?php endif ?>
+
+
+	<?php
 		if ($iconDetail) {
 	?>
 			<button class="btn btn-info btn-circle btn-sm" title="Rincian Data" Onclick="return set_action('getdetail', '<?=$arr[0]?>')"><i class="fa fa-info-circle"></i></button>

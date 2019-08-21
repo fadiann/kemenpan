@@ -31,16 +31,16 @@
 					<i class="fa fa-info-circle"></i> Matriks Temuan
 					</button>
 				</fieldset>
-				<fieldset class="form-group">
+				<!-- <fieldset class="form-group">
 					<button class="btn btn-primary" Onclick="window.open('main.php?method=laporan_lha_filter', '_self');">
 					<i class="fa fa-info-circle"></i> Laporan Hasil Audit
 					</button>
-				</fieldset>
-				<fieldset class="form-group">
+				</fieldset> -->
+				<!-- <fieldset class="form-group">
 					<button class="btn btn-primary" Onclick="window.open('main.php?method=laporan_monitoring_tl_filter', '_self');">
 					<i class="fa fa-info-circle"></i> Monitoring Tindak Lanjut
 					</button>
-				</fieldset>
+				</fieldset> -->
 				</center>
 			</div>
 		</section>

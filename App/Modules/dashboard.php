@@ -134,7 +134,7 @@ var chart2 = new Chart(ctx2, {
 
     // The data for our dataset
     data: {
-        labels: [<?=json_encode($auditees) ?>],
+        labels: <?=json_encode($auditees) ?>,
         datasets: [
 		// 	{
         //     label: 'Jumlah Temuan',

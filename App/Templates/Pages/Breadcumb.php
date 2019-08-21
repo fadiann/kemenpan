@@ -4,9 +4,31 @@
         <ol class="breadcrumbs" style="padding-right:30px !important">
 <?php
 switch ($method) :
-	// coba pelanggan
+	// Manajemen Risiko
+	case "benturan_kepentingan" :
+		echo "<li><a href='main.php'><i class='fa fa-home'></i></a></li> <li><a class='current' href='#'>Manajemen Risiko</a></li><li><a class='current' href='main.php?method=benturan_kepentingan'>Benturan Kepentingan</a></li>";
+		break;
+	case "risk_penetapantujuan" :
+		echo "<li><a href='main.php'><i class='fa fa-home'></i></a></li> <li><a class='current' href='#'>Manajemen Risiko</a></li><li><a class='current' href='main.php?method=risk_penetapan_tujuan'>Siklus Manajemen Risiko</a></li>";
+		break;
+	case "risk_identifikasi" :
+		echo "<li><a href='main.php'><i class='fa fa-home'></i></a></li> <li><a class='current' href='#'>Manajemen Risiko</a></li><li><a class='current' href='main.php?method=risk_penetapan_tujuan'>Siklus Manajemen Risiko</a><li><a class='current' href='main.php?method=risk_identifikasi'>Identifikasi Sasaran</a></li>";
+		if(isset($_REQUEST['data_action'])):
+			$data_action = $Helper->replacetext($_REQUEST['data_action']);
+			if($data_action == 'getindikator'):
+				// var_dump($_REQUEST);
+				echo "<li><a class='current' href='#'>Indikator Risiko</a></li>";
+				$_SESSION['data_indikator'] = $Helper->replacetext($_REQUEST['data_id']);
+			elseif($data_action == 'getrisiko'):
+				// var_dump($_REQUEST);
+				echo "<li><a class='current' href='?method=risk_identifikasi&data_action=getindikator&data_id=".$_SESSION['data_indikator']."'>Indikator Risiko</a></li><li><a class='current' href='main.php?method=risk_identifikasi'>Risiko</a></li>";
+			endif;
+		endif;
+		break;
+	// audit management
 	case "risk_result" :
 		echo "<li><a href='main.php'><i class='fa fa-home'></i></a></li> <li><a class='current' href='#'>Coba Pelanggan</a></li><li><a class='current' href='#'>Coba Pelanggan</a></li>";
+		break;
 	// audit management
 	case "risk_result" :
 		echo "<li><a href='main.php'><i class='fa fa-home'></i></a></li> <li><a class='current' href='#'>Manajemen Audit</a></li><li><a class='current' href='#'>Profil Risiko</a></li>";

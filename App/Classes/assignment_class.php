@@ -583,9 +583,8 @@ class assign {
 	//end assign tl
 
 	//laporan baru
-	public function update_laporan($fdata_id, $ringkasan, $dasar, $tujuan, $ruang, $metodologi, $uraian, $rekomendasi, $lainlain, $apresiasi, $status_lha)
+	public function update_laporan($fdata_id, $ringkasan, $dasar, $tujuan, $ruang, $metodologi, $uraian, $rekomendasi, $lainlain, $apresiasi, $status_lha, $file_name)
 	{
-		$this->update_status_laporan($fdata_id, $status_lha);
 		$sql = "UPDATE assignment_laporan SET
 				ringkasan = '".$ringkasan."', dasar = '".$dasar."', tujuan = '".$tujuan."', 
 				ruang = '".$ruang."', metodologi = '".$metodologi."', uraian = '".$uraian."', 
@@ -598,9 +597,18 @@ class assign {
 	}
 	public function update_status_laporan($fdata_id, $status_lha)
 	{
-		$sql = "UPDATE assignment_lha SET
-				lha_status = '".$status_lha."'
-				WHERE lha_id_assign = '".$fdata_id."'";
+		$sql = "UPDATE assignment_laporan SET
+				assignment_laporan.status = '".$status_lha."'
+				WHERE assignment_laporan_id = '".$fdata_id."'";
+		// echo $sql;
+		// die();
+		$this->_db->_dbquery ( $sql );
+	}
+	public function upload_laporan($fdata_id, $file_name)
+	{
+		$sql = "UPDATE assignment_laporan SET
+				file_laporan = '".$file_name."'
+				WHERE assignment_laporan_id = '".$fdata_id."'";
 		// echo $sql;
 		// die();
 		$this->_db->_dbquery ( $sql );

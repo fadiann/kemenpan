@@ -167,6 +167,7 @@
 
 $rs  = $assigns->assign_viewlist ( $assign_id );
 $arr = $rs->FetchRow();
+// var_dump($arr);
 
 // $rs_auditee          = $assigns->auditee_detil ( $auditee_id );
 // $arr_auditee         = $rs_auditee->FetchRow();
@@ -183,7 +184,7 @@ $cek_posisi = $findings->cek_posisi($arr['assign_id']);
 	<div class="col-md-12">
 		<section class="panel">
 			<header class="panel-heading">
-				<h2 class="panel-title"><?=$page_title?></h2>
+				<h2 class="panel-title"><?=$page_title?> <?=strtoupper($arr['audit_type_name'])?></h2>
 			</header>
 			<div class="panel-body wrap">
 	    <form method="post" name="f" action="#" class="form-horizontal" id="validation-form" enctype="multipart/form-data"  onsubmit="return cek_data()">
@@ -223,6 +224,9 @@ $cek_posisi = $findings->cek_posisi($arr['assign_id']);
                             </li> -->
                             <li>
                                 <a href="#k" data-toggle="tab">Laporan</a>
+                            </li>
+                            <li>
+                                <a href="#l" data-toggle="tab">Upload Laporan</a>
                             </li>
                         </ul>
                         <div class="tab-content">
@@ -301,17 +305,17 @@ $cek_posisi = $findings->cek_posisi($arr['assign_id']);
                                 <fieldset class="form-group">
                                     <div class="col-sm-12">
                                         <div class="nostyle">
-                                            <h3>RINGKASAN HASIL REVIU</h3>
+                                            <h3>RINGKASAN HASIL <?=strtoupper($arr['audit_type_name'])?></h3>
                                             <?=$Helper->showHtml($row_laporan['ringkasan'])?>
                                             <h3>DASAR HUKUM</h3>
                                             <?=$Helper->showHtml($row_laporan['dasar'])?>
-                                            <h3>TUJUAN REVIU</h3>
+                                            <h3>TUJUAN <?=strtoupper($arr['audit_type_name'])?></h3>
                                             <?=$Helper->showHtml($row_laporan['tujuan'])?>
                                             <h3>RUANG LINGKUP</h3>
                                             <?=$Helper->showHtml($row_laporan['ruang'])?>
-                                            <h3>METODOLOGI REVIU</h3>
+                                            <h3>METODOLOGI <?=strtoupper($arr['audit_type_name'])?></h3>
                                             <?=$Helper->showHtml($row_laporan['metodologi'])?>
-                                            <h3>URAIAN HASIL REVIU</h3>
+                                            <h3>URAIAN HASIL <?=strtoupper($arr['audit_type_name'])?></h3>
                                             <?=$Helper->showHtml($row_laporan['uraian'])?>
                                             <h3>REKOMENDASI</h3>
                                             <?=$Helper->showHtml($row_laporan['rekomendasi'])?>
@@ -356,11 +360,34 @@ $cek_posisi = $findings->cek_posisi($arr['assign_id']);
                                     </center>
                                 </fieldset>
                             </div>
+
+                            <div id="l" class="tab-pane">
+                                <fieldset class="form-group">
+                                    <div class="col-sm-12">
+                                        <fieldset class="form-group mt-lg">
+                                            <label class="col-sm-4 control-label">File <span class="required">*</span></label>
+                                            <div class="col-sm-5">
+                                                <input type="file" name="fake_laporan" class="form-control">
+                                                <input type="hidden" name="old_fake_laporan" class="form-control" value="<?=$row_laporan['file_laporan']?>"
+                                            </div>
+                                        </fieldset>
+                                        <fieldset class="form-group">
+                                            <label class="col-sm-4 control-label">Lampiran <span class="required">*</span></label>
+                                            <div class="col-sm-5 control-label text-left">
+                                                <?php if(!empty($row_laporan['file_laporan'])): ?>
+                                                <?=$Helper->showHtml($row_laporan['file_laporan'])?> <a class="btn btn-xs btn-primary" href="Public/Upload/Upload_Audit/<?=$row_laporan['file_laporan']?>" target="_blank">Lihat</a>
+                                                <?php endif; ?>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                </fieldset>
+                            </div>
+
                         </div>
                     </div>
                 </div>
 			</fieldset>
-		<fieldset class="form-group mt-md">
+		<fieldset class="form-group mb-lg">
 			<center>
 					<input type="button" class="btn btn-primary" value="Kembali" onclick="location='<?=$def_page_request?>'">
 					<?

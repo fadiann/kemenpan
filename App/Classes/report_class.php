@@ -144,5 +144,33 @@ class report {
 		$data = $this->_db->_dbquery ( $sql );
 		return $data;
 	}
+	
+	
+	function rekap_laporan($tahun) {
+		$sql = "SELECT * FROM assignment INNER JOIN assignment_laporan
+		ON assignment.`assign_id` = assignment_laporan.`assignment_id` WHERE assign_tahun = '".$tahun."' ORDER BY assign_start_date DESC"; 
+		$data = $this->_db->_dbquery ( $sql );
+		return $data;
+	}
+	function rekap_pelaksanaan($tahun) {
+		$sql = "SELECT assignment.`assign_id`, assignment.`assign_kegiatan`, assignment.`assign_start_date`, assignment_laporan.`file_laporan`, auditee.`auditee_name`, assign_end_date
+		FROM assignment 
+		INNER JOIN assignment_laporan ON assignment.`assign_id` = assignment_laporan.`assignment_id`
+		INNER JOIN assignment_auditee ON assignment.`assign_id` = assignment_auditee.`assign_auditee_id_assign`
+		INNER JOIN auditee ON assignment_auditee.`assign_auditee_id_auditee` = auditee.`auditee_id`
+		WHERE assign_tahun = '".$tahun."' ORDER BY assign_start_date DESC"; 
+		$data = $this->_db->_dbquery ( $sql );
+		return $data;
+	}
+	function get_tim($assign_id) {
+		$sql = "SELECT assignment.`assign_id`, assignment_auditor.`assign_auditor_id_auditor`, auditor.`auditor_name`, par_posisi_penugasan.`posisi_code` FROM assignment
+		INNER JOIN assignment_auditor ON assignment.`assign_id` = assignment_auditor.`assign_auditor_id_assign`
+		INNER JOIN auditor ON auditor.`auditor_id` = assignment_auditor.`assign_auditor_id_auditor`
+		INNER JOIN par_posisi_penugasan ON assignment_auditor.`assign_auditor_id_posisi` = par_posisi_penugasan.`posisi_id`
+		WHERE assign_id = '".$assign_id."' ORDER BY par_posisi_penugasan.`posisi_sort` ASC"; 
+		$data = $this->_db->_dbquery ( $sql );
+		return $data;
+	}
+	
 }
 ?>

@@ -5,25 +5,25 @@ $INCLUDE_DIR = $PATH_ROOT . "App/Classes/";
 include $PATH_ROOT . "App/Libraries/Adodb5/adodb.inc.php";
 class Databases
 {
-	var $dbhost = 'localhost';
-	var $dbuser = 'root';
-	var $dbpassword = 'password';
-	var $dbname = 'ams_kemenpan';
-	var $dbdriver = 'mysqli';
-	var $debug = false;
-	var $db;
-	var $basepath = "D:/wamp64/www/kemenpan2/";
-	var $baseurl = "http://localhost/kemenpan2/";
-
-	// var $dbhost     = "hekya.id";
-	// var $dbuser     = "u6559439_kemenpan";
-	// var $dbpassword = "rQP-t[aVBWT^";
-	// var $dbname     = "u6559439_kemenpan";
-	// var $dbdriver   = "mysqli";
-	// var $debug      = false;
+	// var $dbhost = 'localhost';
+	// var $dbuser = 'root';
+	// var $dbpassword = 'marAs7PUtweB47nu';
+	// var $dbname = 'ams_kemenpan';
+	// var $dbdriver = 'mysqli';
+	// var $debug = false;
 	// var $db;
 	// var $basepath = "D:/wamp64/www/kemenpan2/";
-	// var $baseurl  = "http://localhost/kemenpan2/";
+	// var $baseurl = "http://localhost/kemenpan2/";
+
+	var $dbhost     = "hekya.id";
+	var $dbuser     = "u6559439_kemenpan";
+	var $dbpassword = "rQP-t[aVBWT^";
+	var $dbname     = "u6559439_kemenpan";
+	var $dbdriver   = "mysqli";
+	var $debug      = false;
+	var $db;
+	var $basepath = "D:/wamp64/www/kemenpan2/";
+	var $baseurl  = "http://localhost/kemenpan2/";
 
 	// auth api
 	// var $user_api = 'simontila_server';

@@ -151,7 +151,24 @@ switch ($method) :
         include_once "App/Modules/ReportManagement/laporan_lha_filter.php";
         break;
     case "laporan_lha":
-        include_once "App/Modules/ReportManagement/laporan_lha.php";
+        include_once "App/Modules/ReportManagement/laporan_lha_filter.php";
+        break;
+        
+    //rekap pelaksanaan
+    case "rekap_pelaksanaan_filter":
+        include_once "App/Modules/ReportManagement/rekap_pelaksanaan_filter.php";
+        break;
+    case "rekap_pelaksanaan":
+        include_once "App/Modules/ReportManagement/rekap_pelaksanaan.php";
+        break;
+    // case "laporan_lha":
+    //     include_once "App/Modules/ReportManagement/laporan_lha.php";
+    //     break;
+    case "rekap_laporan_filter":
+        include_once "App/Modules/ReportManagement/rekap_laporan_filter.php";
+        break;
+    case "rekap_laporan":
+        include_once "App/Modules/ReportManagement/rekap_laporan.php";
         break;
         // auditor management
     case "auditormgmt":

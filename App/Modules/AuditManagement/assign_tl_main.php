@@ -53,16 +53,16 @@ $offset = ($noPage - 1) * $num_row;
 $def_page_request = $paging_request . "&page=$noPage";
 $grid = "App/Templates/Grids/grid_monitoring.php";
 $gridHeader = array ("Nama Kegiatan", "Obyek Audit", "No & Tanggal SPT", "Tahun", "Upload Data Awal", "Temuan Audit", "Matriks TL");
-$gridDetail = array ("0", "0", "5", "4", "0", "0", "0");
+$gridDetail = array ("assign_kegiatan", "0", "5", "4", "0", "0", "0");
 $gridWidth = array ("35", "35", "15", "10", "10", "10", "10");
 
-$key_by = array ("Tahun");
-$key_field = array ("assign_tahun");
+$key_by = array ("Nama Kegiatan","Tahun");
+$key_field = array ("assign_kegiatan", "assign_tahun");
 
-$widthAksi = "10";
-$iconAdd = "0";
-$iconEdit = "0";
-$iconDel = "0";
+$widthAksi  = "10";
+$iconAdd    = "0";
+$iconEdit   = "0";
+$iconDel    = "0";
 $iconDetail = "1";
 // === end grid ===//
 
@@ -136,6 +136,7 @@ switch ($_action) {
 	default :
 		$recordcount = $assigns->assign_tl_count ($base_on_id_eks, $key_search, $val_search, $key_field);
 		$rs = $assigns->assign_tl_view_grid ($base_on_id_eks, $key_search, $val_search, $key_field, $offset, $num_row );
+		// var_dump($rs);
 		$page_title = "Daftar Tindak Lanjut Audit";
 		$page_request = $list_page_request;
 		break;
