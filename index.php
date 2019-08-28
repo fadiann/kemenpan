@@ -76,7 +76,7 @@ if (@$_POST ['submit'] == "Login") {
 
 	<title>e-MAS | Elektronik Manajemen Audit Sistem</title>
 	<link rel="stylesheet" href="Public/css/loader.css">
-	<link rel="shortcut icon" href="Public/images/emas-logo.png" type="image/x-icon">
+	<link rel="shortcut icon" href="Public/images/logo_isma.ico" type="image/x-icon">
 	<meta name="author" content="Fadian Adhitya Nugraha">
 
 	<!-- Mobile Metas -->
@@ -133,7 +133,7 @@ if (@$_POST ['submit'] == "Login") {
 		<section class="body-sign">
 			<div class="center-sign">
 				<a href="/" class="logo pull-left">
-					<img src="Public/images/emas-logo.png" height="54" alt="Porto Admin" />
+					<img src="Public/images/logo_isma.png" height="124" style="margin-top:-50px;" alt="Porto Admin" />
 				</a>
 
 				<div class="panel panel-sign">
