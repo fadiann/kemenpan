@@ -26,14 +26,14 @@
 				<label class="col-sm-3 control-label">Tipe Audit <span class="required">*</span></label>
 					<div class="col-sm-5">
 				<?=$Helper->dbCombo("tipe_audit", "par_audit_type", "audit_type_id", "audit_type_name", "and audit_type_del_st = 1 ", "", "", 1)?>
-				
+
 					</div>
 			</fieldset>
 			<fieldset class="form-group">
 				<label class="col-sm-3 control-label">Obyek Audit <span class="required">*</span></label>&nbsp;&nbsp;&nbsp;<input type="hidden" name="auditee" id="auditee" class="select2 multiple" />
 			</fieldset>
 			<fieldset class="form-group">
-				<label class="col-sm-3 control-label">Tahun <span class="required">*</span></label> 
+				<label class="col-sm-3 control-label">Tahun <span class="required">*</span></label>
 					<div class="col-sm-5">
 				<select class="form-control" name="tahun" id="tahun">
 					<option value="">Pilih Satu</option>
@@ -57,14 +57,14 @@
 			</fieldset>
 			<div id="periodes">
 				<fieldset class="form-group">
-					<label class="col-sm-3 control-label">Tanggal Kegiatan <span class="required">*</span></label> 
+					<label class="col-sm-3 control-label">Tanggal Kegiatan <span class="required">*</span></label>
 					<div class="col-sm-2">
 					<input type="text" class="form-control" name="tanggal_awal" id="tanggal_awal" autocomplete="off">
 					</div>
 					<div class="col-sm-1 text-center">s/d</div>
 					<div class="col-sm-2">
 					<input type="text" class="form-control" name="tanggal_akhir" id="tanggal_akhir" autocomplete="off">
-					
+
 					</div>
 				</fieldset>
 				<fieldset class="form-group">
@@ -72,13 +72,13 @@
 					<div class="col-sm-1">
 					<input type="text" class="form-control" name="hari_persiapan" id="hari_persiapan">
 					</div>
-					<label class="col-sm-2 control-label">Tanggal Persiapan</label> 					
+					<label class="col-sm-2 control-label">Tanggal Persiapan</label>
 					<div class="col-sm-2">
-					<input type="text" class="form-control" name="tanggal_persiapan_awal" id="tanggal_persiapan_awal" autocomplete="off"> 		
-					</div>		
+					<input type="text" class="form-control" name="tanggal_persiapan_awal" id="tanggal_persiapan_awal" autocomplete="off">
+					</div>
 					<div class="col-sm-1 text-center">
 					s/d
-					</div>				
+					</div>
 					<div class="col-sm-2">
 					<input type="text" class="form-control" name="tanggal_persiapan_akhir" id="tanggal_persiapan_akhir" autocomplete="off">
 					</div>
@@ -88,9 +88,9 @@
 					<div class="col-sm-1">
 					<input type="text" class="form-control" name="hari_pelaksanaan" id="hari_pelaksanaan">
 					</div>
-					<label class="col-sm-2 control-label">Tanggal Pelaksanaan</label> 
+					<label class="col-sm-2 control-label">Tanggal Pelaksanaan</label>
 					<div class="col-sm-2">
-					<input type="text" class="form-control" name="tanggal_pelaksanaan_awal" id="tanggal_pelaksanaan_awal" autocomplete="off"> 
+					<input type="text" class="form-control" name="tanggal_pelaksanaan_awal" id="tanggal_pelaksanaan_awal" autocomplete="off">
 					</div>
 					<div class="col-sm-1 text-center">
 						s/d
@@ -104,9 +104,9 @@
 					<div class="col-sm-1">
 					<input type="text" class="form-control" name="hari_pelaporan" id="hari_pelaporan">
 					</div>
-					<label class="col-sm-2 control-label">Tanggal Pelaporan</label> 
+					<label class="col-sm-2 control-label">Tanggal Pelaporan</label>
 					<div class="col-sm-2">
-					<input type="text" class="form-control" name="tanggal_pelaporan_awal" id="tanggal_pelaporan_awal" autocomplete="off"> 
+					<input type="text" class="form-control" name="tanggal_pelaporan_awal" id="tanggal_pelaporan_awal" autocomplete="off">
 					</div>
 					<div class="col-sm-1 text-center">
 						s/d
@@ -153,7 +153,7 @@
 				</div>
 			</fieldset>
 			<fieldset class="form-group">
-				<label class="col-sm-3 control-label">Lampiran</label> 
+				<label class="col-sm-3 control-label">Lampiran</label>
 				<div class="col-sm-5"><input type="file" class="form-control" name="assign_attach" id="assign_attach"></div>
 			</fieldset>
 			<input type="hidden" name="data_id" id="data_id" value="">
@@ -180,11 +180,11 @@
 				</div>
 			</fieldset>
 			<fieldset class="form-group">
-				<label class="col-sm-3 control-label">Obyek Audit <span class="mandatory">*</span></label> 
+				<label class="col-sm-3 control-label">Obyek Audit <span class="mandatory">*</span></label>
 				<div class="col-sm-5"><input type="hidden" name="auditee" id="auditee" class="select2 multiple" value="<?=$assign_id_auditee?>" /></div>
 			</fieldset>
 			<fieldset class="form-group">
-				<label class="col-sm-3 control-label">Tahun <span class="mandatory">*</span></label> 
+				<label class="col-sm-3 control-label">Tahun <span class="mandatory">*</span></label>
 				<div class="col-sm-5">
 				<select class="form-control" name="tahun" id="tahun">
 					<option value="">Pilih Satu</option>
@@ -193,7 +193,7 @@
 				for($i = 1; $i <= 3; $i ++) {
 					?>
 					<option value="<?=$thn?>"
-						<? if($thn==$arr['assign_tahun']) echo "selected";?>><?=$thn?></option>
+						<?php if($thn==$arr['assign_tahun']) echo "selected";?>><?=$thn?></option>
 					<?
 					$thn ++;
 				}
@@ -211,7 +211,7 @@
 				<fieldset class="form-group">
 				<label class="col-sm-3 control-label">Tanggal Kegiatan <span class="mandatory">*</span></label>
 				<div class="col-sm-2">
-				<input type="text" class="form-control" name="tanggal_awal" id="tanggal_awal" value="<?=$Helper->dateIndo($arr['assign_start_date'])?>"> 
+				<input type="text" class="form-control" name="tanggal_awal" id="tanggal_awal" value="<?=$Helper->dateIndo($arr['assign_start_date'])?>">
 				</div>
 				<div class="col-sm-1 text-center">s/d</div>
 				<div class="col-sm-2">
@@ -225,7 +225,7 @@
 				</div>
 				<label class="col-sm-2 control-label">Tanggal Persiapan</label>
 				<div class="col-sm-2">
-				<input type="text" class="form-control" name="tanggal_persiapan_awal" id="tanggal_persiapan_awal" value="<?=$Helper->dateIndo($arr['assign_persiapan_awal'])?>"> 
+				<input type="text" class="form-control" name="tanggal_persiapan_awal" id="tanggal_persiapan_awal" value="<?=$Helper->dateIndo($arr['assign_persiapan_awal'])?>">
 				</div>
 				<div class="col-sm-1 text-center">
 					s/d
@@ -241,7 +241,7 @@
 				</div>
 				<label class="col-sm-2 control-label">Tanggal Pelaksanaan</label>
 				<div class="col-sm-2">
-				<input type="text" class="form-control" name="tanggal_pelaksanaan_awal" id="tanggal_pelaksanaan_awal" value="<?=$Helper->dateIndo($arr['assign_pelaksanaan_awal'])?>"> 
+				<input type="text" class="form-control" name="tanggal_pelaksanaan_awal" id="tanggal_pelaksanaan_awal" value="<?=$Helper->dateIndo($arr['assign_pelaksanaan_awal'])?>">
 				</div>
 				<div class="col-sm-1 text-center">
 				s/d
@@ -257,7 +257,7 @@
 				</div>
 				<label class="col-sm-2 control-label">Tanggal Pelaporan</label>
 				<div class="col-sm-2">
-				<input type="text" class="form-control" name="tanggal_pelaporan_awal" id="tanggal_pelaporan_awal" value="<?=$Helper->dateIndo($arr['assign_pelaporan_awal'])?>"> 
+				<input type="text" class="form-control" name="tanggal_pelaporan_awal" id="tanggal_pelaporan_awal" value="<?=$Helper->dateIndo($arr['assign_pelaporan_awal'])?>">
 				</div>
 				<div class="col-sm-1 text-center">
 				s/d
@@ -268,7 +268,7 @@
 			</fieldset>
 			</div>
 			<div id="dates">
-				
+
 			</div>
 			<fieldset class="form-group mt-md">
 				<div class="col-sm-12">
@@ -308,7 +308,7 @@
 			</fieldset>
 			<fieldset class="hr" style="height: 40px !important">
 				<label class="col-sm-3 control-label">Lampiran</label>
-				<input type="hidden" class="span4" name="assign_attach_old" value="<?=$arr['assign_file']?>"> 
+				<input type="hidden" class="span4" name="assign_attach_old" value="<?=$arr['assign_file']?>">
 				<input type="file" class="span4" name="assign_attach" id="assign_attach">
 				<label class="col-sm-3 control-label">
 					<span class="lampiran">
@@ -316,7 +316,7 @@
 					</span>
 				</span>
 			</fieldset>
-			<input type="hidden" name="data_id" id="data_id" value="<?=$arr['assign_id']?>">	
+			<input type="hidden" name="data_id" id="data_id" value="<?=$arr['assign_id']?>">
 		<?
 				break;
 			case "getdetail" :
@@ -413,7 +413,7 @@
 						<td>Detail komentar</td>
 						<td>:</td>
 						<td>
-						<?php 
+						<?php
 						$z = 0;
 						$rs_komentar = $assigns->assign_komentar_viewlist ( $arr ['assign_id'] );
 						while ( $arr_komentar = $rs_komentar->FetchRow () ) {
@@ -427,7 +427,7 @@
 						<td>Upload Data Awal</td>
 						<td>:</td>
 						<td>
-						<?php 
+						<?php
 						$no_file = 0;
 						$rs_file = $assigns->assign_upload_viewlist ( $arr ['assign_id'] );
 						while ( $arr_file = $rs_file->FetchRow () ) {
@@ -541,7 +541,7 @@
 						<td class="text-right">Detail komentar</td>
 						<td>:</td>
 						<td>
-						<?php 
+						<?php
 						$z = 0;
 						$rs_komentar = $assigns->assign_komentar_viewlist ( $arr ['assign_id'] );
 						while ( $arr_komentar = $rs_komentar->FetchRow () ) {
@@ -586,8 +586,8 @@
 				<textarea id="komentar" class="form-control" name="komentar" rows="3" required></textarea>
 					</div>
 			</fieldset>
-			<input type="hidden" name="data_id" value="<?=$arr['assign_id']?>">	
-			<input type="hidden" name="status_penugasan" value="<?=$status?>">	
+			<input type="hidden" name="data_id" value="<?=$arr['assign_id']?>">
+			<input type="hidden" name="status_penugasan" value="<?=$status?>">
 		<?
 				break;
 			case "upload_data" :
@@ -600,47 +600,47 @@
 				?>
 			<fieldset class="form-group">
 				<label class="span1">File 1</label>
-				<input type="hidden" class="span4" name="file_1_old" value="<?=$file[0]?>"> 
+				<input type="hidden" class="span4" name="file_1_old" value="<?=$file[0]?>">
 				<input type="file" class="span2" name="file_1" id="file_1">
 				<label class="span3"><a href="#" Onclick="window.open('<?=$Helper->baseurl("Upload_Audit").$file[0]?>','_blank')"><?=$file[0]?></a></label>
 				<input type="checkbox" name="del_1" value="1"> Hapus File 1
 			</fieldset>
 			<fieldset class="form-group">
 				<label class="span1">File 2</label>
-				<input type="hidden" class="span4" name="file_2_old" value="<?=$file[1]?>"> 
+				<input type="hidden" class="span4" name="file_2_old" value="<?=$file[1]?>">
 				<input type="file" class="span2" name="file_2" id="file_2">
 				<label class="span3"><a href="#" Onclick="window.open('<?=$Helper->baseurl("Upload_Audit").$file[1]?>','_blank')"><?=$file[1]?></a></label>
 				<input type="checkbox" name="del_2" value="1"> Hapus File 2
 			</fieldset>
 			<fieldset class="form-group">
 				<label class="span1">File 3</label>
-				<input type="hidden" class="span4" name="file_3_old" value="<?=$file[2]?>"> 
+				<input type="hidden" class="span4" name="file_3_old" value="<?=$file[2]?>">
 				<input type="file" class="span2" name="file_3" id="file_3">
 				<label class="span3"><a href="#" Onclick="window.open('<?=$Helper->baseurl("Upload_Audit").$file[2]?>','_blank')"><?=$file[2]?></a></label>
 				<input type="checkbox" name="del_3" value="1"> Hapus File 3
 			</fieldset>
 			<fieldset class="form-group">
 				<label class="span1">File 4</label>
-				<input type="hidden" class="span4" name="file_4_old" value="<?=$file[3]?>"> 
+				<input type="hidden" class="span4" name="file_4_old" value="<?=$file[3]?>">
 				<input type="file" class="span2" name="file_4" id="file_4">
 				<label class="span3"><a href="#" Onclick="window.open('<?=$Helper->baseurl("Upload_Audit").$file[3]?>','_blank')"><?=$file[3]?></a></label>
 				<input type="checkbox" name="del_4" value="1"> Hapus File 4
 			</fieldset>
 			<fieldset class="form-group">
 				<label class="span1">File 5</label>
-				<input type="hidden" class="span4" name="file_5_old" value="<?=$file[4]?>"> 
+				<input type="hidden" class="span4" name="file_5_old" value="<?=$file[4]?>">
 				<input type="file" class="span2" name="file_5" id="file_5">
 				<label class="span3"><a href="#" Onclick="window.open('<?=$Helper->baseurl("Upload_Audit").$file[4]?>','_blank')"><?=$file[4]?></a></label>
 				<input type="checkbox" name="del_5" value="1"> Hapus File 5
 			</fieldset>
-			<input type="hidden" name="data_id" id="data_id" value="<?=$arr['assign_id']?>">	
+			<input type="hidden" name="data_id" id="data_id" value="<?=$arr['assign_id']?>">
 		<?
 				break;
 		}
 		?>
 			<fieldset class="form-group">
 				<center>
-				<input type="button" class="btn btn-info" value="Kembali" onclick="location='<?=$def_page_request?>'"> 
+				<input type="button" class="btn btn-info" value="Kembali" onclick="location='<?=$def_page_request?>'">
 				<?
 				if($_action != "getdetail"){
 				?>
@@ -649,8 +649,8 @@
 				}
 				// if($_action != "getdetail"){
 				?>
-					
-				<?php 
+
+				<?php
 				// }
 				?>
 				</center>
@@ -675,11 +675,11 @@ $(document).ready(function() {
 				id : id
 			},
 			success : function(res) {
-				
+
 				var minDate = '';
                 var maxDate = '';
                 var html = '';
-     
+
                 $.each(JSON.parse(res), function(index, el) {
                     minDate = el.minDate;
                     maxDate = el.maxDate;
@@ -768,7 +768,7 @@ $(document).ready(function() {
 	});
 
 });
-  
+
 $(function() {
 	$("#validation-form").validate({
 		rules: {
@@ -780,7 +780,7 @@ $(function() {
 			tipe_audit: "Silahkan Pilih Tipe Audit",
 			tahun: "Silahkan Pilih Tahun",
 			tanggal_akhir: "Silahkan Pilih Tanggal Awal dan Akhir Audit"
-		},		
+		},
 		submitHandler: function(form) {
 			form.submit();
 		}

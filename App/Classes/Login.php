@@ -1,4 +1,4 @@
-<?
+<?php
 if (@$position == 1) {
 	include_once "App/Config/Databases.php";
 } else {
@@ -85,7 +85,7 @@ class Login {
 			$date_finis = explode ( " ", date ( 'Y-m-d H:i:s', $lastLogin + 1800 ) );
 			$time_finis = explode ( ":", $date_finis [1] );
 			$selesai = $time_finis [0] . ":" . $time_finis [1] . ":" . $time_finis [2];
-			
+
 			$mulai_time = (is_string ( $mulai ) ? strtotime ( $mulai ) : $mulai);
 			$selesai_time = (is_string ( $selesai ) ? strtotime ( $selesai ) : $selesai);
 			$detik = $selesai_time - $mulai_time;

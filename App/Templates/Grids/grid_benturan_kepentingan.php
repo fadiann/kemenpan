@@ -50,7 +50,7 @@
         <?php endwhile; ?>
 <?php } else { ?>
         <td colspan="<?= $jmlHeader + 2 ?>">Tidak Ada Data</td>
-<? } ?>
+<?php } ?>
 </table>
 
 <table width="100%">

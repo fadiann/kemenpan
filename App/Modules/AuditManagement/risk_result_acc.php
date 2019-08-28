@@ -16,7 +16,7 @@
 				$arr = $rs->FetchRow ();
 				?>
 			<fieldset class="form-group">
-				<label class="col-sm-3 control-label">Satuan Kerja</label> 
+				<label class="col-sm-3 control-label">Satuan Kerja</label>
 				<?=$arr['auditee_name'];?>
 				<input type="hidden" name="auditee_id" id="auditee_id" value="<?=$arr['penetapan_auditee_id'];?>" />
 			</fieldset>
@@ -33,7 +33,7 @@
 				$thn = date ( "Y" ) - 1;
 				for($i = 1; $i <= 3; $i ++) {
 					?>
-					<option value="<?=$thn?>" <? if($thn==date("Y")) echo "selected";?>><?=$thn?></option>
+					<option value="<?=$thn?>" <?php if($thn==date("Y")) echo "selected";?>><?=$thn?></option>
 					<?
 					$thn ++;
 				}
@@ -77,7 +77,7 @@ $("#tanggal_awal").datepicker({
 	prevText: "",
 	changeYear: true,
 	changeMonth: true
-}); 
+});
 
 $("#tanggal_akhir").datepicker({
 	dateFormat: 'dd-mm-yy',
@@ -98,7 +98,7 @@ $(function() {
 			tipe_audit: "Silahkan Pilih Tipe Audit",
 			tanggal_akhir: "Silahkan Pilih Tanggal Awal dan Akhir Audit",
 			tahun: "Silahkan Pilih Tahun Audit"
-		},		
+		},
 		submitHandler: function(form) {
 			form.submit();
 		}

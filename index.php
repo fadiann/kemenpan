@@ -73,7 +73,7 @@ if (@$_POST ['submit'] == "Login") {
 	<head>
 	<!-- Basic -->
 	<meta charset="UTF-8">
-	
+
 	<title>e-MAS | Elektronik Manajemen Audit Sistem</title>
 	<link rel="stylesheet" href="Public/css/loader.css">
 	<link rel="shortcut icon" href="Public/images/emas-logo.png" type="image/x-icon">
@@ -125,7 +125,7 @@ if (@$_POST ['submit'] == "Login") {
 		});
 	</script>
 	</head>
-	<body>
+	<body style="background:url('Public/images/backkemenpan.jpg') no-repeat fixed center; background-size: cover ">
 		<!-- start: loader -->
 		<div class="preloader"></div>
 		<!-- end: loader -->
@@ -192,7 +192,7 @@ if (@$_POST ['submit'] == "Login") {
 		<script src="Public/assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
 		<script src="Public/assets/vendor/magnific-popup/magnific-popup.js"></script>
 		<script src="Public/assets/vendor/jquery-placeholder/jquery.placeholder.js"></script>
-		
+
 		<!-- Specific Page Vendor -->
 		<script src="Public/assets/vendor/jquery-ui/js/jquery-ui-1.10.4.custom.js"></script>
 		<script src="Public/assets/vendor/jquery-ui-touch-punch/jquery.ui.touch-punch.js"></script>
@@ -217,13 +217,13 @@ if (@$_POST ['submit'] == "Login") {
 		<script src="Public/assets/vendor/summernote/summernote.js"></script>
 		<script src="Public/assets/vendor/bootstrap-maxlength/bootstrap-maxlength.js"></script>
 		<script src="Public/assets/vendor/ios7-switch/ios7-switch.js"></script>
-		
+
 		<!-- Theme Base, Components and Settings -->
 		<script src="Public/assets/javascripts/theme.js"></script>
-		
+
 		<!-- Theme Custom -->
 		<script src="Public/assets/javascripts/theme.custom.js"></script>
-		
+
 		<!-- Theme Initialization Files -->
 		<script src="Public/assets/javascripts/theme.init.js"></script>
 

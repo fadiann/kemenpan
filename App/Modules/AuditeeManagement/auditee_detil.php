@@ -64,9 +64,9 @@ $arr = $rs->FetchRow ();
 							</fieldset>
 						</div>
 						<div id="2" class="tab-pane">
-							<? include "pic_main.php"; ?>	
-						</div>			
-					</div>	
+							<?php include "pic_main.php"; ?>	
+						</div>
+					</div>
 				</div>
 			</div>
 		</section>

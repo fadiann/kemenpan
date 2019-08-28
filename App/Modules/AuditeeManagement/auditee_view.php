@@ -22,7 +22,7 @@
 						<?php
 						for($i=0;$i<count($key_by);$i++){
 						?>
-							<option value="<?=$key_field[$i]?>" <? if(@$key_search==$key_field[$i]) echo "selected";?>><?=$key_by[$i]?></option>
+							<option value="<?=$key_field[$i]?>" <?php if(@$key_search==$key_field[$i]) echo "selected";?>><?=$key_by[$i]?></option>
 						<?php
 						}
 						?>
@@ -33,9 +33,8 @@
 			</form>
 <?
 include_once $grid;
-?>   
+?>
 			</div>
 		</section>
 	</div>
 </div>
-

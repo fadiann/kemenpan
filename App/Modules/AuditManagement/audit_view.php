@@ -53,7 +53,7 @@
 							<?php
 							for($i=0;$i<count($key_by);$i++){
 							?>
-								<option value="<?=$key_field[$i]?>" <? if(@$key_search==$key_field[$i]) echo "selected";?>><?=$key_by[$i]?></option>
+								<option value="<?=$key_field[$i]?>" <?php if(@$key_search==$key_field[$i]) echo "selected";?>><?=$key_by[$i]?></option>
 							<?php
 							}
 							?>
@@ -72,7 +72,7 @@
 					<input type="hidden" value="" name="status_temuan" id="status_temuan">
 					<input type="hidden" value="" name="status_surat_tugas" id="status_surat_tugas">
 					<input type="hidden" value="" name="data_id" id="data_id">
-					
+
 					<?php include_once $grid; ?>
 
 				</div>

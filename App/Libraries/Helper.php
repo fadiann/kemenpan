@@ -719,16 +719,16 @@ class Helper
 			$temp = penyebut($nilai/1000000000) . " milyar" . penyebut(fmod($nilai,1000000000));
 		} else if ($nilai < 1000000000000000) {
 			$temp = penyebut($nilai/1000000000000) . " trilyun" . penyebut(fmod($nilai,1000000000000));
-		}     
+		}
 		return $temp;
 	}
- 
+
 	function terbilang($nilai) {
 		if($nilai<0) {
 			$hasil = "minus ". trim($this->penyebut($nilai));
 		} else {
 			$hasil = trim($this->penyebut($nilai));
-        }     		
+        }
         if($hasil == ''){
             $hasil = 1;
         }else{
@@ -1381,9 +1381,9 @@ class Helper
 
     public function hitungRisiko($kemungkinan, $dampak ) {
         $deretnilai = array(
-                        9, 15, 16, 23, 25, 
-                        6, 12, 16, 19, 24, 
-                        4, 10, 14, 17, 22, 
+                        9, 15, 16, 23, 25,
+                        6, 12, 16, 19, 24,
+                        4, 10, 14, 17, 22,
                         2, 7, 11, 13, 21,
                         1, 3, 5, 8, 20
                     );

@@ -25,7 +25,7 @@
 					</div>
 			</fieldset>
 			<fieldset class="form-group">
-				
+
 				<label class="col-sm-3 control-label">Objek Audit</label>
 				<div class="col-md-8">
 				<table id="tabel_auditee" class="table table-borderless" width="100%">
@@ -52,7 +52,7 @@
 					echo $Helper->buildCombo ("tipe_audit", $arr_type, 0, 1, "", "propinsiOnChange(this.value, 'sub_type')", "", false, true, false );
 				?>
 					</div>
-				
+
 			</fieldset>
 			<fieldset class="form-group">
 				<label class="col-sm-3 control-label">Sub Tipe Audit</label>
@@ -63,7 +63,7 @@
 					</div>
 			</fieldset>
 			<fieldset class="form-group">
-				<label class="col-sm-3 control-label">Tahun <span class="required">*</span></label> 
+				<label class="col-sm-3 control-label">Tahun <span class="required">*</span></label>
 					<div class="col-sm-5">
 					<select class="form-control" name="tahun" id="tahun">
 						<option value="">Pilih Satu</option>
@@ -71,7 +71,7 @@
 					$thn = date ( "Y" ) - 1;
 					for($i = 1; $i <= 3; $i ++) {
 						?>
-						<option value="<?=$thn?>" <? if($thn==date("Y")) echo "selected";?>><?=$thn?></option>
+						<option value="<?=$thn?>" <?php if($thn==date("Y")) echo "selected";?>><?=$thn?></option>
 						<?
 						$thn ++;
 					}
@@ -86,13 +86,13 @@
 					</div>
 			</fieldset>
 			<fieldset class="form-group">
-				<label class="col-sm-3 control-label">Rencana Mulai Penugasan <span class="required">*</span></label> 
+				<label class="col-sm-3 control-label">Rencana Mulai Penugasan <span class="required">*</span></label>
 					<div class="col-sm-2">
 				<input type="text" class="form-control" name="tanggal_awal" id="tanggal_awal" autocomplete="off">
 					</div>
 			</fieldset>
 			<fieldset class="form-group">
-				<label class="col-sm-3 control-label">Rencana Penerbitan Laporan <span class="required">*</span></label> 
+				<label class="col-sm-3 control-label">Rencana Penerbitan Laporan <span class="required">*</span></label>
 					<div class="col-sm-2">
 				<input type="text" class="form-control" name="tanggal_akhir" id="tanggal_akhir" autocomplete="off">
 					</div>
@@ -108,7 +108,7 @@
 			case "getedit" :
 				$arr = $rs->FetchRow ();
 				?>
-			
+
 			<fieldset class="form-group">
 				<label class="col-sm-3 control-label">Kode Perencanaan</label>
 					<div class="col-sm-5">
@@ -175,24 +175,24 @@
 					<?
 					if($arr['audit_type_opsi']==1){
 					?>
-						<option value="Trip 1" <? if($arr['audit_plan_sub_tipe']=='Trip 1') echo 'selected' ?>>Trip 1</option>
-						<option value="Trip 2" <? if($arr['audit_plan_sub_tipe']=='Trip 2') echo 'selected' ?>>Trip 2</option>
-						<option value="Trip 3" <? if($arr['audit_plan_sub_tipe']=='Trip 3') echo 'selected' ?>>Trip 3</option>
-						<option value="Trip 4" <? if($arr['audit_plan_sub_tipe']=='Trip 4') echo 'selected' ?>>Trip 4</option>
-						<option value="Trip 5" <? if($arr['audit_plan_sub_tipe']=='Trip 5') echo 'selected' ?>>Trip 5</option>
-						<option value="Trip 6" <? if($arr['audit_plan_sub_tipe']=='Trip 6') echo 'selected' ?>>Trip 6</option>
-						<option value="Trip 7" <? if($arr['audit_plan_sub_tipe']=='Trip 7') echo 'selected' ?>>Trip 7</option>
-						<option value="Trip 8" <? if($arr['audit_plan_sub_tipe']=='Trip 8') echo 'selected' ?>>Trip 8</option>
-						<option value="Trip 9" <? if($arr['audit_plan_sub_tipe']=='Trip 9') echo 'selected' ?>>Trip 9</option>
-						<option value="Trip 10" <? if($arr['audit_plan_sub_tipe']=='Trip 9') echo 'selected' ?>>Trip 10</option>
-						<option value="Trip Audit Pusat" <? if($arr['audit_plan_sub_tipe']=='Trip Audit Pusat') echo 'selected' ?>>Trip Audit Pusat</option>
-						<option value="Trip Cadangan" <? if($arr['audit_plan_sub_tipe']=='Trip Cadangan') echo 'selected' ?>>Trip Cadangan</option>
+						<option value="Trip 1" <?php if($arr['audit_plan_sub_tipe']=='Trip 1') echo 'selected' ?>>Trip 1</option>
+						<option value="Trip 2" <?php if($arr['audit_plan_sub_tipe']=='Trip 2') echo 'selected' ?>>Trip 2</option>
+						<option value="Trip 3" <?php if($arr['audit_plan_sub_tipe']=='Trip 3') echo 'selected' ?>>Trip 3</option>
+						<option value="Trip 4" <?php if($arr['audit_plan_sub_tipe']=='Trip 4') echo 'selected' ?>>Trip 4</option>
+						<option value="Trip 5" <?php if($arr['audit_plan_sub_tipe']=='Trip 5') echo 'selected' ?>>Trip 5</option>
+						<option value="Trip 6" <?php if($arr['audit_plan_sub_tipe']=='Trip 6') echo 'selected' ?>>Trip 6</option>
+						<option value="Trip 7" <?php if($arr['audit_plan_sub_tipe']=='Trip 7') echo 'selected' ?>>Trip 7</option>
+						<option value="Trip 8" <?php if($arr['audit_plan_sub_tipe']=='Trip 8') echo 'selected' ?>>Trip 8</option>
+						<option value="Trip 9" <?php if($arr['audit_plan_sub_tipe']=='Trip 9') echo 'selected' ?>>Trip 9</option>
+						<option value="Trip 10" <?php if($arr['audit_plan_sub_tipe']=='Trip 9') echo 'selected' ?>>Trip 10</option>
+						<option value="Trip Audit Pusat" <?php if($arr['audit_plan_sub_tipe']=='Trip Audit Pusat') echo 'selected' ?>>Trip Audit Pusat</option>
+						<option value="Trip Cadangan" <?php if($arr['audit_plan_sub_tipe']=='Trip Cadangan') echo 'selected' ?>>Trip Cadangan</option>
 					<?
 					}else if($arr['audit_type_opsi']!=1){
 						$rs_sub = $params->sub_audit_type_list_by_tipe($arr['audit_plan_tipe_id']);
 						while($arr_sub = $rs_sub->FetchRow()){
 					?>
-						<option value="<?=$arr_sub['sub_audit_type_id']?>" <? if($arr_sub['sub_audit_type_id']==$arr['audit_plan_sub_tipe']) echo 'selected' ?>><?=$arr_sub['sub_audit_type_name'];?></option>
+						<option value="<?=$arr_sub['sub_audit_type_id']?>" <?php if($arr_sub['sub_audit_type_id']==$arr['audit_plan_sub_tipe']) echo 'selected' ?>><?=$arr_sub['sub_audit_type_name'];?></option>
 					<?
 						}
 					}
@@ -201,7 +201,7 @@
 					</div>
 			</fieldset>
 			<fieldset class="form-group">
-				<label class="col-sm-3 control-label">Tahun <span class="required">*</span></label> 
+				<label class="col-sm-3 control-label">Tahun <span class="required">*</span></label>
 					<div class="col-sm-5">
 				<select class="form-control" name="tahun" id="tahun">
 					<option value="">Pilih Satu</option>
@@ -210,7 +210,7 @@
 				for($i = 1; $i <= 3; $i ++) {
 					?>
 					<option value="<?=$thn?>"
-						<? if($thn==$arr['audit_plan_tahun']) echo "selected";?>><?=$thn?></option>
+						<?php if($thn==$arr['audit_plan_tahun']) echo "selected";?>><?=$thn?></option>
 					<?
 					$thn ++;
 				}
@@ -225,13 +225,13 @@
 					</div>
 			</fieldset>
 			<fieldset class="form-group">
-				<label class="col-sm-3 control-label">Rencana Mulai Penugasan <span class="required">*</span></label> 
+				<label class="col-sm-3 control-label">Rencana Mulai Penugasan <span class="required">*</span></label>
 					<div class="col-sm-2">
 				<input type="text" class="form-control" name="tanggal_awal" id="tanggal_awal" value="<?=$Helper->dateIndo($arr['audit_plan_start_date'])?>" autocomplete="off"> <?=$Helper->dateIndo($arr['audit_plan_start_date'])?>
 					</div>
 			</fieldset>
 			<fieldset class="form-group">
-				<label class="col-sm-3 control-label">Rencana Penerbitan Laporan <span class="required">*</span></label> 
+				<label class="col-sm-3 control-label">Rencana Penerbitan Laporan <span class="required">*</span></label>
 					<div class="col-sm-2">
 				<input type="text" class="form-control" name="tanggal_akhir" id="tanggal_akhir" value="<?=$Helper->dateIndo($arr['audit_plan_end_date'])?>" autocomplete="off">
 					</div>
@@ -242,7 +242,7 @@
 				<input type="text" class="form-control" name="biaya_audit" id="biaya_audit" value="<?=$Helper->format_uang($arr['audit_plan_biaya'])?>">
 					</div>
 			</fieldset>
-			<input type="hidden" name="data_id" value="<?=$arr['audit_plan_id']?>">	
+			<input type="hidden" name="data_id" value="<?=$arr['audit_plan_id']?>">
 		<?
 				break;
 			case "getdetail" :
@@ -376,7 +376,7 @@
 					</div>
 			</fieldset>
 			<fieldset class="form-group">
-				<label class="col-sm-3 text-right">Detail komentar :</label> 
+				<label class="col-sm-3 text-right">Detail komentar :</label>
 					<div class="col-sm-5">
 				<table>
 					<tbody>
@@ -390,11 +390,11 @@
 						</tr>
 				<?php
 				}
-				?>	
+				?>
 					</tbody>
 				</table>
 					</div>
-			</fieldset>			
+			</fieldset>
 			<fieldset class="form-group">
 				<label class="col-sm-3 text-right">Isi Komentar :</label>
 					<div class="col-sm-6">
@@ -447,22 +447,22 @@ $(document).ready(function() {
 	$("#tabel_auditee").on("click", ".auditee_remove", function(e){
 		e.preventDefault();
 		$(this).parents("tr").remove();
-	});  
+	});
 
 	$("#tanggal_awal").datepicker({
 		format: 'dd-mm-yyyy',
 		 nextText: "",
 		 prevText: "",
         autoClose: true
-	});  
+	});
 	$("#tanggal_akhir").datepicker({
 		format: 'dd-mm-yyyy',
 		 nextText: "",
 		 prevText: "",
         autoClose: true
-	});  
+	});
 	$("#biaya_audit").maskMoney({precision: 0});
-	
+
 	$(function() {
 		$("#validation-form").validate({
 			rules: {
@@ -474,7 +474,7 @@ $(document).ready(function() {
 				tipe_audit: "Silahkan Pilih Tipe Audit",
 				tahun: "Silahkan Pilih Tahun",
 				tanggal_akhir: "Silahkan Pilih Tanggal Awal dan Akhir Audit"
-			},		
+			},
 			submitHandler: function(form) {
 				form.submit();
 			}
@@ -493,7 +493,7 @@ function selectAdd(objSel, objVal, objCap, isSelected) {
 function propinsiOnChange(objValue, cmbNext){
 	objSel = cmbNext;
 	selectRemoveAll(objSel);
-	
+
 	selectAdd(objSel, "", "Pilih Sub Type");
 	switch (objValue) {
 	<?

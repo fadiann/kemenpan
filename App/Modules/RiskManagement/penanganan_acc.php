@@ -28,8 +28,8 @@
 							<th class="text-center" width="20%">Nama Risiko</th>
 							<!-- <th>Nilai<br>Risiko<br>Residu</th> -->
 							<th class="text-center" width="10%">Besaran Risiko</th>
-							<th class="text-center" width="20%">Mitigasi</th>
-							<th class="text-center" width="10%">Batas Waktu</th>
+							<th class="text-center" width="20%">Kegiatan</th>
+							<th class="text-center" width="10%">Jadwal</th>
 							<th class="text-center" width="20%">Penanggung Jawab</th>
 						</tr>
 					<?php
@@ -51,7 +51,32 @@
 							<td class="text-center"><?=$i?>.</td>
 							<td><?=$arr_iden['risk_kategori'];?></td>
 							<td><?=$arr_iden['identifikasi_nama_risiko'];?></td>
-							<td class="text-center"><?= $arr_iden['analisa_ri'] ?></td>
+									<?php
+										$risk_level = $arr_iden['analisa_ri'];
+										if ($risk_level == '' || $risk_level == 0) {
+											$warna = "white";
+											$txtcolor = "black";
+										} elseif ($risk_level > 0 && $risk_level <= 5) {
+											$warna = "blue";
+											$txtcolor = "white";
+										} elseif ($risk_level >= 6 && $risk_level <= 11) {
+											$warna = "green";
+											$txtcolor = "white";
+										} elseif ($risk_level >= 12 && $risk_level <= 15) {
+											$warna = "yellow";
+											$txtcolor = "black";
+										} elseif ($risk_level >= 16 && $risk_level <= 19) {
+											$warna = "orange";
+											$txtcolor = "white";
+										} elseif ($risk_level >= 20 && $risk_level <= 25) {
+											$warna = "red";
+											$txtcolor = "white";
+										} else {
+											$warna = "white";
+											$txtcolor = "black";
+										}
+							?>
+							<td class="text-center" style="background:<?= $warna?>; color:<?= $txtcolor?>"><?= $arr_iden['analisa_ri'] ?></td>
 							<td align="center">
 							<?
 								$rs_td = $params->risk_penanganan_data_viewlist ();
@@ -79,7 +104,7 @@
 				?>
 					<fieldset class="form-group mt-md">
 						<center>
-							<input type="button" class="btn btn-primary" value="Kembali" onclick="location='<?=$def_page_request?>'"> 
+							<input type="button" class="btn btn-primary" value="Kembali" onclick="location='<?=$def_page_request?>'">
 							<input type="submit" class="btn btn-success" value="Simpan">
 						</center>
 						<input type="hidden" name="data_action" id="data_action"
@@ -107,13 +132,13 @@ while ( $arr_kategori = $rs_kategori->FetchRow () ) {
 				 changeYear: true,
 				 changeMonth: true,
 				 minDate: 0
-			}); 
-			
+			});
+
 			$('textarea.cmb_risk_<?=$no?>').focus(function () {
 			   checkContentSize("penanganan_<?=$no?>");
 			});
 			$('textarea.cmb_risk_<?=$no?>').focusout(function(){
-			    $(this).animate({ height: "2em" }, 500); 
+			    $(this).animate({ height: "2em" }, 500);
 			});
 			$('textarea.cmb_risk_<?=$no?>').keypress(function (e) {
 			  if (e.which == 13) {
@@ -126,20 +151,20 @@ while ( $arr_kategori = $rs_kategori->FetchRow () ) {
 }
 ?>
 <script>
-function has_scrollbar(elem_id){ 
-    elem = document.getElementById(elem_id); 
+function has_scrollbar(elem_id){
+    elem = document.getElementById(elem_id);
     if (elem.clientHeight < elem.scrollHeight){
-        alert("The element #" + elem_id + " has a vertical scrollbar!"); 
+        alert("The element #" + elem_id + " has a vertical scrollbar!");
     }else{
         alert("The element #" + elem_id + " doesn't have a vertical");
     } ;
 }
 
 function checkContentSize(elem_id){
- 	elem = document.getElementById(elem_id); 
+ 	elem = document.getElementById(elem_id);
     console.log(elem.clientHeight);
     if (elem.clientHeight < elem.scrollHeight){
-        $( "#" + elem_id + "" ).animate({ height: elem.scrollHeight + 5}, 500); 
+        $( "#" + elem_id + "" ).animate({ height: elem.scrollHeight + 5}, 500);
     }
 }
 $(function() {
@@ -163,11 +188,11 @@ $(function() {
 						action.attr("disabled", true).val("");
 						date_tenggak.attr("disabled", true).val("");
 						pic.attr("disabled", true).val("");
-					}	
+					}
 				}
 			});
-			
-			
+
+
 	});
 });
 </script>

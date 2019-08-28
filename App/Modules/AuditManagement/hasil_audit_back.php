@@ -4,7 +4,7 @@
 <script type="text/javascript" src="Public/ckeditor/ckeditor.js"></script>
 <link href="Public/css/responsive-tabs.css" rel="stylesheet" type="text/css" />
 <script src="Public/js/responsive-tabs.js" type="text/javascript"></script>
-<?php 
+<?php
 
 $rs  = $assigns->assign_viewlist ( $assign_id );
 $arr = $rs->FetchRow();
@@ -48,9 +48,9 @@ $cek_posisi = $findings->cek_posisi($arr['assign_id']);
 								</div>
 							</fieldset>
 							<fieldset class="form-group">
-								<label class="col-sm-3">Tanggal LHA</label> 
+								<label class="col-sm-3">Tanggal LHA</label>
 								<div class="col-md-6">
-								<input type="text" class="form-control" name="tanggal_lha" id="tanggal_lha" value="<?=$Helper->dateIndo($arr_lha['lha_date'])?>"> 
+								<input type="text" class="form-control" name="tanggal_lha" id="tanggal_lha" value="<?=$Helper->dateIndo($arr_lha['lha_date'])?>">
 								</div>
 							</fieldset>
 						</div>
@@ -150,11 +150,11 @@ $cek_posisi = $findings->cek_posisi($arr['assign_id']);
 								</div>
 							</fieldset>
 						</div>
-						<div id="view6">					
+						<div id="view6">
 							<fieldset class="form-group mt-md">
-								<label class="col-md-3 control-label">Lampiran</label> 
+								<label class="col-md-3 control-label">Lampiran</label>
 								<div class="col-md-5">
-								<input type="file" class="form-control" name="attach[]" id="attach" multiple="" onChange="makeFileList();"> 
+								<input type="file" class="form-control" name="attach[]" id="attach" multiple="" onChange="makeFileList();">
 								<label class="fileList_label"></label>
 								<ul id="fileList">
 									<li>No Files Selected</li>
@@ -162,17 +162,17 @@ $cek_posisi = $findings->cek_posisi($arr['assign_id']);
 								</div>
 							</fieldset>
 							<fieldset class="form-group">
-								<label class="col-md-3 control-label">List Lampiran</label> 
+								<label class="col-md-3 control-label">List Lampiran</label>
 								<div class="col-md-5">
-									<?php 
+									<?php
 									$y=0;
 									$rs_file = $assigns->list_lha_lampiran($arr['assign_id']);
-									while($arr_file = $rs_file->FetchRow()){ 
+									while($arr_file = $rs_file->FetchRow()){
 									$y++;
 									?>
 										<input type="checkbox" name="nama_file_<?=$y?>" value="<?=$arr_file['lha_attach_name']?>">
-										<a href="#" Onclick="window.open('<?=$Helper->baseurl("Upload_LHA").$arr_file['lha_attach_name']?>','_blank')"><?=$arr_file['lha_attach_name']?></a>, &nbsp;&nbsp; 
-									<?php 
+										<a href="#" Onclick="window.open('<?=$Helper->baseurl("Upload_LHA").$arr_file['lha_attach_name']?>','_blank')"><?=$arr_file['lha_attach_name']?></a>, &nbsp;&nbsp;
+									<?php
 									}
 									?>
 								</div>
@@ -321,7 +321,7 @@ $cek_posisi = $findings->cek_posisi($arr['assign_id']);
 													$rs_rekomendasi_proses = $findings->get_rekomendasi_proses ( $arr_temuan_proses['finding_id']);
 													$count_rek = $rs_rekomendasi_proses->RecordCount ();
 													$no_rek = 0;
-													while($arr_rekomendasi_proses = $rs_rekomendasi_proses->FetchRow()){	
+													while($arr_rekomendasi_proses = $rs_rekomendasi_proses->FetchRow()){
 														$no_rek++;
 											?>
 												<tr>
@@ -335,7 +335,7 @@ $cek_posisi = $findings->cek_posisi($arr['assign_id']);
 											?>
 													<td><?=$Helper->text_show($arr_rekomendasi_proses['rekomendasi_desc'])?></td>
 													<td>Proses</td>
-												</tr>									
+												</tr>
 											<?
 													}
 												}
@@ -478,12 +478,12 @@ $cek_posisi = $findings->cek_posisi($arr['assign_id']);
 									<tr>
 										<td>&nbsp;</td>
 										<td colspan="2" align="justify">
-											<table>					
+											<table>
 												<tr>
 													<td>Detail komentar</td>
 													<td>:</td>
 													<td>
-													<?php 
+													<?php
 													$z = 0;
 													$rs_komentar = $assigns->lha_komentar_viewlist ( $arr_lha ['lha_id'] );
 													while ( $arr_komentar = $rs_komentar->FetchRow () ) {
@@ -531,11 +531,11 @@ $cek_posisi = $findings->cek_posisi($arr['assign_id']);
 										}
 									}
 									?>
-								</table>				
+								</table>
 							</div>
 						</div>
 						<div id="view8">
-							<? include "matriks_temuan.php";?>
+							<?php include "matriks_temuan.php";?>
 						</div>
 					</div>
 			</fieldset>
@@ -561,8 +561,8 @@ $cek_posisi = $findings->cek_posisi($arr['assign_id']);
 					}
 					?>
 					<input type="hidden" name="status_lha" id="status_lha" value="">
-					<input type="hidden" name="data_id" value="<?=$arr['assign_id']?>">	
-					<input type="hidden" name="lha_id" value="<?=$arr_lha['lha_id']?>">	
+					<input type="hidden" name="data_id" value="<?=$arr['assign_id']?>">
+					<input type="hidden" name="lha_id" value="<?=$arr_lha['lha_id']?>">
 					<input type="hidden" name="data_action" id="data_action" value="<?=$_nextaction?>">
 			</center>
 		</fieldset>
@@ -571,7 +571,7 @@ $cek_posisi = $findings->cek_posisi($arr['assign_id']);
 		</section>
 	</div>
 </div>
-<script> 
+<script>
 function cek_data(){
 	var data = document.getElementById('status_lha').value;
 	if(data==1) text = "Anda Yakin Akan Mengajukan?";
@@ -609,5 +609,5 @@ $("#tanggal_lha").datepicker({
 	 prevText: "",
 	 changeYear: true,
 	 changeMonth: true
-}); 
+});
 </script>

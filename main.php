@@ -16,14 +16,17 @@ $notif_show 	= "";
 $rs_cek_count 	= $Helper->list_notif($ses_userId);
 $rs_notif 		= $Helper->list_notif($ses_userId);
 $count_notif 	= $rs_notif->RecordCount();
-if($count_notif <> 0) $notif_show = ", Anda Memiliki ".$count_notif. " Notifikasi, silahkan direviu";
+if($count_notif <> 0){
+	$notif_show = ", Anda Memiliki ".$count_notif. " Notifikasi, silahkan direviu";
+}
 ?>
+ 
 <!doctype html>
 <html class="fixed">
 	<head>
 	<!-- Basic -->
 	<meta charset="UTF-8">
-	
+
 	<title>e-MAS | Elektronik Manajemen Audit Sistem</title>
 	<link rel="stylesheet" href="Public/css/loader.css">
 	<link rel="shortcut icon" href="Public/images/emas-logo.png" type="image/x-icon">
@@ -71,11 +74,11 @@ if($count_notif <> 0) $notif_show = ", Anda Memiliki ".$count_notif. " Notifikas
 	<script src="Public/assets/vendor/modernizr/modernizr.js"></script>
 	<script src="Public/js/pace.min.js" type="text/javascript"></script>
 	<?php
-	$position = 1;
-	include_once("App/Libraries/login_history.php");
-	$jml_notif = 0;
-	$rs_cek_count = $Helper->list_notif($ses_userId);
-	$jml_notif = $rs_cek_count->RecordCount();
+		$position = 1;
+		include_once("App/Libraries/login_history.php");
+		$jml_notif = 0;
+		$rs_cek_count = $Helper->list_notif($ses_userId);
+		$jml_notif = $rs_cek_count->RecordCount();
 	?>
 	<script>
 		function no_framing() {
@@ -115,10 +118,10 @@ if($count_notif <> 0) $notif_show = ", Anda Memiliki ".$count_notif. " Notifikas
 						<i class="fa fa-bars" aria-label="Toggle sidebar"></i>
 					</div>
 				</div>
-			
+
 				<!-- start: search & user box -->
 				<div class="header-right">
-			
+
 
 					<!-- MODAL NOTIFIKASI -->
 					<ul class="notifications">
@@ -160,7 +163,7 @@ if($count_notif <> 0) $notif_show = ", Anda Memiliki ".$count_notif. " Notifikas
 										<a href="main.php?method=<?=$arr_notif['notif_method']?>" class="btn btn-info btn-sm"><i class="fa fa-info-circle"></i> Lihat</a>
 									</td>
 								</tr>
-								<?
+								<?php
 								}
 								?>
 							</table>
@@ -175,7 +178,7 @@ if($count_notif <> 0) $notif_show = ", Anda Memiliki ".$count_notif. " Notifikas
 					<!-- END MODAL NOTIFIKASI -->
 
 					<span class="separator"></span>
-			
+
 					<div id="userbox" class="userbox">
 						<a href="#" data-toggle="dropdown">
 							<figure class="profile-picture">
@@ -185,10 +188,10 @@ if($count_notif <> 0) $notif_show = ", Anda Memiliki ".$count_notif. " Notifikas
 								<span class="name"><?= ucwords($ses_userName)?></span>
 								<span class="role"><?=ucwords(strtolower($h_groupName))?></span>
 							</div>
-			
+
 							<i class="fa custom-caret"></i>
 						</a>
-			
+
 						<div class="dropdown-menu">
 							<ul class="list-unstyled">
 								<li class="divider"></li>
@@ -197,7 +200,7 @@ if($count_notif <> 0) $notif_show = ", Anda Memiliki ".$count_notif. " Notifikas
 								</li>
 								<!-- <li>
 									<a role="menuitem" tabindex="-1" href="#" data-lock-screen="true"><i class="fa fa-lock"></i> Lock Screen</a>
-								</!--> 
+								</!-->
 								<li>
 									<a role="menuitem" tabindex="-1" href="?action=logout"><i class="fa fa-power-off"></i> Logout</a>
 								</li>
@@ -229,14 +232,14 @@ if($count_notif <> 0) $notif_show = ", Anda Memiliki ".$count_notif. " Notifikas
 		</section>
 
 		<!-- Vendor -->
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script> 
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 		<script src="Public/assets/vendor/jquery-browser-mobile/jquery.browser.mobile.js"></script>
 		<script src="Public/assets/vendor/bootstrap/js/bootstrap.js"></script>
 		<script src="Public/assets/vendor/nanoscroller/nanoscroller.js"></script>
 		<script src="Public/assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
 		<script src="Public/assets/vendor/magnific-popup/magnific-popup.js"></script>
 		<script src="Public/assets/vendor/jquery-placeholder/jquery.placeholder.js"></script>
-		
+
 		<!-- Specific Page Vendor -->
 		<script src="Public/assets/vendor/jquery-ui/js/jquery-ui-1.10.4.custom.js"></script>
 		<script src="Public/assets/vendor/jquery-ui-touch-punch/jquery.ui.touch-punch.js"></script>
@@ -261,13 +264,13 @@ if($count_notif <> 0) $notif_show = ", Anda Memiliki ".$count_notif. " Notifikas
 		<script src="Public/assets/vendor/summernote/summernote.js"></script>
 		<script src="Public/assets/vendor/bootstrap-maxlength/bootstrap-maxlength.js"></script>
 		<script src="Public/assets/vendor/ios7-switch/ios7-switch.js"></script>
-		
+
 		<!-- Theme Base, Components and Settings -->
 		<script src="Public/assets/javascripts/theme.js"></script>
-		
+
 		<!-- Theme Custom -->
 		<script src="Public/assets/javascripts/theme.custom.js"></script>
-		
+
 		<!-- Theme Initialization Files -->
 		<script src="Public/assets/javascripts/theme.init.js"></script>
 
