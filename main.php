@@ -20,16 +20,16 @@ if($count_notif <> 0){
 	$notif_show = ", Anda Memiliki ".$count_notif. " Notifikasi, silahkan direviu";
 }
 ?>
- 
+
 <!doctype html>
 <html class="fixed">
 	<head>
 	<!-- Basic -->
 	<meta charset="UTF-8">
 
-	<title>e-MAS | Elektronik Manajemen Audit Sistem</title>
+	<title>ISMA | Inspektorat </title>
 	<link rel="stylesheet" href="Public/css/loader.css">
-	<link rel="shortcut icon" href="Public/images/emas-logo.png" type="image/x-icon">
+	<link rel="shortcut icon" href="Public/images/logo_isma.ico" type="image/x-icon">
 	<meta name="author" content="Fadian Adhitya Nugraha">
 
 	<!-- Mobile Metas -->
@@ -112,7 +112,7 @@ if($count_notif <> 0){
 			<header class="header">
 				<div class="logo-container">
 					<a href="../" class="logo">
-						<img src="Public/images/emas-logo.png" height="35" alt="Porto Admin" />
+						<img src="Public/images/logo_isma.png" height="50" alt="Porto Admin" /> <span style="display:inline-block; font-size:25px; color:black">INSPEKTORAT SISTEM MANAJEMEN AUDIT</span>
 					</a>
 					<div class="visible-xs toggle-sidebar-left" data-toggle-class="sidebar-left-opened" data-target="html" data-fire-event="sidebar-left-opened">
 						<i class="fa fa-bars" aria-label="Toggle sidebar"></i>

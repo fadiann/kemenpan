@@ -74,7 +74,7 @@ if (@$_POST ['submit'] == "Login") {
 	<!-- Basic -->
 	<meta charset="UTF-8">
 
-	<title>e-MAS | Elektronik Manajemen Audit Sistem</title>
+	<title>ISMA | Inspektorat</title>
 	<link rel="stylesheet" href="Public/css/loader.css">
 	<link rel="shortcut icon" href="Public/images/logo_isma.ico" type="image/x-icon">
 	<meta name="author" content="Fadian Adhitya Nugraha">
