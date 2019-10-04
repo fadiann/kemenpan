@@ -82,8 +82,9 @@ class planning {
 				FROM audit_plan
 				left join par_audit_type on audit_plan_tipe_id = audit_type_id
 				left join par_sub_audit_type on audit_plan_sub_tipe = sub_audit_type_id
-				where audit_plan_id = '".$id."' ";
+				where audit_plan_id = '".$id."'";
 		$data = $this->_db->_dbquery ( $sql );
+		// echo $sql;
 		return $data;
 	}
 	function planning_auditee_viewlist($id) {
@@ -199,6 +200,7 @@ class planning {
 				left join par_audit_type on audit_plan_tipe_id = audit_type_id
 				where 1=1 ".$condition ;
 		$data = $this->_db->_dbquery ( $sql );
+		// echo $sql;
 		return $data;
 	}
 
@@ -215,16 +217,16 @@ class planning {
 		return $data;
 	}
 
-	function plan_report_viewlist($tipe, $sub,$in_tipe="") {
+	function plan_report_viewlist($tipe, $in_tipe="", $tahun) {
 		$condition = "";
-		if($in_tipe!="") $condition = " where audit_plan_tipe_id in ( ".$in_tipe." ) ";
-		else $condition = " where audit_plan_tipe_id = '".$tipe."' ";
-		$sql = "select DISTINCT audit_plan_id, audit_type_code
+		if($in_tipe!="") $condition = " where audit_plan_tipe_id in ( ".$in_tipe." ) AND audit_plan_tahun = '".$tahun."'";
+		else $condition = " where audit_plan_tipe_id = '".$tipe."' AND audit_plan_tahun = '".$tahun."'";
+		$sql = "select DISTINCT audit_plan_id, audit_type_code, audit_plan_tahun
 				FROM audit_plan
 				left join par_audit_type on audit_plan_tipe_id = audit_type_id
 				left join audit_plan_auditee on audit_plan_id = audit_plan_auditee_id_plan
 				".$condition;
-				
+		echo $sql;
 		$data = $this->_db->_dbquery ( $sql );
 		return $data;
 	}

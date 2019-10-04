@@ -77,7 +77,7 @@ if($fil_tahun_id!=""){
 					</tr>
 					<?
 								$no_perencanaan= 0;
-								$rs_report = $plannings->plan_report_viewlist($arr_tipe_audit['audit_type_id'], $arr_sub_tipe['sub_audit_type_id']);
+								$rs_report = $plannings->plan_report_viewlist($arr_tipe_audit['audit_type_id'], $arr_sub_tipe['sub_audit_type_id'], $fil_tahun_id);
 								while($arr_report = $rs_report->FetchRow()){
 									$no_perencanaan++;
 									$no_tim=0;
@@ -88,6 +88,8 @@ if($fil_tahun_id!=""){
 										$no_tim++;							
 					?>
 					<tr>
+						
+					<? // die(); ?>
 					<?
 						if($no_tim == 1 ){
 					?>
